@@ -41,7 +41,13 @@
                                                     <td>{{ $user->email }}</td>
                                                     <td>{{ $user->rut }}</td>
                                                     <td>{{ $user->area }}</td>
-                                                    <td>{{ $user->rol }}</td>
+                                                    <td>
+                                                        @forelse ($user->roles as $role)
+                                                            <span class="badge badge-info">{{$role->name}}</span>
+                                                        @empty
+                                                        <span class="badge badge-danger">No roles</span>
+                                                        @endforelse
+                                                    </td>
                                                     <td class="td-actions text-right">
                                                         <a href="{{ route('users.show', $user->id) }}" class="btn btn-info"><i class="material-icons">person</i></a>
                                                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>

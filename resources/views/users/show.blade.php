@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <div class="card-title">{{ $user->rol }}</div>
+                        <div class="card-title">Usuario</div>
                         <p class="card-category">Vista detallada del usuario {{ $user->name}}</p>
                        </div>
                        <!--Body-->
@@ -36,6 +36,11 @@
                                                    {{ $user->email}}  <br>
                                                    {{ $user->area}}  <br>
                                                    Creacion del usuario: {{ $user->created_at}}  <br>
+                                                   @forelse ($user->roles as $role)
+                                                            <span class="badge rounded-pill bg-dark text-white">{{$role->name}}</span>
+                                                        @empty
+                                                        <span class="badge badge-danger bg-danger">No roles</span>
+                                                        @endforelse
                                                    </p>
                                                </div>
                                         </p>

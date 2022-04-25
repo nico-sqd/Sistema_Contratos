@@ -24,21 +24,25 @@
                                                <div class="autor">
                                                    <a href="#">
                                                        <img src="{{ asset('/img/faces/default-avatar.png')}}" alt="image" class="avatar col-sm-4">
-                                                       <h5 class="title" mt-3>{{ $roles->name}}</h5>
+                                                       <h5 class="title" mt-3>{{ $role->name}}</h5>
                                                    </a>
                                                    <p class="description">
-                                                   {{ $roles->guard_name}}  <br>
-                                                   Creacion del Rol: {{ $roles->created_at}}  <br>
+                                                   {{ $role->guard_name}}  <br>
+                                                   Creacion del Rol: {{ $role->created_at}}  <br>
                                                    </p>
                                                </div>
                                         </p>
                                          <div class="card-description">
-                                            loremore ipsum dolor sit amet consectetur adipiscing elit. Veniam officia corporis molestiar aliquid provident placeat.
+                                            @forelse ($role->permissions as $permission)
+                                                <span class="badge rounded-pill bg-dark text-white">{{ $permission->name }}</span>
+                                            @empty
+                                                <span class="badge badge-danger bg-danger">no Permissions</span>
+                                            @endforelse
                                         </div>
                                        </div>
                                        <div class="card-footer">
                                         <div class="button-container">
-                                            <a href="{{ route('users.edit', $permission->id) }}" class="btn btn-warning "><i class="material-icons">edit</i></a>
+                                            <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-warning "><i class="material-icons">edit</i></a>
                                        </div>
                                    </div>
                                </div><!-- end card user -->

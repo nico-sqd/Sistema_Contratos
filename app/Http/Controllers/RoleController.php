@@ -41,7 +41,7 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $role = Role::create($request->only('name'));
-        $role->permissions()->sync($request->input('permissions', []));
+        $role->permissions()->syncPermissions($request->input('permissions', []));
 
         return redirect()->route('roles.index');
 
@@ -53,9 +53,10 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Role $role)
     {
-        //
+        $role->load('permissions');
+        return view('roles.show', compact('role'));
     }
 
     /**
@@ -81,7 +82,7 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         $role->update($request->only('name'));
-        $role->permissions()->sync($request->input('permissions', []));
+        $role->permissions()->syncPermissions($request->input('permissions', []));
 
         return redirect()->route('roles.index');
 
@@ -93,8 +94,10 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        //
+        $role->delete();
+
+        return redirect()->route('roles.index');
     }
 }

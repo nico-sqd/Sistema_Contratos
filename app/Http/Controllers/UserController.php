@@ -6,6 +6,8 @@ use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserEditRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
@@ -18,7 +20,8 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('users.create');
+        $roles = Role::all()->pluck('name', 'id');
+        return view('users.create', compact('roles'));
     }
 
     public function store(UserCreateRequest $request)
@@ -35,6 +38,9 @@ class UserController extends Controller
             +[
                 'password' => bcrypt($request->input('password')),
             ]);
+
+        $roles = $request->input('roles', []);
+        $user->syncRoles($roles);
         return redirect()->route('users.show', $user->id)->with('success', 'Usuario creado correctamente.');
     }
 
@@ -42,6 +48,7 @@ class UserController extends Controller
     {
         //$user = User::findOrFail($id);
         //dd($user);
+        $user->load('roles');
         return view('users.show', compact('user'));
     }
 
@@ -49,7 +56,9 @@ class UserController extends Controller
     {
         //$user = User::findOrFail($id);
         //dd($user);
-        return view('users.edit', compact('user'));
+        $roles = Role::all()->pluck('name', 'id');
+        $user->load('roles');
+        return view('users.edit', compact('user', 'roles'));
     }
 
     public function update(UserEditRequest $request, User $user)
@@ -68,11 +77,16 @@ class UserController extends Controller
         //    $data['password']=bcrypt($request->password);
         //}
         $user->update($data);
+        $roles = $request->input('roles', []);
+        $user->syncRoles('roles');
         return redirect()->route('users.show', $user->id)->with('success', 'Usuario actualizado correctamente');
     }
 
     public function destroy(User $user)
     {
+        if(auth()->user()->id == $user->id){
+            return redirect()->route('users.index');
+        }
         $user -> delete();
         return back()->with('success', 'Usuario eliminado correctamente');
     }

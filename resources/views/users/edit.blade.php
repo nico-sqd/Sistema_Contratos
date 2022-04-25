@@ -32,15 +32,6 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="rol" class="col-sm-2 col-form-label">Rol</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="rol" value="{{ old('rol', $user->rol) }}">
-                                    @if ($errors->has('rol'))
-                                        <span class="error text-danger" for="input-rol">{{$errors -> first('rol')}}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="row">
                                 <label for="area" class="col-sm-2 col-form-label">Área</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="area" value="{{ old('area', $user->area) }}">
@@ -66,6 +57,38 @@
                                         <span class="error text-danger" for="input-password">{{$errors -> first('password')}}</span>
                                     @endif
                                 </div>
+                            </div>
+                            <div class="row">
+                                <label for="rol" class="col-sm-2 col-form-label">Rol</label>
+                                <div class="col-sm-7">
+                                <div class="form-group">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active">
+                                                <table class="table">
+                                                    <tbody>
+                                                        @foreach($roles as $id => $role)
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-check">
+                                                                    <label class="form-check-label">
+                                                                        <input class="form-check-input" type="checkbox" name="roles[]" 
+                                                                            value="{{ $id }}" {{ $user->roles->contains($id) ? 'checked' : '' }}>
+                                                                        <span class="form-check-sign">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                {{ $role }}
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                             </div>
                         </div>
                         <!--footer-->
