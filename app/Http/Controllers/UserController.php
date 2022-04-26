@@ -26,15 +26,7 @@ class UserController extends Controller
 
     public function store(UserCreateRequest $request)
     {
-        /* $request->validate
-        ([
-            'name' => 'required|max:25',
-            'rut' => 'required',
-            'rol' => 'required',
-            'area' => 'required',
-            'email' => 'required|email|unique:users',
-        ]); */
-        $user = User::create($request->only('name', 'rut','rol','area', 'email')
+        $user = User::create($request->only('name', 'rut', 'email')
             +[
                 'password' => bcrypt($request->input('password')),
             ]);
@@ -64,7 +56,7 @@ class UserController extends Controller
     public function update(UserEditRequest $request, User $user)
     {
         //$user=User::findOrFail($id);
-        $data = $request->only('name','rut','rol','area','email');
+        $data = $request->only('name','rut','email');
         $password=$request->input('password');
         if($password)
             $data['password']=bcrypt($password);

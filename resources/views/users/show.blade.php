@@ -34,7 +34,6 @@
                                                    <p class="description">
                                                    {{ $user->rut}}  <br>
                                                    {{ $user->email}}  <br>
-                                                   {{ $user->area}}  <br>
                                                    Creacion del usuario: {{ $user->created_at}}  <br>
                                                    @forelse ($user->roles as $role)
                                                             <span class="badge rounded-pill bg-dark text-white">{{$role->name}}</span>

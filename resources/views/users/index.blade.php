@@ -29,7 +29,6 @@
                                                 <th>Nombre</th>
                                                 <th>Correo</th>
                                                 <th>RUT</th>
-                                                <th>Area</th>
                                                 <th>ROL</th>
                                                 <th class="text-right">Acciones</th>
                                             </thead>
@@ -40,7 +39,6 @@
                                                     <td>{{ $user->name }}</td>
                                                     <td>{{ $user->email }}</td>
                                                     <td>{{ $user->rut }}</td>
-                                                    <td>{{ $user->area }}</td>
                                                     <td>
                                                         @forelse ($user->roles as $role)
                                                             <span class="badge badge-info">{{$role->name}}</span>

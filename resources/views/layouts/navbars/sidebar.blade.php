@@ -32,7 +32,7 @@
       <li class="nav-item{{ $activePage == 'typography' ? ' active' : '' }}">
         <a class="nav-link" href="#">
           <i class="material-icons">library_books</i>
-            <p>{{ __('Tipografía') }}</p>
+            <p>{{ __('Contratos') }}</p>
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'permissions' ? ' active' : '' }}">
