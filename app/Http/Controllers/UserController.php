@@ -8,11 +8,13 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
     public function index()
     {
+        abort_if(Gate::denies('user_index'), 403);
         $users=User::paginate(5);
         return view('users.index', compact('users'));
     }
@@ -20,21 +22,14 @@ class UserController extends Controller
 
     public function create()
     {
+        abort_if(Gate::denies('user_create'), 403);
         $roles = Role::all()->pluck('name', 'id');
         return view('users.create', compact('roles'));
     }
 
     public function store(UserCreateRequest $request)
     {
-        /* $request->validate
-        ([
-            'name' => 'required|max:25',
-            'rut' => 'required',
-            'rol' => 'required',
-            'area' => 'required',
-            'email' => 'required|email|unique:users',
-        ]); */
-        $user = User::create($request->only('name', 'rut','rol','area', 'email')
+        $user = User::create($request->only('name', 'rut', 'email')
             +[
                 'password' => bcrypt($request->input('password')),
             ]);
@@ -46,6 +41,7 @@ class UserController extends Controller
 
     public function Show(User $user)
     {
+        abort_if(Gate::denies('user_show'), 403);
         //$user = User::findOrFail($id);
         //dd($user);
         $user->load('roles');
@@ -54,6 +50,7 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
+        abort_if(Gate::denies('user_edit'), 403);
         //$user = User::findOrFail($id);
         //dd($user);
         $roles = Role::all()->pluck('name', 'id');
@@ -64,7 +61,7 @@ class UserController extends Controller
     public function update(UserEditRequest $request, User $user)
     {
         //$user=User::findOrFail($id);
-        $data = $request->only('name','rut','rol','area','email');
+        $data = $request->only('name','rut','email');
         $password=$request->input('password');
         if($password)
             $data['password']=bcrypt($password);
@@ -78,12 +75,13 @@ class UserController extends Controller
         //}
         $user->update($data);
         $roles = $request->input('roles', []);
-        $user->syncRoles('roles');
+        $user->syncRoles($roles);
         return redirect()->route('users.show', $user->id)->with('success', 'Usuario actualizado correctamente');
     }
 
     public function destroy(User $user)
     {
+        abort_if(Gate::denies('user_destroy'), 403);
         if(auth()->user()->id == $user->id){
             return redirect()->route('users.index');
         }

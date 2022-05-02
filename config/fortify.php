@@ -48,8 +48,6 @@ return [
 
     'username' => 'rut',
 
-    'area' => 'area',
-
     'email' => 'email',
 
     /*

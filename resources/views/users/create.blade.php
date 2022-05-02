@@ -11,6 +11,7 @@
                             <h4 class="card-tittle">Crear Usuario</h4>
                             <p class="card-category">Ingresar datos</p>
                         </div>
+                        {{ $errors }}
                         <div class="card-body">
                           {{--  @if ($errors->any())
                                 <div class="alert alert-danger">
@@ -36,24 +37,6 @@
                                     <input type="text" class="form-control" name="rut" placeholder="Ingrese el RUT" value="{{old('rut')}}">
                                     @if ($errors->has('rut'))
                                         <span class="error text-danger" for="input-rut">{{$errors -> first('rut')}}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label for="rol" class="col-sm-2 col-form-label">Rol</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="rol" placeholder="Ingrese el ROL" value="{{old('rol')}}">
-                                    @if ($errors->has('rol'))
-                                        <span class="error text-danger" for="input-rol">{{$errors -> first('rol')}}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label for="area" class="col-sm-2 col-form-label">Área</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="area" placeholder="Ingrese el área" value="{{old('area')}}">
-                                    @if ($errors->has('area'))
-                                        <span class="error text-danger" for="input-area">{{$errors -> first('area')}}</span>
                                     @endif
                                 </div>
                             </div>
@@ -97,7 +80,7 @@
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                {{ $role }}}
+                                                                {{ $role }}
                                                             </td>
                                                         </tr>
                                                         @endforeach

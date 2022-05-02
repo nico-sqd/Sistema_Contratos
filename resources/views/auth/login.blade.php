@@ -58,22 +58,6 @@
                 </div>
               @endif
             </div>
-            <!-- Area -->
-            <div class="bmd-form-group{{ $errors->has('area') ? ' has-danger' : '' }} mt-3">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="material-icons">business_center</i>
-                  </span>
-                </div>
-                <input type="text" name="area" class="form-control" placeholder="{{ __('Area...') }}" value="{{ old('area', null) }}" required autocomplete="area">
-              </div>
-              @if ($errors->has('area'))
-                <div id="area-error" class="error text-danger pl-3" for="area" style="display: block;">
-                  <strong>{{ $errors->first('area') }}</strong>
-                </div>
-              @endif
-            </div>
             <!-- Password -->
             <div class="bmd-form-group{{ $errors->has('password') ? ' has-danger' : '' }} mt-3">
               <div class="input-group">

@@ -17,12 +17,14 @@
             <p>{{ __('Dashboard') }}</p>
         </a>
       </li>
+      @can('user_index')
       <li class="nav-item{{ $activePage == 'usuarios' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('users.index') }}">
           <i class="material-icons">person</i>
             <p>Usuario</p>
         </a>
       </li>
+      @endcan
       <li class="nav-item{{ $activePage == 'referentes' ? ' active' : '' }}">
         <a class="nav-link" href="#">
           <i class="material-icons">person</i>
@@ -32,21 +34,25 @@
       <li class="nav-item{{ $activePage == 'typography' ? ' active' : '' }}">
         <a class="nav-link" href="#">
           <i class="material-icons">library_books</i>
-            <p>{{ __('Tipografía') }}</p>
+            <p>{{ __('Contratos') }}</p>
         </a>
       </li>
+      @can('permission_index')
       <li class="nav-item{{ $activePage == 'permissions' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('permissions.index') }}">
           <i class="material-icons">bubble_chart</i>
           <p>{{ __('Permisos') }}</p>
         </a>
       </li>
+      @endcan
+      @can('role_index')
       <li class="nav-item{{ $activePage == 'map' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('roles.index') }}">
           <i class="material-icons">work_outline</i>
             <p>{{ __('Roles') }}</p>
         </a>
       </li>
+      @endcan
       <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
         <a class="nav-link" href="#">
           <i class="material-icons">notifications</i>

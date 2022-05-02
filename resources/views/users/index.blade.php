@@ -19,7 +19,9 @@
                                     @endif
                                     <div class="row">
                                         <div class="col-12 text-right">
+                                            @can('user_create')
                                             <a href="{{ route('users.create') }}" class="btn btn-sm btn-facebook">Añadir Usuario</a>
+                                            @endcan
                                         </div>
                                     </div>
                                     <div class="table-responsive">
@@ -29,7 +31,6 @@
                                                 <th>Nombre</th>
                                                 <th>Correo</th>
                                                 <th>RUT</th>
-                                                <th>Area</th>
                                                 <th>ROL</th>
                                                 <th class="text-right">Acciones</th>
                                             </thead>
@@ -40,7 +41,6 @@
                                                     <td>{{ $user->name }}</td>
                                                     <td>{{ $user->email }}</td>
                                                     <td>{{ $user->rut }}</td>
-                                                    <td>{{ $user->area }}</td>
                                                     <td>
                                                         @forelse ($user->roles as $role)
                                                             <span class="badge badge-info">{{$role->name}}</span>
@@ -49,9 +49,15 @@
                                                         @endforelse
                                                     </td>
                                                     <td class="td-actions text-right">
+                                                        @can('user_show')
                                                         <a href="{{ route('users.show', $user->id) }}" class="btn btn-info"><i class="material-icons">person</i></a>
+                                                        @endcan
+                                                        @can('user_edit')
                                                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                        @endcan
+                                                        @can('user_destroy')
                                                         <form action="{{route('users.delete', $user->id)}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
+                                                        @endcan
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger" type="submit" rel="tooltip">

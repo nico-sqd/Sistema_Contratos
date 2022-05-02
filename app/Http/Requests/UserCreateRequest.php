@@ -26,8 +26,6 @@ class UserCreateRequest extends FormRequest
         return [
             'name' => 'required|max:25',
             'rut' => 'required|unique:users',
-            'rol' => 'required',
-            'area' => 'required',
             'email' => 'required|email|unique:users',
         ];
     }

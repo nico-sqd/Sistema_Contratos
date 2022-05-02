@@ -32,15 +32,6 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="area" class="col-sm-2 col-form-label">Área</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="area" value="{{ old('area', $user->area) }}">
-                                    @if ($errors->has('area'))
-                                        <span class="error text-danger" for="input-area">{{$errors -> first('area')}}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="row">
                                 <label for="email" class="col-sm-2 col-form-label">Correo</label>
                                 <div class="col-sm-7">
                                     <input type="email" class="form-control" name="email" value="{{ old('email', $user->email) }}" >
