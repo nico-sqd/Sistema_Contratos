@@ -29,8 +29,6 @@ class UserEditRequest extends FormRequest
             'rut' => [
                 'required','unique:users,rut,' . $user->id
                 ],
-            'rol' => 'required',
-            'area' => 'required',
             'email' => [
                 'required', 'email', 'unique:users,email,' . request()->route('user')->id
             ],

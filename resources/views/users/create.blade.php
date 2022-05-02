@@ -11,6 +11,7 @@
                             <h4 class="card-tittle">Crear Usuario</h4>
                             <p class="card-category">Ingresar datos</p>
                         </div>
+                        {{ $errors }}
                         <div class="card-body">
                           {{--  @if ($errors->any())
                                 <div class="alert alert-danger">
