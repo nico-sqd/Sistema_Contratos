@@ -29,6 +29,9 @@ class CreateMontoTable extends Migration
      */
     public function down()
     {
+        Schema::table('monto', function (Blueprint $table){
+            $table->dropColumn('id_tipo_moneda');
+        });
         Schema::dropIfExists('monto');
     }
 }
