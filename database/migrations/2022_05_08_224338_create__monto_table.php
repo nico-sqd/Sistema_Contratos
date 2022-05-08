@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateMontoTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('monto', function (Blueprint $table) {
+            $table->id('codigo_monto');
+            $table->timestamps();
+            $table->unsignedBigInteger('moneda');
+            $table->unsignedBigInteger('id_tipo_moneda');
+            $table->foreign('id_tipo_moneda')->references('id_tipo')->on('tipo_moneda');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('monto');
+    }
+}

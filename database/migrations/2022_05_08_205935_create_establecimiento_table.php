@@ -20,7 +20,7 @@ class CreateEstablecimientoTable extends Migration
         Schema::table('establecimiento', function (Blueprint $table) {
             $table->string('establecimiento');
             $table->string('abreviacion');
-            $table->string('codigo_deis');
+            $table->unsignedBigInteger('codigo_deis');
         });
         Schema::table('users', function (Blueprint $table) {
             $table->unsignedBigInteger('establecimiento');
