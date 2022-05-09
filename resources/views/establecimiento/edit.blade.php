@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form action="{{route('users.update', $user->id)}}" method="post" class="form-horizontal">
+            <form action="{{route('establecimiento.update', $establecimientos->id)}}" method="post" class="form-horizontal">
                     @csrf
                     @method('PUT')
                     <div class="card">
@@ -14,11 +14,11 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <label for="name" class="col-sm-2 col-form-label">Establecimiento</label>
+                                <label for="establecimiento" class="col-sm-2 col-form-label">Establecimiento</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="establecimiento" value="{{ old('establecimiento', $establecimiento->establecimiento) }}" autofocus>
+                                    <input type="text" class="form-control" name="establecimiento" value="{{ old('establecimiento', $establecimientos->establecimiento) }}" autofocus>
                                     @if ($errors->has('establecimiento'))
-                                        <span class="error text-danger" for="input-name">{{$errors -> first('establecimiento')}}</span>
+                                        <span class="error text-danger" for="input-establecimiento">{{$errors -> first('establecimiento')}}</span>
                                     @endif
                                 </div>
                             </div>
