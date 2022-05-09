@@ -9,7 +9,7 @@ class Establecimiento extends Model
 {
     use HasFactory;
 
-    protected $table = 'establecimientos';
+    protected $table = 'establecimiento';
 
     public function usuarios()
     {
