@@ -31,6 +31,12 @@
             <p>Referentes</p>
         </a>
       </li>
+      <li class="nav-item{{ $activePage == 'referentes' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('establecimiento.index') }}">
+          <i class="material-icons">person</i>
+            <p>Establecimientos</p>
+        </a>
+      </li>
       <li class="nav-item{{ $activePage == 'typography' ? ' active' : '' }}">
         <a class="nav-link" href="#">
           <i class="material-icons">library_books</i>

@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\Models\Establecimiento;
 use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
@@ -24,12 +25,12 @@ class UserController extends Controller
     {
         abort_if(Gate::denies('user_create'), 403);
         $roles = Role::all()->pluck('name', 'id');
-        return view('users.create', compact('roles'));
+        return view('users.create', compact('roles'),['establecimiento'=>Establecimiento::all()]);
     }
 
     public function store(UserCreateRequest $request)
     {
-        $user = User::create($request->only('name', 'rut', 'email')
+        $user = User::create($request->only('name', 'rut', 'email','establecimiento')
             +[
                 'password' => bcrypt($request->input('password')),
             ]);
@@ -55,13 +56,13 @@ class UserController extends Controller
         //dd($user);
         $roles = Role::all()->pluck('name', 'id');
         $user->load('roles');
-        return view('users.edit', compact('user', 'roles'));
+        return view('users.edit', compact('user', 'roles'),['establecimientos'=>Establecimiento::all()]);
     }
 
     public function update(UserEditRequest $request, User $user)
     {
         //$user=User::findOrFail($id);
-        $data = $request->only('name','rut','email');
+        $data = $request->only('name','rut','email','establecimiento');
         $password=$request->input('password');
         if($password)
             $data['password']=bcrypt($password);
