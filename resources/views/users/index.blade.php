@@ -31,6 +31,7 @@
                                                 <th>Nombre</th>
                                                 <th>Correo</th>
                                                 <th>RUT</th>
+                                                <th>Establecimiento</th>
                                                 <th>ROL</th>
                                                 <th class="text-right">Acciones</th>
                                             </thead>
@@ -41,6 +42,7 @@
                                                     <td>{{ $user->name }}</td>
                                                     <td>{{ $user->email }}</td>
                                                     <td>{{ $user->rut }}</td>
+                                                    <td>{{ $user->getEstablecimiento->establecimiento }}</td>
                                                     <td>
                                                         @forelse ($user->roles as $role)
                                                             <span class="badge badge-info">{{$role->name}}</span>

@@ -58,6 +58,19 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="row">
+                                <label for="rol" class="col-sm-2 col-form-label">Establecimiento</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Seleccionar Establecimiento</label>
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="establecimiento">
+                                          @foreach ( $establecimiento as $establecimiento )
+                                            <option value="{{ $establecimiento->id }}">{{ $establecimiento->establecimiento }}</option>
+                                          @endforeach
+                                        </select>
+                                      </div>
+                                </div>
+                            </div>
                             <div>
                                 <label for="roles" class="col-sm-2 col-form-label">Roles</label>
                                 <div class="col-sm-7">
