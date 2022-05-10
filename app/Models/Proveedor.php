@@ -15,4 +15,9 @@ class Proveedor extends Model
     {
         return $this->belongsTo(Direccion::class, 'direccion_id');
     }
+
+    public function convenios()
+    {
+        return $this->belongsTo(Convenios::class, 'rut_proveedor');
+    }
 }
