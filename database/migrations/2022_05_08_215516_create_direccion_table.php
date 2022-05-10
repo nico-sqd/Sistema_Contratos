@@ -19,7 +19,6 @@ class CreateDireccionTable extends Migration
             $table->string('direccion');
             $table->string('comuna');
             $table->string('region');
-            $table->integer('codigo_postal');
         });
     }
 
