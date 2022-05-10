@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Proveedor;
+use App\Models\Direccion;
 
 class DireccionController extends Controller
 {
@@ -35,8 +36,9 @@ class DireccionController extends Controller
      */
     public function store(Request $request)
     {
-        $direccion = Direccion::create($request->only('direccion', 'comuna', 'region','codigo_postal'));
-        return redirect()->route('proveedores.index', $proveedor->id)->with('success', 'Usuario creado correctamente.');
+        $direccion = Direccion::create($request->only('direccion', 'comuna', 'region'));
+        $proveedor = Proveedor::create(array_merge($request->only('nombre_proveedor', 'rut_proveedor', 'representante','rut_representante'),['direccion_id'=>$direccion->id]));
+        return redirect()->route('proveedor.index', $proveedor->id)->with('success', 'Usuario creado correctamente.');
     }
 
     /**

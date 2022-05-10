@@ -38,7 +38,7 @@
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'typography' ? ' active' : '' }}">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('proveedor.index') }}">
           <i class="material-icons">library_books</i>
             <p>{{ __('Contratos') }}</p>
         </a>

@@ -33,5 +33,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::resource('permissions', App\Http\Controllers\PermissionController::class);
     Route::resource('roles', App\Http\Controllers\RoleController::class);
     Route::resource('establecimiento', App\Http\Controllers\EstablecimientoController::class);
+    Route::resource('proveedor', App\Http\Controllers\ProveedorController::class);
+    Route::resource('direccion', App\Http\Controllers\DireccionController::class);
 });
 

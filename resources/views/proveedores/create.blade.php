@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form action="{{route('proveedores.store')}}" method="post" class="form-horizontal">
+                <form action="{{route('direccion.store')}}" method="post" class="form-horizontal">
                     @csrf
                     <div class="card">
                         <div class="card-header card-header-primary">
@@ -50,53 +50,32 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="direccion_id" class="col-sm-2 col-form-label">Codigo Postal</label>
+                                <label for="direccion" class="col-sm-2 col-form-label">Direccion</label>
                                 <div class="col-sm-7">
-                                    <input type="direccion_id" class="form-control" name="direccion_id" placeholder="Digite 1">
-                                    @if ($errors->has('direccion_id'))
-                                        <span class="error text-danger" for="input-direccion_id">{{$errors -> first('direccion_id')}}</span>
+                                    <input type="text" class="form-control" name="direccion" placeholder="Ingrese nombre" value="{{old('direccion')}}" autofocus>
+                                    @if ($errors->has('direccion'))
+                                        <span class="error text-danger" for="input-direccion">{{$errors -> first('direccion')}}</span>
                                     @endif
                                 </div>
                             </div>
-                            <form action="{{ route('direccion.store') }}" method="post" class="form-horizontal">
-                                <div class="row">
-                                    <label for="direccion" class="col-sm-2 col-form-label">Direccion</label>
-                                    <div class="col-sm-7">
-                                        <input type="text" class="form-control" name="direccion" placeholder="Ingrese nombre" value="{{old('direccion')}}" autofocus>
-                                        @if ($errors->has('direccion'))
-                                            <span class="error text-danger" for="input-direccion">{{$errors -> first('direccion')}}</span>
-                                        @endif
-                                    </div>
+                            <div class="row">
+                                <label for="comuna" class="col-sm-2 col-form-label">Comuna</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="comuna" placeholder="Ingrese nombre" value="{{old('comuna')}}" autofocus>
+                                    @if ($errors->has('comuna'))
+                                        <span class="error text-danger" for="input-comuna">{{$errors -> first('comuna')}}</span>
+                                    @endif
                                 </div>
-                                <div class="row">
-                                    <label for="comuna" class="col-sm-2 col-form-label">Comuna</label>
-                                    <div class="col-sm-7">
-                                        <input type="text" class="form-control" name="comuna" placeholder="Ingrese nombre" value="{{old('comuna')}}" autofocus>
-                                        @if ($errors->has('comuna'))
-                                            <span class="error text-danger" for="input-comuna">{{$errors -> first('comuna')}}</span>
-                                        @endif
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <label for="region" class="col-sm-2 col-form-label">Region</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="region" placeholder="Ingrese nombre" value="{{old('region')}}" autofocus>
+                                    @if ($errors->has('region'))
+                                        <span class="error text-danger" for="input-region">{{$errors -> first('region')}}</span>
+                                    @endif
                                 </div>
-                                <div class="row">
-                                    <label for="region" class="col-sm-2 col-form-label">Region</label>
-                                    <div class="col-sm-7">
-                                        <input type="text" class="form-control" name="region" placeholder="Ingrese nombre" value="{{old('region')}}" autofocus>
-                                        @if ($errors->has('region'))
-                                            <span class="error text-danger" for="input-region">{{$errors -> first('region')}}</span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label for="codigo_postal" class="col-sm-2 col-form-label">codigo_postal</label>
-                                    <div class="col-sm-7">
-                                        <input type="text" class="form-control" name="codigo_postal" placeholder="Ingrese nombre" value="{{old('codigo_postal')}}" autofocus>
-                                        @if ($errors->has('codigo_postal'))
-                                            <span class="error text-danger" for="input-codigo_postal">{{$errors -> first('codigo_postal')}}</span>
-                                        @endif
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                            </div>
                         <!--footer-->
                         <div class="card-footer ml-auto mr-auto">
                             <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>

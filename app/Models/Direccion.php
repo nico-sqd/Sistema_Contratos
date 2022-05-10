@@ -11,6 +11,17 @@ class Direccion extends Model
 
     protected $table = 'direccion';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'direccion',
+        'comuna',
+        'region',
+    ];
+
     public function proveedor()
     {
         return $this->hasOne(Proveedor::class,'direccion_id');
