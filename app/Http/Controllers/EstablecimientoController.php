@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
+use App\Models\Establecimiento;
 
 class EstablecimientoController extends Controller
 {
@@ -14,7 +14,7 @@ class EstablecimientoController extends Controller
      */
     public function index()
     {
-        $establecimientos = Permission::paginate(5);
+        $establecimientos = Establecimiento::paginate(5);
 
         return view('establecimiento.index', compact('establecimientos'));
     }
@@ -26,7 +26,7 @@ class EstablecimientoController extends Controller
      */
     public function create()
     {
-        //
+        return view('establecimiento.create');
     }
 
     /**
@@ -37,7 +37,8 @@ class EstablecimientoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Establecimiento::create($request->only('establecimiento', 'abreviacion', 'codigo_deis'));
+        return redirect()->route('establecimiento.index');
     }
 
     /**
@@ -57,9 +58,9 @@ class EstablecimientoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Establecimiento $establecimientos)
     {
-        //
+        return view('establecimiento.edit', compact('establecimientos'));
     }
 
     /**
@@ -69,9 +70,11 @@ class EstablecimientoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Establecimiento $establecimientos)
     {
-        //
+        $establecimientos->update($request->only('establecimiento','codigo_deis','abreviacion'));
+
+        return redirect()->route('establecimiento.index');
     }
 
     /**
@@ -80,8 +83,10 @@ class EstablecimientoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Establecimiento $establecimientos)
     {
-        //
+        $establecimientos->delete();
+
+        return redirect()->route('establecimiento.index');
     }
 }
