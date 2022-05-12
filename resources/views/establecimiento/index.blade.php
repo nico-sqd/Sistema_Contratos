@@ -34,7 +34,7 @@
                                                     <td>{{ $establecimiento->abreviacion }}</td>
                                                     <td>{{ $establecimiento->codigo_deis }}</td>
                                                      <td class="td-actions text-right">
-                                                        <a href="{{ route('establecimiento.edit', $establecimiento->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                        <a href="{{ route('establecimiento.edit', ['establecimiento' => $establecimiento->id]) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
                                                         <form action="{{route('establecimiento.destroy', $establecimiento->id)}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
                                                         @csrf
                                                         @method('DELETE')
