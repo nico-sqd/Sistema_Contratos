@@ -25,22 +25,22 @@
         </a>
       </li>
       @endcan
-      @can('index_administrador')
+
       <li class="nav-item{{ $activePage == 'administradores' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('administradores.index_administrador') }}">
           <i class="material-icons">person</i>
             <p>Administradores</p>
         </a>
       </li>
-      @endcan
-      @can('index_referente')
+
+
       <li class="nav-item{{ $activePage == 'referentes' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('referentes.index_referente') }}">
           <i class="material-icons">person</i>
             <p>Referentes</p>
         </a>
       </li>
-      @endcan
+
       <li class="nav-item{{ $activePage == 'establecimiento' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('establecimiento.index') }}">
           <i class="material-icons">home_work</i>
