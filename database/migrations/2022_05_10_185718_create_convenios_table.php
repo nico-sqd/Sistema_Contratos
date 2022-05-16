@@ -34,6 +34,10 @@ class CreateConveniosTable extends Migration
      */
     public function down()
     {
+        Schema::table('convenios', function (Blueprint $table){
+            $table->dropColumn('rut_proveedor');
+            $table->dropColumn('monto');
+        });
         Schema::dropIfExists('convenios');
     }
 }
