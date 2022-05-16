@@ -16,7 +16,7 @@ class CreateConveniosTable extends Migration
         Schema::create('convenios', function (Blueprint $table) {
             $table->id('id_licitacion');
             $table->timestamps();
-            $table->string('rut_proveedor');
+            $table->unsignedBigInteger('rut_proveedor');
             $table->foreign('rut_proveedor')->references('id')->on('proveedor');
             $table->date('vigencia_inicio');
             $table->date('vigencia_fin');
