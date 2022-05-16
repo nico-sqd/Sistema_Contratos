@@ -25,7 +25,7 @@ class ConveniosController extends Controller
      */
     public function create()
     {
-        //
+        return view('convenios.create');
     }
 
     /**
@@ -58,7 +58,7 @@ class ConveniosController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('proveedores.edit');
     }
 
     /**

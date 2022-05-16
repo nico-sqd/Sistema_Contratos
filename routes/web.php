@@ -35,5 +35,6 @@ Route::group(['middleware'=>'auth'], function(){
     Route::resource('establecimiento', App\Http\Controllers\EstablecimientoController::class);
     Route::resource('proveedor', App\Http\Controllers\ProveedorController::class);
     Route::resource('direccion', App\Http\Controllers\DireccionController::class);
+    Route::resource('convenios', App\Http\Controllers\ConveniosController::class);
 });
 

@@ -37,10 +37,16 @@
             <p>Establecimientos</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'typography' ? ' active' : '' }}">
+      <li class="nav-item{{ $activePage == 'proveedores' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('proveedor.index') }}">
+          <i class="material-icons">person</i>
+            <p>{{ __('Proveedores') }}</p>
+        </a>
+      </li>
+      <li class="nav-item{{ $activePage == 'convenios' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('convenios.index') }}">
           <i class="material-icons">library_books</i>
-            <p>{{ __('Contratos') }}</p>
+            <p>{{ __('Convenios') }}</p>
         </a>
       </li>
       @can('permission_index')
@@ -52,7 +58,7 @@
       </li>
       @endcan
       @can('role_index')
-      <li class="nav-item{{ $activePage == 'map' ? ' active' : '' }}">
+      <li class="nav-item{{ $activePage == 'roles' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('roles.index') }}">
           <i class="material-icons">work_outline</i>
             <p>{{ __('Roles') }}</p>
