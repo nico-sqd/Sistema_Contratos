@@ -55,7 +55,7 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Seleccionar Establecimiento</label>
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="establecimiento">
-                                          @foreach ( $establecimiento as $establecimiento )
+                                          @foreach ( $establecimientos as $establecimiento )
                                             <option value="{{ $establecimiento->id }}" {{ $user->establecimiento == $establecimiento->id ? 'selected' : '' }}>{{ $establecimiento->establecimiento }}</option>
                                           @endforeach
                                         </select>

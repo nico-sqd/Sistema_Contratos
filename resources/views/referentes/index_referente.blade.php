@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'usuarios', 'titlePage' => 'Usuarios'])
+@extends('layouts.main', ['activePage' => 'referentes', 'titlePage' => 'Usuarios'])
 @section('content')
     <div class="content">
         <div class="container-fuid">
@@ -75,7 +75,7 @@
                                 </div>
                                 <!--footer-->
                                 <div class="card-footer ml-auto mr-auto">
-                                    {{ $users->links() }}
+                                    {{ $users->links() }} 
                                 </div>
                                 <!--End footer-->
                         </div>

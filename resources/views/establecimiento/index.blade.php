@@ -8,13 +8,13 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-primary">
-                                    <h4 class="card-tittle">Tablas de Establecimientos</h4>
-                                    <p class="card-category">Datos de Establecimiento<s/p>
+                                    <h4 class="card-tittle">Establecimientos</h4>
+                                    <p class="card-category">Establecimientos Registrados</p>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-12 text-right">
-                                            <a href="{{ route('establecimiento.create') }}" class="btn btn-sm btn-facebook">Añadir Establecimiento</a>
+                                            <a href="{{ route('establecimiento.create') }}" class="btn btn-sm btn-facebook">Añadir Establecimientos</a>
                                         </div>
                                     </div>
                                     <div class="table-responsive">
@@ -27,14 +27,14 @@
                                                 <th class="text-right">Acciones</th>
                                             </thead>
                                             <tbody>
-                                                @foreach ($establecimientos as $establecimiento)
+                                                @forelse ($establecimientos as $establecimiento)
                                                 <tr>
                                                     <td>{{ $establecimiento->id }}</td>
                                                     <td>{{ $establecimiento->establecimiento }}</td>
                                                     <td>{{ $establecimiento->abreviacion }}</td>
                                                     <td>{{ $establecimiento->codigo_deis }}</td>
-                                                    <td class="td-actions text-right">
-                                                        <a href="{{ route('establecimiento.edit', $establecimiento->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                     <td class="td-actions text-right">
+                                                        <a href="{{ route('establecimiento.edit', ['establecimiento' => $establecimiento->id]) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
                                                         <form action="{{route('establecimiento.destroy', $establecimiento->id)}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
                                                         @csrf
                                                         @method('DELETE')
@@ -44,14 +44,16 @@
                                                         </form>
                                                     </td>
                                                 </tr>
-                                                @endforeach
+                                                @empty
+                                                No permissions registered yet.
+                                                @endforelse
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                                 <!--footer-->
                                 <div class="card-footer ml-auto mr-auto">
-                                    {{ $establecimiento->links() }}
+                                    {{ $establecimientos ?? ''->links() }}
                                 </div>
                                 <!--End footer-->
                         </div>
