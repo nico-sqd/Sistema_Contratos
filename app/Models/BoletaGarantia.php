@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TipoMoneda extends Model
+class BoletaGarantia extends Model
 {
     use HasFactory;
 
-    protected $table = 'tipo_moneda';
+    protected $table = 'boletagarantia';
 
     /**
      * The attributes that are mass assignable.
@@ -17,12 +17,12 @@ class TipoMoneda extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'id_tipo',
-        'Nombre_tipo',
+        'id_boleta',
+        'documentos_garantia',
     ];
 
-    public function monto()
+    public function contrato()
     {
-        return $this->hasMany(Monto::class,'id_tipo_moneda','id_tipo');
+        return $this->hasMany(Contrato::class,'id_boleta','id_boleta');
     }
 }

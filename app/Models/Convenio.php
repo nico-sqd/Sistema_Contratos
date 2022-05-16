@@ -31,6 +31,6 @@ class Convenio extends Model
     }
     public function monto()
     {
-        return $this->belongsTo(Monto::class,'codigo_monto');
+        return $this->belongsTo(Monto::class,'monto','codigo_monto');
     }
 }

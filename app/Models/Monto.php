@@ -11,9 +11,20 @@ class Monto extends Model
 
     protected $table = 'monto';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'codigo_monto',
+        'moneda',
+        'id_tipo_moneda',
+    ];
+
     public function tipo_moneda()
     {
-        return $this->belongsTo(TipoMoneda::class,'id_tipo_moneda');
+        return $this->belongsTo(TipoMoneda::class,'id_tipo','id_tipo_moneda');
     }
     public function factura()
     {
@@ -21,6 +32,10 @@ class Monto extends Model
     }
     public function convenios()
     {
-        return $this->hasMany(Convenio::class,'codigo_monto');
+        return $this->hasMany(Convenio::class,'monto','codigo_monto');
+    }
+    public function contrato()
+    {
+        return $this->hasOne(Contrato::class,'id_monto','codigo_monto');
     }
 }
