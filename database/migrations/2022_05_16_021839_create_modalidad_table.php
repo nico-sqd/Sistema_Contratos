@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDireccionTable extends Migration
+class CreateModalidadTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateDireccionTable extends Migration
      */
     public function up()
     {
-        Schema::create('direccion', function (Blueprint $table) {
-            $table->id();
+        Schema::create('modalidad', function (Blueprint $table) {
+            $table->id('id_modalidad');
             $table->timestamps();
-            $table->string('direccion');
-            $table->string('comuna');
-            $table->string('region');
+            $table->string('nombre_modalidad');
+            $table->string('abreviacion_modalidad');
+
         });
     }
 
@@ -29,6 +29,6 @@ class CreateDireccionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('direccion');
+        Schema::dropIfExists('modalidad');
     }
 }

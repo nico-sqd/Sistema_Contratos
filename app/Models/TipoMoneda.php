@@ -11,8 +11,18 @@ class TipoMoneda extends Model
 
     protected $table = 'tipo_moneda';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'id_tipo',
+        'Nombre_tipo',
+    ];
+
     public function monto()
     {
-        return $this->hasMany(Monto::class,'id_tipo_moneda');
+        return $this->hasMany(Monto::class,'id_tipo_moneda','id_tipo');
     }
 }

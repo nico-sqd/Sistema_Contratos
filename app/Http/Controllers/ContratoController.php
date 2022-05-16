@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Proveedor;
-use App\Models\Direccion;
+use App\Models\Contrato;
 
-class DireccionController extends Controller
+class ContratoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,8 @@ class DireccionController extends Controller
      */
     public function index()
     {
-        //
+        $contratos=Contrato::paginate(5);
+        return view('contratos.index', compact('contratos'));
     }
 
     /**
@@ -25,7 +25,7 @@ class DireccionController extends Controller
      */
     public function create()
     {
-        return view('direccion.create');
+        return view('contratos.create');
     }
 
     /**
@@ -36,9 +36,7 @@ class DireccionController extends Controller
      */
     public function store(Request $request)
     {
-        $direccion = Direccion::create($request->only('direccion', 'comuna', 'region'));
-        $proveedor = Proveedor::create(array_merge($request->only('nombre_proveedor', 'rut_proveedor', 'representante','rut_representante'),['direccion_id'=>$direccion->id]));
-        return redirect()->route('proveedor.index', $proveedor->id)->with('success', 'Usuario creado correctamente.');
+        //
     }
 
     /**
@@ -60,7 +58,7 @@ class DireccionController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('contratos.edit');
     }
 
     /**

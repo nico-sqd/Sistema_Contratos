@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Direccion extends Model
+class Modalidad extends Model
 {
     use HasFactory;
 
-    protected $table = 'direccion';
+    protected $table = 'modalidad';
 
     /**
      * The attributes that are mass assignable.
@@ -17,13 +17,13 @@ class Direccion extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'direccion',
-        'comuna',
-        'region',
+        'id_modalidad',
+        'nombre_modalidad',
+        'abreviacion_modalidad',
     ];
 
-    public function proveedor()
+    public function contratos()
     {
-        return $this->hasOne(Proveedor::class,'direccion_id');
+        return $this->hasMany(Contrato::class,'id_modalidad','id_modalidad');
     }
 }
