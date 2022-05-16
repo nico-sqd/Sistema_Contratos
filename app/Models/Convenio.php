@@ -29,4 +29,8 @@ class Convenio extends Model
     {
         return $this->hasMany(Proveedor::class,'rut_proveedor');
     }
+    public function convenios()
+    {
+        return $this->belongsTo(Monto::class,'codigo_monto');
+    }
 }

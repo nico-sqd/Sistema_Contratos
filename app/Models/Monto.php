@@ -19,4 +19,8 @@ class Monto extends Model
     {
         return $this->belongsTo(Factura::class,'codigo_monto');
     }
+    public function convenios()
+    {
+        return $this->hasMany(Convenio::class,'codigo_monto');
+    }
 }
