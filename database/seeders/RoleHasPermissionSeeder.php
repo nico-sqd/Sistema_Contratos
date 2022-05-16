@@ -20,11 +20,14 @@ class RoleHasPermissionSeeder extends Seeder
         Role::findOrFail(1)->syncPermissions($superadmin_permissions->pluck('id'));
 
         //admin
-        $admin_permissions = Permission::all();
-        Role::findOrFail(2)->syncPermissions($admin_permissions->pluck('id'));
+        $admin_permissions = $superadmin_permissions->filter(function($permission){
+            return substr($permission->name, 0, 15) != 'index_referente';
+        });
+        Role::findOrFail(2)->syncPermissions($admin_permissions);
 
         $referente_permissions = $superadmin_permissions->filter(function($permission){
             return substr($permission->name, 0, 5) != 'user_' && 
+                substr($permission->name, 0,19) != 'index_administrador'&&
                 substr($permission->name, 0, 5) != 'role_'&&
                 substr($permission->name, 0, 11) != 'permission_';
         });

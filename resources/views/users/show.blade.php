@@ -1,4 +1,4 @@
-@extends('layouts.main',['activePage' => 'users', 'titlePage' =>'Detalles del Usuario'])
+@extends('layouts.main',['activePage' => 'usuarios', 'titlePage' =>'Detalles del Usuario'])
 @section('content')
 <div class="content">
     <div class="conteiner-fuid">
@@ -18,7 +18,7 @@
                             @endif
                             <div class="row">
                                 <div class="col-12 text-right">
-                                    <a href="{{ route('users.index') }}" class="btn btn-success"><i class="material-icons">arrow_back</i></a>
+                                    <a href="{{ url()->previous() }}" class="btn btn-success"><i class="material-icons">arrow_back</i></a>
                                 </div>
                             </div>
                            <div class="row">

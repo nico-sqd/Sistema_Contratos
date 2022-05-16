@@ -30,6 +30,8 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('/users/{user}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('users.edit');
     Route::put('/users/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.delete');
+    Route::get('administradores', [App\Http\Controllers\UserController::class, 'index_administrador'])->name('administradores.index_administrador');
+    Route::get('referentes', [App\Http\Controllers\UserController::class, 'index_referente'])->name('referentes.index_referente');
     Route::resource('permissions', App\Http\Controllers\PermissionController::class);
     Route::resource('roles', App\Http\Controllers\RoleController::class);
     Route::resource('establecimiento', App\Http\Controllers\EstablecimientoController::class);
