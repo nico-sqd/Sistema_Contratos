@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'usuarios', 'titlePage' => 'Usuarios'])
+@extends('layouts.main', ['activePage' => 'administradores', 'titlePage' => 'Administradores'])
 @section('content')
     <div class="content">
         <div class="container-fuid">
@@ -8,8 +8,8 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-primary">
-                                    <h4 class="card-tittle">Tablas de Usuario</h4>
-                                    <p class="card-category">Datos de Usuario</p>
+                                    <h4 class="card-tittle">Tablas de Administradores</h4>
+                                    <p class="card-category">Datos de Administrador</p>
                                 </div>
                                 <div class="card-body">
                                     @if (session('success'))

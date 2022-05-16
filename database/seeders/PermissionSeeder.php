@@ -31,7 +31,11 @@ class PermissionSeeder extends Seeder
             'user_show',
             'user_create',
             'user_edit',
-            'user_destroy'
+            'user_destroy',
+
+            'index_administrador',
+            'index_referente'
+
         ];
 
         foreach($permissions as $permission){
