@@ -12,12 +12,20 @@ class Convenio extends Model
     protected $table = 'convenios';
 
     /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id_licitacion';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
         'id_licitacion',
+        'convenio',
         'rut_proveedor',
         'vigencia_inicio',
         'vigencia_fin',
@@ -27,7 +35,7 @@ class Convenio extends Model
 
     public function proveedor()
     {
-        return $this->hasMany(Proveedor::class,'rut_proveedor');
+        return $this->belongsTo(Proveedor::class,'rut_proveedor');
     }
     public function monto()
     {

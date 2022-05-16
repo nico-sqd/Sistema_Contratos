@@ -9,7 +9,7 @@
                             <div class="card">
                                 <div class="card-header card-header-primary">
                                     <h4 class="card-tittle">Tablas de Convenios</h4>
-                                    <p class="card-category">Datos de Convenio<s/p>
+                                    <p class="card-category">Datos de Convenio</p>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
@@ -38,10 +38,10 @@
                                                     <td>{{ $convenio->vigencia_fin }}</td>
                                                     <td>{{ $convenio->monto }}</td>
                                                     <td>{{ $convenio->admin }}</td>
-                                                    <td>{{ $convenio->rut_proveedor }}</td>
+                                                    <td>{{ $convenio->proveedor->rut_proveedor }}</td>
                                                     <td class="td-actions text-right">
-                                                        <a href="{{ route('convenio.edit', $convenio->id_licitacion) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
-                                                        <form action="{{route('convenio.destroy', $convenio->id_licitacion)}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
+                                                        <a href="{{ route('convenios.edit', $convenio->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                        <form action="{{route('convenios.destroy', $convenio->id)}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger" type="submit" rel="tooltip">

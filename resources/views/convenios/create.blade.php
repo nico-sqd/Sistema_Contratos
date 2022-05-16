@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form action="{{route('establecimiento.store')}}" method="post" class="form-horizontal">
+                <form action="{{route('convenios.store')}}" method="post" class="form-horizontal">
                     @csrf
                     <div class="card">
                         <div class="card-header card-header-primary">
@@ -41,6 +41,19 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <label for="rut_proveedor" class="col-sm-2 col-form-label">Proveedores</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Seleccionar Proveedor</label>
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="rut_proveedor">
+                                        @foreach ( $proveedor as $proveedores )
+                                            <option value="{{ $proveedores->id }}">{{ $proveedores->nombre_proveedor }} - {{ $proveedores->rut_proveedor }}</option>
+                                        @endforeach
+                                        </select>
+                                      </div>
+                                </div>
+                            </div>
+                            {{--<div class="row">
                                 <label for="rut_proveedor" class="col-sm-2 col-form-label">RUT del Proveedor</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="rut_proveedor" placeholder="Ingrese el RUT Proveedor" value="{{old('rut_proveedor')}}">
@@ -48,7 +61,7 @@
                                         <span class="error text-danger" for="input-rut_proveedor">{{$errors -> first('rut_proveedor')}}</span>
                                     @endif
                                 </div>
-                            </div>
+                            </div>--}}
                             <div class="row">
                                 <label for="vigencia_inicio" class="col-sm-2 col-form-label">Vigencia Inicio</label>
                                 <div class="col-sm-7">

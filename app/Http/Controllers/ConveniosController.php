@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Convenio;
+use App\Models\Proveedor;
 
 class ConveniosController extends Controller
 {
@@ -25,7 +26,7 @@ class ConveniosController extends Controller
      */
     public function create()
     {
-        return view('convenios.create');
+        return view('convenios.create',['proveedor'=>Proveedor::all()]);
     }
 
     /**
@@ -36,7 +37,8 @@ class ConveniosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $convenios = Convenio::create(array_merge($request->only('id_licitacion', 'convenio', 'rut_proveedor','vigencia_inicio','vigencia_fin','monto','admin')));
+        return redirect()->route('convenios.index', $convenios->id_licitacion)->with('success', 'Usuario creado correctamente.');
     }
 
     /**
@@ -58,7 +60,7 @@ class ConveniosController extends Controller
      */
     public function edit($id)
     {
-        return view('proveedores.edit');
+        return view('convenios.edit');
     }
 
     /**
@@ -79,8 +81,9 @@ class ConveniosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Convenio $convenios)
     {
-        //
+        $convenios -> delete();
+        return redirect()->route('convenios.index');
     }
 }

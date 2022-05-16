@@ -14,15 +14,16 @@ class CreateConveniosTable extends Migration
     public function up()
     {
         Schema::create('convenios', function (Blueprint $table) {
-            $table->id('id_licitacion');
+            $table->id();
             $table->timestamps();
+            $table->string('id_licitacion');
             $table->longText('convenio');
             $table->unsignedBigInteger('rut_proveedor');
             $table->foreign('rut_proveedor')->references('id')->on('proveedor');
             $table->date('vigencia_inicio');
             $table->date('vigencia_fin');
-            $table->unsignedBigInteger('monto');
-            $table->foreign('monto')->references('codigo_monto')->on('monto');
+            $table->integer('monto');
+//            $table->foreign('monto')->references('codigo_monto')->on('monto');
             $table->string('admin');
         });
     }

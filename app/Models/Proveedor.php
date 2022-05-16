@@ -31,6 +31,6 @@ class Proveedor extends Model
 
     public function convenios()
     {
-        return $this->belongsTo(Convenios::class, 'rut_proveedor');
+        return $this->hasMany(Convenios::class, 'rut_proveedor');
     }
 }
