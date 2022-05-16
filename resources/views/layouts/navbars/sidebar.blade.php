@@ -49,6 +49,12 @@
             <p>{{ __('Convenios') }}</p>
         </a>
       </li>
+      <li class="nav-item{{ $activePage == 'contratos' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('contratos.index') }}">
+          <i class="material-icons">library_books</i>
+            <p>{{ __('Contratos') }}</p>
+        </a>
+      </li>
       @can('permission_index')
       <li class="nav-item{{ $activePage == 'permissions' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('permissions.index') }}">

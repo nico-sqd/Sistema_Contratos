@@ -9,7 +9,7 @@
                             <div class="card">
                                 <div class="card-header card-header-primary">
                                     <h4 class="card-tittle">Tablas de Convenios</h4>
-                                    <p class="card-category">Datos de Convenio<s/p>
+                                    <p class="card-category">Datos de Convenios</p>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
