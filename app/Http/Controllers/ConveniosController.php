@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Convenio;
 
 class ConveniosController extends Controller
 {
@@ -13,8 +14,8 @@ class ConveniosController extends Controller
      */
     public function index()
     {
-        $proveedores=Proveedor::with('direccion')->paginate(5);
-        return view('proveedores.index', compact('proveedores'),['direcciones'=>Direccion::all()]);
+        $convenios=Convenio::paginate(5);
+        return view('convenios.index', compact('convenios'));
     }
 
     /**

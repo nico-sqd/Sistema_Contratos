@@ -29,7 +29,7 @@ class Convenio extends Model
     {
         return $this->hasMany(Proveedor::class,'rut_proveedor');
     }
-    public function convenios()
+    public function monto()
     {
         return $this->belongsTo(Monto::class,'codigo_monto');
     }
