@@ -56,10 +56,10 @@ class UserSeeder extends Seeder
             'codigo_deis'=>'1'
         ]);
         DB::table('tipo_moneda')->insert([
-            'Nombre_tipo'=>'USD'
+            'Nombre_tipo'=>'CLP'
         ]);
         DB::table('tipo_moneda')->insert([
-            'Nombre_tipo'=>'CLP'
+            'Nombre_tipo'=>'USD'
         ]);
         DB::table('tipo_moneda')->insert([
             'Nombre_tipo'=>'UF'
