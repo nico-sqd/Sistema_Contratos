@@ -49,4 +49,8 @@ class Contrato extends Model
     {
         return $this->belongsTo(Convenio::class,'id_licitacion');
     }
+    public function caratula()
+    {
+        return $this->hasMany(Caratula::class,'id_contrato');
+    }
 }

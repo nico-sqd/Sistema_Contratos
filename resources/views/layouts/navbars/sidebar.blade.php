@@ -66,7 +66,7 @@
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'caratulas' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('contratos.index') }}">
+        <a class="nav-link" href="{{ route('caratula.index') }}">
           <i class="material-icons">library_books</i>
             <p>{{ __('Caratulas') }}</p>
         </a>
