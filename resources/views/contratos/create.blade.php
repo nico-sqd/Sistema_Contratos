@@ -14,6 +14,19 @@
                         {{ $errors }}
                         <div class="card-body">
                             <div class="row">
+                                <label for="id_licitacion" class="col-sm-2 col-form-label">ID Licitacion</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Seleccionar ID de Licitacion</label>
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_licitacion">
+                                        @foreach ( $id_licitacion as $licitacion )
+                                            <option value="{{ $licitacion->id }}">{{ $licitacion->id_licitacion }} - {{ $licitacion->convenio }}</option>
+                                        @endforeach
+                                        </select>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <label for="id_contrato" class="col-sm-2 col-form-label">ID Contrato</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="id_contrato" placeholder="Ingrese id de contrato" value="{{old('id_contrato')}}" autofocus>

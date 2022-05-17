@@ -48,4 +48,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Establecimiento::class,'establecimiento');
     }
+    public function convenio()
+    {
+        return $this->hasOne(Convenio::class,'rut');
+    }
 }

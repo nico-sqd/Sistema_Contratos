@@ -53,6 +53,19 @@
                                       </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <label for="rut" class="col-sm-2 col-form-label">Referentes</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Seleccionar Referente</label>
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="rut">
+                                        @foreach ( $referente as $rut )
+                                            <option value="{{ $rut->id }}">{{ $rut->name }} - {{ $rut->rut_proveedor }}</option>
+                                        @endforeach
+                                        </select>
+                                      </div>
+                                </div>
+                            </div>
                             {{--<div class="row">
                                 <label for="rut_proveedor" class="col-sm-2 col-form-label">RUT del Proveedor</label>
                                 <div class="col-sm-7">

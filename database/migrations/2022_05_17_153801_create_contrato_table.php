@@ -16,6 +16,8 @@ class CreateContratoTable extends Migration
         Schema::create('contrato', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->unsignedBigInteger('id_licitacion')->nullable();
+            $table->foreign('id_licitacion')->references('id')->on('convenios');
             $table->string('id_contrato')->nullable();
             $table->string('res_adjudicacion');
             $table->string('res_apruebacontrato');
@@ -40,6 +42,7 @@ class CreateContratoTable extends Migration
     public function down()
     {
         Schema::table('contrato', function (Blueprint $table){
+            $table->dropColumn('id_licitacion');
             $table->dropColumn('id_monto');
             $table->dropColumn('id_boleta');
             $table->dropColumn('id_modalidad');

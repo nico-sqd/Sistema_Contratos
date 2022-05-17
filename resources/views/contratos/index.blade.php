@@ -28,6 +28,7 @@
                                         <table class="table">
                                             <thead class="text-primary">
                                                 <th>ID Contrato</th>
+                                                <th>ID Licitacion</th>
                                                 <th>Resolucion de Adj.</th>
                                                 <th>Resolucion Aprueba Cont.</th>
                                                 <th>Monto</th>
@@ -41,6 +42,7 @@
                                             @foreach ($contratos as $contrato)
                                                 <tr>
                                                     <td>{{ $contrato->id_contrato }}</td>
+                                                    <td>{{ $contrato->convenio->id_licitacion }}</td>
                                                     <td>{{ $contrato->res_adjudicacion }}</td>
                                                     <td>{{ $contrato->res_apruebacontrato }}</td>
                                                     <td>{{ $contrato->monto->moneda }}</td>

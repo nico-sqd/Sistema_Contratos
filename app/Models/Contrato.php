@@ -17,6 +17,7 @@ class Contrato extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'id_licitacion',
         'id_contrato',
         'res_adjudicacion',
         'res_apruebacontrato',
@@ -43,5 +44,9 @@ class Contrato extends Model
     public function montoboleta()
     {
         return $this->belongsTo(MontoBoleta::class,'id_monto_boleta');
+    }
+    public function convenio()
+    {
+        return $this->belongsTo(Convenio::class,'id_licitacion');
     }
 }
