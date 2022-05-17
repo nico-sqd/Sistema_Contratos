@@ -27,7 +27,7 @@ class ConveniosController extends Controller
      */
     public function create()
     {
-        return view('convenios.create',['proveedor'=>Proveedor::all(),'referente'=>User::role('Referente')->get()]);
+        return view('convenios.create',['proveedor'=>Proveedor::all(),'referente'=>User::role('Referente')->get(),'admin'=>User::role('Administrador')->get()]);
     }
 
     /**

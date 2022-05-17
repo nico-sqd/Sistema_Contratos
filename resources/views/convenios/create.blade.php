@@ -60,7 +60,7 @@
                                         <label for="exampleFormControlSelect1">Seleccionar Referente</label>
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="rut">
                                         @foreach ( $referente as $rut )
-                                            <option value="{{ $rut->id }}">{{ $rut->name }} - {{ $rut->rut_proveedor }}</option>
+                                            <option value="{{ $rut->id }}">{{ $rut->name }} - {{ $rut->rut }}</option>
                                         @endforeach
                                         </select>
                                       </div>
@@ -103,12 +103,16 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="admin" class="col-sm-2 col-form-label">Administrador</label>
+                                <label for="admin" class="col-sm-2 col-form-label">Gestor de Contrato</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="admin" placeholder="Ingrese nombre admin" value="{{old('admin')}}">
-                                    @if ($errors->has('admin'))
-                                        <span class="error text-danger" for="input-admin">{{$errors -> first('admin')}}</span>
-                                    @endif
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Seleccionar Gestor</label>
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="admin">
+                                        @foreach ( $admin as $rut )
+                                            <option value="{{ $rut->name }}">{{ $rut->name }}</option>
+                                        @endforeach
+                                        </select>
+                                      </div>
                                 </div>
                             </div>
                         </div>
