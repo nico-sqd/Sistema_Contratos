@@ -19,9 +19,10 @@ class Contrato extends Model
     protected $fillable = [
         'id_contrato',
         'res_adjudicacion',
-        'res_aprueba_contrato',
+        'res_apruebacontrato',
         'id_monto',
         'id_boleta',
+        'id_monto_boleta',
         'id_modalidad',
         'aumento_contrato',
         'res_aumento',
@@ -37,6 +38,10 @@ class Contrato extends Model
     }
     public function monto()
     {
-        return $this->belongsTo(Monto::class,'id_monto','codigo_monto');
+        return $this->belongsTo(Monto::class,'id_monto');
+    }
+    public function montoboleta()
+    {
+        return $this->belongsTo(MontoBoleta::class,'id_monto_boleta');
     }
 }

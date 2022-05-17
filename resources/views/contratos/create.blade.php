@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form action="{{route('direccion.store')}}" method="post" class="form-horizontal">
+                <form action="{{route('contratos.store')}}" method="post" class="form-horizontal">
                     @csrf
                     <div class="card">
                         <div class="card-header card-header-primary">
@@ -32,21 +32,69 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="res_aprueba_contrato" class="col-sm-2 col-form-label">Resolucion Aprueba Contrato</label>
+                                <label for="res_apruebacontrato" class="col-sm-2 col-form-label">Resolucion Aprueba Contratob</label>
                                 <div class="col-sm-7">
-                                    <input type="txt" class="form-control" name="res_adjudicacion" placeholder="Ingrese la resolucion de aprueba contrato" value="{{old('res_aprueba_contrato')}}">
-                                    @if ($errors->has('res_aprueba_contrato'))
-                                        <span class="error text-danger" for="input-res_aprueba_contrato">{{$errors -> first('res_aprueba_contrato')}}</span>
+                                    <input type="text" class="form-control" name="res_apruebacontrato" placeholder="Ingrese la resolucion apruebo" value="{{old('res_apruebacontrato')}}">
+                                    @if ($errors->has('res_apruebacontrato'))
+                                        <span class="error text-danger" for="input-res_apruebacontrato">{{$errors -> first('res_apruebacontrato')}}</span>
                                     @endif
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="id_monto" class="col-sm-2 col-form-label">ID Monto</label>
+                                <label for="moneda" class="col-sm-2 col-form-label">Monto</label>
                                 <div class="col-sm-7">
-                                    <input type="txt" class="form-control" name="id_monto" placeholder="ingrese el id del monto">
-                                    @if ($errors->has('id_monto'))
-                                        <span class="error text-danger" for="input-id_monto">{{$errors -> first('id_monto')}}</span>
+                                    <input type="txt" class="form-control" name="moneda" placeholder="ingrese el id del monto">
+                                    @if ($errors->has('moneda'))
+                                        <span class="error text-danger" for="input-moneda">{{$errors -> first('moneda')}}</span>
                                     @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="id_tipo_moneda" class="col-sm-2 col-form-label">Tipo Moneda</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Seleccionar Tipo Moneda</label>
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_tipo_moneda">
+                                        @foreach ( $tipomoneda as $monedas )
+                                            <option value="{{ $monedas->id_tipo }}">{{ $monedas->Nombre_tipo }}</option>
+                                        @endforeach
+                                        </select>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="monto_boleta" class="col-sm-2 col-form-label">Monto Boleta de Garantía</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="monto_boleta" placeholder="Ingrese el aumento contrato" value="{{old('monto_boleta')}}" autofocus>
+                                    @if ($errors->has('monto_boleta'))
+                                        <span class="error text-danger" for="input-monto_boleta">{{$errors -> first('monto_boleta')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="id_tipo_boleta" class="col-sm-2 col-form-label">Tipo Boleta</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Seleccionar Tipo Boleta</label>
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_tipo_boleta">
+                                        @foreach ( $tipoboleta as $boletagarantia )
+                                            <option value="{{ $boletagarantia->id_boleta }}">{{ $boletagarantia->documentos_garantia }}</option>
+                                        @endforeach
+                                        </select>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="id_modalidad" class="col-sm-2 col-form-label">Modalidad</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Seleccionar Modalidad</label>
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_modalidad">
+                                        @foreach ( $modalidad as $modalidades )
+                                            <option value="{{ $modalidades->id_modalidad }}">{{ $modalidades->nombre_modalidad }} - {{ $modalidades->abreviacion_modalidad }}</option>
+                                        @endforeach
+                                        </select>
+                                      </div>
                                 </div>
                             </div>
                             <div class="row">

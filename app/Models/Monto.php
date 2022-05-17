@@ -17,7 +17,6 @@ class Monto extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'codigo_monto',
         'moneda',
         'id_tipo_moneda',
     ];
@@ -28,7 +27,7 @@ class Monto extends Model
     }
     public function factura()
     {
-        return $this->belongsTo(Factura::class,'codigo_monto');
+        return $this->belongsTo(Factura::class,'id_monto');
     }
     public function convenios()
     {

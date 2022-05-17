@@ -3,14 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Contrato;
-use App\Models\Monto;
-use App\Models\BoletaGarantia;
-use App\Models\MontoBoleta;
-use App\Models\Modalidad;
-use App\Models\TipoMoneda;
 
-class ContratoController extends Controller
+class MontoBoletaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +13,7 @@ class ContratoController extends Controller
      */
     public function index()
     {
-        $contratos=Contrato::paginate(5);
-        return view('contratos.index', compact('contratos'));
+        //
     }
 
     /**
@@ -30,8 +23,7 @@ class ContratoController extends Controller
      */
     public function create()
     {
-        return view('contratos.create',['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
-        'modalidad'=>Modalidad::all(),'montoboletagarantia'=>Modalidad::all()]);
+        //
     }
 
     /**
@@ -42,10 +34,7 @@ class ContratoController extends Controller
      */
     public function store(Request $request)
     {
-        $montoboleta = Monto::create($request->only('moneda', 'id_tipo_moneda','id_tipo_monto'));
-        $boletagarantia = MontoBoleta::create($request->only('monto_boleta','id_tipo_boleta'));
-        $contrato = Contrato::create(array_merge($request->only('id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento'),['id_monto'=>$montoboleta->id,'id_boleta'=>$boletagarantia->id_tipo_boleta,'id_monto_boleta'=>$boletagarantia->id]));
-        return redirect()->route('contratos.index', $contrato->id)->with('success', 'Usuario creado correctamente.');
+        //
     }
 
     /**
@@ -67,7 +56,7 @@ class ContratoController extends Controller
      */
     public function edit($id)
     {
-        return view('contratos.edit');
+        //
     }
 
     /**

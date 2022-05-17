@@ -27,12 +27,13 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead class="text-primary">
-                                                <th>ID</th>
+                                                <th>ID Contrato</th>
                                                 <th>Resolucion de Adj.</th>
                                                 <th>Resolucion Aprueba Cont.</th>
                                                 <th>Monto</th>
-                                                <th>ID Boleta</th>
-                                                <th>Aumento Contrato/th>
+                                                <th>Documento de Garantía</th>
+                                                <th>Modalidad</th>
+                                                <th>Aumento Contrato</th>
                                                 <th>Resolucion de Aumento</th>
                                                 <th class="text-right">Acciones</th>
                                             </thead>
@@ -41,11 +42,11 @@
                                                 <tr>
                                                     <td>{{ $contrato->id_contrato }}</td>
                                                     <td>{{ $contrato->res_adjudicacion }}</td>
-                                                    <td>{{ $contrato->res_aprueba_contrato }}</td>
-                                                    <td>{{ $contrato->monto->id_monto }}</td>
-                                                    <td>{{ $contrato->boletagarantia->id_boleta }}</td>
-                                                    <td>{{ $contrato->modalidad->id_modalidad}}</td>
-                                                    <td>{{ $contrato->aumneto_contrato}}</td>
+                                                    <td>{{ $contrato->res_apruebacontrato }}</td>
+                                                    <td>{{ $contrato->monto->moneda }}</td>
+                                                    <td>{{ $contrato->boletagarantia->documentos_garantia }}</td>
+                                                    <td>{{ $contrato->modalidad->abreviacion_modalidad}}</td>
+                                                    <td>{{ $contrato->aumento_contrato}}</td>
                                                     <td>{{ $contrato->res_aumento }}</td>
                                                     <td class="td-actions text-right">
                                                         @can('proveedor_edit')

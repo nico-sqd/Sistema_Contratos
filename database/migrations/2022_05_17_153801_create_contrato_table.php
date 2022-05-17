@@ -14,18 +14,21 @@ class CreateContratoTable extends Migration
     public function up()
     {
         Schema::create('contrato', function (Blueprint $table) {
-            $table->id('id_contrato');
+            $table->id();
             $table->timestamps();
+            $table->string('id_contrato')->nullable();
             $table->string('res_adjudicacion');
-            $table->string('res_aprueba_contrato');
+            $table->string('res_apruebacontrato');
             $table->unsignedBigInteger('id_monto');
-            $table->foreign('id_monto')->references('codigo_monto')->on('monto');
+            $table->foreign('id_monto')->references('id')->on('monto');
             $table->unsignedBigInteger('id_boleta');
             $table->foreign('id_boleta')->references('id_boleta')->on('boletagarantia');
+            $table->unsignedBigInteger('id_monto_boleta');
+            $table->foreign('id_monto_boleta')->references('id')->on('montoboleta');
             $table->unsignedBigInteger('id_modalidad');
             $table->foreign('id_modalidad')->references('id_modalidad')->on('modalidad');
-            $table->string('aumento_contrato');
-            $table->string('res_aumento');
+            $table->string('aumento_contrato')->nullable();
+            $table->string('res_aumento')->nullable();
         });
     }
 
@@ -40,6 +43,7 @@ class CreateContratoTable extends Migration
             $table->dropColumn('id_monto');
             $table->dropColumn('id_boleta');
             $table->dropColumn('id_modalidad');
+            $table->dropColumn('id_monto_boleta');
         });
         Schema::dropIfExists('contrato');
     }
