@@ -20,16 +20,17 @@
                                     <div class="row">
                                         <div class="col-12 text-right">
                                             @can('user_create')
-                                            <a href="{{ route('caratula.create') }}" class="btn btn-sm btn-facebook">Añadir Proveedor</a>
+                                            <a href="{{ route('caratula.create') }}" class="btn btn-sm btn-facebook">Añadir Caratula</a>
                                             @endcan
                                         </div>
                                     </div>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead class="text-primary">
-                                                <th>ID Contrato</th>
+                                                <th>Proveedor</th>
                                                 <th>ID Licitacion</th>
-                                                <th>Resolucion de Adj.</th>
+                                                <th>ID Contrato</th>
+                                                <th>Referente</th>
                                                 <th class="text-right">Acciones</th>
                                             </thead>
                                             <tbody>
@@ -38,6 +39,7 @@
                                                     <td>{{ $caratula->proveedor->nombre_proveedor }}</td>
                                                     <td>{{ $caratula->convenio->id_licitacion }}</td>
                                                     <td>{{ $caratula->contrato->id_contrato }}</td>
+                                                    <td>{{ $caratula->convenio->user->name }}</td>
                                                     <td class="td-actions text-right">
                                                         <a href="{{ route('caratula.show', $caratula->id) }}" class="btn btn-info"><i class="material-icons">person</i></a>
                                                         @can('proveedor_edit')
