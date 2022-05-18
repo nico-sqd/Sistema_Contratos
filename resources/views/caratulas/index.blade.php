@@ -39,6 +39,7 @@
                                                     <td>{{ $caratula->convenio->id_licitacion }}</td>
                                                     <td>{{ $caratula->contrato->id_contrato }}</td>
                                                     <td class="td-actions text-right">
+                                                        <a href="{{ route('caratula.show', $caratula->id) }}" class="btn btn-info"><i class="material-icons">person</i></a>
                                                         @can('proveedor_edit')
                                                         <a href="{{ route('caratulas.edit', $caratula->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
                                                         @endcan

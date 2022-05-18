@@ -49,9 +49,9 @@ class CaratulaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Caratula $caratulas)
     {
-        //
+        return view('caratulas.show', compact('caratulas'));
     }
 
     /**
@@ -60,9 +60,9 @@ class CaratulaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Caratula $caratulas)
     {
-        //
+        return view('caratulas.edit', compact('caratulas'));
     }
 
     /**
