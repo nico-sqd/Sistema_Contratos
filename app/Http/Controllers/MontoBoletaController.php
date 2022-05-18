@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Proveedor;
-use App\Models\Direccion;
-use Illuminate\Support\Facades\Gate;
 
-class ProveedorController extends Controller
+class MontoBoletaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +13,7 @@ class ProveedorController extends Controller
      */
     public function index()
     {
-        $proveedores=Proveedor::with('direccion')->paginate(5);
-        return view('proveedor.index', compact('proveedores'),['direcciones'=>Direccion::all()]);
+        //
     }
 
     /**
@@ -27,7 +23,7 @@ class ProveedorController extends Controller
      */
     public function create()
     {
-        return view('proveedor.create',['direccion'=>Direccion::all()]);
+        //
     }
 
     /**
@@ -38,8 +34,7 @@ class ProveedorController extends Controller
      */
     public function store(Request $request)
     {
-        $proveedor = Proveedor::create($request->only('nombre_proveedor', 'rut_proveedor', 'representante','rut_representante','direccion_id'));
-        return redirect()->route('proveedor.index', $proveedor->id)->with('success', 'Usuario creado correctamente.');
+        //
     }
 
     /**
@@ -59,9 +54,9 @@ class ProveedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Proveedor $proveedores)
+    public function edit($id)
     {
-        return view('proveedor.edit',compact('proveedores'),['direccion'=>Direccion::all()]);
+        //
     }
 
     /**
@@ -71,11 +66,9 @@ class ProveedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Proveedor $proveedores)
+    public function update(Request $request, $id)
     {
-        $proveedores->update($request->only('nombre_proveedor', 'rut_proveedor', 'representante','rut_representante','direccion_id'));
-
-        return redirect()->route('proveedor.index', $proveedores->id)->with('success', 'Usuario actualizado correctamente.');
+        //
     }
 
     /**
@@ -84,9 +77,8 @@ class ProveedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Proveedor $proveedores)
+    public function destroy($id)
     {
-        $proveedores->delete();
-        return redirect()->route('proveedor.index');
+        //
     }
 }

@@ -13,6 +13,11 @@
                         </div>
                         {{ $errors }}
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 text-right">
+                                    <a href="{{ url()->previous() }}" class="btn btn-facebook"><i class="material-icons">arrow_back</i></a>
+                                </div>
+                            </div>
                           {{--  @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
@@ -48,6 +53,19 @@
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="rut_proveedor">
                                         @foreach ( $proveedor as $proveedores )
                                             <option value="{{ $proveedores->id }}">{{ $proveedores->nombre_proveedor }} - {{ $proveedores->rut_proveedor }}</option>
+                                        @endforeach
+                                        </select>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="rut" class="col-sm-2 col-form-label">Referentes</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Seleccionar Referente</label>
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="rut">
+                                        @foreach ( $referente as $rut )
+                                            <option value="{{ $rut->id }}">{{ $rut->name }} - {{ $rut->rut }}</option>
                                         @endforeach
                                         </select>
                                       </div>
@@ -90,12 +108,16 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="admin" class="col-sm-2 col-form-label">Administrador</label>
+                                <label for="admin" class="col-sm-2 col-form-label">Gestor de Contrato</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="admin" placeholder="Ingrese nombre admin" value="{{old('admin')}}">
-                                    @if ($errors->has('admin'))
-                                        <span class="error text-danger" for="input-admin">{{$errors -> first('admin')}}</span>
-                                    @endif
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Seleccionar Gestor</label>
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="admin">
+                                        @foreach ( $admin as $rut )
+                                            <option value="{{ $rut->name }}">{{ $rut->name }}</option>
+                                        @endforeach
+                                        </select>
+                                      </div>
                                 </div>
                             </div>
                         </div>

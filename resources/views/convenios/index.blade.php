@@ -25,8 +25,9 @@
                                                 <th>Vigencia inicio</th>
                                                 <th>Vigencia Fin</th>
                                                 <th>Monto</th>
-                                                <th>Administrador</th>
+                                                <th>Referente</th>
                                                 <th>Rut Proveedor</th>
+                                                <th>Administrador</th>
                                                 <th class="text-right">Acciones</th>
                                             </thead>
                                             <tbody>
@@ -37,8 +38,9 @@
                                                     <td>{{ $convenio->vigencia_inicio }}</td>
                                                     <td>{{ $convenio->vigencia_fin }}</td>
                                                     <td>{{ $convenio->monto }}</td>
-                                                    <td>{{ $convenio->admin }}</td>
+                                                    <td>{{ $convenio->user->name }}</td>
                                                     <td>{{ $convenio->proveedor->rut_proveedor }}</td>
+                                                    <td>{{ $convenio->admin }}</td>
                                                     <td class="td-actions text-right">
                                                         <a href="{{ route('convenios.edit', $convenio->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
                                                         <form action="{{route('convenios.destroy', $convenio->id)}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">

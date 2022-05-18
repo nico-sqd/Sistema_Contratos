@@ -14,7 +14,7 @@ class CreateMontoTable extends Migration
     public function up()
     {
         Schema::create('monto', function (Blueprint $table) {
-            $table->id('codigo_monto');
+            $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('moneda');
             $table->unsignedBigInteger('id_tipo_moneda');

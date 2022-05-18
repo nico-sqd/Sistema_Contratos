@@ -23,6 +23,11 @@
                                 </div>
                             @endif--}}
                             <div class="row">
+                                <div class="col-12 text-right">
+                                    <a href="{{ url()->previous() }}" class="btn btn-facebook"><i class="material-icons">arrow_back</i></a>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <label for="name" class="col-sm-2 col-form-label">Nombre</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="name" placeholder="Ingrese el nombre" value="{{old('name')}}" autofocus>
@@ -84,7 +89,7 @@
                                                             <td>
                                                                 <div class="form-check">
                                                                     <label class="form-check-label">
-                                                                        <input class="form-check-input" type="checkbox" name="roles[]" 
+                                                                        <input class="form-check-input" type="checkbox" name="roles[]"
                                                                             value="{{ $id }}">
                                                                         <span class="form-check-sign">
                                                                             <span class="check"></span>

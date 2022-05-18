@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'proveedores', 'titlePage' => 'Nuevo Proveedor'])
+@extends('layouts.main', ['activePage' => 'proveedor', 'titlePage' => 'Nuevo Proveedor'])
 @section('content')
 <div class="content">
     <div class="container-fluid">
@@ -13,6 +13,11 @@
                         </div>
                         {{ $errors }}
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 text-right">
+                                    <a href="{{ url()->previous() }}" class="btn btn-facebook"><i class="material-icons">arrow_back</i></a>
+                                </div>
+                            </div>
                             <div class="row">
                                 <label for="nombre_proveedor" class="col-sm-2 col-form-label">Proveedor</label>
                                 <div class="col-sm-7">
@@ -52,7 +57,7 @@
                             <div class="row">
                                 <label for="direccion" class="col-sm-2 col-form-label">Direccion</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="direccion" placeholder="Ingrese nombre" value="{{old('direccion')}}" autofocus>
+                                    <input type="text" class="form-control" name="direccion" placeholder="Ingrese direccion" value="{{old('direccion')}}" autofocus>
                                     @if ($errors->has('direccion'))
                                         <span class="error text-danger" for="input-direccion">{{$errors -> first('direccion')}}</span>
                                     @endif
@@ -61,7 +66,7 @@
                             <div class="row">
                                 <label for="comuna" class="col-sm-2 col-form-label">Comuna</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="comuna" placeholder="Ingrese nombre" value="{{old('comuna')}}" autofocus>
+                                    <input type="text" class="form-control" name="comuna" placeholder="Ingrese comuna" value="{{old('comuna')}}" autofocus>
                                     @if ($errors->has('comuna'))
                                         <span class="error text-danger" for="input-comuna">{{$errors -> first('comuna')}}</span>
                                     @endif
@@ -70,7 +75,7 @@
                             <div class="row">
                                 <label for="region" class="col-sm-2 col-form-label">Region</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="region" placeholder="Ingrese nombre" value="{{old('region')}}" autofocus>
+                                    <input type="text" class="form-control" name="region" placeholder="Ingrese region" value="{{old('region')}}" autofocus>
                                     @if ($errors->has('region'))
                                         <span class="error text-danger" for="input-region">{{$errors -> first('region')}}</span>
                                     @endif

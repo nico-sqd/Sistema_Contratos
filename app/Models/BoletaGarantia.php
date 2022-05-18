@@ -25,4 +25,8 @@ class BoletaGarantia extends Model
     {
         return $this->hasMany(Contrato::class,'id_boleta','id_boleta');
     }
+    public function montoboleta()
+    {
+        return $this->hasMany(MontoBoleta::class,'id_tipo_boleta');
+    }
 }

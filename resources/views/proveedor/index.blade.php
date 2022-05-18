@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'contratos', 'titlePage' => 'Contratos'])
+@extends('layouts.main', ['activePage' => 'proveedor', 'titlePage' => 'Proveedores'])
 @section('content')
     <div class="content">
         <div class="container-fuid">
@@ -8,8 +8,8 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-primary">
-                                    <h4 class="card-tittle">Tablas de Contratos PIPO GUZMAN</h4>
-                                    <p class="card-category">Datos de Contratos</p>
+                                    <h4 class="card-tittle">Tablas de Proveedores</h4>
+                                    <p class="card-category">Datos de Proveedores</p>
                                 </div>
                                 <div class="card-body">
                                     @if (session('success'))
@@ -20,43 +20,37 @@
                                     <div class="row">
                                         <div class="col-12 text-right">
                                             @can('user_create')
-                                            <a href="{{ route('contratos.create') }}" class="btn btn-sm btn-facebook">Añadir Contrato</a>
+                                            <a href="{{ route('proveedor.create') }}" class="btn btn-sm btn-facebook">Añadir Proveedor</a>
                                             @endcan
                                         </div>
                                     </div>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead class="text-primary">
-                                                <th>ID Contrato</th>
-                                                <th>ID Licitacion</th>
-                                                <th>Resolucion de Adj.</th>
-                                                <th>Resolucion Aprueba Cont.</th>
-                                                <th>Monto</th>
-                                                <th>Documento de Garantía</th>
-                                                <th>Modalidad</th>
-                                                <th>Aumento Contrato</th>
-                                                <th>Resolucion de Aumento</th>
+                                                <th>ID</th>
+                                                <th>Nombre</th>
+                                                <th>RUT Proveedor</th>
+                                                <th>Representante Legal</th>
+                                                <th>RUN Representante Legal</th>
+                                                <th>Direccion</th>
+                                                <th>Comuna</th>
+                                                <th>Region</th>
                                                 <th class="text-right">Acciones</th>
                                             </thead>
                                             <tbody>
-                                            @foreach ($contratos as $contrato)
+                                            @foreach ($proveedores as $proveedor)
                                                 <tr>
-                                                    <td>{{ $contrato->id_contrato }}</td>
-                                                    <td>{{ $contrato->convenio->id_licitacion }}</td>
-                                                    <td>{{ $contrato->res_adjudicacion }}</td>
-                                                    <td>{{ $contrato->res_apruebacontrato }}</td>
-                                                    <td>{{ $contrato->monto->moneda }}</td>
-                                                    <td>{{ $contrato->boletagarantia->documentos_garantia }}</td>
-                                                    <td>{{ $contrato->modalidad->abreviacion_modalidad}}</td>
-                                                    <td>{{ $contrato->aumento_contrato}}</td>
-                                                    <td>{{ $contrato->res_aumento }}</td>
+                                                    <td>{{ $proveedor->id }}</td>
+                                                    <td>{{ $proveedor->nombre_proveedor }}</td>
+                                                    <td>{{ $proveedor->rut_proveedor }}</td>
+                                                    <td>{{ $proveedor->representante }}</td>
+                                                    <td>{{ $proveedor->rut_representante }}</td>
+                                                    <td>{{ $proveedor->direccion->direccion}}</td>
+                                                    <td>{{ $proveedor->direccion->comuna }}</td>
+                                                    <td>{{ $proveedor->direccion->region }}</td>
                                                     <td class="td-actions text-right">
-                                                        @can('proveedor_edit')
-                                                        <a href="{{ route('contratos.edit', $contrato->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
-                                                        @endcan
-                                                        @can('proveedor_destroy')
-                                                        <form action="{{route('contratos.delete', $contrato->id)}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
-                                                        @endcan
+                                                        <a href="{{ route('proveedor.edit', $proveedor->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                        <form action="{{ route('proveedor.destroy', $proveedor->id) }}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger" type="submit" rel="tooltip">
@@ -72,7 +66,7 @@
                                 </div>
                                 <!--footer-->
                                 <div class="card-footer ml-auto mr-auto">
-                                    {{ $contratos->links() }}
+                                    {{ $proveedores->links() }}
                                 </div>
                                 <!--End footer-->
                         </div>

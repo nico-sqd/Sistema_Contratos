@@ -47,7 +47,7 @@
             <p>Establecimientos</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'proveedores' ? ' active' : '' }}">
+      <li class="nav-item{{ $activePage == 'proveedor' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('proveedor.index') }}">
           <i class="material-icons">person</i>
             <p>{{ __('Proveedores') }}</p>
@@ -63,6 +63,12 @@
         <a class="nav-link" href="{{ route('contratos.index') }}">
           <i class="material-icons">library_books</i>
             <p>{{ __('Contratos') }}</p>
+        </a>
+      </li>
+      <li class="nav-item{{ $activePage == 'caratulas' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('caratula.index') }}">
+          <i class="material-icons">library_books</i>
+            <p>{{ __('Caratulas') }}</p>
         </a>
       </li>
       @can('permission_index')

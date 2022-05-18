@@ -19,7 +19,7 @@ class CreateFacturaTable extends Migration
             $table->unsignedBigInteger('codigo_factura');
             $table->date('fecha');
             $table->unsignedBigInteger('codigo_monto');
-            $table->foreign('codigo_monto')->references('codigo_monto')->on('monto');
+            $table->foreign('codigo_monto')->references('id')->on('monto');
         });
     }
 

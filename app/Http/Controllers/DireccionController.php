@@ -58,9 +58,9 @@ class DireccionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Direccion $direccion)
     {
-        //
+        return view('direccion.edit', compact('direccion'));
     }
 
     /**
@@ -70,9 +70,12 @@ class DireccionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Proveedor $proveedores, Direccion $direccion)
     {
-        //
+        $direccion->update($request->only('direccion', 'comuna', 'region'));
+        $proveedores->update(array_merge($request->only('nombre_proveedor', 'rut_proveedor', 'representante','rut_representante'),['direccion_id'=>$direccion->id]));
+
+        return redirect()->route('proveedor.index', $proveedores->id)->with('success', 'Usuario actualizado correctamente.');
     }
 
     /**
