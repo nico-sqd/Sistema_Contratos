@@ -8,7 +8,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-primary">
-                                    <h4 class="card-tittle">Tablas de Contratos Pipo Main</h4>
+                                    <h4 class="card-tittle">Tablas de Contratos</h4>
                                     <p class="card-category">Datos de Contratos</p>
                                 </div>
                                 <div class="card-body">
