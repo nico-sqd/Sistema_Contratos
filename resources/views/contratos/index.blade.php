@@ -20,7 +20,7 @@
                                     <div class="row">
                                         <div class="col-12 text-right">
                                             @can('user_create')
-                                            <a href="{{ route('contratos.create') }}" class="btn btn-sm btn-facebook">Añadir Proveedor</a>
+                                            <a href="{{ route('contratos.create') }}" class="btn btn-sm btn-facebook">Añadir Contrato</a>
                                             @endcan
                                         </div>
                                     </div>

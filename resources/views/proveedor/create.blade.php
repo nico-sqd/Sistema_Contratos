@@ -14,6 +14,11 @@
                         {{ $errors }}
                         <div class="card-body">
                             <div class="row">
+                                <div class="col-12 text-right">
+                                    <a href="{{ url()->previous() }}" class="btn btn-facebook"><i class="material-icons">arrow_back</i></a>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <label for="nombre_proveedor" class="col-sm-2 col-form-label">Proveedor</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="nombre_proveedor" placeholder="Ingrese nombre" value="{{old('nombre_proveedor')}}" autofocus>

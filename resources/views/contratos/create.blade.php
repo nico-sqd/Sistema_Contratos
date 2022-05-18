@@ -14,6 +14,11 @@
                         {{ $errors }}
                         <div class="card-body">
                             <div class="row">
+                                <div class="col-12 text-right">
+                                    <a href="{{ url()->previous() }}" class="btn btn-facebook"><i class="material-icons">arrow_back</i></a>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <label for="id_licitacion" class="col-sm-2 col-form-label">ID Licitacion</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
