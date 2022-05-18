@@ -33,4 +33,8 @@ class Proveedor extends Model
     {
         return $this->hasMany(Convenios::class, 'rut_proveedor');
     }
+    public function caratula()
+    {
+        return $this->hasMany(Caratula::class,'id_proveedor');
+    }
 }

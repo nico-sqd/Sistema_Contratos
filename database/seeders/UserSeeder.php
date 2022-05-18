@@ -55,6 +55,31 @@ class UserSeeder extends Seeder
             'abreviacion'=>'NN',
             'codigo_deis'=>'1'
         ]);
+        DB::table('tipo_moneda')->insert([
+            'Nombre_tipo'=>'CLP'
+        ]);
+        DB::table('tipo_moneda')->insert([
+            'Nombre_tipo'=>'USD'
+        ]);
+        DB::table('tipo_moneda')->insert([
+            'Nombre_tipo'=>'UF'
+        ]);
+        DB::table('modalidad')->insert([
+            'nombre_modalidad'=>'Licitacion Publica',
+            'abreviacion_modalidad'=>'LP'
+        ]);
+        DB::table('boletagarantia')->insert([
+            'documentos_garantia'=>'Boleta Garantía'
+        ]);
+        DB::table('boletagarantia')->insert([
+            'documentos_garantia'=>'Vale Vista'
+        ]);
+        DB::table('boletagarantia')->insert([
+            'documentos_garantia'=>'Póliza de Garantía'
+        ]);
+        DB::table('boletagarantia')->insert([
+            'documentos_garantia'=>'Certificado de Fianza'
+        ]);
         $user = User::create([
             'name'=>'Admin',
             'email'=>'admin@admin.com',

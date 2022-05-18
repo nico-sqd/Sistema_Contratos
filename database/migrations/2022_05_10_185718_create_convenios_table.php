@@ -20,6 +20,8 @@ class CreateConveniosTable extends Migration
             $table->longText('convenio');
             $table->unsignedBigInteger('rut_proveedor');
             $table->foreign('rut_proveedor')->references('id')->on('proveedor');
+            $table->unsignedBigInteger('rut');
+            $table->foreign('rut')->references('id')->on('users');
             $table->date('vigencia_inicio');
             $table->date('vigencia_fin');
             $table->integer('monto');
@@ -38,6 +40,7 @@ class CreateConveniosTable extends Migration
         Schema::table('convenios', function (Blueprint $table){
             $table->dropColumn('rut_proveedor');
             $table->dropColumn('monto');
+            $table->dropColumn('rut');
         });
         Schema::dropIfExists('convenios');
     }
