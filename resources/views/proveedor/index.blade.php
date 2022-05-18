@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'proveedores', 'titlePage' => 'Proveedores'])
+@extends('layouts.main', ['activePage' => 'proveedor', 'titlePage' => 'Proveedores'])
 @section('content')
     <div class="content">
         <div class="container-fuid">
@@ -49,15 +49,8 @@
                                                     <td>{{ $proveedor->direccion->comuna }}</td>
                                                     <td>{{ $proveedor->direccion->region }}</td>
                                                     <td class="td-actions text-right">
-                                                        @can('proveedor_show')
-                                                        <a href="{{ route('proveedors.show', $proveedor->id) }}" class="btn btn-info"><i class="material-icons">person</i></a>
-                                                        @endcan
-                                                        @can('proveedor_edit')
-                                                        <a href="{{ route('proveedores.edit', $proveedor->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
-                                                        @endcan
-                                                        @can('proveedor_destroy')
-                                                        <form action="{{route('proveedors.delete', $proveedor->id)}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
-                                                        @endcan
+                                                        <a href="{{ route('proveedor.edit', $proveedor->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                        <form action="{{ route('proveedor.destroy', $proveedor->id) }}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger" type="submit" rel="tooltip">
