@@ -51,7 +51,7 @@ class CaratulaController extends Controller
      */
     public function show(Caratula $caratulas)
     {
-        return view('caratulas.show', compact('caratulas'));
+        return view('caratulas.show', compact('caratulas'), ['convenios'=>Convenio::all(),'proveedores'=>Proveedor::all(),'contratos'=>Contrato::all()]);
     }
 
     /**
