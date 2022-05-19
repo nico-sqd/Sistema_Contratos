@@ -9,6 +9,20 @@
                             <div class="card">
                                 <div class="card-header card-header-primary">
                                     <h4 class="card-tittle">Establecimientos</h4>
+                                    <div class="row">
+                                        <div class="col-7 text-right">
+                                            <form action="{{route('establecimiento.index')}}" method="get">
+                                                <div class="form-row">
+                                                    <div class="col-sm-4">
+                                                        <input type="text" class="form-control" name="texto" value="{{$texto}}">
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <input type="submit" class="btn btn-primary" value="Buscar">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                     <p class="card-category">Establecimientos Registrados</p>
                                 </div>
                                 <div class="card-body">

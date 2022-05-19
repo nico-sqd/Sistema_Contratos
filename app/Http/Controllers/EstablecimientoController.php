@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Establecimiento;
+use Illuminate\Support\Facades\DB;
 
 class EstablecimientoController extends Controller
 {
@@ -12,11 +13,16 @@ class EstablecimientoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $establecimientos = Establecimiento::paginate(5);
+        $texto = trim($request->get('texto'));
+        $establecimientos = DB::table('establecimiento')->select('id','establecimiento','abreviacion','codigo_deis')
+        ->where('establecimiento','LIKE','%'.$texto.'%')
+        ->orWhere('codigo_deis','LIKE','%'.$texto.'%')
+        ->orderBy('id','asc')
+        ->paginate(5);
 
-        return view('establecimiento.index', compact('establecimientos'));
+        return view('establecimiento.index', compact('establecimientos','texto'));
     }
 
     /**
