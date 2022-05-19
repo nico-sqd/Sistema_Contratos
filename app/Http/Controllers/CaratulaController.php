@@ -66,7 +66,6 @@ class CaratulaController extends Controller
      */
     public function edit(Caratula $caratulas)
     {
-        dd($caratulas->id);
         return view('caratulas.edit',  compact('caratulas'), ['convenios'=>Convenio::all(),'proveedores'=>Proveedor::all(),'contratos'=>Contrato::all(),
 'monto'=>Monto::all(),'montoboleta'=>MontoBoleta::all(),'modalidad'=>Modalidad::all(),'user'=>User::all()]);
     }

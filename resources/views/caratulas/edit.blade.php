@@ -4,7 +4,6 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                {{dd($caratulas->id);}}
                 <form action="{{route('caratula.update', $caratulas->id)}}" method="post" class="form-horizontal">
                     @csrf
                     @method('PUT')
@@ -20,11 +19,11 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="id_licitacion" class="col-sm-2 col-form-label">Nombre Licitacion</label>
+                                <label for="convenio" class="col-sm-2 col-form-label">Nombre Licitacion</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="id_licitacion" value="{{ old('id_licitacion', $caratulas->convenio->convenio) }}" autofocus>
-                                    @if ($errors->has('id_licitacion'))
-                                        <span class="error text-danger" for="input-id_licitacion">{{$errors -> first('id_licitacion')}}</span>
+                                    <input type="text" class="form-control" name="convenio" value="{{ old('convenio', $caratulas->convenio->convenio) }}" autofocus>
+                                    @if ($errors->has('convenio'))
+                                        <span class="error text-danger" for="input-convenio">{{$errors -> first('convenio')}}</span>
                                     @endif
                                 </div>
                             </div>
@@ -156,6 +155,7 @@
                                     @endif
                                 </div>
                             </div>
+
                             {{--
                             <div class="row">
                                 <label for="rol" class="col-sm-2 col-form-label">Rol</label>

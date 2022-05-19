@@ -41,7 +41,7 @@
                                                     <td>{{ $caratula->contrato->id_contrato }}</td>
                                                     <td>{{ $caratula->convenio->user->name }}</td>
                                                     <td class="td-actions text-right">
-                                                        <a href="{{ route('caratula.show', $caratula->id) }}" class="btn btn-info"><i class="material-icons">person</i></a>
+                                                        <a href="{{ route('caratula.show', $caratula->id) }}" class="btn btn-info"><i class="material-icons">library_books</i></a>
                                                         <a href="{{ route('caratula.edit', $caratula->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
                                                         @can('proveedor_destroy')
                                                         <form action="{{route('caratulas.delete', $caratula->id)}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
