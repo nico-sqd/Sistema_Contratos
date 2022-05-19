@@ -19,7 +19,7 @@
                                     @endif
                                     <div class="row">
                                         <div class="col-12 text-right">
-                                            <a href="{{ url()->previous() }}" class="btn btn-facebook"><i class="material-icons">arrow_back</i></a>
+                                            <a href="{{ url()->route('caratula.index') }}" class="btn btn-facebook"><i class="material-icons">arrow_back</i></a>
                                         </div>
                                     </div>
                                     <div class="container p-3 my-3 border">
@@ -36,7 +36,7 @@
                                         <div class="h5">ID Contrato: {{$caratulas->proveedor->rut_proveedor}}</div>
                                         <div class="h5">Referente: {{$caratulas->convenio->user->name}}</div>
                                         <div class="h5">Aumento Contrato: {{$caratulas->contrato->aumento_contrato}}</div>
-                                        <div class="h5">Referente: {{$caratulas->contrato->res_aumento}}</div>
+                                        <div class="h5">Res. Aumento Contrato: {{$caratulas->contrato->res_aumento}}</div>
                                     </div>
                                     {{--<div class="table-responsive">
                                         <table class="table">
