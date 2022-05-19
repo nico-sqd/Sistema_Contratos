@@ -4,7 +4,6 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                {{dd($caratulas->id);}}
                 <form action="{{route('caratula.update', $caratulas->id)}}" method="post" class="form-horizontal">
                     @csrf
                     @method('PUT')
