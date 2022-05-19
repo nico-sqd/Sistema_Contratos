@@ -7,6 +7,10 @@ use App\Models\Caratula;
 use App\Models\Convenio;
 use App\Models\Proveedor;
 use App\Models\Contrato;
+use App\Models\Monto;
+use App\Models\MontoBoleta;
+use App\Models\User;
+use App\Models\Modalidad;
 
 class CaratulaController extends Controller
 {
@@ -62,7 +66,8 @@ class CaratulaController extends Controller
      */
     public function edit(Caratula $caratulas)
     {
-        return view('caratulas.edit', compact('caratulas'));
+        return view('caratulas.edit',  compact('caratulas'), ['convenios'=>Convenio::all(),'proveedores'=>Proveedor::all(),'contratos'=>Contrato::all(),
+'monto'=>Monto::all(),'montoboleta'=>MontoBoleta::all(),'modalidad'=>Modalidad::all(),'user'=>User::all()]);
     }
 
     /**
@@ -72,9 +77,16 @@ class CaratulaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Caratula $caratulas, Convenio $convenios, Proveedor $proveedores, Contrato $contratos, Monto $monto, MontoBoleta $montoboleta, Modalidad $modalidad, User $user)
     {
-        //
+        $modalidad->update($request->only('nombre_modalidad'));
+        $convenios->update($request->only('convenio','id_licitacion','vigencia_inicio','vigencia_fin'));
+        $contratos->update($request->only('res_apruebacontrato','id_contrato','aumento_contrato','res_aumento'));
+        $monto->update($request->only('moneda'));
+        $montoboleta->update($request->only('monto_boleta'));
+        $proveedores->update($request->only('nombre_proveedor','rut_proveedor'));
+        $user->update($request->only('name'));
+        return redirect()->route('caratula.show', $caratulas->id);
     }
 
     /**
