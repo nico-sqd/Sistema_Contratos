@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Convenio;
 use App\Models\Proveedor;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 
 class ConveniosController extends Controller
 {
@@ -14,9 +15,21 @@ class ConveniosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $convenios=Convenio::paginate(5);
+        $texto = trim($request->get('texto'));
+        $convenios = Convenio::with('proveedor')
+        ->whereRaw('UPPER(id_licitacion) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        ->orWhereRaw('UPPER(convenio) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        ->orWhere('vigencia_inicio','LIKE','%'.$texto.'%')
+        ->orWhere('vigencia_fin','LIKE','%'.$texto.'%')
+        ->orWhere('monto','LIKE','%'.$texto.'%')
+        ->orWhereRaw('UPPER(admin) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        ->orwhereHas('proveedor', function (Builder $query) use ($texto) {
+            $query->Where('rut_proveedor','LIKE','%'.$texto.'%');
+        })
+        ->orderBy('id','asc')
+        ->paginate(5);
         return view('convenios.index', compact('convenios'));
     }
 

@@ -16,8 +16,8 @@ class EstablecimientoController extends Controller
     public function index(Request $request)
     {
         $texto = trim($request->get('texto'));
-        $establecimientos = DB::table('establecimiento')->select('id','establecimiento','abreviacion','codigo_deis')
-        ->where('establecimiento','LIKE','%'.$texto.'%')
+        $establecimientos = Establecimiento::whereRaw('UPPER(establecimiento) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        ->orWhereRaw('UPPER(abreviacion) LIKE ?', ['%' . strtoupper($texto) . '%'])
         ->orWhere('codigo_deis','LIKE','%'.$texto.'%')
         ->orderBy('id','asc')
         ->paginate(5);
