@@ -54,7 +54,7 @@
                                             <tbody>
                                             @if (count($proveedores)<=0)
                                                 <div class="alert alert-danger" style="text-align:center" role="alert">
-                                                    <h4>No se han encontrato proveedores</h4>
+                                                    <h4>No se han encontrado proveedores</h4>
                                                 </div>
                                             @endif
                                             @foreach ($proveedores as $proveedor)
