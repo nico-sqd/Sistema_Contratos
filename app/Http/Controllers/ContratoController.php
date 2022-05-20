@@ -10,6 +10,7 @@ use App\Models\MontoBoleta;
 use App\Models\Modalidad;
 use App\Models\TipoMoneda;
 use App\Models\Convenio;
+use Illuminate\Database\Eloquent\Builder;
 
 class ContratoController extends Controller
 {
@@ -18,9 +19,28 @@ class ContratoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $contratos=Contrato::paginate(5);
+        $texto = trim($request->get('texto'));
+        $contratos = Contrato::whereRaw('UPPER(id_contrato) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        ->orWhere('res_adjudicacion','LIKE','%'.$texto.'%')
+        ->orWhere('res_apruebacontrato','LIKE','%'.$texto.'%')
+        ->orWhere('aumento_contrato','LIKE','%'.$texto.'%')
+        ->orWhere('res_aumento','LIKE','%'.$texto.'%')
+        ->orwhereHas('monto', function (Builder $query) use ($texto) {
+            $query->where('moneda','LIKE','%'.$texto.'%');
+        })
+        ->orwhereHas('convenio', function (Builder $query) use ($texto) {
+            $query->whereRaw('UPPER(id_licitacion) LIKE ?', ['%' . strtoupper($texto) . '%']);
+        })
+        ->orwhereHas('boletagarantia', function (Builder $query) use ($texto) {
+            $query->whereRaw('UPPER(documentos_garantia) LIKE ?', ['%' . strtoupper($texto) . '%']);
+        })
+        ->orwhereHas('modalidad', function (Builder $query) use ($texto) {
+            $query->whereRaw('UPPER(abreviacion_modalidad) LIKE ?', ['%' . strtoupper($texto) . '%']);
+        })
+        ->orderBy('id','asc')
+        ->paginate(5);
         return view('contratos.index', compact('contratos'));
     }
 
