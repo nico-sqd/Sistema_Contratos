@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form action="{{route('direccion.update', $proveedores->id)}}" method="post" class="form-horizontal">
+                <form action="{{route('proveedor.update', $proveedores->id)}}" method="post" class="form-horizontal">
                     @csrf
                     @method('PUT')
                     <div class="card">

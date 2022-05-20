@@ -16,6 +16,7 @@ class CreateEstablecimientoTable extends Migration
         Schema::create('establecimiento', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
         });
         Schema::table('establecimiento', function (Blueprint $table) {
             $table->string('establecimiento');

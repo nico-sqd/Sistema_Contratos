@@ -16,6 +16,7 @@ class CreateMontoTable extends Migration
         Schema::create('monto', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
             $table->unsignedBigInteger('moneda');
             $table->unsignedBigInteger('id_tipo_moneda');
             $table->foreign('id_tipo_moneda')->references('id_tipo')->on('tipo_moneda');

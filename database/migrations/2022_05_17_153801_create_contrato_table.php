@@ -16,6 +16,7 @@ class CreateContratoTable extends Migration
         Schema::create('contrato', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
             $table->unsignedBigInteger('id_licitacion')->nullable();
             $table->foreign('id_licitacion')->references('id')->on('convenios');
             $table->string('id_contrato')->nullable();

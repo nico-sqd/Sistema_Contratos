@@ -16,6 +16,7 @@ class CreateConveniosTable extends Migration
         Schema::create('convenios', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
             $table->string('id_licitacion');
             $table->longText('convenio');
             $table->unsignedBigInteger('rut_proveedor');

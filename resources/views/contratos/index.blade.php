@@ -51,12 +51,8 @@
                                                     <td>{{ $contrato->aumento_contrato}}</td>
                                                     <td>{{ $contrato->res_aumento }}</td>
                                                     <td class="td-actions text-right">
-                                                        @can('proveedor_edit')
                                                         <a href="{{ route('contratos.edit', $contrato->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
-                                                        @endcan
-                                                        @can('proveedor_destroy')
-                                                        <form action="{{route('contratos.delete', $contrato->id)}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
-                                                        @endcan
+                                                        <form action="{{route('contratos.destroy', $contrato->id)}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger" type="submit" rel="tooltip">

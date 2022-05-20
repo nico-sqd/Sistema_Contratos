@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form action="{{route('users.update', $user->id)}}" method="post" class="form-horizontal">
+                <form action="{{route('convenios.update', $convenios->id)}}" method="post" class="form-horizontal">
                     @csrf
                     @method('PUT')
                     <div class="card">
@@ -34,7 +34,7 @@
                             <div class="row">
                                 <label for="rut_proveedor" class="col-sm-2 col-form-label">RUT Proveedor</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="rut_proveedor" value="{{ old('rut_proveedor', $convenio->rut_proveedor) }}" >
+                                    <input type="text" class="form-control" name="rut_proveedor" value="{{ old('rut_proveedor', $convenios->proveedor->rut_proveedor) }}" >
                                     @if ($errors->has('rut_proveedor'))
                                         <span class="error text-danger" for="input-rut_proveedor">{{$errors -> first('rut_proveedor')}}</span>
                                     @endif
@@ -43,7 +43,7 @@
                             <div class="row">
                                 <label for="vigencia_inicio" class="col-sm-2 col-form-label">Vigencia Inicio</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="vigencia_inicio" value="{{ old('vigencia_inicio', $convenio->vigencia_inicio) }}" >
+                                    <input type="text" class="form-control" name="vigencia_inicio" value="{{ old('vigencia_inicio', $convenios->vigencia_inicio) }}" >
                                     @if ($errors->has('vigencia_inicio'))
                                         <span class="error text-danger" for="input-vigencia_inicio">{{$errors -> first('vigencia_inicio')}}</span>
                                     @endif
@@ -52,7 +52,7 @@
                             <div class="row">
                                 <label for="vigencia_fin" class="col-sm-2 col-form-label">Vigencia Fin</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="vigencia_fin" value="{{ old('vigencia_fin', $convenio->vigencia_fin) }}" >
+                                    <input type="text" class="form-control" name="vigencia_fin" value="{{ old('vigencia_fin', $convenios->vigencia_fin) }}" >
                                     @if ($errors->has('vigencia_fin'))
                                         <span class="error text-danger" for="input-vigencia_fin">{{$errors -> first('vigencia_fin')}}</span>
                                     @endif
@@ -61,7 +61,7 @@
                             <div class="row">
                                 <label for="monto" class="col-sm-2 col-form-label">Monto</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="monto" value="{{ old('monto', $convenio->monto) }}" >
+                                    <input type="text" class="form-control" name="monto" value="{{ old('monto', $convenios->monto) }}" >
                                     @if ($errors->has('monto'))
                                         <span class="error text-danger" for="input-monto">{{$errors -> first('monto')}}</span>
                                     @endif
@@ -70,7 +70,7 @@
                             <div class="row">
                                 <label for="admin" class="col-sm-2 col-form-label">Administrador</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="admin" value="{{ old('admin', $convenio->admin) }}" >
+                                    <input type="text" class="form-control" name="admin" value="{{ old('admin', $convenios->admin) }}" >
                                     @if ($errors->has('admin'))
                                         <span class="error text-danger" for="input-admin">{{$errors -> first('admin')}}</span>
                                     @endif

@@ -16,6 +16,7 @@ class CreateTipoMonedaTable extends Migration
         Schema::create('tipo_moneda', function (Blueprint $table) {
             $table->id('id_tipo');
             $table->timestamps();
+            $table->softDeletes();
             $table->string('Nombre_tipo');
         });
     }

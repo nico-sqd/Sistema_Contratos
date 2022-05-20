@@ -34,6 +34,7 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead class="text-primary">
+                                                <th>ID</th>
                                                 <th>ID Licitacion</th>
                                                 <th>Convenios</th>
                                                 <th>Vigencia inicio</th>
@@ -52,6 +53,7 @@
                                             @endif
                                                 @foreach ($convenios as $convenio)
                                                 <tr>
+                                                    <td>{{ $convenio->id }}</td>
                                                     <td>{{ $convenio->id_licitacion }}</td>
                                                     <td>{{ $convenio->convenio }}</td>
                                                     <td>{{ $convenio->vigencia_inicio }}</td>

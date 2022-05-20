@@ -28,6 +28,9 @@ class ConveniosController extends Controller
         ->orwhereHas('proveedor', function (Builder $query) use ($texto) {
             $query->Where('rut_proveedor','LIKE','%'.$texto.'%');
         })
+        ->orwhereHas('user', function (Builder $query) use ($texto) {
+            $query->whereRaw('UPPER(name) LIKE ?', ['%' . strtoupper($texto) . '%']);
+        })
         ->orderBy('id','asc')
         ->paginate(5);
         return view('convenios.index', compact('convenios'));
@@ -72,9 +75,9 @@ class ConveniosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Convenio $convenios)
     {
-        return view('convenios.edit');
+        return view('convenios.edit', compact('convenios'),['proveedor'=>Proveedor::all(),'referente'=>User::role('Referente')->get(),'admin'=>User::role('Administrador')->get()]);
     }
 
     /**
@@ -84,10 +87,16 @@ class ConveniosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Convenio $convenios)
     {
-        //
+        $user = $convenios->user;
+        $proveedor = $convenios->proveedor;
+        $user->update($request->only('name'));
+        $proveedor->update($request->only('rut_proveedor'));
+        $convenios->update($request->only('id_licitacion', 'convenio', 'vigencia_inicio','vigencia_fin','monto','admin'));
+        return redirect()->route('convenios.index', $convenios->id)->with('success', 'Convenio actualizado correctamente.');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -97,7 +106,7 @@ class ConveniosController extends Controller
      */
     public function destroy(Convenio $convenios)
     {
-        $convenios -> delete();
+        $convenios->delete();
         return redirect()->route('convenios.index');
     }
 }

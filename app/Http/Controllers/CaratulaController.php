@@ -77,8 +77,15 @@ class CaratulaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Caratula $caratulas, Convenio $convenios, Proveedor $proveedores, Contrato $contratos, Monto $monto, MontoBoleta $montoboleta, Modalidad $modalidad, User $user)
+    public function update(Request $request, Caratula $caratulas)
     {
+        $modalidad = $caratulas->contrato->modalidad;
+        $convenios = $caratulas->convenio;
+        $contratos = $caratulas->contrato;
+        $monto = $caratulas->contrato->monto;
+        $montoboleta = $caratulas->contrato->montoboleta;
+        $proveedores = $caratulas->proveedor;
+        $user = $caratulas->convenio->user;
         $modalidad->update($request->only('nombre_modalidad'));
         $convenios->update($request->only('convenio','id_licitacion','vigencia_inicio','vigencia_fin'));
         $contratos->update($request->only('res_apruebacontrato','id_contrato','aumento_contrato','res_aumento'));
@@ -95,8 +102,9 @@ class CaratulaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Caratula $caratulas)
     {
-        //
+        $caratulas -> delete();
+        return redirect()->route('caratula.index');
     }
 }

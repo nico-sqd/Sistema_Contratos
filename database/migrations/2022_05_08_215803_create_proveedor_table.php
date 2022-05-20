@@ -16,6 +16,7 @@ class CreateProveedorTable extends Migration
         Schema::create('proveedor', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
             $table->string('nombre_proveedor');
             $table->string('rut_proveedor');
             $table->string('representante');

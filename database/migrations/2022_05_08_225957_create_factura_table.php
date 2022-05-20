@@ -16,6 +16,7 @@ class CreateFacturaTable extends Migration
         Schema::create('factura', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
             $table->unsignedBigInteger('codigo_factura');
             $table->date('fecha');
             $table->unsignedBigInteger('codigo_monto');

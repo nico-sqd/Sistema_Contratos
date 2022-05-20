@@ -33,7 +33,7 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Seleccionar Modalidad</label>
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="nombre_modalidad">
-                                            <option value="{{ old('nombre_modalidad', $caratulas->contrato->modalidad->id) }}">{{ $caratulas->contrato->modalidad->nombre_modalidad }}</option>
+                                            <option value="{{ old('nombre_modalidad', $caratulas->contrato->modalidad->nombre_modalidad) }}">{{ $caratulas->contrato->modalidad->nombre_modalidad }}</option>
                                         </select>
                                       </div>
                                 </div>

@@ -16,6 +16,7 @@ class CreateCaratulaTable extends Migration
         Schema::create('caratula', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
             $table->unsignedBigInteger('id_proveedor');
             $table->foreign('id_proveedor')->references('id')->on('proveedor');
             $table->unsignedBigInteger('id_convenio');

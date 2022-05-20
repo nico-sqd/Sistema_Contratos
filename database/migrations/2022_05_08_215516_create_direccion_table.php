@@ -16,6 +16,7 @@ class CreateDireccionTable extends Migration
         Schema::create('direccion', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
             $table->string('direccion');
             $table->string('comuna');
             $table->string('region');

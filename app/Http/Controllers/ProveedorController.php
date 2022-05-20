@@ -87,8 +87,9 @@ class ProveedorController extends Controller
      */
     public function update(Request $request, Proveedor $proveedores)
     {
+        $direccion = $proveedores->direccion;
+        $direccion->update($request->only('direccion', 'comuna', 'region'));
         $proveedores->update($request->only('nombre_proveedor', 'rut_proveedor', 'representante','rut_representante','direccion_id'));
-
         return redirect()->route('proveedor.index', $proveedores->id)->with('success', 'Usuario actualizado correctamente.');
     }
 

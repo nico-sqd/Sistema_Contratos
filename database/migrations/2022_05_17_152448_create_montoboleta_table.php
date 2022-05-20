@@ -16,6 +16,7 @@ class CreateMontoboletaTable extends Migration
         Schema::create('montoboleta', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
             $table->integer('monto_boleta')->nullable();
             $table->unsignedBigInteger('id_tipo_boleta');
             $table->foreign('id_tipo_boleta')->references('id_boleta')->on('boletagarantia');
