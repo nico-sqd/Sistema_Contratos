@@ -53,7 +53,7 @@
                                                 <th class="text-right">Acciones</th>
                                             </thead>
                                             <tbody>
-                                            @if (count($convenios)<=0)
+                                            @if (count($contratos)<=0)
                                                 <div class="alert alert-danger" style="text-align:center" role="alert">
                                                     <h4>No se han encontrado contratos</h4>
                                                 </div>
