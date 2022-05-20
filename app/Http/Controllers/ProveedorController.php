@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Proveedor;
 use App\Models\Direccion;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProveedorController extends Controller
 {
@@ -14,10 +16,22 @@ class ProveedorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $proveedores=Proveedor::with('direccion')->paginate(5);
-        return view('proveedor.index', compact('proveedores'),['direcciones'=>Direccion::all()]);
+        $texto = trim($request->get('texto'));
+        $proveedores = Proveedor::with('direccion')
+        ->whereRaw('UPPER(nombre_proveedor) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        ->orWhere('rut_proveedor','LIKE','%'.$texto.'%')
+        ->orWhereRaw('UPPER(representante) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        ->orWhere('rut_representante','LIKE','%'.$texto.'%')
+        ->orwhereHas('direccion', function (Builder $query) use ($texto) {
+            $query->whereRaw('UPPER(direccion) LIKE ?', ['%' . strtoupper($texto) . '%'])
+            ->orWhereRaw('UPPER(comuna) LIKE ?', ['%' . strtoupper($texto) . '%'])
+            ->orWhereRaw('UPPER(region) LIKE ?', ['%' . strtoupper($texto) . '%']);
+        })
+        ->orderBy('id','asc')
+        ->paginate(5);
+        return view('proveedor.index', compact('proveedores'));
     }
 
     /**

@@ -27,7 +27,7 @@ class UserController extends Controller
         $users = User::role('Administrador')->paginate(5);
         return view('administradores.index_administrador', compact('users'));
     }
-    
+
     public function index_referente()
     {
         //abort_if(Gate::denies('user_index'), 403);
