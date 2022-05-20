@@ -10,29 +10,56 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Models\Establecimiento;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Database\Eloquent\Builder;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        abort_if(Gate::denies('user_index'), 403); //si el usuario no tiene e permiso "user_index" mostrara error 403
-        $users=User::paginate(5);
+        //abort_if(Gate::denies('user_index'), 403); //si el usuario no tiene el permiso "user_index" mostrara "error 403"
+        $texto = trim($request->get('texto'));
+        $users=User::whereRaw('UPPER(name) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        ->orWhereRaw('UPPER(email) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        ->orWhere('rut', 'LIKE', '%' . $texto . '%')
+        ->orWhereHas('getEstablecimiento', function (Builder $query) use ($texto){
+            $query->WhereRaw('UPPER(establecimiento) LIKE ?',['%' . strtoupper($texto) . '%']);
+        })
+        ->orderBy('id','asc')
+        ->paginate(5);
         return view('users.index', compact('users'));
     }
 
-    public function index_administrador()
+    public function index_administrador(Request $request)
     {
         //abort_if(Gate::denies('user_index'), 403);
         //$users = User::paginate(5);
-        $users = User::role('Administrador')->paginate(5);
+        $texto = trim($request->get('texto'));
+        $users = User::whereRaw('UPPER(name) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        ->orWhereRaw('UPPER(email) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        ->orWhere('rut', 'LIKE', '%' . $texto . '%')
+        ->orWhereHas('getEstablecimiento', function (Builder $query) use ($texto){
+            $query->WhereRaw('UPPER(establecimiento) LIKE ?',['%' . strtoupper($texto) . '%']);
+        })
+        ->orderBy('id','asc')
+        ->role('Administrador')
+        ->paginate(5);
         return view('administradores.index_administrador', compact('users'));
     }
 
-    public function index_referente()
+    public function index_referente(Request $request)
     {
         //abort_if(Gate::denies('user_index'), 403);
         //$users = User::paginate(5);
-        $users = User::role('Referente')->paginate(5);
+        $texto = trim($request->get('texto'));
+        $users = User::whereRaw('UPPER(name) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        ->orWhereRaw('UPPER(email) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        ->orWhere('rut', 'LIKE', '%' . $texto . '%')
+        ->orWhereHas('getEstablecimiento', function (Builder $query) use ($texto){
+            $query->WhereRaw('UPPER(establecimiento) LIKE ?',['%' . strtoupper($texto) . '%']);
+        })
+        ->orderBy('id','asc')
+        ->role('Referente')
+        ->paginate(5);
         return view('referentes.index_referente', compact('users'));
     }
 
