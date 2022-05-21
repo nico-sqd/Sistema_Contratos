@@ -27,4 +27,8 @@ class Establecimiento extends Model
     {
         return $this->hasMany(User::class,'establecimiento');
     }
+    public function subdireccion()
+    {
+        return $this->hasMany(SubDireccion::class,'id_establecimiento');
+    }
 }
