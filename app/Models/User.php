@@ -25,6 +25,10 @@ class User extends Authenticatable
         'rut',
         'establecimiento',
         'password',
+        'subrogante',
+        'correo_subrogante',
+        'id_subdireccion',
+        'id_departamento',
     ];
 
     /**
@@ -52,5 +56,13 @@ class User extends Authenticatable
     public function convenio()
     {
         return $this->hasOne(Convenio::class,'rut');
+    }
+    public function subdireccion()
+    {
+        return $this->belongsTo(SubDireccion::class,'id_subdireccion');
+    }
+    public function departamento()
+    {
+        return $this->belongsTo(Departamento::class,'id_departamento');
     }
 }

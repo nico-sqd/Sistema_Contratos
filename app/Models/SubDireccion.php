@@ -38,4 +38,9 @@ class SubDireccion extends Model
         return $this->hasMany(Dispositivo::class, 'id_subdireccion');
     }
 
+    public function user()
+    {
+        return $this->hasMany(User::class,'id_subdireccion');
+    }
+
 }

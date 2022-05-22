@@ -41,22 +41,28 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead class="text-primary">
-                                                <th>ID</th>
                                                 <th>Nombre</th>
                                                 <th>Correo</th>
                                                 <th>RUT</th>
                                                 <th>Establecimiento</th>
+                                                <th>Subrogante</th>
+                                                <th>Correo Subrogante</th>
+                                                <th>SubDireccion</th>
+                                                <th>Departamento</th>
                                                 <th>ROL</th>
                                                 <th class="text-right">Acciones</th>
                                             </thead>
                                             <tbody>
                                                 @foreach ($users as $user)
                                                 <tr>
-                                                    <td>{{ $user->id }}</td>
                                                     <td>{{ $user->name }}</td>
                                                     <td>{{ $user->email }}</td>
                                                     <td>{{ $user->rut }}</td>
                                                     <td>{{ $user->getEstablecimiento->establecimiento }}</td>
+                                                    <td>{{ $user->subrogante }}</td>
+                                                    <td>{{ $user->correo_subrogante }}</td>
+                                                    <td>{{ $user->subdireccion->nombre_subdireccion }}</td>
+                                                    <td>{{ $user->departamento->nombre_departamento }}</td>
                                                     <td>
                                                         @forelse ($user->roles as $role)
                                                             <span class="badge badge-info">{{$role->name}}</span>
@@ -89,7 +95,7 @@
                                 </div>
                                 <!--footer-->
                                 <div class="card-footer ml-auto mr-auto">
-                                    {{ $users->links() }} 
+                                    {{ $users->links() }}
                                 </div>
                                 <!--End footer-->
                         </div>

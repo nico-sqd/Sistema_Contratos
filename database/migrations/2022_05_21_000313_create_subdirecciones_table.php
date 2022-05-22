@@ -31,7 +31,7 @@ class CreateSubdireccionesTable extends Migration
     public function down()
     {
         Schema::table('subdirecciones', function (Blueprint $table){
-            $table->dropColumn('id_proveedor');
+            $table->dropColumn('id_establecimiento');
         });
         Schema::dropIfExists('subdirecciones');
     }

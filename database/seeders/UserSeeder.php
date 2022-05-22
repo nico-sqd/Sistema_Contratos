@@ -92,6 +92,10 @@ class UserSeeder extends Seeder
             'nombre_subdireccion'=>'Subdireccion de Gestión Asistencial',
             'id_establecimiento'=>'1'
         ]);
+        DB::table('subdirecciones')->insert([
+            'nombre_subdireccion'=>'Ninguno',
+            'id_establecimiento'=>'1'
+        ]);
         DB::table('departamentos')->insert([
             'nombre_departamento'=>'Articulación de la Red Asistencial',
             'codigo_sso'=>'B.3',
@@ -187,6 +191,11 @@ class UserSeeder extends Seeder
             'codigo_sso'=>'C.6',
             'id_subdireccion'=>'1'
         ]);
+        DB::table('departamentos')->insert([
+            'nombre_departamento'=>'Ninguno',
+            'codigo_sso'=>'NN',
+            'id_subdireccion'=>'4'
+        ]);
         DB::table('dispositivos')->insert([
             'nombre_dispositivo'=>'KUMELEN',
             'id_departamento'=>'7',
@@ -224,6 +233,10 @@ class UserSeeder extends Seeder
         DB::table('dispositivos')->insert([
             'nombre_dispositivo'=>'SAMU',
             'id_subdireccion'=>'3'
+        ]);
+        DB::table('dispositivos')->insert([
+            'nombre_dispositivo'=>'Ninguno',
+            'id_subdireccion'=>'4'
         ]);
         $user = User::create([
             'name'=>'Admin',

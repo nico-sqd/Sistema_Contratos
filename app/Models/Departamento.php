@@ -32,6 +32,10 @@ class Departamento extends Model
     {
         return $this->hasMany(Dispositivo::class, 'id_departamento');
     }
+    public function user()
+    {
+        return $this->hasMany(User::class, 'id_departamento');
+    }
 
 
 }
