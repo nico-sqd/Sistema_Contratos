@@ -14,6 +14,11 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
+                                <div class="col-12 text-right">
+                                    <a href="{{ url()->previous() }}" class="btn btn-facebook"><i class="material-icons">arrow_back</i></a>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <label for="nombre_proveedor" class="col-sm-2 col-form-label">Proveedor</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="nombre_proveedor" value="{{ old('nombre_proveedor', $proveedores->nombre_proveedor) }}" autofocus>
@@ -46,6 +51,24 @@
                                     <input type="text" class="form-control" name="rut_representante" value="{{ old('rut_representante', $proveedores->rut_representante) }}" >
                                     @if ($errors->has('rut_representante'))
                                         <span class="error text-danger" for="input-rut_representante">{{$errors -> first('rut_representante')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="mail_representante" class="col-sm-2 col-form-label">Correo</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="mail_representante" value="{{ old('mail_representante', $proveedores->mail_representante) }}" >
+                                    @if ($errors->has('mail_representante'))
+                                        <span class="error text-danger" for="input-mail_representante">{{$errors -> first('mail_representante')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="telefono_representante" class="col-sm-2 col-form-label">N° Teléfono</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="telefono_representante" value="{{ old('telefono_representante', $proveedores->telefono_representante) }}" >
+                                    @if ($errors->has('telefono_representante'))
+                                        <span class="error text-danger" for="input-telefono_representante">{{$errors -> first('telefono_representante')}}</span>
                                     @endif
                                 </div>
                             </div>

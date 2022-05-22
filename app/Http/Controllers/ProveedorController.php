@@ -24,6 +24,8 @@ class ProveedorController extends Controller
         ->orWhere('rut_proveedor','LIKE','%'.$texto.'%')
         ->orWhereRaw('UPPER(representante) LIKE ?', ['%' . strtoupper($texto) . '%'])
         ->orWhere('rut_representante','LIKE','%'.$texto.'%')
+        ->orWhereRaw('UPPER(mail_representante) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        ->orWhere('telefono_representante','LIKE','%'.$texto.'%')
         ->orwhereHas('direccion', function (Builder $query) use ($texto) {
             $query->whereRaw('UPPER(direccion) LIKE ?', ['%' . strtoupper($texto) . '%'])
             ->orWhereRaw('UPPER(comuna) LIKE ?', ['%' . strtoupper($texto) . '%'])
@@ -52,7 +54,7 @@ class ProveedorController extends Controller
      */
     public function store(Request $request)
     {
-        $proveedor = Proveedor::create($request->only('nombre_proveedor', 'rut_proveedor', 'representante','rut_representante','direccion_id'));
+        $proveedor = Proveedor::create($request->only('nombre_proveedor', 'rut_proveedor', 'representante','rut_representante','mail_representante','telefono_representante','direccion_id'));
         return redirect()->route('proveedor.index', $proveedor->id)->with('success', 'Usuario creado correctamente.');
     }
 
@@ -89,7 +91,7 @@ class ProveedorController extends Controller
     {
         $direccion = $proveedores->direccion;
         $direccion->update($request->only('direccion', 'comuna', 'region'));
-        $proveedores->update($request->only('nombre_proveedor', 'rut_proveedor', 'representante','rut_representante','direccion_id'));
+        $proveedores->update($request->only('nombre_proveedor', 'rut_proveedor', 'representante','rut_representante','rut_representante','mail_representante','telefono_representante','direccion_id'));
         return redirect()->route('proveedor.index', $proveedores->id)->with('success', 'Usuario actualizado correctamente.');
     }
 

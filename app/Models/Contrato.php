@@ -23,6 +23,7 @@ class Contrato extends Model
         'res_adjudicacion',
         'res_apruebacontrato',
         'id_monto',
+        'id_tipo_moneda',
         'id_boleta',
         'id_monto_boleta',
         'id_modalidad',
@@ -53,5 +54,9 @@ class Contrato extends Model
     public function caratula()
     {
         return $this->hasMany(Caratula::class,'id_contrato');
+    }
+    public function tipomoneda()
+    {
+        return $this->belongsTo(TipoMoneda::class,'id_tipo_moneda');
     }
 }

@@ -10,29 +10,64 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Models\Establecimiento;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Database\Eloquent\Builder;
+use App\Models\SubDireccion;
+use App\Models\Departamento;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        abort_if(Gate::denies('user_index'), 403); //si el usuario no tiene e permiso "user_index" mostrara error 403
-        $users=User::paginate(5);
+        //abort_if(Gate::denies('user_index'), 403); //si el usuario no tiene el permiso "user_index" mostrara "error 403"
+        $texto = trim($request->get('texto'));
+        $users=User::whereRaw('UPPER(name) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        ->orWhereRaw('UPPER(email) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        ->orWhere('rut', 'LIKE', '%' . $texto . '%')
+        ->orWhereHas('getEstablecimiento', function (Builder $query) use ($texto){
+            $query->WhereRaw('UPPER(establecimiento) LIKE ?',['%' . strtoupper($texto) . '%']);
+        })
+        ->orderBy('id','asc')
+        ->paginate(5);
         return view('users.index', compact('users'));
     }
 
-    public function index_administrador()
+    public function index_administrador(Request $request)
     {
         //abort_if(Gate::denies('user_index'), 403);
         //$users = User::paginate(5);
-        $users = User::role('Administrador')->paginate(5);
+        $texto = trim($request->get('texto'));
+        $users = User::whereRaw('UPPER(name) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        ->orWhereRaw('UPPER(email) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        ->orWhere('rut', 'LIKE', '%' . $texto . '%')
+        ->orWhereHas('getEstablecimiento', function (Builder $query) use ($texto){
+            $query->WhereRaw('UPPER(establecimiento) LIKE ?',['%' . strtoupper($texto) . '%']);
+        })
+        ->orderBy('id','asc')
+        ->role('Administrador')
+        ->paginate(5);
         return view('administradores.index_administrador', compact('users'));
     }
 
-    public function index_referente()
+    public function index_referente(Request $request)
     {
         //abort_if(Gate::denies('user_index'), 403);
         //$users = User::paginate(5);
-        $users = User::role('Referente')->paginate(5);
+        $texto = trim($request->get('texto'));
+        $users = User::whereRaw('UPPER(name) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        ->orWhereRaw('UPPER(email) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        ->orWhere('rut', 'LIKE', '%' . $texto . '%')
+        ->orWhereHas('getEstablecimiento', function (Builder $query) use ($texto){
+            $query->WhereRaw('UPPER(establecimiento) LIKE ?',['%' . strtoupper($texto) . '%']);
+        })
+        ->orWhereHas('subdireccion', function (Builder $query) use ($texto){
+            $query->WhereRaw('UPPER(nombre_subdireccion) LIKE ?',['%' . strtoupper($texto) . '%']);
+        })
+        ->orWhereHas('departamento', function (Builder $query) use ($texto){
+            $query->WhereRaw('UPPER(nombre_departamento) LIKE ?',['%' . strtoupper($texto) . '%']);
+        })
+        ->orderBy('id','asc')
+        ->role('Referente')
+        ->paginate(5);
         return view('referentes.index_referente', compact('users'));
     }
 
@@ -40,12 +75,12 @@ class UserController extends Controller
     {
         abort_if(Gate::denies('user_create'), 403);//si el usuario no tiene e permiso "user_create" mostrara error 403
         $roles = Role::all()->pluck('name', 'id');
-        return view('users.create', compact('roles'),['establecimiento'=>Establecimiento::all()]);
+        return view('users.create', compact('roles'),['establecimiento'=>Establecimiento::all(),'subdirecciones'=>SubDireccion::all(),'departamentos'=>Departamento::all()]);
     }
 
     public function store(UserCreateRequest $request)
     {
-        $user = User::create($request->only('name', 'rut', 'email','establecimiento')
+        $user = User::create($request->only('name', 'rut', 'email','establecimiento','subrogante','correo_subrogante','id_subdireccion','id_departamento')
             +[
                 'password' => bcrypt($request->input('password')),
             ]);
@@ -71,13 +106,13 @@ class UserController extends Controller
         //dd($user);
         $roles = Role::all()->pluck('name', 'id');
         $user->load('roles');
-        return view('users.edit', compact('user', 'roles'),['establecimientos'=>Establecimiento::all()]);
+        return view('users.edit', compact('user', 'roles'),['establecimientos'=>Establecimiento::all(),'subdirecciones'=>SubDireccion::all(),'departamentos'=>Departamento::all()]);
     }
 
     public function update(UserEditRequest $request, User $user)
     {
         //$user=User::findOrFail($id);
-        $data = $request->only('name','rut','email','establecimiento');
+        $data = $request->only('name','rut','email','establecimiento','subrogante','correo_subrogante','id_subdireccion','id_departamento');
         $password=$request->input('password');
         if($password)
             $data['password']=bcrypt($password);

@@ -53,6 +53,11 @@
                                                 <th class="text-right">Acciones</th>
                                             </thead>
                                             <tbody>
+                                            @if (count($contratos)<=0)
+                                                <div class="alert alert-danger" style="text-align:center" role="alert">
+                                                    <h4>No se han encontrado contratos</h4>
+                                                </div>
+                                            @endif
                                             @foreach ($contratos as $contrato)
                                                 <tr>
                                                     <td>{{ $contrato->id_contrato }}</td>

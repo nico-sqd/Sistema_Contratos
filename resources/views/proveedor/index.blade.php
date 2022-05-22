@@ -41,11 +41,12 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead class="text-primary">
-                                                <th>ID</th>
                                                 <th>Nombre</th>
                                                 <th>RUT Proveedor</th>
                                                 <th>Representante Legal</th>
                                                 <th>RUN Representante Legal</th>
+                                                <th>Correo</th>
+                                                <th>Teléfono</th>
                                                 <th>Direccion</th>
                                                 <th>Comuna</th>
                                                 <th>Region</th>
@@ -54,16 +55,17 @@
                                             <tbody>
                                             @if (count($proveedores)<=0)
                                                 <div class="alert alert-danger" style="text-align:center" role="alert">
-                                                    <h4>No se han encontrato proveedores</h4>
+                                                    <h4>No se han encontrado proveedores</h4>
                                                 </div>
                                             @endif
                                             @foreach ($proveedores as $proveedor)
                                                 <tr>
-                                                    <td>{{ $proveedor->id }}</td>
                                                     <td>{{ $proveedor->nombre_proveedor }}</td>
                                                     <td>{{ $proveedor->rut_proveedor }}</td>
                                                     <td>{{ $proveedor->representante }}</td>
                                                     <td>{{ $proveedor->rut_representante }}</td>
+                                                    <td>{{ $proveedor->mail_representante }}</td>
+                                                    <td>{{ $proveedor->telefono_representante }}</td>
                                                     <td>{{ $proveedor->direccion->direccion}}</td>
                                                     <td>{{ $proveedor->direccion->comuna }}</td>
                                                     <td>{{ $proveedor->direccion->region }}</td>

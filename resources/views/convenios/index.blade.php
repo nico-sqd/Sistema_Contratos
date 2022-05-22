@@ -48,7 +48,7 @@
                                             <tbody>
                                             @if (count($convenios)<=0)
                                                 <div class="alert alert-danger" style="text-align:center" role="alert">
-                                                    <h4>No se han encontrato establecimientos</h4>
+                                                    <h4>No se han encontrado convenios</h4>
                                                 </div>
                                             @endif
                                                 @foreach ($convenios as $convenio)

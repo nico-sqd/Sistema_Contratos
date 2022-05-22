@@ -37,7 +37,7 @@ class DireccionController extends Controller
     public function store(Request $request)
     {
         $direccion = Direccion::create($request->only('direccion', 'comuna', 'region'));
-        $proveedor = Proveedor::create(array_merge($request->only('nombre_proveedor', 'rut_proveedor', 'representante','rut_representante'),['direccion_id'=>$direccion->id]));
+        $proveedor = Proveedor::create(array_merge($request->only('nombre_proveedor', 'rut_proveedor', 'representante','rut_representante','mail_representante','telefono_representante'),['direccion_id'=>$direccion->id]));
         return redirect()->route('proveedor.index', $proveedor->id)->with('success', 'Usuario creado correctamente.');
     }
 
@@ -73,7 +73,7 @@ class DireccionController extends Controller
     public function update(Request $request, Proveedor $proveedores, Direccion $direccion)
     {
         $direccion->update($request->only('direccion', 'comuna', 'region'));
-        $proveedores->update(array_merge($request->only('nombre_proveedor', 'rut_proveedor', 'representante','rut_representante'),['direccion_id'=>$direccion->id]));
+        $proveedores->update(array_merge($request->only('nombre_proveedor', 'rut_proveedor', 'representante','rut_representante','mail_representante','telefono_representante'),['direccion_id'=>$direccion->id]));
 
         return redirect()->route('proveedor.index', $proveedores->id)->with('success', 'Usuario actualizado correctamente.');
     }

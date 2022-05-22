@@ -22,6 +22,8 @@ class Proveedor extends Model
         'rut_proveedor',
         'representante',
         'rut_representante',
+        'mail_representante',
+        'telefono_representante',
         'direccion_id',
     ];
 
