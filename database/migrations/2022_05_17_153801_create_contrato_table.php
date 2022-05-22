@@ -24,6 +24,8 @@ class CreateContratoTable extends Migration
             $table->string('res_apruebacontrato');
             $table->unsignedBigInteger('id_monto');
             $table->foreign('id_monto')->references('id')->on('monto');
+            $table->unsignedBigInteger('id_tipo_moneda');
+            $table->foreign('id_tipo_moneda')->references('id_tipo')->on('tipo_moneda');
             $table->unsignedBigInteger('id_boleta');
             $table->foreign('id_boleta')->references('id_boleta')->on('boletagarantia');
             $table->unsignedBigInteger('id_monto_boleta');
@@ -45,6 +47,7 @@ class CreateContratoTable extends Migration
         Schema::table('contrato', function (Blueprint $table){
             $table->dropColumn('id_licitacion');
             $table->dropColumn('id_monto');
+            $table->dropColumn('id_tipo_moneda');
             $table->dropColumn('id_boleta');
             $table->dropColumn('id_modalidad');
             $table->dropColumn('id_monto_boleta');

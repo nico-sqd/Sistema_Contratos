@@ -53,6 +53,11 @@
                                                 <th class="text-right">Acciones</th>
                                             </thead>
                                             <tbody>
+                                            @if (count($users)<=0)
+                                                <div class="alert alert-danger" style="text-align:center" role="alert">
+                                                    <h4>No se han encontrado referentes</h4>
+                                                </div>
+                                            @endif
                                                 @foreach ($users as $user)
                                                 <tr>
                                                     <td>{{ $user->name }}</td>
