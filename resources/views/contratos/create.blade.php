@@ -61,7 +61,7 @@
                             <div class="row">
                                 <label for="moneda" class="col-sm-2 col-form-label">Monto</label>
                                 <div class="col-sm-7">
-                                    <input type="txt" class="form-control" name="moneda" placeholder="ingrese el id del monto">
+                                    <input type="text" class="form-control" name="moneda" placeholder="ingrese monto">
                                     @if ($errors->has('moneda'))
                                         <span class="error text-danger" for="input-moneda">{{$errors -> first('moneda')}}</span>
                                     @endif
@@ -83,7 +83,7 @@
                             <div class="row">
                                 <label for="monto_boleta" class="col-sm-2 col-form-label">Monto Boleta de Garantía</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="monto_boleta" placeholder="Ingrese el aumento contrato" value="{{old('monto_boleta')}}" autofocus>
+                                    <input type="text" class="form-control" name="monto_boleta" placeholder="Ingrese el monto boleta garantia" value="{{old('monto_boleta')}}" autofocus>
                                     @if ($errors->has('monto_boleta'))
                                         <span class="error text-danger" for="input-monto_boleta">{{$errors -> first('monto_boleta')}}</span>
                                     @endif

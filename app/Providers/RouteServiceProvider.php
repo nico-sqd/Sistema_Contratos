@@ -52,6 +52,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::model('direccion', \App\Models\Direccion::class);
         Route::model('caratula', \App\Models\Caratula::class);
         Route::model('convenio', \App\Models\Convenio::class);
+        Route::model('contrato', \App\Models\Contrato::class);
     }
 
     /**
