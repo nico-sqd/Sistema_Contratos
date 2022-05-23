@@ -33,11 +33,11 @@ class Contrato extends Model
 
     public function modalidad()
     {
-        return $this->belongsTo(Modalidad::class,'id_modalidad','id_modalidad');
+        return $this->belongsTo(Modalidad::class,'id_modalidad');
     }
     public function boletagarantia()
     {
-        return $this->belongsTo(BoletaGarantia::class,'id_boleta','id_boleta');
+        return $this->belongsTo(BoletaGarantia::class,'id_boleta');
     }
     public function monto()
     {

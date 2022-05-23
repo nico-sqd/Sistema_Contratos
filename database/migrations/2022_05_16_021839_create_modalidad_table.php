@@ -14,7 +14,7 @@ class CreateModalidadTable extends Migration
     public function up()
     {
         Schema::create('modalidad', function (Blueprint $table) {
-            $table->id('id_modalidad');
+            $table->id();
             $table->timestamps();
             $table->softDeletes();
             $table->string('nombre_modalidad');

@@ -52,7 +52,7 @@ class ContratoController extends Controller
     public function create()
     {
         return view('contratos.create',['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
-        'modalidad'=>Modalidad::all(),'montoboletagarantia'=>Modalidad::all(),'id_licitacion'=>Convenio::all()]);
+        'modalidad'=>Modalidad::all(),'montoboletagarantia'=>MontoBoleta::all(),'id_licitacion'=>Convenio::all()]);
     }
 
     /**
@@ -63,7 +63,7 @@ class ContratoController extends Controller
      */
     public function store(Request $request)
     {
-        $montoboleta = Monto::create($request->only('moneda', 'id_tipo_moneda','id_tipo_monto'));
+        $montoboleta = Monto::create($request->only('moneda', 'id_tipo_moneda'));
         $boletagarantia = MontoBoleta::create($request->only('monto_boleta','id_tipo_boleta'));
         $contrato = Contrato::create(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda'),['id_monto'=>$montoboleta->id,'id_boleta'=>$boletagarantia->id_tipo_boleta,'id_monto_boleta'=>$boletagarantia->id]));
         return redirect()->route('contratos.index', $contrato->id)->with('success', 'Usuario creado correctamente.');
@@ -86,9 +86,10 @@ class ContratoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Contrato $contratos)
     {
-        return view('contratos.edit');
+        return view('contratos.edit', compact('contratos'),['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
+        'modalidad'=>Modalidad::all(),'montoboletagarantia'=>MontoBoleta::all(),'id_licitacion'=>Convenio::all()]);
     }
 
     /**
@@ -98,9 +99,14 @@ class ContratoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Contrato $contrato)
     {
-        //
+        $montoboleta = $contrato->monto;
+        $boletagarantia = $contrato->montoboleta;
+        $montoboleta->update($request->only('moneda', 'id_tipo_moneda'));
+        $boletagarantia->update($request->only('monto_boleta','id_tipo_boleta'));
+        $contrato->update($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda'));
+        return redirect()->route('contratos.index', $contrato->id)->with('success', 'Usuario creado correctamente.');
     }
 
     /**

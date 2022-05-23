@@ -27,11 +27,11 @@ class CreateContratoTable extends Migration
             $table->unsignedBigInteger('id_tipo_moneda');
             $table->foreign('id_tipo_moneda')->references('id_tipo')->on('tipo_moneda');
             $table->unsignedBigInteger('id_boleta');
-            $table->foreign('id_boleta')->references('id_boleta')->on('boletagarantia');
+            $table->foreign('id_boleta')->references('id')->on('boletagarantia');
             $table->unsignedBigInteger('id_monto_boleta');
             $table->foreign('id_monto_boleta')->references('id')->on('montoboleta');
             $table->unsignedBigInteger('id_modalidad');
-            $table->foreign('id_modalidad')->references('id_modalidad')->on('modalidad');
+            $table->foreign('id_modalidad')->references('id')->on('modalidad');
             $table->string('aumento_contrato')->nullable();
             $table->string('res_aumento')->nullable();
         });

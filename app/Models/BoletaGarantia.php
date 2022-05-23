@@ -18,13 +18,12 @@ class BoletaGarantia extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'id_boleta',
         'documentos_garantia',
     ];
 
     public function contrato()
     {
-        return $this->hasMany(Contrato::class,'id_boleta','id_boleta');
+        return $this->hasMany(Contrato::class,'id_boleta');
     }
     public function montoboleta()
     {
