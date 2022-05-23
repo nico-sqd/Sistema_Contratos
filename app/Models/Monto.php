@@ -24,7 +24,7 @@ class Monto extends Model
 
     public function tipo_moneda()
     {
-        return $this->belongsTo(TipoMoneda::class,'id_tipo','id_tipo_moneda');
+        return $this->belongsTo(TipoMoneda::class,'id_tipo_moneda');
     }
     public function factura()
     {

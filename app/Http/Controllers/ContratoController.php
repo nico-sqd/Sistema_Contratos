@@ -52,7 +52,8 @@ class ContratoController extends Controller
     public function create()
     {
         return view('contratos.create',['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
-        'modalidad'=>Modalidad::all(),'montoboletagarantia'=>MontoBoleta::all(),'id_licitacion'=>Convenio::all()]);
+        'modalidad'=>Modalidad::all(),'montoboletagarantia'=>MontoBoleta::all(),'id_licitacion'=>Convenio::all(),
+        'monto'=>Monto::all()]);
     }
 
     /**
@@ -89,7 +90,7 @@ class ContratoController extends Controller
     public function edit(Contrato $contratos)
     {
         return view('contratos.edit', compact('contratos'),['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
-        'modalidad'=>Modalidad::all(),'montoboletagarantia'=>MontoBoleta::all(),'id_licitacion'=>Convenio::all()]);
+        'modalidad'=>Modalidad::all(),'montoboletagarantia'=>MontoBoleta::all(),'id_licitacion'=>Convenio::all(),'monto'=>Monto::all()]);
     }
 
     /**
