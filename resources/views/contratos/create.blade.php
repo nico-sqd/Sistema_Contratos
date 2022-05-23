@@ -96,7 +96,7 @@
                                         <label for="exampleFormControlSelect1">Seleccionar Tipo Boleta</label>
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_tipo_boleta">
                                         @foreach ( $tipoboleta as $boletagarantia )
-                                            <option value="{{ $boletagarantia->id_boleta }}">{{ $boletagarantia->documentos_garantia }}</option>
+                                            <option value="{{ $boletagarantia->id }}">{{ $boletagarantia->documentos_garantia }}</option>
                                         @endforeach
                                         </select>
                                       </div>
@@ -109,7 +109,7 @@
                                         <label for="exampleFormControlSelect1">Seleccionar Modalidad</label>
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_modalidad">
                                         @foreach ( $modalidad as $modalidades )
-                                            <option value="{{ $modalidades->id_modalidad }}">{{ $modalidades->nombre_modalidad }} - {{ $modalidades->abreviacion_modalidad }}</option>
+                                            <option value="{{ $modalidades->id }}">{{ $modalidades->nombre_modalidad }} - {{ $modalidades->abreviacion_modalidad }}</option>
                                         @endforeach
                                         </select>
                                       </div>

@@ -65,7 +65,11 @@ class ContratoController extends Controller
     {
         $montoboleta = Monto::create($request->only('moneda', 'id_tipo_moneda'));
         $boletagarantia = MontoBoleta::create($request->only('monto_boleta','id_tipo_boleta'));
+<<<<<<< HEAD
         $contrato = Contrato::create(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento'),['id_monto'=>$montoboleta->id,'id_boleta'=>$boletagarantia->id_tipo_boleta,'id_monto_boleta'=>$boletagarantia->monto_boleta]));
+=======
+        $contrato = Contrato::create(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda'),['id_monto'=>$montoboleta->id,'id_boleta'=>$boletagarantia->id_tipo_boleta,'id_monto_boleta'=>$boletagarantia->id]));
+>>>>>>> 0f84040ecb202340cf9ba569a55ad0fbe3f0ee99
         return redirect()->route('contratos.index', $contrato->id)->with('success', 'Usuario creado correctamente.');
     }
 
@@ -88,8 +92,13 @@ class ContratoController extends Controller
      */
     public function edit(Contrato $contratos)
     {
+<<<<<<< HEAD
         return view('contratos.edit',compact('contratos'),['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
         'modalidad'=>Modalidad::all(),'montoboletagarantia'=>Modalidad::all(),'id_licitacion'=>Convenio::all()]);
+=======
+        return view('contratos.edit', compact('contratos'),['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
+        'modalidad'=>Modalidad::all(),'montoboletagarantia'=>MontoBoleta::all(),'id_licitacion'=>Convenio::all()]);
+>>>>>>> 0f84040ecb202340cf9ba569a55ad0fbe3f0ee99
     }
 
     /**

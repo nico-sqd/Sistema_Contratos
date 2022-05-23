@@ -55,6 +55,24 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <label for="mail_representante" class="col-sm-2 col-form-label">Correo</label>
+                                <div class="col-sm-7">
+                                    <input type="mail_representante" class="form-control" name="mail_representante" placeholder="Ingrese Correo">
+                                    @if ($errors->has('mail_representante'))
+                                        <span class="error text-danger" for="input-mail_representante">{{$errors -> first('mail_representante')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="telefono_representante" class="col-sm-2 col-form-label">N° Teléfono</label>
+                                <div class="col-sm-7">
+                                    <input type="telefono_representante" class="form-control" name="telefono_representante" placeholder="Ingrese Número Telefónico">
+                                    @if ($errors->has('telefono_representante'))
+                                        <span class="error text-danger" for="input-telefono_representante">{{$errors -> first('telefono_representante')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
                                 <label for="direccion" class="col-sm-2 col-form-label">Direccion</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="direccion" placeholder="Ingrese direccion" value="{{old('direccion')}}" autofocus>

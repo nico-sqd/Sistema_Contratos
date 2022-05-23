@@ -18,7 +18,7 @@
                             @endif
                             <div class="row">
                                 <div class="col-12 text-right">
-                                    <a href="{{ url()->previous() }}" class="btn btn-success"><i class="material-icons">arrow_back</i></a>
+                                    <a href="{{ route('referentes.index_referente') }}" class="btn btn-facebook"><i class="material-icons">arrow_back</i></a>
                                 </div>
                             </div>
                            <div class="row">
@@ -32,8 +32,12 @@
                                                        <h5 class="title" mt-3>{{ $user->name}}</h5>
                                                    </a>
                                                    <p class="description">
-                                                   {{ $user->rut}}  <br>
-                                                   {{ $user->email}}  <br>
+                                                   RUT: {{ $user->rut}}  <br>
+                                                   Correo: {{ $user->email}}  <br>
+                                                   Subrogante: {{ $user->subrogante }} <br>
+                                                   Correo Subrogante: {{ $user->correo_subrogante }} <br>
+                                                   Subdireccion: {{ $user->subdireccion->nombre_subdireccion }} <br>
+                                                   Departamento: {{ $user->departamento->nombre_departamento }} <br>
                                                    Creacion del usuario: {{ $user->created_at}}  <br>
                                                    @forelse ($user->roles as $role)
                                                             <span class="badge rounded-pill bg-dark text-white">{{$role->name}}</span>

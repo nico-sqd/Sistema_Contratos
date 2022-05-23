@@ -11,6 +11,7 @@ use App\Models\Monto;
 use App\Models\MontoBoleta;
 use App\Models\User;
 use App\Models\Modalidad;
+use Illuminate\Database\Eloquent\Builder;
 
 class CaratulaController extends Controller
 {
@@ -19,9 +20,20 @@ class CaratulaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $caratulas=Caratula::paginate(5);
+        $texto = trim($request->get('texto'));
+        $caratulas = Caratula::whereHas('proveedor', function (Builder $query) use ($texto) {
+            $query->where('nombre_proveedor','LIKE','%'.$texto.'%');
+        })
+        ->orwhereHas('convenio', function (Builder $query) use ($texto) {
+            $query->where('id_licitacion','LIKE','%'.$texto.'%');
+        })
+        ->orwhereHas('contrato', function (Builder $query) use ($texto) {
+            $query->where('id_contrato','LIKE','%'.$texto.'%');
+        })
+        ->orderBy('id','asc')
+        ->paginate(5);
         return view('caratulas.index', compact('caratulas'));
     }
 

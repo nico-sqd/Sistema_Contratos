@@ -21,6 +21,8 @@ class CreateProveedorTable extends Migration
             $table->string('rut_proveedor');
             $table->string('representante');
             $table->string('rut_representante');
+            $table->string('mail_representante');
+            $table->string('telefono_representante');
             $table->unsignedBigInteger('direccion_id');
             $table->foreign('direccion_id')->references('id')->on('direccion');
         });

@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->string('subrogante')->nullable();
+            $table->string('correo_subrogante')->nullable();
         });
     }
 

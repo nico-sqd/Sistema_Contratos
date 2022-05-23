@@ -19,7 +19,7 @@ class CreateMontoboletaTable extends Migration
             $table->softDeletes();
             $table->integer('monto_boleta')->nullable();
             $table->unsignedBigInteger('id_tipo_boleta');
-            $table->foreign('id_tipo_boleta')->references('id_boleta')->on('boletagarantia');
+            $table->foreign('id_tipo_boleta')->references('id')->on('boletagarantia');
         });
     }
 

@@ -14,7 +14,7 @@ class CreateBoletagarantiaTable extends Migration
     public function up()
     {
         Schema::create('boletagarantia', function (Blueprint $table) {
-            $table->id('id_boleta');
+            $table->id();
             $table->timestamps();
             $table->softDeletes();
             $table->string('documentos_garantia');
