@@ -61,6 +61,7 @@
                                                     <td>{{ $convenio->proveedor->nombre_proveedor }}</td>
                                                     <td>{{ $convenio->admin }}</td>
                                                     <td class="td-actions text-right">
+                                                        <a href="{{ route('convenios.show', $convenio->id) }}" class="btn btn-info"><i class="material-icons">library_books</i></a>
                                                         <a href="{{ route('convenios.edit', $convenio->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
                                                         <form action="{{route('convenios.destroy', $convenio->id)}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
                                                         @csrf
