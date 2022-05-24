@@ -53,9 +53,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Establecimiento::class,'establecimiento');
     }
-    public function convenio()
+    public function contrato()
     {
-        return $this->hasOne(Convenio::class,'rut');
+        return $this->hasOne(Contrato::class,'rut');
     }
     public function subdireccion()
     {

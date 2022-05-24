@@ -77,9 +77,9 @@ class ConveniosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Convenio $convenio)
     {
-        //
+        return view('convenios.show', compact('convenio'), ['proveedores'=>Proveedor::all(),'contratos'=>Contrato::all()]);
     }
 
     /**
