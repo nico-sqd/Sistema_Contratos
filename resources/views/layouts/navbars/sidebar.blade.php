@@ -53,22 +53,10 @@
             <p>{{ __('Proveedores') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'convenios' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('convenios.index') }}">
-          <i class="material-icons">library_books</i>
-            <p>{{ __('Convenios') }}</p>
-        </a>
-      </li>
       <li class="nav-item{{ $activePage == 'contratos' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('contratos.index') }}">
           <i class="material-icons">library_books</i>
             <p>{{ __('Contratos') }}</p>
-        </a>
-      </li>
-      <li class="nav-item{{ $activePage == 'caratulas' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('caratula.index') }}">
-          <i class="material-icons">library_books</i>
-            <p>{{ __('Caratulas') }}</p>
         </a>
       </li>
       @can('permission_index')

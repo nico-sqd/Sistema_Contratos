@@ -41,15 +41,14 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead class="text-primary">
-                                                <th>ID Contrato</th>
                                                 <th>ID Licitacion</th>
-                                                <th>Resolucion de Adj.</th>
-                                                <th>Resolucion Aprueba Cont.</th>
+                                                <th>Convenios</th>
+                                                <th>Vigencia inicio</th>
+                                                <th>Vigencia Fin</th>
                                                 <th>Monto</th>
-                                                <th>Documento de Garantía</th>
-                                                <th>Modalidad</th>
-                                                <th>Aumento Contrato</th>
-                                                <th>Resolucion de Aumento</th>
+                                                <th>Referente</th>
+                                                <th>Proveedor</th>
+                                                <th>Administrador</th>
                                                 <th class="text-right">Acciones</th>
                                             </thead>
                                             <tbody>
@@ -60,16 +59,16 @@
                                             @endif
                                             @foreach ($contratos as $contrato)
                                                 <tr>
-                                                    <td>{{ $contrato->id_contrato }}</td>
                                                     <td>{{ $contrato->convenio->id_licitacion }}</td>
-                                                    <td>{{ $contrato->res_adjudicacion }}</td>
-                                                    <td>{{ $contrato->res_apruebacontrato }}</td>
+                                                    <td>{{ $contrato->convenio->convenio }}</td>
+                                                    <td>{{ $contrato->convenio->vigencia_inicio }}</td>
+                                                    <td>{{ $contrato->convenio->vigencia_fin }}</td>
                                                     <td>{{ $contrato->monto->moneda }}</td>
-                                                    <td>{{ $contrato->boletagarantia->documentos_garantia }}</td>
-                                                    <td>{{ $contrato->modalidad->abreviacion_modalidad}}</td>
-                                                    <td>{{ $contrato->aumento_contrato}}</td>
-                                                    <td>{{ $contrato->res_aumento }}</td>
+                                                    <td>{{ $contrato->convenio->user->name }}</td>
+                                                    <td>{{ $contrato->convenio->proveedor->nombre_proveedor }}</td>
+                                                    <td>{{ $contrato->convenio->admin }}</td>
                                                     <td class="td-actions text-right">
+                                                        <a href="{{ route('contratos.show', $contrato->id) }}" class="btn btn-info"><i class="material-icons">library_books</i></a>
                                                         <a href="{{ route('contratos.edit', $contrato->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
                                                         <form action="{{route('contratos.destroy', $contrato->id)}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
                                                         @csrf

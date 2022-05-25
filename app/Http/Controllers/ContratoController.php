@@ -10,6 +10,8 @@ use App\Models\MontoBoleta;
 use App\Models\Modalidad;
 use App\Models\TipoMoneda;
 use App\Models\Convenio;
+use App\Models\Proveedor;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 
 class ContratoController extends Controller
@@ -22,22 +24,20 @@ class ContratoController extends Controller
     public function index(Request $request)
     {
         $texto = trim($request->get('texto'));
-        $contratos = Contrato::whereRaw('UPPER(id_contrato) LIKE ?', ['%' . strtoupper($texto) . '%'])
-        ->orWhere('res_adjudicacion','LIKE','%'.$texto.'%')
-        ->orWhere('res_apruebacontrato','LIKE','%'.$texto.'%')
-        ->orWhere('aumento_contrato','LIKE','%'.$texto.'%')
-        ->orWhere('res_aumento','LIKE','%'.$texto.'%')
-        ->orwhereHas('monto', function (Builder $query) use ($texto) {
-            $query->where('moneda','LIKE','%'.$texto.'%');
-        })
-        ->orwhereHas('convenio', function (Builder $query) use ($texto) {
+        $contratos = Contrato::with('convenio')
+        ->whereHas('convenio', function (Builder $query) use ($texto) {
             $query->whereRaw('UPPER(id_licitacion) LIKE ?', ['%' . strtoupper($texto) . '%']);
+            $query->orWhere('vigencia_inicio','LIKE','%'.$texto.'%');
+            $query->orWhere('vigencia_fin','LIKE','%'.$texto.'%');
+            $query->orWhere('monto','LIKE','%'.$texto.'%');
+            $query->orWhereRaw('UPPER(admin) LIKE ?', ['%' . strtoupper($texto) . '%']);
+            $query->orWhereRaw('UPPER(convenio) LIKE ?', ['%' . strtoupper($texto) . '%']);
         })
-        ->orwhereHas('boletagarantia', function (Builder $query) use ($texto) {
-            $query->whereRaw('UPPER(documentos_garantia) LIKE ?', ['%' . strtoupper($texto) . '%']);
+        ->orwhereHas('proveedor', function (Builder $query) use ($texto) {
+            $query->Where('rut_proveedor','LIKE','%'.$texto.'%');
         })
-        ->orwhereHas('modalidad', function (Builder $query) use ($texto) {
-            $query->whereRaw('UPPER(abreviacion_modalidad) LIKE ?', ['%' . strtoupper($texto) . '%']);
+        ->orwhereHas('user', function (Builder $query) use ($texto) {
+            $query->whereRaw('UPPER(name) LIKE ?', ['%' . strtoupper($texto) . '%']);
         })
         ->orderBy('id','asc')
         ->paginate(5);
@@ -51,9 +51,10 @@ class ContratoController extends Controller
      */
     public function create()
     {
-        return view('contratos.create',['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
+        return view('contratos.create',['proveedor'=>Proveedor::all(),'referente'=>User::role('Referente')->get(),'admin'=>User::role('Administrador')->get(),
+        'tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
         'modalidad'=>Modalidad::all(),'montoboletagarantia'=>MontoBoleta::all(),'id_licitacion'=>Convenio::all(),
-        'monto'=>Monto::all()]);
+        'monto'=>Monto::all(),'contratos'=>Contrato::all()]);
     }
 
     /**
@@ -64,9 +65,11 @@ class ContratoController extends Controller
      */
     public function store(Request $request)
     {
+        $convenios = Convenio::create(array_merge($request->only('id_licitacion', 'convenio', 'rut_proveedor','rut','vigencia_inicio','vigencia_fin','monto','admin')));
         $montoboleta = Monto::create($request->only('moneda', 'id_tipo_moneda'));
         $boletagarantia = MontoBoleta::create($request->only('monto_boleta','id_tipo_boleta'));
-        $contrato = Contrato::create(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda'),['id_monto'=>$montoboleta->id,'id_boleta'=>$boletagarantia->id_tipo_boleta,'id_monto_boleta'=>$boletagarantia->id]));
+        $contrato = Contrato::create(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','rut_proveedor','rut','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda'),['id_monto'=>$montoboleta->id,
+        'rut_proveedor'=>$convenios->rut_proveedor,'rut'=>$convenios->rut,'id_licitacion'=>$convenios->id,'id_boleta'=>$boletagarantia->id_tipo_boleta,'id_monto_boleta'=>$boletagarantia->id]));
         return redirect()->route('contratos.index', $contrato->id)->with('success', 'Usuario creado correctamente.');
     }
 
@@ -76,9 +79,9 @@ class ContratoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Contrato $contrato)
     {
-        //
+        return view('contratos.show', compact('contrato'), ['proveedores'=>Proveedor::all(),'convenios'=>Convenio::all()]);
     }
 
     /**
@@ -90,7 +93,8 @@ class ContratoController extends Controller
     public function edit(Contrato $contratos)
     {
         return view('contratos.edit', compact('contratos'),['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
-        'modalidad'=>Modalidad::all(),'montoboletagarantia'=>MontoBoleta::all(),'id_licitacion'=>Convenio::all(),'monto'=>Monto::all()]);
+        'modalidad'=>Modalidad::all(),'montoboletagarantia'=>MontoBoleta::all(),'id_licitacion'=>Convenio::all(),'monto'=>Monto::all(),
+        'proveedor'=>Proveedor::all(),'referente'=>User::role('Referente')->get(),'admin'=>User::role('Administrador')->get()]);
     }
 
     /**
@@ -104,9 +108,13 @@ class ContratoController extends Controller
     {
         $montoboleta = $contrato->monto;
         $boletagarantia = $contrato->montoboleta;
+        $user = $contrato->convenio->user;
+        $convenios = $contrato->convenio;   
+        $user->update($request->only('name'));
+        $convenios->update(array_merge($request->only('rut_proveedor','rut','id_licitacion', 'convenio', 'vigencia_inicio','vigencia_fin','monto','admin')));
         $montoboleta->update($request->only('moneda', 'id_tipo_moneda'));
         $boletagarantia->update($request->only('monto_boleta','id_tipo_boleta'));
-        $contrato->update($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda'));
+        $contrato->update(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda'),['id_licitacion'=>$convenios->id]));
         return redirect()->route('contratos.index', $contrato->id)->with('success', 'Usuario creado correctamente.');
     }
 

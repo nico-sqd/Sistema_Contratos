@@ -32,12 +32,16 @@ class Proveedor extends Model
         return $this->belongsTo(Direccion::class, 'direccion_id');
     }
 
-    public function convenios()
+    public function contrato()
     {
-        return $this->hasMany(Convenios::class, 'rut_proveedor');
+        return $this->hasMany(Contrato::class, 'rut_proveedor');
     }
     public function caratula()
     {
         return $this->hasMany(Caratula::class,'id_proveedor');
+    }
+    public function convenio()
+    {
+        return $this->hasMany(Convenio::class,'rut_proveedor');
     }
 }
