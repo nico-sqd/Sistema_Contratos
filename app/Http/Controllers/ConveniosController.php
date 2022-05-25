@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Convenio;
 use App\Models\Proveedor;
 use App\Models\User;
+use App\Models\Monto;
+use App\Models\BoletaGarantia;
+use App\Models\MontoBoleta;
+use App\Models\Modalidad;
+use App\Models\TipoMoneda;
+use App\Models\Contrato;
 use Illuminate\Database\Eloquent\Builder;
 
 class ConveniosController extends Controller
@@ -43,7 +49,10 @@ class ConveniosController extends Controller
      */
     public function create()
     {
-        return view('convenios.create',['proveedor'=>Proveedor::all(),'referente'=>User::role('Referente')->get(),'admin'=>User::role('Administrador')->get()]);
+        return view('convenios.create',['proveedor'=>Proveedor::all(),'referente'=>User::role('Referente')->get(),'admin'=>User::role('Administrador')->get(),
+        'tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
+        'modalidad'=>Modalidad::all(),'montoboletagarantia'=>MontoBoleta::all(),'id_licitacion'=>Convenio::all(),
+        'monto'=>Monto::all(),'contratos'=>Contrato::all()]);
     }
 
     /**
@@ -54,7 +63,11 @@ class ConveniosController extends Controller
      */
     public function store(Request $request)
     {
+        $montoboleta = Monto::create($request->only('moneda', 'id_tipo_moneda'));
+        $boletagarantia = MontoBoleta::create($request->only('monto_boleta','id_tipo_boleta'));
         $convenios = Convenio::create(array_merge($request->only('id_licitacion', 'convenio', 'rut_proveedor','rut','vigencia_inicio','vigencia_fin','monto','admin')));
+        $contratos = Contrato::create(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda'),['id_monto'=>$montoboleta->id,
+        'id_licitacion'=>$convenios->id,'id_boleta'=>$boletagarantia->id_tipo_boleta,'id_monto_boleta'=>$boletagarantia->id]));
         return redirect()->route('convenios.index', $convenios->id_licitacion)->with('success', 'Usuario creado correctamente.');
     }
 

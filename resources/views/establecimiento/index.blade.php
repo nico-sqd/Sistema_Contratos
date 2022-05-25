@@ -34,7 +34,6 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead class="text-primary">
-                                                <th>ID</th>
                                                 <th>Establecimiento</th>
                                                 <th>Abreviacion</th>
                                                 <th>Codigo DEIS</th>
@@ -48,7 +47,6 @@
                                             @endif
                                                 @forelse ($establecimientos as $establecimiento)
                                                 <tr>
-                                                    <td>{{ $establecimiento->id }}</td>
                                                     <td>{{ $establecimiento->establecimiento }}</td>
                                                     <td>{{ $establecimiento->abreviacion }}</td>
                                                     <td>{{ $establecimiento->codigo_deis }}</td>

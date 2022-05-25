@@ -52,7 +52,8 @@ class ContratoController extends Controller
     public function create()
     {
         return view('contratos.create',['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
-        'modalidad'=>Modalidad::all(),'montoboletagarantia'=>MontoBoleta::all(),'id_licitacion'=>Convenio::all()]);
+        'modalidad'=>Modalidad::all(),'montoboletagarantia'=>MontoBoleta::all(),'id_licitacion'=>Convenio::all(),
+        'monto'=>Monto::all()]);
     }
 
     /**
@@ -93,8 +94,12 @@ class ContratoController extends Controller
         'modalidad'=>Modalidad::all(),'montoboletagarantia'=>Modalidad::all(),'id_licitacion'=>Convenio::all()]);
 =======
         return view('contratos.edit', compact('contratos'),['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
+<<<<<<< HEAD
         'modalidad'=>Modalidad::all(),'montoboletagarantia'=>MontoBoleta::all(),'id_licitacion'=>Convenio::all()]);
 >>>>>>> 0f84040ecb202340cf9ba569a55ad0fbe3f0ee99
+=======
+        'modalidad'=>Modalidad::all(),'montoboletagarantia'=>MontoBoleta::all(),'id_licitacion'=>Convenio::all(),'monto'=>Monto::all()]);
+>>>>>>> 05bbc53a1a0dfadad14d5c3791fe90756079dc90
     }
 
     /**

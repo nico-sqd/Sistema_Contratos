@@ -27,6 +27,11 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-12 text-right">
+                                    <a href="{{ url()->previous() }}" class="btn btn-facebook"><i class="material-icons">arrow_back</i></a>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <label for="id_licitacion" class="col-sm-2 col-form-label">ID Licitacion</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
@@ -67,44 +72,44 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="id_monto" class="col-sm-2 col-form-label">Monto</label>
+                                <label for="moneda" class="col-sm-2 col-form-label">Monto</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="id_monto" value="{{ old('id_monto', $contratos->monto->moneda) }}" >
-                                    @if ($errors->has('id_monto'))
-                                        <span class="error text-danger" for="input-id_monto">{{$errors -> first('id_monto')}}</span>
+                                    <input type="text" class="form-control" name="moneda" value="{{ old('moneda', $contratos->monto->moneda) }}" >
+                                    @if ($errors->has('moneda'))
+                                        <span class="error text-danger" for="input-moneda">{{$errors -> first('moneda')}}</span>
                                     @endif
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="id_modalidad" class="col-sm-2 col-form-label">Tipo Moneda</label>
+                                <label for="id_tipo_moneda" class="col-sm-2 col-form-label">Tipo Moneda</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Seleccionar tipo de Moneda</label>
-                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_modalidad">
-                                          @foreach ( $tipomoneda as $tipomoneda )
-                                            <option value="{{ $tipomoneda->id }}" {{$contratos->id_tipo_moneda == $tipomoneda->id ? 'selected' : ''}}>{{$tipomoneda->Nombre_tipo}}</option>
-                                          @endforeach
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_tipo_moneda">
+                                        @foreach ( $tipomoneda as $tipo )
+                                            <option value="{{ $tipo->id_tipo}}" {{$contratos->id_tipo_moneda == $tipo->id_tipo ? 'selected' : ''}}>{{$tipo->Nombre_tipo}}</option>
+                                        @endforeach
                                         </select>
                                       </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="id_monto_boleta" class="col-sm-2 col-form-label">Monto</label>
+                                <label for="monto_boleta" class="col-sm-2 col-form-label">Monto</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="id_monto_boleta" value="{{ old('id_monto_boleta', $contratos->montoboleta->monto_boleta) }}" >
-                                    @if ($errors->has('id_monto_boleta'))
-                                        <span class="error text-danger" for="input-id_monto_boleta">{{$errors -> first('id_monto_boleta')}}</span>
+                                    <input type="text" class="form-control" name="monto_boleta" value="{{ old('monto_boleta', $contratos->montoboleta->monto_boleta) }}" >
+                                    @if ($errors->has('monto_boleta'))
+                                        <span class="error text-danger" for="input-monto_boleta">{{$errors -> first('monto_boleta')}}</span>
                                     @endif
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="id_boleta" class="col-sm-2 col-form-label">ID Boleta</label>
+                                <label for="id_tipo_boleta" class="col-sm-2 col-form-label">ID Boleta</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Seleccionar tipo de Boleta de Garantía</label>
-                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_boleta">
-                                          @foreach ( $tipoboleta as $tipoboleta )
-                                            <option value="{{ $tipoboleta->id }}" {{$contratos->id_boleta == $tipoboleta->id ? 'selected' : ''}}>{{$tipoboleta->documentos_garantia}}</option>
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_tipo_boleta">
+                                          @foreach ( $tipoboleta as $boletas )
+                                            <option value="{{ $boletas->id }}" {{$contratos->id_boleta == $boletas->id ? 'selected' : ''}}>{{$boletas->documentos_garantia}}</option>
                                           @endforeach
                                         </select>
                                       </div>
