@@ -14,7 +14,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-12 text-right">
-                                            @can('role_create')
+                                            @can('admin_create')
                                             <a href="{{ route('roles.create') }}" class="btn btn-sm btn-facebook">Añadir Nuevo Rol</a>
                                             @endcan
                                         </div>
@@ -44,21 +44,21 @@
                                                         @endforelse
                                                     </td>
                                                      <td class="td-actions text-right">
-                                                        @can('role_show')
+                                                        @can('admin_show')
                                                         <a href="{{ route('roles.show', $role->id) }}" class="btn btn-info"><i class="material-icons">person</i></a>
                                                         @endcan
-                                                        @can('role_edit')
+                                                        @can('admin_edit')
                                                         <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
                                                         @endcan
-                                                        @can('role_destroy')
+                                                        @can('admin_destroy')
                                                         <form action="{{route('roles.destroy', $role->id)}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
-                                                        @endcan
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger" type="submit" rel="tooltip">
                                                             <i class="material-icons">close</i>
                                                         </button>
                                                         </form>
+                                                        @endcan
                                                     </td>
                                                 </tr>
                                                 @empty

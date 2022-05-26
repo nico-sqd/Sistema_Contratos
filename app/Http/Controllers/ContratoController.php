@@ -108,6 +108,7 @@ class ContratoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, Contrato $contrato)
     {
         $montoboleta = $contrato->monto;

@@ -13,6 +13,19 @@
                             <p class="card-category">Editar datos</p>
                         </div>
                         <div class="card-body">
+                        <div class="row">
+                                <label for="id_licitacion" class="col-sm-2 col-form-label">ID Licitacion</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Seleccionar Tipo Licitacion</label>
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_licitacion">
+                                          @foreach ( $id_licitacion as $licitacion )
+                                            <option value="{{ $licitacion->id }}" {{$contratos->licitacion == $licitacion->id ? 'selected' : ''}}>{{$licitacion->convenio}}</option>
+                                          @endforeach
+                                        </select>
+                                      </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-12 text-right">
                                     <a href="{{ url()->previous() }}" class="btn btn-facebook"><i class="material-icons">arrow_back</i></a>
@@ -187,6 +200,32 @@
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_modalidad">
                                           @foreach ( $modalidad as $modalidad )
                                             <option value="{{ $modalidad->id }}" {{$contratos->id_modalidad == $modalidad->id ? 'selected' : ''}}>{{$modalidad->nombre_modalidad}}</option>
+                                          @endforeach
+                                        </select>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="id_boleta" class="col-sm-2 col-form-label">Tipo Boleta</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Seleccionar Tipo Boleta</label>
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_boleta">
+                                          @foreach ( $tipoboleta as $boletagarantia )
+                                            <option value="{{ $boletagarantia->id_tipo_boleta }}" {{$contratos->boletagarantia == $boletagarantia->id_tipo_boleta ? 'selected' : ''}}>{{$boletagarantia->documentos_garantia}}</option>
+                                          @endforeach
+                                        </select>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="id_modalidad" class="col-sm-2 col-form-label">Modalidad</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Seleccionar Modalidad</label>
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_modalidad">
+                                          @foreach ( $modalidad as $modalidades )
+                                            <option value="{{ $modalidades->id_modalidad }}" {{$contratos->modalidades == $modalidades->id_modalidad ? ' selected="selected"' : ''}}>{{$modalidades->abreviacion_modalidad}}</option>
                                           @endforeach
                                         </select>
                                       </div>

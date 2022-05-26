@@ -33,7 +33,7 @@
                                     @endif
                                     <div class="row">
                                         <div class="col-12 text-right">
-                                            @can('user_create')
+                                            @can('admin_create')
                                             <a href="{{ route('proveedor.create') }}" class="btn btn-sm btn-facebook">Añadir Proveedor</a>
                                             @endcan
                                         </div>
@@ -70,7 +70,10 @@
                                                     <td>{{ $proveedor->direccion->comuna }}</td>
                                                     <td>{{ $proveedor->direccion->region }}</td>
                                                     <td class="td-actions text-right">
+                                                        @can('admin_edit')
                                                         <a href="{{ route('proveedor.edit', $proveedor->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                        @endcan
+                                                        @can('admin_destroy')
                                                         <form action="{{ route('proveedor.destroy', $proveedor->id) }}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
                                                         @csrf
                                                         @method('DELETE')
@@ -78,6 +81,7 @@
                                                             <i class="material-icons">close</i>
                                                         </button>
                                                         </form>
+                                                        @endcan
                                                     </td>
                                                 </tr>
                                                 @endforeach
