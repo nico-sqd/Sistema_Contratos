@@ -270,7 +270,7 @@
                                     @endif
                                 </div>
                             </div>
-                        <!--footer-->
+                        <!--footers-->
                         <div class="card-footer ml-auto mr-auto">
                             <button type="submit" class="btn btn-primary">{{ __('Actualizar') }}</button>
                         </div>
