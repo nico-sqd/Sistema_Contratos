@@ -32,6 +32,10 @@ class CreateContratoTable extends Migration
             $table->foreign('id_monto_boleta')->references('id')->on('montoboleta');
             $table->unsignedBigInteger('id_modalidad');
             $table->foreign('id_modalidad')->references('id')->on('modalidad');
+            $table->unsignedBigInteger('rut_proveedor');
+            $table->foreign('rut_proveedor')->references('id')->on('proveedor');
+            $table->unsignedBigInteger('rut');
+            $table->foreign('rut')->references('id')->on('users');
             $table->string('aumento_contrato')->nullable();
             $table->string('res_aumento')->nullable();
         });
@@ -51,6 +55,8 @@ class CreateContratoTable extends Migration
             $table->dropColumn('id_boleta');
             $table->dropColumn('id_modalidad');
             $table->dropColumn('id_monto_boleta');
+            $table->dropColumn('rut_proveedor');
+            $table->dropColumn('rut');
         });
         Schema::dropIfExists('contrato');
     }

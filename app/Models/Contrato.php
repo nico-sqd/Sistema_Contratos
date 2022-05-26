@@ -29,6 +29,8 @@ class Contrato extends Model
         'id_modalidad',
         'aumento_contrato',
         'res_aumento',
+        'rut_proveedor',
+        'rut',
     ];
 
     public function modalidad()
@@ -58,5 +60,13 @@ class Contrato extends Model
     public function tipomoneda()
     {
         return $this->belongsTo(TipoMoneda::class,'id_tipo_moneda');
+    }
+    public function proveedor()
+    {
+        return $this->belongsTo(Proveedor::class,'rut_proveedor');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class,'rut');
     }
 }

@@ -17,7 +17,7 @@
             <p>{{ __('Dashboard') }}</p>
         </a>
       </li>
-      @can('user_index')
+      @can('super_index')
       <li class="nav-item{{ $activePage == 'usuarios' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('users.index') }}">
           <i class="material-icons">person</i>
@@ -25,53 +25,47 @@
         </a>
       </li>
       @endcan
-
+      @can('admin_index')
       <li class="nav-item{{ $activePage == 'administradores' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('administradores.index_administrador') }}">
           <i class="material-icons">person</i>
             <p>Administradores</p>
         </a>
       </li>
-
-
+      @endcan
+      @can('index')
       <li class="nav-item{{ $activePage == 'referentes' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('referentes.index_referente') }}">
           <i class="material-icons">person</i>
             <p>Referentes</p>
         </a>
       </li>
-
+      @endcan
+      @can('index')
       <li class="nav-item{{ $activePage == 'establecimiento' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('establecimiento.index') }}">
           <i class="material-icons">home_work</i>
             <p>Establecimientos</p>
         </a>
       </li>
+      @endcan
+      @can('index')
       <li class="nav-item{{ $activePage == 'proveedor' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('proveedor.index') }}">
           <i class="material-icons">person</i>
             <p>{{ __('Proveedores') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'convenios' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('convenios.index') }}">
-          <i class="material-icons">library_books</i>
-            <p>{{ __('Convenios') }}</p>
-        </a>
-      </li>
+      @endcan
+      @can('index')
       <li class="nav-item{{ $activePage == 'contratos' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('contratos.index') }}">
           <i class="material-icons">library_books</i>
             <p>{{ __('Contratos') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'caratulas' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('caratula.index') }}">
-          <i class="material-icons">library_books</i>
-            <p>{{ __('Caratulas') }}</p>
-        </a>
-      </li>
-      @can('permission_index')
+      @endcan
+      @can('admin_index')
       <li class="nav-item{{ $activePage == 'permissions' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('permissions.index') }}">
           <i class="material-icons">bubble_chart</i>
@@ -79,7 +73,7 @@
         </a>
       </li>
       @endcan
-      @can('role_index')
+      @can('admin_index')
       <li class="nav-item{{ $activePage == 'roles' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('roles.index') }}">
           <i class="material-icons">work_outline</i>

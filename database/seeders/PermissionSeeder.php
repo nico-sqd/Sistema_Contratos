@@ -15,27 +15,20 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            'permission_index',
-            'permission_show',
-            'permission_create',
-            'permission_edit',
-            'permission_destroy',
+            'index',
+            'show',
+            
+            'super_index',
+            'super_show',
+            'super_create',
+            'super_edit',
+            'super_destroy',
 
-            'role_index',
-            'role_show',
-            'role_create',
-            'role_edit',
-            'role_destroy',
-
-            'user_index',
-            'user_show',
-            'user_create',
-            'user_edit',
-            'user_destroy',
-
-            'index_administrador',
-            'index_referente'
-
+            'admin_index',
+            'admin_show',
+            'admin_create',
+            'admin_edit',
+            'admin_destroy'
         ];
 
         foreach($permissions as $permission){
