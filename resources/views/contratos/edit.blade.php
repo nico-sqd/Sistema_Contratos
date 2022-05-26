@@ -81,13 +81,14 @@
                             <div class="row">
                                 <label for="vigencia_inicio" class="col-sm-2 col-form-label">Vigencia Inicio </label>
                                 <div class="col-sm-7">
-                                    <input type="date" class="form-control" name="vigencia_inicio" value="{{ old('vigencia_inicio', $contratos->vigencia_inicio) }}">
+                                    {{--{{dd($contratos->convenio->vigencia_inicio)}}--}}
+                                    <input type="date" class="form-control" name="vigencia_inicio" value="{{ old('vigencia_inicio', $contratos->convenio->vigencia_inicio) }}">
                                 </div>
                             </div>
                             <div class="row">
                                 <label for="vigencia_fin" class="col-sm-2 col-form-label">Vigencia Fin</label>
                                 <div class="col-sm-7">
-                                    <input type="date" class="form-control" name="vigencia_fin">
+                                    <input type="date" class="form-control" name="vigencia_fin" value="{{ old('vigencia_fin', $contratos->convenio->vigencia_fin) }}">
                                 </div>
                             </div>
                             <div class="row">
