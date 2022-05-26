@@ -12,6 +12,7 @@ use App\Models\TipoMoneda;
 use App\Models\Convenio;
 use App\Models\Proveedor;
 use App\Models\User;
+use App\Models\EstadoContrato;
 use Illuminate\Database\Eloquent\Builder;
 
 class ContratoController extends Controller
@@ -54,7 +55,7 @@ class ContratoController extends Controller
         return view('contratos.create',['proveedor'=>Proveedor::all(),'referente'=>User::role('Referente')->get(),'admin'=>User::role('Administrador')->get(),
         'tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
         'modalidad'=>Modalidad::all(),'montoboletagarantia'=>MontoBoleta::all(),'id_licitacion'=>Convenio::all(),
-        'monto'=>Monto::all(),'contratos'=>Contrato::all()]);
+        'monto'=>Monto::all(),'contratos'=>Contrato::all(),'estadocontrato'=>EstadoContrato::all()]);
     }
 
     /**
@@ -65,11 +66,13 @@ class ContratoController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
+        //dd($request->descripcion);
         $convenios = Convenio::create(array_merge($request->only('id_licitacion', 'convenio', 'rut_proveedor','rut','vigencia_inicio','vigencia_fin','monto','admin')));
         $montoboleta = Monto::create($request->only('moneda', 'id_tipo_moneda'));
         $boletagarantia = MontoBoleta::create($request->only('monto_boleta','id_tipo_boleta'));
-        $contrato = Contrato::create(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','rut_proveedor','rut','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda'),['id_monto'=>$montoboleta->id,
-        'rut_proveedor'=>$convenios->rut_proveedor,'rut'=>$convenios->rut,'id_licitacion'=>$convenios->id,'id_boleta'=>$boletagarantia->id_tipo_boleta,'id_monto_boleta'=>$boletagarantia->id]));
+        $contrato = Contrato::create(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','rut_proveedor','rut','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),
+        ['id_monto'=>$montoboleta->id,'rut_proveedor'=>$convenios->rut_proveedor,'rut'=>$convenios->rut,'id_licitacion'=>$convenios->id,'id_boleta'=>$boletagarantia->id_tipo_boleta,'id_monto_boleta'=>$boletagarantia->id]));
         return redirect()->route('contratos.index', $contrato->id)->with('success', 'Usuario creado correctamente.');
     }
 
@@ -81,7 +84,7 @@ class ContratoController extends Controller
      */
     public function show(Contrato $contrato)
     {
-        return view('contratos.show', compact('contrato'), ['proveedores'=>Proveedor::all(),'convenios'=>Convenio::all()]);
+        return view('contratos.show', compact('contrato'), ['proveedores'=>Proveedor::all(),'convenios'=>Convenio::all(),'estadocontraot'=>EstadoContrato::all()]);
     }
 
     /**
@@ -94,7 +97,8 @@ class ContratoController extends Controller
     {
         return view('contratos.edit', compact('contratos'),['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
         'modalidad'=>Modalidad::all(),'montoboletagarantia'=>MontoBoleta::all(),'id_licitacion'=>Convenio::all(),'monto'=>Monto::all(),
-        'proveedor'=>Proveedor::all(),'referente'=>User::role('Referente')->get(),'admin'=>User::role('Administrador')->get()]);
+        'proveedor'=>Proveedor::all(),'referente'=>User::role('Referente')->get(),'admin'=>User::role('Administrador')->get(),
+        'estadocontrato'=>EstadoContrato::all()]);
     }
 
     /**
@@ -115,7 +119,7 @@ class ContratoController extends Controller
         $convenios->update(array_merge($request->only('rut_proveedor','rut','id_licitacion', 'convenio', 'vigencia_inicio','vigencia_fin','monto','admin')));
         $montoboleta->update($request->only('moneda', 'id_tipo_moneda'));
         $boletagarantia->update($request->only('monto_boleta','id_tipo_boleta'));
-        $contrato->update(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda'),['id_licitacion'=>$convenios->id]));
+        $contrato->update(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),['id_licitacion'=>$convenios->id]));
         return redirect()->route('contratos.index', $contrato->id)->with('success', 'Usuario creado correctamente.');
     }
 

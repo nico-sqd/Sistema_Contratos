@@ -31,6 +31,8 @@ class Contrato extends Model
         'res_aumento',
         'rut_proveedor',
         'rut',
+        'estado_contrato',
+        'descripcion',
     ];
 
     public function modalidad()
@@ -68,5 +70,9 @@ class Contrato extends Model
     public function user()
     {
         return $this->belongsTo(User::class,'rut');
+    }
+    public function estadocontrato()
+    {
+        return $this->belongsTo(EstadoContrato::class,'estado_contrato');
     }
 }

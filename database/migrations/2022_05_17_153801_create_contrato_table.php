@@ -38,6 +38,7 @@ class CreateContratoTable extends Migration
             $table->foreign('rut')->references('id')->on('users');
             $table->string('aumento_contrato')->nullable();
             $table->string('res_aumento')->nullable();
+            $table->text('descripcion')->nullable();
         });
     }
 

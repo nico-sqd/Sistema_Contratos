@@ -238,6 +238,24 @@ class UserSeeder extends Seeder
             'nombre_dispositivo'=>'Ninguno',
             'id_subdireccion'=>'4'
         ]);
+        DB::table('estadocontrato')->insert([
+            'estado_contrato'=>'Modificado',
+        ]);
+        DB::table('estadocontrato')->insert([
+            'estado_contrato'=>'Termino Anticipado',
+        ]);
+        DB::table('estadocontrato')->insert([
+            'estado_contrato'=>'Terminado',
+        ]);
+        DB::table('estadocontrato')->insert([
+            'estado_contrato'=>'Cerrado',
+        ]);
+        DB::table('estadocontrato')->insert([
+            'estado_contrato'=>'Vigente',
+        ]);
+        DB::table('estadocontrato')->insert([
+            'estado_contrato'=>'Fin Presupuesto',
+        ]);
         $user = User::create([
             'name'=>'Admin',
             'email'=>'admin@admin.com',
