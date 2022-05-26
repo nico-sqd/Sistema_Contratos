@@ -213,7 +213,7 @@
                                         <label for="exampleFormControlSelect1">Seleccionar Modalidad</label>
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_modalidad">
                                           @foreach ( $modalidad as $modalidades )
-                                            <option value="{{ $modalidades->id_modalidad }}" {{$contratos->modalidades == $modalidades->id_modalidad ? ' selected="selected"' : ''}}>{{$modalidades->abreviacion_modalidad}}</option>
+                                            <option value="{{ $modalidades->id }}" {{$contratos->modalidades == $modalidades->id_modalidad ? ' selected="selected"' : ''}}>{{$modalidades->abreviacion_modalidad}}</option>
                                           @endforeach
                                         </select>
                                       </div>
