@@ -33,7 +33,7 @@
                                     @endif
                                     <div class="row">
                                         <div class="col-12 text-right">
-                                            @can('user_create')
+                                            @can('admin_create')
                                             <a href="{{ route('caratula.create') }}" class="btn btn-sm btn-facebook">Añadir Caratula</a>
                                             @endcan
                                         </div>
@@ -60,8 +60,13 @@
                                                     <td>{{ $caratula->contrato->id_contrato }}</td>
                                                     <td>{{ $caratula->convenio->user->name }}</td>
                                                     <td class="td-actions text-right">
+                                                        @can('show')
                                                         <a href="{{ route('caratula.show', $caratula->id) }}" class="btn btn-info"><i class="material-icons">library_books</i></a>
+                                                        @endcan
+                                                        @can('admin_edit')
                                                         <a href="{{ route('caratula.edit', $caratula->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                        @endcan
+                                                        @can('admin_destroy')
                                                         <form action="{{route('caratula.destroy', $caratula->id)}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
                                                         @csrf
                                                         @method('DELETE')
@@ -69,6 +74,7 @@
                                                             <i class="material-icons">close</i>
                                                         </button>
                                                         </form>
+                                                        @endcan
                                                     </td>
                                                 </tr>
                                                 @endforeach

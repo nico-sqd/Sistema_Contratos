@@ -76,21 +76,21 @@
                                                         @endforelse
                                                     </td>
                                                     <td class="td-actions text-right">
-                                                        @can('user_show')
+                                                        @can('show')
                                                         <a href="{{ route('users.show', $user->id) }}" class="btn btn-info"><i class="material-icons">person</i></a>
                                                         @endcan
-                                                        @can('user_edit')
+                                                        @can('admin_edit')
                                                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
                                                         @endcan
-                                                        @can('user_destroy')
+                                                        @can('admin_destroy')
                                                         <form action="{{route('users.delete', $user->id)}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
-                                                        @endcan
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger" type="submit" rel="tooltip">
                                                             <i class="material-icons">close</i>
                                                         </button>
                                                         </form>
+                                                        @endcan
                                                     </td>
                                                 </tr>
                                                 @endforeach

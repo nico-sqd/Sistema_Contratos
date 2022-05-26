@@ -28,7 +28,9 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-12 text-right">
+                                            @can('admin_create')
                                             <a href="{{ route('convenios.create') }}" class="btn btn-sm btn-facebook">Añadir Convenio</a>
+                                            @endcan
                                         </div>
                                     </div>
                                     <div class="table-responsive">
@@ -61,8 +63,13 @@
                                                     <td>{{ $convenio->proveedor->nombre_proveedor }}</td>
                                                     <td>{{ $convenio->admin }}</td>
                                                     <td class="td-actions text-right">
+                                                        @can('show')
                                                         <a href="{{ route('convenios.show', $convenio->id) }}" class="btn btn-info"><i class="material-icons">library_books</i></a>
+                                                        @endcan
+                                                        @can('admin_edit')
                                                         <a href="{{ route('convenios.edit', $convenio->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                        @endcan
+                                                        @can('admin_destroy')
                                                         <form action="{{route('convenios.destroy', $convenio->id)}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
                                                         @csrf
                                                         @method('DELETE')
@@ -70,6 +77,7 @@
                                                             <i class="material-icons">close</i>
                                                         </button>
                                                         </form>
+                                                        @endcan
                                                     </td>
                                                 </tr>
                                                 @endforeach
