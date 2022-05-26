@@ -33,7 +33,7 @@
                                     @endif
                                     <div class="row">
                                         <div class="col-12 text-right">
-                                            @can('user_create')
+                                            @can('admin_index')
                                             <a href="{{ route('users.create') }}" class="btn btn-sm btn-facebook">Añadir Usuario</a>
                                             @endcan
                                         </div>

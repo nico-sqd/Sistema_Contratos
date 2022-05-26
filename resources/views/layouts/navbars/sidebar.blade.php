@@ -65,7 +65,7 @@
         </a>
       </li>
       @endcan
-      @can('@can('admin_index')
+      @can('admin_index')
       <li class="nav-item{{ $activePage == 'permissions' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('permissions.index') }}">
           <i class="material-icons">bubble_chart</i>
@@ -73,7 +73,7 @@
         </a>
       </li>
       @endcan
-      @can('@can('admin_index')
+      @can('admin_index')
       <li class="nav-item{{ $activePage == 'roles' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('roles.index') }}">
           <i class="material-icons">work_outline</i>
