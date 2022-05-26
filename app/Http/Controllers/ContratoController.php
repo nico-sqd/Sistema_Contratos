@@ -110,7 +110,7 @@ class ContratoController extends Controller
         $montoboleta = $contrato->monto;
         $boletagarantia = $contrato->montoboleta;
         $user = $contrato->convenio->user;
-        $convenios = $contrato->convenio;   
+        $convenios = $contrato->convenio;
         $user->update($request->only('name'));
         $convenios->update(array_merge($request->only('rut_proveedor','rut','id_licitacion', 'convenio', 'vigencia_inicio','vigencia_fin','monto','admin')));
         $montoboleta->update($request->only('moneda', 'id_tipo_moneda'));
