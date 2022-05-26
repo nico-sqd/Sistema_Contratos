@@ -67,7 +67,6 @@
                                 <label for="rol" class="col-sm-2 col-form-label">Establecimiento</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Seleccionar Establecimiento</label>
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="establecimiento">
                                           @foreach ( $establecimiento as $establecimiento )
                                             <option value="{{ $establecimiento->id }}">{{ $establecimiento->establecimiento }}</option>
@@ -98,7 +97,6 @@
                                 <label for="rol" class="col-sm-2 col-form-label">Subdireccion</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Seleccionar Subdireccion</label>
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_subdireccion">
                                           @foreach ( $subdirecciones as $subdireccion )
                                             <option value="{{ $subdireccion->id }}">{{ $subdireccion->nombre_subdireccion }}</option>
@@ -111,7 +109,6 @@
                                 <label for="rol" class="col-sm-2 col-form-label">Departamento</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Seleccionar Departamento</label>
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_departamento">
                                           @foreach ( $departamentos as $departamento )
                                             <option value="{{ $departamento->id }}">{{ $departamento->nombre_departamento }}</option>

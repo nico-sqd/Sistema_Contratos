@@ -37,6 +37,8 @@
                                         <div class="h5">Referente: {{$contrato->convenio->user->name}}</div>
                                         <div class="h5">Aumento Contrato: {{$contrato->aumento_contrato}}</div>
                                         <div class="h5">Res. Aumento Contrato: {{$contrato->res_aumento}}</div>
+                                        <div class="h5">Estado del Contrato: {{$contrato->estadocontrato->estado_contrato}}</div>
+                                        <div class="h5">Comentario: {{$contrato->descripcion}}</div>
                                     </div>
                                 </div>
                                 <!--footer-->

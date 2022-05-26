@@ -72,6 +72,18 @@
                             <div class="row">
                                 <label for="vigencia_inicio" class="col-sm-2 col-form-label">Vigencia Inicio</label>
                                 <div class="col-sm-7">
+                                    <input type="date" class="form-control" name="vigencia_inicio">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="vigencia_fin" class="col-sm-2 col-form-label">Vigencia Fin</label>
+                                <div class="col-sm-7">
+                                    <input type="date" class="form-control" name="vigencia_fin">
+                                </div>
+                            </div>
+                            {{--<div class="row">
+                                <label for="vigencia_inicio" class="col-sm-2 col-form-label">Vigencia Inicio</label>
+                                <div class="col-sm-7">
                                     <input type="text" class="form-control" name="vigencia_inicio" placeholder="Ingrese vigencia inicio" value="{{old('vigencia_inicio')}}">
                                     @if ($errors->has('vigencia_inicio'))
                                         <span class="error text-danger" for="input-vigencia_inicio">{{$errors -> first('vigencia_inicio')}}</span>
@@ -86,7 +98,7 @@
                                         <span class="error text-danger" for="input-vigencia_fin">{{$errors -> first('vigencia_fin')}}</span>
                                     @endif
                                 </div>
-                            </div>
+                            </div>--}}
                             <div class="row">
                                 <label for="monto" class="col-sm-2 col-form-label">Monto</label>
                                 <div class="col-sm-7">
@@ -205,6 +217,26 @@
                                     @if ($errors->has('res_aumento'))
                                         <span class="error text-danger" for="input-comuna">{{$errors -> first('res_aumento')}}</span>
                                     @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
+                                <div class="col-sm-7" >
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="descripcion" name= "descripcion" rows="2" cols="107" placeholder="Descripción"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="estado_contrato" class="col-sm-2 col-form-label">Estado Contrato</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="estado_contrato">
+                                        @foreach ( $estadocontrato as $estado )
+                                            <option value="{{ $estado->id }}">{{ $estado->estado_contrato }}</option>
+                                        @endforeach
+                                        </select>
+                                      </div>
                                 </div>
                             </div>
                         <!--footer-->
