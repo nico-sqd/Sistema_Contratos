@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form action="{{route('contratos.store')}}" method="post" class="form-horizontal">
+                <form action="{{route('contratos.store')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                     @csrf
                     <div class="card">
                         <div class="card-header card-header-primary">
@@ -237,6 +237,13 @@
                                         @endforeach
                                         </select>
                                       </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="res_aumento" class="col-sm-2 col-form-label">Documento</label>
+                                <div class="col-sm-7">
+                                    @csrf
+                                    <input type="file" name="nombre_archivo" id="">
                                 </div>
                             </div>
                         <!--footer-->

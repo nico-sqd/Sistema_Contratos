@@ -60,28 +60,9 @@
                                       </div>
                                 </div>
                             </div>
-                            {{--<div class="row">
-                                <label for="vigencia_inicio" class="col-sm-2 col-form-label">Vigencia Inicio</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="vigencia_inicio" value="{{ old('vigencia_inicio', $contratos->convenio->vigencia_inicio) }}" >
-                                    @if ($errors->has('vigencia_inicio'))
-                                        <span class="error text-danger" for="input-vigencia_inicio">{{$errors -> first('vigencia_inicio')}}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label for="vigencia_fin" class="col-sm-2 col-form-label">Vigencia Fin</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="vigencia_fin" value="{{ old('vigencia_fin', $contratos->convenio->vigencia_fin) }}" >
-                                    @if ($errors->has('vigencia_fin'))
-                                        <span class="error text-danger" for="input-vigencia_fin">{{$errors -> first('vigencia_fin')}}</span>
-                                    @endif
-                                </div>
-                            </div>--}}
                             <div class="row">
                                 <label for="vigencia_inicio" class="col-sm-2 col-form-label">Vigencia Inicio </label>
                                 <div class="col-sm-7">
-                                    {{--{{dd($contratos->convenio->vigencia_inicio)}}--}}
                                     <input type="date" class="form-control" name="vigencia_inicio" value="{{ old('vigencia_inicio', $contratos->convenio->vigencia_inicio) }}">
                                 </div>
                             </div>
@@ -193,19 +174,6 @@
                                       </div>
                                 </div>
                             </div>
-                            {{--<div class="row">
-                                <label for="id_modalidad" class="col-sm-2 col-form-label">Modalidad</label>
-                                <div class="col-sm-7">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Seleccionar Modalidad</label>
-                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_modalidad">
-                                          @foreach ( $modalidad as $modalidades )
-                                            <option value="{{ $modalidades->id }}" {{$contratos->id_modalidad == $modalidades->id ? ' selected="selected"' : ''}}>{{$modalidades->abreviacion_modalidad}}</option>
-                                          @endforeach
-                                        </select>
-                                      </div>
-                                </div>
-                            </div>--}}
                             <div class="row">
                                 <label for="aumento_contrato" class="col-sm-2 col-form-label">Aumento de Contrato</label>
                                 <div class="col-sm-7">

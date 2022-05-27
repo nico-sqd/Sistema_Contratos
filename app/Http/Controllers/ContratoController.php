@@ -13,7 +13,9 @@ use App\Models\Convenio;
 use App\Models\Proveedor;
 use App\Models\User;
 use App\Models\EstadoContrato;
+use App\Models\Files;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 
 class ContratoController extends Controller
 {
@@ -73,6 +75,16 @@ class ContratoController extends Controller
         $boletagarantia = MontoBoleta::create($request->only('monto_boleta','id_tipo_boleta'));
         $contrato = Contrato::create(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','rut_proveedor','rut','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),
         ['id_monto'=>$montoboleta->id,'rut_proveedor'=>$convenios->rut_proveedor,'rut'=>$convenios->rut,'id_licitacion'=>$convenios->id,'id_boleta'=>$boletagarantia->id_tipo_boleta,'id_monto_boleta'=>$boletagarantia->id]));
+        $archivo = $request->all();
+        $archivo['uuid'] = (string) Str::uuid();
+        $archivo['user_rut'] = $convenios->user->id;
+
+        if($request->hasFile('nombre_archivo')){
+            $archivo['nombre_archivo'] = $request->file('nombre_archivo')->getClientOriginalName();
+            $request->file('nombre_archivo')->storeAs('folder_file',$archivo['nombre_archivo']);
+        }
+        //dd($request);
+        Files::create($archivo);
         return redirect()->route('contratos.index', $contrato->id)->with('success', 'Usuario creado correctamente.');
     }
 
