@@ -60,15 +60,6 @@
                                       </div>
                                 </div>
                             </div>
-                            {{--<div class="row">
-                                <label for="rut_proveedor" class="col-sm-2 col-form-label">RUT del Proveedor</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="rut_proveedor" placeholder="Ingrese el RUT Proveedor" value="{{old('rut_proveedor')}}">
-                                    @if ($errors->has('rut_proveedor'))
-                                        <span class="error text-danger" for="input-rut_proveedor">{{$errors -> first('rut_proveedor')}}</span>
-                                    @endif
-                                </div>
-                            </div>--}}
                             <div class="row">
                                 <label for="vigencia_inicio" class="col-sm-2 col-form-label">Vigencia Inicio</label>
                                 <div class="col-sm-7">
@@ -81,24 +72,6 @@
                                     <input type="date" class="form-control" name="vigencia_fin">
                                 </div>
                             </div>
-                            {{--<div class="row">
-                                <label for="vigencia_inicio" class="col-sm-2 col-form-label">Vigencia Inicio</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="vigencia_inicio" placeholder="Ingrese vigencia inicio" value="{{old('vigencia_inicio')}}">
-                                    @if ($errors->has('vigencia_inicio'))
-                                        <span class="error text-danger" for="input-vigencia_inicio">{{$errors -> first('vigencia_inicio')}}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label for="vigencia_fin" class="col-sm-2 col-form-label">Vigencia Fin</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="vigencia_fin" placeholder="Ingrese vigencia fin" value="{{old('vigencia_fin')}}">
-                                    @if ($errors->has('vigencia_fin'))
-                                        <span class="error text-danger" for="input-vigencia_fin">{{$errors -> first('vigencia_fin')}}</span>
-                                    @endif
-                                </div>
-                            </div>--}}
                             <div class="row">
                                 <label for="monto" class="col-sm-2 col-form-label">Monto</label>
                                 <div class="col-sm-7">
@@ -239,13 +212,13 @@
                                       </div>
                                 </div>
                             </div>
-                            <div class="row">
+                        {{--<div class="row">
                                 <label for="res_aumento" class="col-sm-2 col-form-label">Documento</label>
                                 <div class="col-sm-7">
                                     @csrf
                                     <input type="file" name="nombre_archivo" id="">
                                 </div>
-                            </div>
+                            </div>--}}
                         <!--footer-->
                         <div class="card-footer ml-auto mr-auto">
                             <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>
