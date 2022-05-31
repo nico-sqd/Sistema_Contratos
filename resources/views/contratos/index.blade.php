@@ -68,6 +68,7 @@
                                                     <td>{{ $contrato->convenio->proveedor->nombre_proveedor }}</td>
                                                     <td>{{ $contrato->convenio->admin }}</td>
                                                     <td class="td-actions text-right">
+                                                        <a href="{{ route('files.index', $contrato->id) }}" class="btn btn-download"><i class="material-icons">download</i></a>
                                                         @can('show')
                                                         <a href="{{ route('contratos.show', $contrato->id) }}" class="btn btn-info"><i class="material-icons">library_books</i></a>
                                                         @endcan
@@ -90,11 +91,6 @@
                                         </table>
                                     </div>
                                 </div>
-                                <!--footer-->
-                                <div class="card-footer ml-auto mr-auto">
-                                    {{ $contratos->links() }}
-                                </div>
-                                <!--End footer-->
                         </div>
                     </div>
                 </div>

@@ -11,7 +11,6 @@
                             <h4 class="card-tittle">Crear Contrato</h4>
                             <p class="card-category">Ingresar datos</p>
                         </div>
-                        {{ $errors }}
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12 text-right">
@@ -212,13 +211,13 @@
                                       </div>
                                 </div>
                             </div>
-                            <div class="row">
+                        {{--<div class="row">
                                 <label for="res_aumento" class="col-sm-2 col-form-label">Documento</label>
                                 <div class="col-sm-7">
                                     @csrf
                                     <input type="file" name="nombre_archivo" id=""">
                                 </div>
-                            </div>
+                            </div>--}}
                         <!--footer-->
                         <div class="card-footer ml-auto mr-auto">
                             <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>

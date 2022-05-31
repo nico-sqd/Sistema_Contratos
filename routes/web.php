@@ -32,7 +32,8 @@ Route::group(['middleware'=>'auth'], function(){
     Route::delete('/users/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.delete');
     Route::get('administradores', [App\Http\Controllers\UserController::class, 'index_administrador'])->name('administradores.index_administrador');
     Route::get('referentes', [App\Http\Controllers\UserController::class, 'index_referente'])->name('referentes.index_referente');
-    Route::post('/upload', [App\Http\Controllers\FilesController::class, 'store'])->name('files.store');
+    Route::get('files/{uuid}/download', [App\Http\Controllers\FilesController::class, 'download'])->name('files.download');
+    Route::resource('files', App\Http\Controllers\FilesController::class);
     Route::resource('permissions', App\Http\Controllers\PermissionController::class);
     Route::resource('roles', App\Http\Controllers\RoleController::class);
     Route::resource('establecimiento', App\Http\Controllers\EstablecimientoController::class);
