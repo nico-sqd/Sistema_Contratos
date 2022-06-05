@@ -31,6 +31,7 @@
                                             {{ session('success') }}
                                         </div>
                                     @endif
+                                    @can('admin_create')
                                     <div class="row">
                                         <label for="res_aumento" class="col-sm-2 col-form-label">Documento</label>
                                         <div class="col-sm-7">
@@ -38,6 +39,7 @@
                                             <input type="file" name="nombre_archivo" id="" >
                                         </div>
                                     </div>
+                                    @endcan
                                     <div class="card-footer ml-auto mr-auto">
                                         <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>
                                     </div>

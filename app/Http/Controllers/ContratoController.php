@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Contrato;
 use App\Models\Monto;
 use App\Models\BoletaGarantia;
@@ -42,6 +43,7 @@ class ContratoController extends Controller
         ->orwhereHas('user', function (Builder $query) use ($texto) {
             $query->whereRaw('UPPER(name) LIKE ?', ['%' . strtoupper($texto) . '%']);
         })
+        //->whereRelation('Convenio', 'admin', Auth::id()) //--------(filrar contratos por id)------------
         ->orderBy('id','asc')
         ->paginate(5);
         return view('contratos.index', compact('contratos'));
