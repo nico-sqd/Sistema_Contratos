@@ -44,7 +44,7 @@ class FilesController extends Controller
     public function download($uuid)
     {
         $file = Files::where('uuid',$uuid)->firstOrFail();
-        $pathToFile = storage_path("app/folder_file/" . $file->nombre_archivo);
+        $pathToFile = storage_path("folder_file/" . $file->nombre_archivo);
         return response()->download($pathToFile);
     }
 
