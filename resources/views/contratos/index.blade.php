@@ -48,7 +48,7 @@
                                                 <th>Monto</th>
                                                 <th>Referente</th>
                                                 <th>Proveedor</th>
-                                                <th>Administrador</th>
+                                                <th>Gestor</th>
                                                 <th class="text-right">Acciones</th>
                                             </thead>
                                             <tbody>
@@ -68,7 +68,7 @@
                                                     <td>{{ $contrato->convenio->proveedor->nombre_proveedor }}</td>
                                                     <td>{{ $contrato->convenio->admin }}</td>
                                                     <td class="td-actions text-right">
-                                                        <a href="{{ route('files.index', $contrato->id) }}" class="btn btn-download"><i class="material-icons">download</i></a>
+                                                        <a href="{{ route('contratos.files.index', $contrato->id) }}" class="btn btn-download"><i class="material-icons">download</i></a>
                                                         @can('show')
                                                         <a href="{{ route('contratos.show', $contrato->id) }}" class="btn btn-info"><i class="material-icons">library_books</i></a>
                                                         @endcan

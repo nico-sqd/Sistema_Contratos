@@ -72,7 +72,7 @@ class ContratoController extends Controller
         //dd($request->descripcion);
         $convenios = Convenio::create(array_merge($request->only('id_licitacion', 'convenio', 'rut_proveedor','rut','vigencia_inicio','vigencia_fin','monto','admin')));
         $montoboleta = Monto::create($request->only('moneda', 'id_tipo_moneda'));
-        $boletagarantia = MontoBoleta::create($request->only('monto_boleta','id_tipo_boleta'));
+        $boletagarantia = MontoBoleta::create($request->only('monto_boleta','id_tipo_boleta')); //crear ID Boleta garantía en migración, controlador y vista.
         $contrato = Contrato::create(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','rut_proveedor','rut','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),
         ['id_monto'=>$montoboleta->id,'rut_proveedor'=>$convenios->rut_proveedor,'rut'=>$convenios->rut,'id_licitacion'=>$convenios->id,'id_boleta'=>$boletagarantia->id_tipo_boleta,'id_monto_boleta'=>$boletagarantia->id]));
         /**$archivo = $request->all();

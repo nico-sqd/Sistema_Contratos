@@ -75,4 +75,8 @@ class Contrato extends Model
     {
         return $this->belongsTo(EstadoContrato::class,'estado_contrato');
     }
+    public function files()
+    {
+        return $this->hasMany(Files::class,'id_contrato');
+    }
 }

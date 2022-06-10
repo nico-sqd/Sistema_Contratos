@@ -12,13 +12,15 @@ use Illuminate\Support\Str;
 
 class FilesController extends Controller
 {
-    public function index(Request $request)
-    {
+    public function index(Request $request, Contrato $contratos)
+    {   
+        //dd($contratos->id);
         $texto = trim($request->get('texto'));
-        $files = Files::whereRaw('UPPER(nombre_archivo) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        $files = $contratos->files()->whereRaw('UPPER(nombre_archivo) LIKE ?', ['%' . strtoupper($texto) . '%'])
         ->orderBy('id','asc')
         ->paginate(5);
-        return view('files.index', compact('files'));
+        //**$files = Files::whereRaw('UPPER(nombre_archivo) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        return view('files.index', compact('files','contratos'));
     }
 
     public function create()
@@ -26,11 +28,11 @@ class FilesController extends Controller
         dd("updload");
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Contrato $contratos)
     {
         $archivo = $request->all();
         $archivo['uuid'] = (string) Str::uuid();
-        $archivo['user_rut'] = 1;
+        $archivo['id_contrato'] = $contratos->id;
 
         if($request->hasFile('nombre_archivo')){
             $archivo['nombre_archivo'] = $request->file('nombre_archivo')->getClientOriginalName();
@@ -38,7 +40,7 @@ class FilesController extends Controller
         }
         //dd($request);
         Files::create($archivo);
-        return redirect()->route('files.index')->with('success', 'Archivo subido correctamente.');
+        return redirect()->route('contratos.files.index', $contratos->id)->with('success', 'Archivo subido correctamente.');
     }
 
     public function download($uuid)
@@ -61,8 +63,11 @@ class FilesController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(Files $files, Contrato $contratos)
     {
-        //
+        //$contratos= $files->contrato;
+        //dd($files->id);
+        $files->delete();
+        return redirect()->route('contratos.files.index', $contratos->id);;
     }
 }

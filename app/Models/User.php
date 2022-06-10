@@ -65,8 +65,4 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Departamento::class,'id_departamento');
     }
-    public function files()
-    {
-        return $this->hasMany(Files::class,'user_rut');
-    }
 }
