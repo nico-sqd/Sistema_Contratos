@@ -21,7 +21,7 @@
       <li class="nav-item{{ $activePage == 'usuarios' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('users.index') }}">
           <i class="material-icons">person</i>
-            <p>Usuario</p>
+            <p>Super Administrador</p>
         </a>
       </li>
       @endcan

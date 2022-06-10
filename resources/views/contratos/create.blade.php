@@ -215,7 +215,7 @@
                                 <label for="res_aumento" class="col-sm-2 col-form-label">Documento</label>
                                 <div class="col-sm-7">
                                     @csrf
-                                    <input type="file" name="nombre_archivo" id="">
+                                    <input type="file" name="nombre_archivo" id=""">
                                 </div>
                             </div>--}}
                         <!--footer-->
