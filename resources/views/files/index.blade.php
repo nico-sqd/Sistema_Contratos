@@ -59,7 +59,7 @@
                                                             <td><a href="{{ route('files.download', $file->uuid)}}">Descargar</a></td>
                                                             <td class="td-actions text-right">
                                                                 @can('admin_destroy')
-                                                                <form action="{{route('contratos.files.destroy',[$file->id, $contratos->id])}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
+                                                                <form action="{{route('contratos.files.destroy',[$contratos, $file])}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button class="btn btn-danger" type="submit" rel="tooltip">
