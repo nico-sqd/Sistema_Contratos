@@ -175,24 +175,6 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="aumento_contrato" class="col-sm-2 col-form-label">Aumento de Contrato</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="aumento_contrato" value="{{ old('aumento_contrato', $contratos->aumento_contrato) }}" >
-                                    @if ($errors->has('aumento_contrato'))
-                                        <span class="error text-danger" for="input-aumento_contrato">{{$errors -> first('aumento_contrato')}}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label for="res_aumento" class="col-sm-2 col-form-label">Resolucion de Aumento</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="res_aumento" value="{{ old('res_aumento', $contratos->res_aumento) }}" >
-                                    @if ($errors->has('res_aumento'))
-                                        <span class="error text-danger" for="input-res_aumento">{{$errors -> first('res_aumento')}}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="row">
                                 <label for="estado_contrato" class="col-sm-2 col-form-label">Estado</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
@@ -210,6 +192,24 @@
                                     <input type="text" class="form-control" name="descripcion" value="{{ old('descripcion', $contratos->descripcion) }}" >
                                     @if ($errors->has('descripcion'))
                                         <span class="error text-danger" for="input-descripcion">{{$errors -> first('descripcion')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="aumento_contrato" class="col-sm-2 col-form-label">Aumento de Contrato</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="aumento_contrato" value="{{ old('aumento_contrato', $contratos->aumento_contrato) }}" >
+                                    @if ($errors->has('aumento_contrato'))
+                                        <span class="error text-danger" for="input-aumento_contrato">{{$errors -> first('aumento_contrato')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="res_aumento" class="col-sm-2 col-form-label">Resolucion de Aumento</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="res_aumento" value="{{ old('res_aumento', $contratos->res_aumento) }}" >
+                                    @if ($errors->has('res_aumento'))
+                                        <span class="error text-danger" for="input-res_aumento">{{$errors -> first('res_aumento')}}</span>
                                     @endif
                                 </div>
                             </div>
