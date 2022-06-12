@@ -9,16 +9,21 @@ use App\Models\Convenio;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+
 
 class FilesController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, Contrato $contratos)
     {
+        //dd($contratos->id);
         $texto = trim($request->get('texto'));
-        $files = Files::whereRaw('UPPER(nombre_archivo) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        $files = $contratos->files()->whereRaw('UPPER(nombre_archivo) LIKE ?', ['%' . strtoupper($texto) . '%'])
         ->orderBy('id','asc')
         ->paginate(5);
-        return view('files.index', compact('files'));
+        //**$files = Files::whereRaw('UPPER(nombre_archivo) LIKE ?', ['%' . strtoupper($texto) . '%'])
+        return view('files.index', compact('files','contratos'));
     }
 
     public function create()
@@ -26,11 +31,21 @@ class FilesController extends Controller
         dd("updload");
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Contrato $contratos)
     {
         $archivo = $request->all();
         $archivo['uuid'] = (string) Str::uuid();
-        $archivo['user_rut'] = 1;
+        $archivo['id_contrato'] = $contratos->id;
+
+        //dd($request);
+        //en php.ini subir upload_max_filesize = 2M a los megas que quieras subir y post_max_size = 8M a los megas que quieras subir
+        $validator = Validator::make($request->all(), [
+            'nombre_archivo' => ['required','mimes:pdf,jpg,jpeg,png,xlsx,docx,doc,ppt,octet-stream','max:25000']
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors('No se puede subir este tipo de archivo o es muy pesado');
+        }
 
         if($request->hasFile('nombre_archivo')){
             $archivo['nombre_archivo'] = $request->file('nombre_archivo')->getClientOriginalName();
@@ -38,7 +53,7 @@ class FilesController extends Controller
         }
         //dd($request);
         Files::create($archivo);
-        return redirect()->route('files.index')->with('success', 'Archivo subido correctamente.');
+        return redirect()->route('contratos.files.index', $contratos->id)->with('success', 'Archivo subido correctamente.');
     }
 
     public function download($uuid)
@@ -61,8 +76,14 @@ class FilesController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(Contrato $contrato, Files $file)
     {
-        //
+        //$contratos= $files->contrato;
+        //dd($files->id)a;
+        $borrar = storage_path('app/folder_file' . $file->nombre_archivo);
+        //return $borrar;
+        Storage::delete($borrar);
+        $file->delete();
+        return redirect()->route('contratos.files.index', $contrato->id);;
     }
 }

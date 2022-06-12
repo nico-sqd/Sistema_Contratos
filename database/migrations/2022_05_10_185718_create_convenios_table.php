@@ -25,8 +25,6 @@ class CreateConveniosTable extends Migration
             $table->foreign('rut')->references('id')->on('users');
             $table->date('vigencia_inicio');
             $table->date('vigencia_fin');
-            $table->integer('monto');
-//            $table->foreign('monto')->references('codigo_monto')->on('monto');
             $table->string('admin');
         });
     }
@@ -40,7 +38,6 @@ class CreateConveniosTable extends Migration
     {
         Schema::table('convenios', function (Blueprint $table){
             $table->dropColumn('rut_proveedor');
-            $table->dropColumn('monto');
             $table->dropColumn('rut');
         });
         Schema::dropIfExists('convenios');

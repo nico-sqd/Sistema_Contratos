@@ -11,7 +11,6 @@
                             <h4 class="card-tittle">Crear Caratula</h4>
                             <p class="card-category">Ingresar datos</p>
                         </div>
-                        {{ $errors }}
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12 text-right">

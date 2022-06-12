@@ -16,9 +16,9 @@ class CreateFilesTable extends Migration
         Schema::create('files', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
-            $table->string('nombre_archivo');
-            $table->unsignedBigInteger('user_rut');
-            $table->foreign('user_rut')->references('id')->on('users')->onDelete('cascade');
+            $table->text('nombre_archivo');
+            $table->unsignedBigInteger('id_contrato');
+            $table->foreign('id_contrato')->references('id')->on('contrato')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,7 +31,7 @@ class CreateFilesTable extends Migration
     public function down()
     {
         Schema::table('files', function (Blueprint $table) {
-            $table->dropColumn('user_rut');
+            $table->dropColumn('id_contrato');
         });
         Schema::dropIfExists('files');
     }

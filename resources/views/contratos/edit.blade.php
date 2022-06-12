@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="convenio" class="col-sm-2 col-form-label">Convenio</label>
+                                <label for="convenio" class="col-sm-2 col-form-label">Nombre Convenio</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="convenio" value="{{ old('convenio', $contratos->convenio->convenio) }}">
                                     @if ($errors->has('convenio'))
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="rut_proveedor" class="col-sm-2 col-form-label">Proveedor</label>
+                                <label for="rut_proveedor" class="col-sm-2 col-form-label">Proveedores</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="rut_proveedor">
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="rut" class="col-sm-2 col-form-label">Referente</label>
+                                <label for="rut" class="col-sm-2 col-form-label">Referentes</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="rut">
@@ -70,15 +70,6 @@
                                 <label for="vigencia_fin" class="col-sm-2 col-form-label">Vigencia Fin</label>
                                 <div class="col-sm-7">
                                     <input type="date" class="form-control" name="vigencia_fin" value="{{ old('vigencia_fin', $contratos->convenio->vigencia_fin) }}">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label for="monto" class="col-sm-2 col-form-label">Monto</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="monto" value="{{ old('monto', $contratos->convenio->monto) }}" >
-                                    @if ($errors->has('monto'))
-                                        <span class="error text-danger" for="input-monto">{{$errors -> first('monto')}}</span>
-                                    @endif
                                 </div>
                             </div>
                             <div class="row">
@@ -121,7 +112,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="moneda" class="col-sm-2 col-form-label">Monto</label>
+                                <label for="moneda" class="col-sm-2 col-form-label">Monto de Contrato</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="moneda" value="{{ old('moneda', $contratos->monto->moneda) }}" >
                                     @if ($errors->has('moneda'))
@@ -142,16 +133,16 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="monto_boleta" class="col-sm-2 col-form-label">Monto</label>
+                                <label for="id_boleta" class="col-sm-2 col-form-label">ID Boleta de Garantía</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="monto_boleta" value="{{ old('monto_boleta', $contratos->montoboleta->monto_boleta) }}" >
-                                    @if ($errors->has('monto_boleta'))
-                                        <span class="error text-danger" for="input-monto_boleta">{{$errors -> first('monto_boleta')}}</span>
+                                    <input type="text" class="form-control" name="id_boleta" value="{{ old('id_boleta', $contratos->montoboleta->id_boleta) }}" >
+                                    @if ($errors->has('id_boleta'))
+                                        <span class="error text-danger" for="input-id_boleta">{{$errors -> first('id_boleta')}}</span>
                                     @endif
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="id_tipo_boleta" class="col-sm-2 col-form-label">ID Boleta</label>
+                                <label for="id_tipo_boleta" class="col-sm-2 col-form-label">Tipo Boleta</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_tipo_boleta">
@@ -163,7 +154,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="id_modalidad" class="col-sm-2 col-form-label">ID Modalidad</label>
+                                <label for="id_modalidad" class="col-sm-2 col-form-label">Modalidad</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_modalidad">
@@ -193,7 +184,16 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="estado_contrato" class="col-sm-2 col-form-label">Estado</label>
+                                <label for="descripcion" class="col-sm-2 col-form-label">Descripcion</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="descripcion" value="{{ old('descripcion', $contratos->descripcion) }}" >
+                                    @if ($errors->has('descripcion'))
+                                        <span class="error text-danger" for="input-descripcion">{{$errors -> first('descripcion')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="estado_contrato" class="col-sm-2 col-form-label">Estado Contrato</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="estado_contrato">
@@ -202,15 +202,6 @@
                                           @endforeach
                                         </select>
                                       </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label for="descripcion" class="col-sm-2 col-form-label">Descripcion</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="descripcion" value="{{ old('descripcion', $contratos->descripcion) }}" >
-                                    @if ($errors->has('descripcion'))
-                                        <span class="error text-danger" for="input-descripcion">{{$errors -> first('descripcion')}}</span>
-                                    @endif
                                 </div>
                             </div>
                         <!--footers-->

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\models\BoletaGarantia
-use app\models\Contrato
+use app\models\BoletaGarantia;
+use app\models\Contrato;
+use app\models\Monto;
 
 class BoletaGarantiaController extends Controller
 {
@@ -68,7 +69,7 @@ class BoletaGarantiaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BoletaGarantia $boletagarantia, Contrato $contratos)
+    public function update(Request $request, BoletaGarantia $boletagarantia, Contrato $contratos, Monto $montoboleta)
     {
         $boletagarantia -> update($request->only('monto_boleta','id_tipo_boleta'));
         $contratos -> create(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento'),['id_monto'=>$montoboleta->id,'id_boleta'=>$boletagarantia->id_tipo_boleta,'id_monto_boleta'=>$boletagarantia->id]));

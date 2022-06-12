@@ -9,15 +9,17 @@ class Files extends Model
 {
     use HasFactory;
 
+    protected $table = 'files';
+
     protected $fillable = [
         'uuid',
         'nombre_archivo',
-        'user_rut',
+        'id_contrato',
     ];
 
-    public function user()
+    public function contrato()
     {
-        return $this->belongsTo(User::class,'user_rut');
+        return $this->belongsTo(Contrato::class,'id_contrato');
     }
 
 }

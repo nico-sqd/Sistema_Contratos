@@ -11,7 +11,6 @@
                             <h4 class="card-tittle">Crear Contrato</h4>
                             <p class="card-category">Ingresar datos</p>
                         </div>
-                        {{ $errors }}
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12 text-right">
@@ -28,7 +27,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="convenio" class="col-sm-2 col-form-label">convenio</label>
+                                <label for="convenio" class="col-sm-2 col-form-label">Nombre Convenio</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="convenio" placeholder="Ingrese nombre convenio" value="{{old('convenio')}}">
                                     @if ($errors->has('convenio'))
@@ -73,15 +72,6 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="monto" class="col-sm-2 col-form-label">Monto</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="monto" placeholder="Ingrese monto" value="{{old('monto')}}">
-                                    @if ($errors->has('monto'))
-                                        <span class="error text-danger" for="input-monto">{{$errors -> first('monto')}}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="row">
                                 <label for="admin" class="col-sm-2 col-form-label">Gestor de Contrato</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
@@ -112,7 +102,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="res_apruebacontrato" class="col-sm-2 col-form-label">Resolucion Aprueba Contratob</label>
+                                <label for="res_apruebacontrato" class="col-sm-2 col-form-label">Resolucion Aprueba Contrato</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="res_apruebacontrato" placeholder="Ingrese la resolucion apruebo" value="{{old('res_apruebacontrato')}}">
                                     @if ($errors->has('res_apruebacontrato'))
@@ -121,9 +111,9 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="moneda" class="col-sm-2 col-form-label">Monto</label>
+                                <label for="moneda" class="col-sm-2 col-form-label">Monto De Contrato</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="moneda" placeholder="ingrese monto">
+                                    <input type="text" class="form-control" name="moneda" placeholder="Ingrese monto del contrato">
                                     @if ($errors->has('moneda'))
                                         <span class="error text-danger" for="input-moneda">{{$errors -> first('moneda')}}</span>
                                     @endif
@@ -142,11 +132,11 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="monto_boleta" class="col-sm-2 col-form-label">Monto Boleta de Garantía</label>
+                                <label for="id_boleta" class="col-sm-2 col-form-label">ID Boleta de Garantía</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="monto_boleta" placeholder="Ingrese el monto boleta garantia" value="{{old('monto_boleta')}}" autofocus>
-                                    @if ($errors->has('monto_boleta'))
-                                        <span class="error text-danger" for="input-monto_boleta">{{$errors -> first('monto_boleta')}}</span>
+                                    <input type="text" class="form-control" name="id_boleta" placeholder="Ingrese ID de la boleta de garantia" value="{{old('id_boleta')}}" autofocus>
+                                    @if ($errors->has('id_boleta'))
+                                        <span class="error text-danger" for="input-id_boleta">{{$errors -> first('id_boleta')}}</span>
                                     @endif
                                 </div>
                             </div>
@@ -216,7 +206,7 @@
                                 <label for="res_aumento" class="col-sm-2 col-form-label">Documento</label>
                                 <div class="col-sm-7">
                                     @csrf
-                                    <input type="file" name="nombre_archivo" id="">
+                                    <input type="file" name="nombre_archivo" id=""">
                                 </div>
                             </div>--}}
                         <!--footer-->
