@@ -9,11 +9,14 @@ use App\Models\Convenio;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+
 
 class FilesController extends Controller
 {
     public function index(Request $request, Contrato $contratos)
-    {   
+    {
         //dd($contratos->id);
         $texto = trim($request->get('texto'));
         $files = $contratos->files()->whereRaw('UPPER(nombre_archivo) LIKE ?', ['%' . strtoupper($texto) . '%'])
@@ -33,6 +36,16 @@ class FilesController extends Controller
         $archivo = $request->all();
         $archivo['uuid'] = (string) Str::uuid();
         $archivo['id_contrato'] = $contratos->id;
+
+        //dd($request);
+        //en php.ini subir upload_max_filesize = 2M a los megas que quieras subir y post_max_size = 8M a los megas que quieras subir
+        $validator = Validator::make($request->all(), [
+            'nombre_archivo' => ['required','mimes:pdf,jpg,jpeg,png,xlsx,docx,doc,ppt,octet-stream','max:25000']
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors('No se puede subir este tipo de archivo o es muy pesado');
+        }
 
         if($request->hasFile('nombre_archivo')){
             $archivo['nombre_archivo'] = $request->file('nombre_archivo')->getClientOriginalName();
@@ -66,7 +79,10 @@ class FilesController extends Controller
     public function destroy(Contrato $contrato, Files $file)
     {
         //$contratos= $files->contrato;
-        //dd($files->id);
+        //dd($files->id)a;
+        $borrar = storage_path('app/folder_file' . $file->nombre_archivo);
+        //return $borrar;
+        Storage::delete($borrar);
         $file->delete();
         return redirect()->route('contratos.files.index', $contrato->id);;
     }

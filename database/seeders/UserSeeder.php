@@ -239,6 +239,9 @@ class UserSeeder extends Seeder
             'id_subdireccion'=>'4'
         ]);
         DB::table('estadocontrato')->insert([
+            'estado_contrato'=>'Vigente',
+        ]);
+        DB::table('estadocontrato')->insert([
             'estado_contrato'=>'Modificado',
         ]);
         DB::table('estadocontrato')->insert([
@@ -249,9 +252,6 @@ class UserSeeder extends Seeder
         ]);
         DB::table('estadocontrato')->insert([
             'estado_contrato'=>'Cerrado',
-        ]);
-        DB::table('estadocontrato')->insert([
-            'estado_contrato'=>'Vigente',
         ]);
         DB::table('estadocontrato')->insert([
             'estado_contrato'=>'Fin Presupuesto',
