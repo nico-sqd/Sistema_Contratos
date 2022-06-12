@@ -34,7 +34,7 @@
                                     <div class="row">
                                         <div class="col-12 text-right">
                                             @can('admin_index')
-                                            <a href="{{ route('users.create') }}" class="btn btn-sm btn-facebook">Añadir Usuario</a>
+                                            <a href="{{ route('referentes.create_referente') }}" class="btn btn-sm btn-facebook">Añadir Usuario</a>
                                             @endcan
                                         </div>
                                     </div>
@@ -77,10 +77,10 @@
                                                     </td>
                                                     <td class="td-actions text-right">
                                                         @can('show')
-                                                        <a href="{{ route('users.show', $user->id) }}" class="btn btn-info"><i class="material-icons">person</i></a>
+                                                        <a href="{{ route('referentes.show_referente', $user->id) }}" class="btn btn-info"><i class="material-icons">person</i></a>
                                                         @endcan
                                                         @can('admin_edit')
-                                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                        <a href="{{ route('referentes.edit_referentes', $user->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
                                                         @endcan
                                                         @can('admin_destroy')
                                                         <form action="{{route('users.delete', $user->id)}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">

@@ -1,4 +1,4 @@
-@extends('layouts.main',['activePage' => 'usuarios', 'titlePage' =>'Detalles del Usuario'])
+@extends('layouts.main',['activePage' => 'referentes', 'titlePage' =>'Detalles del Usuario'])
 @section('content')
 <div class="content">
     <div class="conteiner-fuid">
@@ -53,7 +53,7 @@
                                        </div>
                                        <div class="card-footer">
                                         <div class="button-container">
-                                            <a href="{{ route('referentes.edit_referente', $user->id) }}" class="btn btn-warning "><i class="material-icons">edit</i></a>
+                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning "><i class="material-icons">edit</i></a>
                                        </div>
                                    </div>
                                </div><!-- end card user -->
