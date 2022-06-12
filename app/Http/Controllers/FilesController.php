@@ -77,7 +77,7 @@ class FilesController extends Controller
     public function destroy(Contrato $contrato, Files $file)
     {
         //$contratos= $files->contrato;
-        //dd($files->id);
+        //dd($files->id)a;
         $file->delete();
         return redirect()->route('contratos.files.index', $contrato->id);;
     }
