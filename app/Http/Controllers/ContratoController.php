@@ -33,7 +33,6 @@ class ContratoController extends Controller
             $query->whereRaw('UPPER(id_licitacion) LIKE ?', ['%' . strtoupper($texto) . '%']);
             $query->orWhere('vigencia_inicio','LIKE','%'.$texto.'%');
             $query->orWhere('vigencia_fin','LIKE','%'.$texto.'%');
-            $query->orWhere('monto','LIKE','%'.$texto.'%');
             $query->orWhereRaw('UPPER(admin) LIKE ?', ['%' . strtoupper($texto) . '%']);
             $query->orWhereRaw('UPPER(convenio) LIKE ?', ['%' . strtoupper($texto) . '%']);
         })
@@ -72,9 +71,9 @@ class ContratoController extends Controller
     {
         //dd($request);
         //dd($request->descripcion);
-        $convenios = Convenio::create(array_merge($request->only('id_licitacion', 'convenio', 'rut_proveedor','rut','vigencia_inicio','vigencia_fin','monto','admin')));
+        $convenios = Convenio::create(array_merge($request->only('id_licitacion', 'convenio', 'rut_proveedor','rut','vigencia_inicio','vigencia_fin','admin')));
         $montoboleta = Monto::create($request->only('moneda', 'id_tipo_moneda'));
-        $boletagarantia = MontoBoleta::create($request->only('monto_boleta','id_tipo_boleta')); //crear ID Boleta garantía en migración, controlador y vista.
+        $boletagarantia = MontoBoleta::create($request->only('id_boleta','id_tipo_boleta')); //crear ID Boleta garantía en migración, controlador y vista.
         $contrato = Contrato::create(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','rut_proveedor','rut','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),
         ['id_monto'=>$montoboleta->id,'rut_proveedor'=>$convenios->rut_proveedor,'rut'=>$convenios->rut,'id_licitacion'=>$convenios->id,'id_boleta'=>$boletagarantia->id_tipo_boleta,'id_monto_boleta'=>$boletagarantia->id]));
         /**$archivo = $request->all();
@@ -130,9 +129,9 @@ class ContratoController extends Controller
         $user = $contrato->convenio->user;
         $convenios = $contrato->convenio;
         $user->update($request->only('name'));
-        $convenios->update(array_merge($request->only('rut_proveedor','rut','id_licitacion', 'convenio', 'vigencia_inicio','vigencia_fin','monto','admin')));
+        $convenios->update(array_merge($request->only('rut_proveedor','rut','id_licitacion', 'convenio', 'vigencia_inicio','vigencia_fin','admin')));
         $montoboleta->update($request->only('moneda', 'id_tipo_moneda'));
-        $boletagarantia->update($request->only('monto_boleta','id_tipo_boleta'));
+        $boletagarantia->update($request->only('id_boleta','id_tipo_boleta'));
         $contrato->update(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),['id_licitacion'=>$convenios->id]));
         return redirect()->route('contratos.index', $contrato->id)->with('success', 'Usuario creado correctamente.');
     }

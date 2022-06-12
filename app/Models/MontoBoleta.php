@@ -18,7 +18,7 @@ class MontoBoleta extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'monto_boleta',
+        'id_boleta',
         'id_tipo_boleta',
     ];
 
