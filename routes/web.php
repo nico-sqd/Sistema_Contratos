@@ -54,5 +54,6 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('aumentos/{contrato}/edit', [App\Http\Controllers\ContratoController::class, 'edit_aumento'])->name('aumentos.edit_aumento');
     Route::resource('monto', App\Http\Controllers\MontoController::class);
     Route::resource('caratula', App\Http\Controllers\CaratulaController::class);
+    Route::resource('contratos.aumento', App\Http\Controllers\AumentoController::class);
 });
 

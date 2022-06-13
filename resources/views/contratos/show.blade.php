@@ -43,7 +43,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12 text-right">
-                                            <a href="{{ route('aumentos.edit_aumento', $contrato->id) }}" class="btn btn-facebook">Agregar aumento de contrato</a>
+                                            <a href="{{ route('contratos.aumento.index', $contrato->id) }}" class="btn btn-facebook">Agregar aumento de contrato</a>
                                         </div>
                                     </div>
                                     <div class="card-body">
@@ -56,12 +56,13 @@
                                                     <th>Monto Total</th>
                                                 </thead>
                                                 <tbody>
-                                                @foreach ($contrato as $contratos)
+                                                @foreach ($aumento as $aumentos)
+
                                                     <tr>
-                                                        <td>{{ $contrato->res_aumento }}</td>
-                                                        <td>${{ $contrato->aumento_contrato }}</td>
-                                                        <td>{{ $contrato->updated_at }}</td>
-                                                        <td>${{ $contrato->monto->moneda }}</td>
+                                                        <td>{{ $aumentos->res_aumento }}</td>
+                                                        <td>{{ $aumentos->monto_aumento }}</td>
+                                                        <td>{{ $aumentos->created_at }}</td>
+                                                        <td>{{ $aumentos->monto_aumento + $aumentos->contrato->monto->moneda }}</td>
                                                     </tr>
                                                     @endforeach
                                                 </tbody>

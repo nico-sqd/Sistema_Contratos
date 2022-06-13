@@ -13,6 +13,7 @@ use App\Models\TipoMoneda;
 use App\Models\Convenio;
 use App\Models\Proveedor;
 use App\Models\User;
+use App\Models\Aumento;
 use App\Models\EstadoContrato;
 use App\Models\Files;
 use Illuminate\Database\Eloquent\Builder;
@@ -97,7 +98,7 @@ class ContratoController extends Controller
      */
     public function show(Contrato $contrato)
     {
-        return view('contratos.show', compact('contrato'), ['proveedores'=>Proveedor::all(),'convenios'=>Convenio::all(),'estadocontraot'=>EstadoContrato::all()]);
+        return view('contratos.show', compact('contrato'), ['proveedores'=>Proveedor::all(),'convenios'=>Convenio::all(),'estadocontraot'=>EstadoContrato::all(),'aumento'=>Aumento::all()]);
     }
 
     /**
@@ -111,7 +112,7 @@ class ContratoController extends Controller
         return view('contratos.edit', compact('contratos'),['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
         'modalidad'=>Modalidad::all(),'montoboletagarantia'=>MontoBoleta::all(),'id_licitacion'=>Convenio::all(),'monto'=>Monto::all(),
         'proveedor'=>Proveedor::all(),'referente'=>User::role('Referente')->get(),'admin'=>User::role('Administrador')->get(),
-        'estadocontrato'=>EstadoContrato::all()]);
+        'estadocontrato'=>EstadoContrato::all(),'aumento'=>Aumento::all()]);
     }
 
     public function edit_aumento(Contrato $contratos)
@@ -132,6 +133,7 @@ class ContratoController extends Controller
 
     public function update(Request $request, Contrato $contrato)
     {
+        $aumento = $contrato->aumento;
         $montoboleta = $contrato->monto;
         $boletagarantia = $contrato->montoboleta;
         $user = $contrato->convenio->user;
