@@ -80,7 +80,7 @@
                                                         <a href="{{ route('referentes.show_referente', $user->id) }}" class="btn btn-info"><i class="material-icons">person</i></a>
                                                         @endcan
                                                         @can('admin_edit')
-                                                        <a href="{{ route('referentes.edit_referentes', $user->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                        <a href="{{ route('referentes.edit_referente', $user->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
                                                         @endcan
                                                         @can('admin_destroy')
                                                         <form action="{{route('users.delete', $user->id)}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">

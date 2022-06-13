@@ -114,6 +114,14 @@ class ContratoController extends Controller
         'estadocontrato'=>EstadoContrato::all()]);
     }
 
+    public function edit_aumento(Contrato $contratos)
+    {
+        return view('aumtenos.edit_aumento', compact('contratos'),['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
+        'modalidad'=>Modalidad::all(),'montoboletagarantia'=>MontoBoleta::all(),'id_licitacion'=>Convenio::all(),'monto'=>Monto::all(),
+        'proveedor'=>Proveedor::all(),'referente'=>User::role('Referente')->get(),'admin'=>User::role('Administrador')->get(),
+        'estadocontrato'=>EstadoContrato::all()]);
+    }
+
     /**
      * Update the specified resource in storage.
      *

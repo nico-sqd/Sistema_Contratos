@@ -142,7 +142,7 @@ class UserController extends Controller
         //$user = User::findOrFail($id);
         //dd($user);
         $user->load('roles');
-        return view('administradores.Show_administrador', compact('user'));
+        return view('administradores.show_administrador', compact('user'));
     }
 
     public function Show_referente(User $user)
@@ -151,7 +151,7 @@ class UserController extends Controller
         //$user = User::findOrFail($id);
         //dd($user);
         $user->load('roles');
-        return view('referentes.Show_referente', compact('user'));
+        return view('referentes.show_referente', compact('user'));
     }
 
     public function edit(User $user)

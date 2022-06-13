@@ -43,7 +43,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12 text-right">
-                                            <a href="{{ route('contratos.edit', $contrato->id) }}" class="btn btn-facebook">Agregar aumento de contrato</a>
+                                            <a href="{{ route('aumentos.edit_aumento', $contrato->id) }}" class="btn btn-facebook">Agregar aumento de contrato</a>
                                         </div>
                                     </div>
                                     <div class="card-body">
