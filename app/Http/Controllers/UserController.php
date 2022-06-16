@@ -27,7 +27,6 @@ class UserController extends Controller
             $query->WhereRaw('UPPER(establecimiento) LIKE ?',['%' . strtoupper($texto) . '%']);
         })
         ->orderBy('id','asc')
-        ->role('SuperAdmin')
         ->paginate(5);
         return view('users.index', compact('users'));
     }
@@ -74,7 +73,7 @@ class UserController extends Controller
     public function create()
     {
         abort_if(Gate::denies('super_create'), 403);//si el usuario no tiene e permiso "user_create" mostrara error 403
-        $roles = Role::Where('id','1')->pluck('name', 'id');
+        $roles = Role::All()->pluck('name', 'id');
         return view('users.create', compact('roles'),['establecimiento'=>Establecimiento::all(),'subdirecciones'=>SubDireccion::all(),'departamentos'=>Departamento::all()]);
     }
 
