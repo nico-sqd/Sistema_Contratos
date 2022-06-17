@@ -72,21 +72,12 @@ class ContratoController extends Controller
     {
         //dd($request);
         //dd($request->descripcion);
+        //dd($request->id_tipo_moneda);
         $convenios = Convenio::create(array_merge($request->only('id_licitacion', 'convenio', 'rut_proveedor','rut','vigencia_inicio','vigencia_fin','admin')));
         $montoboleta = Monto::create($request->only('moneda', 'id_tipo_moneda'));
-        $boletagarantia = MontoBoleta::create($request->only('id_boleta','id_tipo_boleta')); //crear ID Boleta garantía en migración, controlador y vista.
+        $boletagarantia = MontoBoleta::create($request->only('monto_boleta','fecha_inicio','fecha_fin','id_boleta','id_tipo_boleta')); //crear ID Boleta garantía en migración, controlador y vista.
         $contrato = Contrato::create(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','rut_proveedor','rut','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),
         ['id_monto'=>$montoboleta->id,'rut_proveedor'=>$convenios->rut_proveedor,'rut'=>$convenios->rut,'id_licitacion'=>$convenios->id,'id_boleta'=>$boletagarantia->id_tipo_boleta,'id_monto_boleta'=>$boletagarantia->id]));
-        /**$archivo = $request->all();
-        $archivo['uuid'] = (string) Str::uuid();
-        $archivo['user_rut'] = $convenios->user->id;
-
-        if($request->hasFile('nombre_archivo')){
-            $archivo['nombre_archivo'] = $request->file('nombre_archivo')->getClientOriginalName();
-            $request->file('nombre_archivo')->storeAs('folder_file',$archivo['nombre_archivo']);
-        }
-        //dd($request);
-        Files::create($archivo);**/
         return redirect()->route('contratos.index', $contrato->id)->with('success', 'Usuario creado correctamente.');
     }
 
@@ -98,7 +89,8 @@ class ContratoController extends Controller
      */
     public function show(Contrato $contrato)
     {
-        return view('contratos.show', compact('contrato'), ['proveedores'=>Proveedor::all(),'convenios'=>Convenio::all(),'estadocontraot'=>EstadoContrato::all(),'aumento'=>Aumento::all()]);
+        return view('contratos.show', compact('contrato'), ['proveedores'=>Proveedor::all(),'convenios'=>Convenio::all(),'estadocontraot'=>EstadoContrato::all(),
+        'aumento'=>Aumento::all(),'boletagarantia'=>BoletaGarantia::all()]);
     }
 
     /**

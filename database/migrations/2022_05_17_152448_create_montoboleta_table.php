@@ -17,6 +17,9 @@ class CreateMontoboletaTable extends Migration
             $table->id();
             $table->timestamps();
             $table->softDeletes();
+            $table->string('monto_boleta')->nullable();
+            $table->date('fecha_inicio')->nullable();
+            $table->date('fecha_fin')->nullable();
             $table->string('id_boleta')->nullable();
             $table->unsignedBigInteger('id_tipo_boleta');
             $table->foreign('id_tipo_boleta')->references('id')->on('boletagarantia');

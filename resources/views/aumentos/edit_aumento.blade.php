@@ -9,8 +9,8 @@
                     @method('PUT')
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-tittle">contratos</h4>
-                            <p class="card-category">Editar datos</p>
+                            <h4 class="card-tittle">Modificaciones Contrato</h4>
+                            <p class="card-category">Modificar datos</p>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -29,6 +29,18 @@
                                     @if ($errors->has('res_aumento'))
                                         <span class="error text-danger" for="input-res_aumento">{{$errors -> first('res_aumento')}}</span>
                                     @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="vigencia_inicio" class="col-sm-2 col-form-label">Vigencia Inicio</label>
+                                <div class="col-sm-7">
+                                    <input type="date" class="form-control" name="vigencia_inicio">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="vigencia_fin" class="col-sm-2 col-form-label">Vigencia Fin</label>
+                                <div class="col-sm-7">
+                                    <input type="date" class="form-control" name="vigencia_fin">
                                 </div>
                             </div>
                         <!--footers-->

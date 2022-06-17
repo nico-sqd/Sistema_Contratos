@@ -18,6 +18,9 @@ class MontoBoleta extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'monto_boleta',
+        'fecha_inicio',
+        'fecha_fin',
         'id_boleta',
         'id_tipo_boleta',
     ];
@@ -29,5 +32,9 @@ class MontoBoleta extends Model
     public function contrato()
     {
         return $this->hasOne(Contrato::class,'id_monto_boleta');
+    }
+    public function aumento()
+    {
+        return $this->hasOne(Aumento::class,'id_monto_boleta');
     }
 }

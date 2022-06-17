@@ -8,8 +8,8 @@
                     @csrf
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-tittle">contratos</h4>
-                            <p class="card-category">Editar datos</p>
+                            <h4 class="card-tittle">Modificaciones Contratos</h4>
+                            <p class="card-category">Modificar datos</p>
                         </div>
                         <div class="card-body">
                         <div class="row">
@@ -18,21 +18,63 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="monto_aumento" class="col-sm-2 col-form-label">ID Licitacion</label>
+                                <label for="monto_aumento" class="col-sm-2 col-form-label">Monto Aumento</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="monto_aumento" placeholder="monto_aumento" value="{{old('monto_aumento')}}" autofocus>
+                                    <input type="text" class="form-control" name="monto_aumento" placeholder="Monto Aumento" value="{{old('monto_aumento')}}" autofocus>
                                     @if ($errors->has('monto_aumento'))
                                         <span class="error text-danger" for="input-monto_aumento">{{$errors -> first('monto_aumento')}}</span>
                                     @endif
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="res_aumento" class="col-sm-2 col-form-label">ID Licitacion</label>
+                                <label for="res_aumento" class="col-sm-2 col-form-label">Resolución Aumento</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="res_aumento" placeholder="res_aumento" value="{{old('res_aumento')}}" autofocus>
+                                    <input type="text" class="form-control" name="res_aumento" placeholder="resolución" value="{{old('res_aumento')}}" autofocus>
                                     @if ($errors->has('res_aumento'))
                                         <span class="error text-danger" for="input-res_aumento">{{$errors -> first('res_aumento')}}</span>
                                     @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="monto_boleta" class="col-sm-2 col-form-label">Monto Boleta Garantía</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="monto_boleta" placeholder="Monto boleta Garantía" value="{{old('monto_boleta')}}" autofocus>
+                                    @if ($errors->has('monto_boleta'))
+                                        <span class="error text-danger" for="input-monto_boleta">{{$errors -> first('monto_boleta')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="id_boleta" class="col-sm-2 col-form-label">ID Boleta Garantía</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="id_boleta" placeholder="ID Boleta Garantía" value="{{old('id_boleta')}}" autofocus>
+                                    @if ($errors->has('id_boleta'))
+                                        <span class="error text-danger" for="input-id_boleta">{{$errors -> first('id_boleta')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="id_tipo_boleta" class="col-sm-2 col-form-label">Tipo Boleta</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_tipo_boleta">
+                                        @foreach ( $tipoboleta as $boletagarantia )
+                                            <option value="{{ $boletagarantia->id }}">{{ $boletagarantia->documentos_garantia }}</option>
+                                        @endforeach
+                                        </select>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="vigencia_inicio" class="col-sm-2 col-form-label">Vigencia Inicio</label>
+                                <div class="col-sm-7">
+                                    <input type="date" class="form-control" name="vigencia_inicio">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="vigencia_fin" class="col-sm-2 col-form-label">Vigencia Fin</label>
+                                <div class="col-sm-7">
+                                    <input type="date" class="form-control" name="vigencia_fin">
                                 </div>
                             </div>
                         <!--footers-->

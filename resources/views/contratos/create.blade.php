@@ -125,7 +125,7 @@
                                     <div class="form-group">
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_tipo_moneda">
                                         @foreach ( $tipomoneda as $monedas )
-                                            <option value="{{ $monedas->id_tipo }}">{{ $monedas->Nombre_tipo }}</option>
+                                            <option value="{{ $monedas->id }}">{{ $monedas->Nombre_tipo }}</option>
                                         @endforeach
                                         </select>
                                       </div>
@@ -138,6 +138,27 @@
                                     @if ($errors->has('id_boleta'))
                                         <span class="error text-danger" for="input-id_boleta">{{$errors -> first('id_boleta')}}</span>
                                     @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="monto_boleta" class="col-sm-2 col-form-label">Monto Boleta Garantía</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="monto_boleta" placeholder="Ingrese monto de la boleta de garantia" value="{{old('monto_boleta')}}" autofocus>
+                                    @if ($errors->has('monto_boleta'))
+                                        <span class="error text-danger" for="input-monto_boleta">{{$errors -> first('monto_boleta')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="fecha_inicio" class="col-sm-2 col-form-label">Vigencia Inicio</label>
+                                <div class="col-sm-7">
+                                    <input type="date" class="form-control" name="fecha_inicio">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="fecha_fin" class="col-sm-2 col-form-label">Vigencia Fin</label>
+                                <div class="col-sm-7">
+                                    <input type="date" class="form-control" name="fecha_fin">
                                 </div>
                             </div>
                             <div class="row">
@@ -162,24 +183,6 @@
                                         @endforeach
                                         </select>
                                       </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label for="aumento_contrato" class="col-sm-2 col-form-label">Aumento Contrato</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="aumento_contrato" placeholder="Ingrese el aumento contrato" value="{{old('aumento_contrato')}}" autofocus>
-                                    @if ($errors->has('aumento_contrato'))
-                                        <span class="error text-danger" for="input-aumento_contrato">{{$errors -> first('aumento_contrato')}}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label for="res_aumento" class="col-sm-2 col-form-label">Resolucion de Aumento</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="res_aumento" placeholder="Ingrese resolucion aumento" value="{{old('res_aumento')}}" autofocus>
-                                    @if ($errors->has('res_aumento'))
-                                        <span class="error text-danger" for="input-comuna">{{$errors -> first('res_aumento')}}</span>
-                                    @endif
                                 </div>
                             </div>
                             <div class="row">

@@ -18,7 +18,6 @@ class TipoMoneda extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'id_tipo',
         'Nombre_tipo',
     ];
 

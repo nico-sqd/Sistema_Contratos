@@ -29,7 +29,7 @@
                                         <div class="h5">Vigencia: Inicio: {{$contrato->convenio->vigencia_inicio}} Fin: {{$contrato->convenio->vigencia_fin}}</div>
                                         <div class="h5">Res. Adjudicación: {{$contrato->res_adjudicacion}}</div>
                                         <div class="h5">Res. Aprueba Contrato: {{$contrato->res_apruebacontrato}}</div>
-                                        <div class="h5">Monto: ${{$contrato->monto->moneda}}</div>
+                                        <div class="h5">Monto: ${{ number_format($contrato->monto->moneda,2,',','.')}} {{$contrato->monto->tipo_moneda->Nombre_tipo}}</div>
                                         <div class="h5">Boleta Garantía: {{$contrato->montoboleta->id_boleta}}</div>
                                         <div class="h5">ID Contrato: {{$contrato->id_contrato}}</div>
                                         <div class="h5">Proveedor: {{$contrato->convenio->proveedor->nombre_proveedor}}</div>
@@ -54,17 +54,20 @@
                                                     <th>Monto a aumentar</th>
                                                     <th>fecha de aumento</th>
                                                     <th>Monto Total</th>
+                                                    <th>Monto Boleta Garantía</th>
                                                 </thead>
                                                 <tbody>
                                                 @foreach ($aumento as $aumentos)
-
+                                                    @if ($aumentos->id_contrato == $contrato->id)
                                                     <tr>
                                                         <td>{{ $aumentos->res_aumento }}</td>
-                                                        <td>{{ $aumentos->monto_aumento }}</td>
+                                                        <td>$ {{ number_format($aumentos->monto_aumento,2,',','.') }}</td>
                                                         <td>{{ $aumentos->created_at }}</td>
-                                                        <td>{{ $aumentos->monto_aumento + $aumentos->contrato->monto->moneda }}</td>
+                                                        <td>$ {{ number_format($aumentos->monto_aumento + $aumentos->contrato->monto->moneda,2,',','.') }}</td>
+                                                        <td>$ {{ $aumentos->montoboleta->monto_boleta }}</td>
                                                     </tr>
-                                                    @endforeach
+                                                    @endif
+                                                @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
