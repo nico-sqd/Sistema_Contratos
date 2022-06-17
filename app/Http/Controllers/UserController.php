@@ -158,7 +158,7 @@ class UserController extends Controller
         abort_if(Gate::denies('admin_edit'), 403);//si el usuario no tiene e permiso "user_edit" mostrara error 403
         //$user = User::findOrFail($id);
         //dd($user);
-        $roles = Role::Where('id','1')->pluck('name', 'id');
+        $roles = Role::All()->pluck('name', 'id');
         $user->load('roles');
         return view('users.edit', compact('user', 'roles'),['establecimientos'=>Establecimiento::all(),'subdirecciones'=>SubDireccion::all(),'departamentos'=>Departamento::all()]);
     }
@@ -201,7 +201,7 @@ class UserController extends Controller
         $user->update($data);
         $roles = $request->input('roles', []);
         $user->syncRoles($roles);
-        return redirect()->route('administradores.Show_administrador', $user->id)->with('success', 'Usuario actualizado correctamente');
+        return redirect()->route('users.show', $user->id)->with('success', 'Usuario actualizado correctamente');
     }
 
     public function update_administrador(UserEditRequest $request, User $user)
@@ -214,7 +214,7 @@ class UserController extends Controller
         $user->update($data);
         $roles = $request->input('roles', []);
         $user->syncRoles($roles);
-        return redirect()->route('users.show', $user->id)->with('success', 'Usuario actualizado correctamente');
+        return redirect()->route('administradores.Show_administrador', $user->id)->with('success', 'Usuario actualizado correctamente');
     }
 
     public function update_referente(UserEditRequest $request, User $user)
