@@ -104,7 +104,7 @@ class ContratoController extends Controller
         return view('contratos.edit', compact('contratos'),['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
         'modalidad'=>Modalidad::all(),'montoboletagarantia'=>MontoBoleta::all(),'id_licitacion'=>Convenio::all(),'monto'=>Monto::all(),
         'proveedor'=>Proveedor::all(),'referente'=>User::role('Referente')->get(),'admin'=>User::role('Administrador')->get(),
-        'estadocontrato'=>EstadoContrato::all(),'aumento'=>Aumento::all()]);
+        'estadocontrato'=>EstadoContrato::all(),'aumento'=>Aumento::all(),'boletagarantia'=>BoletaGarantia::all()]);
     }
 
     public function edit_aumento(Contrato $contratos)
@@ -133,7 +133,7 @@ class ContratoController extends Controller
         $user->update($request->only('name'));
         $convenios->update(array_merge($request->only('rut_proveedor','rut','id_licitacion', 'convenio', 'vigencia_inicio','vigencia_fin','admin')));
         $montoboleta->update($request->only('moneda', 'id_tipo_moneda'));
-        $boletagarantia->update($request->only('id_boleta','id_tipo_boleta'));
+        $boletagarantia->update($request->only('monto_boleta','fecha_inicio','fecha_fin','id_boleta','id_tipo_boleta'));
         $contrato->update(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),['id_licitacion'=>$convenios->id]));
         return redirect()->route('contratos.index', $contrato->id)->with('success', 'Usuario creado correctamente.');
     }
