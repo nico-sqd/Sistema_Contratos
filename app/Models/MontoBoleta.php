@@ -23,6 +23,7 @@ class MontoBoleta extends Model
         'fecha_fin',
         'id_boleta',
         'id_tipo_boleta',
+        'id_moneda',
     ];
 
     public function boletagarantia()
@@ -36,5 +37,9 @@ class MontoBoleta extends Model
     public function aumento()
     {
         return $this->hasOne(Aumento::class,'id_monto_boleta');
+    }
+    public function tipomoneda()
+    {
+        return $this->belongsTo(TipoMoneda::class,'id_moneda');
     }
 }

@@ -29,4 +29,8 @@ class TipoMoneda extends Model
     {
         return $this->hasMany(Contrato::class,'id_tipo_moneda');
     }
+    public function montoboleta()
+    {
+        return $this->hasMany(Montoboleta::class,'id_moneda');
+    }
 }

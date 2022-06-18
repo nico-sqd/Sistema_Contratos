@@ -150,6 +150,18 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <label for="id_moneda" class="col-sm-2 col-form-label">Tipo Moneda Boleta Garantía</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_moneda">
+                                        @foreach ( $tipomoneda as $monedas )
+                                            <option value="{{ $monedas->id }}">{{ $monedas->Nombre_tipo }}</option>
+                                        @endforeach
+                                        </select>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <label for="fecha_inicio" class="col-sm-2 col-form-label">Vigencia Inicio</label>
                                 <div class="col-sm-7">
                                     <input type="date" class="form-control" name="fecha_inicio">

@@ -29,7 +29,7 @@
                             <div class="row">
                                 <label for="res_aumento" class="col-sm-2 col-form-label">Resolución Aumento</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="res_aumento" placeholder="resolución" value="{{old('res_aumento')}}" autofocus>
+                                    <input type="text" class="form-control" name="res_aumento" placeholder="Resolución" value="{{old('res_aumento')}}" autofocus>
                                     @if ($errors->has('res_aumento'))
                                         <span class="error text-danger" for="input-res_aumento">{{$errors -> first('res_aumento')}}</span>
                                     @endif
@@ -42,6 +42,18 @@
                                     @if ($errors->has('monto_boleta'))
                                         <span class="error text-danger" for="input-monto_boleta">{{$errors -> first('monto_boleta')}}</span>
                                     @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="id_moneda" class="col-sm-2 col-form-label">Tipo Moneda Boleta Garantía</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_moneda">
+                                        @foreach ( $tipomoneda as $monedas )
+                                            <option value="{{ $monedas->id }}">{{ $monedas->Nombre_tipo }}</option>
+                                        @endforeach
+                                        </select>
+                                      </div>
                                 </div>
                             </div>
                             <div class="row">

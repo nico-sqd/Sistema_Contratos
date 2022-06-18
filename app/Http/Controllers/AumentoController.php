@@ -7,6 +7,7 @@ use App\Models\Contrato;
 use App\Models\Aumento;
 use App\Models\MontoBoleta;
 use App\Models\BoletaGarantia;
+use App\Models\TipoMoneda;
 
 class AumentoController extends Controller
 {
@@ -18,7 +19,7 @@ class AumentoController extends Controller
     public function index(Contrato $contratos)
     {
 
-        return view('aumentos.index', compact('contratos'),['tipoboleta'=>BoletaGarantia::all()]);
+        return view('aumentos.index', compact('contratos'),['tipoboleta'=>BoletaGarantia::all(),'tipomoneda'=>TipoMoneda::all()]);
     }
 
     /**
@@ -40,10 +41,10 @@ class AumentoController extends Controller
     public function store(Request $request, Contrato $contratos)
     {
         //dd($request->monto_aumento);
-        $monto_boleta = number_format($request->monto_boleta,2,',','.');
+        //$monto_boleta = number_format($request->monto_boleta,2,',','.');
         //$monto_aumento = number_format($request->monto_aumento);
         //dd($monto);
-        $montoboleta = MontoBoleta::create(array_merge($request->only('monto_boleta','fecha_inicio','fecha_fin','id_boleta','id_tipo_boleta'),['monto_boleta'=>$monto_boleta]));
+        $montoboleta = MontoBoleta::create(array_merge($request->only('monto_boleta','fecha_inicio','fecha_fin','id_boleta','id_tipo_boleta','id_moneda')));
         Aumento::create(array_merge($request->only('monto_aumento','res_aumento','id_contrato','id_monto_boleta'),['id_contrato'=>$contratos->id,'id_monto_boleta'=>$montoboleta->id]));
         return redirect()->route('contratos.show', $contratos->id)->with('success', 'Aumento modificado');
     }
@@ -88,8 +89,11 @@ class AumentoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Contrato $contrato, Aumento $aumentos, MontoBoleta $montoboleta)
+    {  
+        //d($aumentos->montoboleta);
+        $aumentos-> montoboleta -> delete();
+        $aumentos -> delete();
+        return redirect()->route('contratos.show', $contrato->id);
     }
 }

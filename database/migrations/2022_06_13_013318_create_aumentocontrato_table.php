@@ -16,6 +16,7 @@ class CreateAumentocontratoTable extends Migration
         Schema::create('aumentocontrato', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
             $table->float('monto_aumento');
             $table->string('res_aumento');
             $table->unsignedBigInteger('id_contrato');
