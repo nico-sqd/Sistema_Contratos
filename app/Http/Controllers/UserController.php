@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\SubDireccion;
 use App\Models\Departamento;
+use App\Http\Controllers\M_MONE;
 
 class UserController extends Controller
 {
@@ -42,7 +43,8 @@ class UserController extends Controller
             $query->WhereRaw('UPPER(establecimiento) LIKE ?',['%' . strtoupper($texto) . '%']);
         })
         ->orderBy('id','asc')
-        ->role('Administrador')
+        ->notRole(['SuperAdmin'])
+        ->orDoesntHave('roles')
         ->paginate(5);
         return view('administradores.index_administrador', compact('users'));
     }
@@ -72,21 +74,21 @@ class UserController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('super_create'), 403);//si el usuario no tiene e permiso "user_create" mostrara error 403
+        abort_if(Gate::denies('super_create'), 403);//si el usuario no tiene el permiso "user_create" mostrara error 403
         $roles = Role::All()->pluck('name', 'id');
         return view('users.create', compact('roles'),['establecimiento'=>Establecimiento::all(),'subdirecciones'=>SubDireccion::all(),'departamentos'=>Departamento::all()]);
     }
 
     public function create_administrador()
     {
-        abort_if(Gate::denies('super_create'), 403);//si el usuario no tiene e permiso "user_create" mostrara error 403
+        abort_if(Gate::denies('super_create'), 403);//si el usuario no tiene el permiso "user_create" mostrara error 403
         $roles = Role::Where('id','2')->pluck('name', 'id');
         return view('administradores.create_administrador', compact('roles'),['establecimiento'=>Establecimiento::all(),'subdirecciones'=>SubDireccion::all(),'departamentos'=>Departamento::all()]);
     }
 
     public function create_referente()
     {
-        abort_if(Gate::denies('admin_create'), 403);//si el usuario no tiene e permiso "user_create" mostrara error 403
+        abort_if(Gate::denies('admin_create'), 403);//si el usuario no tiene el permiso "user_create" mostrara error 403
         $roles = Role::Where('id','3')->pluck('name', 'id');
         return view('referentes.create_referente', compact('roles'),['establecimiento'=>Establecimiento::all(),'subdirecciones'=>SubDireccion::all(),'departamentos'=>Departamento::all()]);
     }
@@ -128,7 +130,7 @@ class UserController extends Controller
 
     public function Show(User $user)
     {
-        abort_if(Gate::denies('show'), 403);//si el usuario no tiene e permiso "user_show" mostrara error 403
+        abort_if(Gate::denies('show'), 403);//si el usuario no tiene el permiso "user_show" mostrara error 403
         //$user = User::findOrFail($id);
         //dd($user);
         $user->load('roles');
@@ -137,7 +139,7 @@ class UserController extends Controller
 
     public function Show_administrador(User $user)
     {
-        abort_if(Gate::denies('show'), 403);//si el usuario no tiene e permiso "user_show" mostrara error 403
+        abort_if(Gate::denies('show'), 403);//si el usuario no tiene el permiso "user_show" mostrara error 403
         //$user = User::findOrFail($id);
         //dd($user);
         $user->load('roles');
@@ -146,7 +148,7 @@ class UserController extends Controller
 
     public function Show_referente(User $user)
     {
-        abort_if(Gate::denies('show'), 403);//si el usuario no tiene e permiso "user_show" mostrara error 403
+        abort_if(Gate::denies('show'), 403);//si el usuario no tiene el permiso "user_show" mostrara error 403
         //$user = User::findOrFail($id);
         //dd($user);
         $user->load('roles');
@@ -155,7 +157,7 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        abort_if(Gate::denies('admin_edit'), 403);//si el usuario no tiene e permiso "user_edit" mostrara error 403
+        abort_if(Gate::denies('admin_edit'), 403);//si el usuario no tiene el permiso "user_edit" mostrara error 403
         //$user = User::findOrFail($id);
         //dd($user);
         $roles = Role::All()->pluck('name', 'id');
@@ -165,7 +167,7 @@ class UserController extends Controller
 
     public function edit_administrador(User $user)
     {
-        abort_if(Gate::denies('admin_edit'), 403);//si el usuario no tiene e permiso "user_edit" mostrara error 403
+        abort_if(Gate::denies('admin_edit'), 403);//si el usuario no tiene el permiso "user_edit" mostrara error 403
         //$user = User::findOrFail($id);
         //dd($user);
         $roles = Role::Where('id','2')->pluck('name', 'id');
@@ -175,7 +177,7 @@ class UserController extends Controller
 
     public function edit_referente(User $user)
     {
-        abort_if(Gate::denies('admin_edit'), 403);//si el usuario no tiene e permiso "user_edit" mostrara error 403
+        abort_if(Gate::denies('admin_edit'), 403);//si el usuario no tiene el permiso "user_edit" mostrara error 403
         //$user = User::findOrFail($id);
         //dd($user);
         $roles = Role::Where('id','3')->pluck('name', 'id');
@@ -230,9 +232,18 @@ class UserController extends Controller
         return redirect()->route('referentes.Show_referente', $user->id)->with('success', 'Usuario actualizado correctamente');
     }
 
-    public function destroy(User $user)
+    public function destroy(User $user, Request $request)
     {
-        abort_if(Gate::denies('admin_destroy'), 403);//si el usuario no tiene e permiso "user_destroy" mostrara error 403
+        abort_if(Gate::denies('admin_destroy'), 403);//si el usuario no tiene el permiso "user_destroy" mostrara error 403
+        //$m_mone=User::find($request->id);
+        //$count=0;
+        //$count+=count($m_mone->convenio);
+        //if($count>0){
+        //    return ['msg'=>'Elemento en uso'];
+        //}else{
+        //    $m_mone->fill($request->all());
+        //    $m_mone->save();
+        // }   
         if(auth()->user()->id == $user->id){
             return redirect()->route('users.index');
         }
