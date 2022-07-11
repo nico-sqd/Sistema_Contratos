@@ -28,7 +28,11 @@ class PermissionSeeder extends Seeder
             'admin_show',
             'admin_create',
             'admin_edit',
-            'admin_destroy'
+            'admin_destroy',
+
+            'super',
+            'admin', 
+            'referente'
         ];
 
         foreach($permissions as $permission){

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\SubDireccion;
 use App\Models\Departamento;
-use App\Http\Controllers\M_MONE;
+use App\Models\Convenio;
 
 class UserController extends Controller
 {
@@ -235,19 +235,23 @@ class UserController extends Controller
     public function destroy(User $user, Request $request)
     {
         abort_if(Gate::denies('admin_destroy'), 403);//si el usuario no tiene el permiso "user_destroy" mostrara error 403
-        //$m_mone=User::find($request->id);
+        //$m_mone=User::find($request->name);
+        //$m_mones=User::find($request->id);
+        //$convenio=Convenio::find($request->admin);
+        //$convenios=Convenio::find($request->rut);
         //$count=0;
-        //$count+=count($m_mone->convenio);
+        //$count+=count($m_mone->$convenio);
+        //$count+=count($m_mones->$convenios);
         //if($count>0){
         //    return ['msg'=>'Elemento en uso'];
         //}else{
         //    $m_mone->fill($request->all());
         //    $m_mone->save();
         // }   
-        if(auth()->user()->id == $user->id){
-            return redirect()->route('users.index');
-        }
+        //if(auth()->user()->id == $user->id){
+        //    return redirect()->route('users.index');
+        //}
         $user -> delete();
         return back()->with('success', 'Usuario eliminado correctamente');
     }
-}
+} 
