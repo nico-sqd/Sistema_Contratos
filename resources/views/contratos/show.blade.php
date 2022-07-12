@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12 text-right">
-                                            <a href="{{ route('contratos.aumento.index', $contrato->id) }}" class="btn btn-facebook">Agregar aumento de contrato</a>
+                                            <a href="{{ route('contratos.aumento.index', $contrato->id) }}" class="btn btn-facebook">Agregar modificación  de contrato</a>
                                         </div>
                                     </div>
                                     <div class="card-body">
