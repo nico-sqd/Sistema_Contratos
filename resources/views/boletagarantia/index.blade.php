@@ -4,12 +4,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form action="{{route('contratos.aumento.store', $contratos->id)}}" method="post" class="form-horizontal">
+                <form action="{{route('contratos.boletagarantia.store', $contratos->id)}}" method="post" class="form-horizontal">
                     @csrf
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-tittle">Modificaciones Contratos</h4>
-                            <p class="card-category">Modificar datos</p>
+                            <h4 class="card-tittle">Boletas de Garantía</h4>
+                            <p class="card-category">Agregar datos</p>
                         </div>
                         <div class="card-body">
                         <div class="row">
@@ -18,20 +18,11 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="res_aumento" class="col-sm-2 col-form-label">Resolución Aumento</label>
+                                <label for="id_boleta" class="col-sm-2 col-form-label">ID Boleta Garantía</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="res_aumento" placeholder="Resolución" value="{{old('res_aumento')}}" autofocus  required oninvalid="this.setCustomValidity('Ingrese ID de resolución')" oninput="this.setCustomValidity('')"/>
-                                    @if ($errors->has('res_aumento'))
-                                        <span class="error text-danger" for="input-res_aumento">{{$errors -> first('res_aumento')}}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label for="monto_aumento" class="col-sm-2 col-form-label">Monto Aumento</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="monto_aumento" placeholder="Monto Aumento" value="{{old('monto_aumento')}}">
-                                    @if ($errors->has('monto_aumento'))
-                                        <span class="error text-danger" for="input-monto_aumento">{{$errors -> first('monto_aumento')}}</span>
+                                    <input type="text" class="form-control" name="id_boleta" placeholder="ID Boleta Garantía" value="{{old('id_boleta')}}" autofocus required oninvalid="this.setCustomValidity('Ingrese ID de la boleta')" oninput="this.setCustomValidity('')"/>
+                                    @if ($errors->has('id_boleta'))
+                                        <span class="error text-danger" for="input-id_boleta">{{$errors -> first('id_boleta')}}</span>
                                     @endif
                                 </div>
                             </div>
@@ -57,15 +48,6 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="id_boleta" class="col-sm-2 col-form-label">ID Boleta Garantía</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="id_boleta" placeholder="ID Boleta Garantía" value="{{old('id_boleta')}}">
-                                    @if ($errors->has('id_boleta'))
-                                        <span class="error text-danger" for="input-id_boleta">{{$errors -> first('id_boleta')}}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="row">
                                 <label for="id_tipo_boleta" class="col-sm-2 col-form-label">Tipo Boleta</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
@@ -78,15 +60,15 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="vigencia_inicio" class="col-sm-2 col-form-label">Vigencia Inicio</label>
+                                <label for="fecha_inicio" class="col-sm-2 col-form-label">Vigencia Inicio</label>
                                 <div class="col-sm-7">
-                                    <input type="date" class="form-control" name="vigencia_inicio">
+                                    <input type="date" class="form-control" name="fecha_inicio">
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="vigencia_fin" class="col-sm-2 col-form-label">Vigencia Fin</label>
+                                <label for="fecha_fin" class="col-sm-2 col-form-label">Vigencia Fin</label>
                                 <div class="col-sm-7">
-                                    <input type="date" class="form-control" name="vigencia_fin">
+                                    <input type="date" class="form-control" name="fecha_fin">
                                 </div>
                             </div>
                         <!--footers-->

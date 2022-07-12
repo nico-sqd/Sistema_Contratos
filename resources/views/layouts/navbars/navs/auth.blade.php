@@ -66,7 +66,7 @@
             <a class="dropdown-item" href="{{ route('referentes.edit_referente', Auth::user()->id) }}">{{ __('Editar Perfil') }}</a>
             @endcan
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Cerrar Secion') }}</a>
+            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Cerrar Sesión') }}</a>
           </div>
         </li>
       </ul>

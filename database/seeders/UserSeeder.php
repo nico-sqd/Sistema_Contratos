@@ -68,6 +68,14 @@ class UserSeeder extends Seeder
             'nombre_modalidad'=>'Licitacion Publica',
             'abreviacion_modalidad'=>'LP'
         ]);
+        DB::table('modalidad')->insert([
+            'nombre_modalidad'=>'Trato Directo',
+            'abreviacion_modalidad'=>'TD'
+        ]);
+        DB::table('modalidad')->insert([
+            'nombre_modalidad'=>'Gran Compra',
+            'abreviacion_modalidad'=>'GC'
+        ]);
         DB::table('boletagarantia')->insert([
             'documentos_garantia'=>'Boleta Garantía'
         ]);

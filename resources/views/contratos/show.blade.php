@@ -34,7 +34,7 @@
                                         @endif
                                         @if ($contrato->montoboleta->tipomoneda->Nombre_tipo == 'USD')
                                         <div class="h5">Monto: ${{ number_format($contrato->monto->moneda,2,',','.')}} {{$contrato->montoboleta->tipomoneda->Nombre_tipo}}</div>
-                                        @endif  
+                                        @endif
                                         <div class="h5">ID Contrato: {{$contrato->id_contrato}}</div>
                                         <div class="h5">Proveedor: {{$contrato->convenio->proveedor->nombre_proveedor}}</div>
                                         <div class="h5">Rut Proveedor: {{$contrato->convenio->proveedor->rut_proveedor}}</div>
@@ -59,8 +59,10 @@
                                         <div class="h5">Fecha Fin Boleta Garantía: {{$contrato->montoboleta->fecha_fin}}</div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-12 text-right">
+                                        <div class="col-12 text-center">
+                                            <a href="{{ route('contratos.boletagarantia.index', $contrato->id) }}" class="btn btn-facebook">Agregar Boleta de Garantía</a>
                                             <a href="{{ route('contratos.aumento.index', $contrato->id) }}" class="btn btn-facebook">Agregar modificación  de contrato</a>
+                                            <a href="{{ route('contratos.aumento.index', $contrato->id) }}" class="btn btn-danger">Multas del Contrato</a>
                                         </div>
                                     </div>
                                     <div class="card-body">
@@ -69,7 +71,7 @@
                                                 <thead class="text-primary">
                                                     <th>Resolucion Aumento</th>
                                                     <th>Monto a Aumentar</th>
-                                                    <th>Fecha de Aumento</th>
+                                                    <th>Fecha de Resolución</th>
                                                     <th>Monto Total</th>
                                                     <th>Monto Boleta Garantía</th>
                                                     <th>Acciones</th>

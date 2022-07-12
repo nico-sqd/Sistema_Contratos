@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use app\models\BoletaGarantia;
 use app\models\Contrato;
 use app\models\Monto;
+use app\models\TipoMoneda;
 
 class BoletaGarantiaController extends Controller
 {
@@ -14,9 +15,9 @@ class BoletaGarantiaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Contrato $contratos)
     {
-        //
+        return view('boletagarantia.index',compact('contratos'),['contratos'=>Contrato::all(),'tipomoneda'=>TipoMoneda::all()]);
     }
 
     /**

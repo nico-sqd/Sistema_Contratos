@@ -247,11 +247,11 @@ class UserController extends Controller
         //}else{
         //    $m_mone->fill($request->all());
         //    $m_mone->save();
-        // }   
+        // }
         //if(auth()->user()->id == $user->id){
         //    return redirect()->route('users.index');
         //}
         $user -> delete();
         return back()->with('success', 'Usuario eliminado correctamente');
     }
-} 
+}
