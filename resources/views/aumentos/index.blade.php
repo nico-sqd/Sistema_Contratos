@@ -17,24 +17,27 @@
                                     <a href="{{ url()->previous() }}" class="btn btn-facebook"><i class="material-icons">arrow_back</i></a>
                                 </div>
                             </div>
-                            <div class="row">
-                                <label for="monto_aumento" class="col-sm-2 col-form-label">Monto Aumento</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="monto_aumento" placeholder="Monto Aumento" value="{{old('monto_aumento')}}" autofocus>
-                                    @if ($errors->has('monto_aumento'))
-                                        <span class="error text-danger" for="input-monto_aumento">{{$errors -> first('monto_aumento')}}</span>
-                                    @endif
+                            <form action="{{route('contratos.update', $contratos->id)}}" method="post" class="form-horizontal">
+                                @csrf
+                                <div class="row">
+                                    <label for="monto_aumento" class="col-sm-2 col-form-label">Monto Aumento</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="monto_aumento" placeholder="Monto Aumento" value="{{old('monto_aumento')}}" autofocus>
+                                        @if ($errors->has('monto_aumento'))
+                                            <span class="error text-danger" for="input-monto_aumento">{{$errors -> first('monto_aumento')}}</span>
+                                        @endif
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <label for="res_aumento" class="col-sm-2 col-form-label">Resolución Aumento</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="res_aumento" placeholder="Resolución" value="{{old('res_aumento')}}" autofocus>
-                                    @if ($errors->has('res_aumento'))
-                                        <span class="error text-danger" for="input-res_aumento">{{$errors -> first('res_aumento')}}</span>
-                                    @endif
+                                <div class="row">
+                                    <label for="res_aumento" class="col-sm-2 col-form-label">Resolución Aumento</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="res_aumento" placeholder="Resolución" value="{{old('res_aumento')}}" autofocus>
+                                        @if ($errors->has('res_aumento'))
+                                            <span class="error text-danger" for="input-res_aumento">{{$errors -> first('res_aumento')}}</span>
+                                        @endif
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                             <div class="row">
                                 <label for="monto_boleta" class="col-sm-2 col-form-label">Monto Boleta Garantía</label>
                                 <div class="col-sm-7">

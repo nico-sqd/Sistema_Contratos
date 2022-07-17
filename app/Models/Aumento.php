@@ -16,6 +16,7 @@ class Aumento extends Model
 
     protected $fillable = [
         'monto_aumento',
+        'monto_total',
         'res_aumento',
         'id_contrato',
         'id_monto_boleta',

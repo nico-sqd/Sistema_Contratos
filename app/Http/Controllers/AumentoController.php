@@ -43,9 +43,14 @@ class AumentoController extends Controller
         //dd($request->monto_aumento);
         //$monto_boleta = number_format($request->monto_boleta,2,',','.');
         //$monto_aumento = number_format($request->monto_aumento);
-        //dd($monto);
-        $montoboleta = MontoBoleta::create(array_merge($request->only('monto_boleta','fecha_inicio','fecha_fin','id_boleta','id_tipo_boleta','id_moneda')));
-        Aumento::create(array_merge($request->only('monto_aumento','res_aumento','id_contrato','id_monto_boleta'),['id_contrato'=>$contratos->id,'id_monto_boleta'=>$montoboleta->id]));
+        //dd($request->monto_aumento);
+        $contrato = $contratos;
+        $monto = $contratos->monto;
+        $montoboleta = $contratos->montoboleta;
+        $monto->update(array_merge($request->only('moneda'),['moneda'=>$monto->moneda+$request->monto_aumento]));
+        $id_boleta = MontoBoleta::create(array_merge($request->only('monto_boleta','fecha_inicio','fecha_fin','id_boleta','id_tipo_boleta','id_moneda'),['fecha_inicio'=>$request->vigencia_inicio, 'fecha_fin'=>$request->vigencia_fin]));
+        $contrato->update(array_merge($request->only('aumento_contrato','res_aumento','id_monto_boleta'),['aumento_contrato'=>$request->monto_aumento,'id_monto_boleta'=>$id_boleta->id]));
+        Aumento::create(array_merge($request->only('monto_aumento','res_aumento','id_contrato','id_monto_boleta','monto_total'),['id_contrato'=>$contratos->id,'id_monto_boleta'=>$montoboleta->id,'monto_total'=>$monto->moneda]));
         return redirect()->route('contratos.show', $contratos->id)->with('success', 'Aumento modificado');
     }
 

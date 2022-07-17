@@ -90,7 +90,7 @@
                                                         @endif
                                                         <td>{{ $aumentos->created_at }}</td>
                                                         @if ($aumentos->contrato->montoboleta->tipomoneda->Nombre_tipo == 'CLP')
-                                                        <td>$ {{ number_format($aumentos->monto_aumento) }} {{$aumentos->contrato->montoboleta->tipomoneda->Nombre_tipo}}</td>
+                                                        <td>$ {{ number_format($aumentos->monto_total) }} {{$aumentos->contrato->montoboleta->tipomoneda->Nombre_tipo}}</td>
                                                         @endif
                                                         @if($aumentos->contrato->montoboleta->tipomoneda->Nombre_tipo == 'USD')
                                                         <td>$ {{ number_format($aumentos->monto_aumento + $aumentos->contrato->monto->moneda,2,',','.') }} {{$aumentos->contrato->montoboleta->tipomoneda->Nombre_tipo}}</td>

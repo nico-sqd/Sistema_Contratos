@@ -19,6 +19,7 @@ class CreateAumentocontratoTable extends Migration
             $table->softDeletes();
             $table->float('monto_aumento');
             $table->string('res_aumento');
+            $table->float('monto_total');
             $table->unsignedBigInteger('id_contrato');
             $table->foreign('id_contrato')->references('id')->on('contrato');
             $table->unsignedBigInteger('id_monto_boleta');

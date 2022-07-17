@@ -90,7 +90,7 @@ class ContratoController extends Controller
     public function show(Contrato $contrato)
     {
         return view('contratos.show', compact('contrato'), ['proveedores'=>Proveedor::all(),'convenios'=>Convenio::all(),'estadocontraot'=>EstadoContrato::all(),
-        'aumento'=>Aumento::all(),'boletagarantia'=>BoletaGarantia::all()]);
+        'aumento'=>Aumento::all(),'boletagarantia'=>BoletaGarantia::all()]) ;
     }
 
     /**
@@ -130,14 +130,32 @@ class ContratoController extends Controller
         $boletagarantia = $contrato->montoboleta;
         $user = $contrato->convenio->user;
         $convenios = $contrato->convenio;
+        $aumento = $contrato->aumento;
+        dd($aumento);
         $user->update($request->only('name'));
         $convenios->update(array_merge($request->only('rut_proveedor','rut','id_licitacion', 'convenio', 'vigencia_inicio','vigencia_fin','admin')));
         $montoboleta->update($request->only('moneda', 'id_tipo_moneda'));
         $boletagarantia->update($request->only('monto_boleta','fecha_inicio','fecha_fin','id_boleta','id_tipo_boleta','id_moneda'));
-        $contrato->update(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),['id_licitacion'=>$convenios->id]));
+        $contrato->update(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),['id_licitacion'=>$convenios->id,
+        'aumento_contrato'=>$aumento->monto_aumento,'res_aumento'=>$aumento->res_aumento]));
         return redirect()->route('contratos.index', $contrato->id)->with('success', 'Usuario creado correctamente.');
     }
 
+    public function update_aumento(Request $request, Contrato $contrato)
+    {
+        $aumento = $contrato->aumento;
+        $montoboleta = $contrato->monto;
+        $boletagarantia = $contrato->montoboleta;
+        $user = $contrato->convenio->user;
+        $convenios = $contrato->convenio;
+        $user->update($request->only('name'));
+        $convenios->update(array_merge($request->only('rut_proveedor','rut','id_licitacion', 'convenio', 'vigencia_inicio','vigencia_fin','admin')));
+        $montoboleta->update($request->only('moneda', 'id_tipo_moneda'));
+        $boletagarantia->update($request->only('monto_boleta','fecha_inicio','fecha_fin','id_boleta','id_tipo_boleta','id_moneda'));
+        $contrato->update(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),['id_licitacion'=>$convenios->id,
+        'aumento_contrato'=>$aumento->monto_aumento,'res_aumento'=>$aumento->res_aumento]));
+        return redirect()->route('contratos.index', $contrato->id)->with('success', 'Usuario creado correctamente.');
+    }
     /**
      * Remove the specified resource from storage.
      *
