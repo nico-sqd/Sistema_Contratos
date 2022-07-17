@@ -17,6 +17,7 @@
                                     <a href="{{ url()->previous() }}" class="btn btn-facebook"><i class="material-icons">arrow_back</i></a>
                                 </div>
                             </div>
+<<<<<<< HEAD
                             <form action="{{route('contratos.update', $contratos->id)}}" method="post" class="form-horizontal">
                                 @csrf
                                 <div class="row">
@@ -36,12 +37,30 @@
                                             <span class="error text-danger" for="input-res_aumento">{{$errors -> first('res_aumento')}}</span>
                                         @endif
                                     </div>
+=======
+                            <div class="row">
+                                <label for="res_aumento" class="col-sm-2 col-form-label">Resolución Aumento</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="res_aumento" placeholder="Resolución" value="{{old('res_aumento')}}" autofocus  required oninvalid="this.setCustomValidity('Ingrese ID de resolución')" oninput="this.setCustomValidity('')"/>
+                                    @if ($errors->has('res_aumento'))
+                                        <span class="error text-danger" for="input-res_aumento">{{$errors -> first('res_aumento')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="monto_aumento" class="col-sm-2 col-form-label">Monto Aumento</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="monto_aumento" placeholder="Monto Aumento" value="{{old('monto_aumento')}}">
+                                    @if ($errors->has('monto_aumento'))
+                                        <span class="error text-danger" for="input-monto_aumento">{{$errors -> first('monto_aumento')}}</span>
+                                    @endif
+>>>>>>> refs/remotes/origin/contratos
                                 </div>
                             </form>
                             <div class="row">
                                 <label for="monto_boleta" class="col-sm-2 col-form-label">Monto Boleta Garantía</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="monto_boleta" placeholder="Monto boleta Garantía" value="{{old('monto_boleta')}}" autofocus>
+                                    <input type="text" class="form-control" name="monto_boleta" placeholder="Monto boleta Garantía" value="{{old('monto_boleta')}}">
                                     @if ($errors->has('monto_boleta'))
                                         <span class="error text-danger" for="input-monto_boleta">{{$errors -> first('monto_boleta')}}</span>
                                     @endif
@@ -62,7 +81,7 @@
                             <div class="row">
                                 <label for="id_boleta" class="col-sm-2 col-form-label">ID Boleta Garantía</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="id_boleta" placeholder="ID Boleta Garantía" value="{{old('id_boleta')}}" autofocus>
+                                    <input type="text" class="form-control" name="id_boleta" placeholder="ID Boleta Garantía" value="{{old('id_boleta')}}">
                                     @if ($errors->has('id_boleta'))
                                         <span class="error text-danger" for="input-id_boleta">{{$errors -> first('id_boleta')}}</span>
                                     @endif

@@ -30,8 +30,8 @@ class PermissionSeeder extends Seeder
             'admin_edit',
             'admin_destroy',
 
-            'super',
-            'admin', 
+            '_super',
+            '_admin', 
             'referente'
         ];
 

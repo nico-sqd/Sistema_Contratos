@@ -18,7 +18,7 @@ class RoleHasPermissionSeeder extends Seeder
         //super-admin 
         $superadmin_permissions = Permission::all()->filter(function ($permission){
             return substr($permission->name, 0, 9) != 'referente' && 
-                substr($permission->name, 0, 5) != 'admin';
+                substr($permission->name, 0, 6) != '_admin';
         });
         Role::findOrFail(1)->syncPermissions($superadmin_permissions->pluck('id'));
 
@@ -26,14 +26,15 @@ class RoleHasPermissionSeeder extends Seeder
         $admin_permissions = $superadmin_permissions->filter(function($permission){
             return substr($permission->name, 0, 6) != 'super_' &&
                 substr($permission->name, 0, 9) != 'referente' && 
-                substr($permission->name, 0, 5) != 'super';
+                substr($permission->name, 0, 6) != '_super';
         });
         Role::findOrFail(2)->syncPermissions($admin_permissions);
 
         $referente_permissions = $superadmin_permissions->filter(function($permission){
             return substr($permission->name, 0, 6) != 'super_' && 
                 substr($permission->name, 0,6) != 'admin_' && 
-                substr($permission->name, 0, 5) != 'super';
+                substr($permission->name, 0, 6) != '_super' && 
+                substr($permission->name, 0, 6) != '_admin';
         });
         Role::findOrFail(3)->syncPermissions($referente_permissions);
     }

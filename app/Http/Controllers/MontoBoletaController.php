@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Contrato;
+use App\Models\Aumento;
+use App\Models\MontoBoleta;
+use App\Models\BoletaGarantia;
+use App\Models\TipoMoneda;
 
 class MontoBoletaController extends Controller
 {
@@ -11,9 +16,9 @@ class MontoBoletaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Contrato $contratos)
     {
-        //
+        return view('boletagarantia.index',compact('contratos'),['tipoboleta'=>BoletaGarantia::all(),'contratos'=>Contrato::all(),'tipomoneda'=>TipoMoneda::all()]);
     }
 
     /**
@@ -32,9 +37,10 @@ class MontoBoletaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Contrato $contratos)
     {
-        //
+        MontoBoleta::create(array_merge($request->only('monto_boleta','fecha_inicio','fecha_fin','id_boleta','id_tipo_boleta','id_moneda')));
+        return redirect()->route('contratos.show', $contratos->id)->with('success', 'Aumento modificado');
     }
 
     /**
