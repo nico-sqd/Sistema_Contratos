@@ -18,13 +18,16 @@ class CreateMontoboletaTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->float('monto_boleta')->nullable();
-            $table->date('fecha_inicio')->nullable();
-            $table->date('fecha_fin')->nullable();
+            $table->date('fecha_vencimiento')->nullable();
             $table->string('id_boleta')->nullable();
             $table->unsignedBigInteger('id_tipo_boleta');
             $table->foreign('id_tipo_boleta')->references('id')->on('boletagarantia');
             $table->unsignedBigInteger('id_moneda');
             $table->foreign('id_moneda')->references('id')->on('tipo_moneda');
+            $table->string('otraboleta')->nullable();
+            $table->string('institucion');
+            $table->string('id_contrato_original')->nullable();
+            $table->string('id_contrato_modificada')->nullable();
         });
     }
 

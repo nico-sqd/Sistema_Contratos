@@ -1,38 +1,20 @@
-@extends('layouts.main', ['activePage' => 'contratos', 'titlePage' => 'Aumento de Contratos'])
+@extends('layouts.main', ['activePage' => 'contratos', 'titlePage' => 'Boletas de Garantía'])
 @section('content')
 <div class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form action="{{route('contratos.aumento.store', $contratos->id)}}" method="post" class="form-horizontal"  enctype="multipart/form-data">
+                <form action="{{route('contratos.boletagarantia.store', $contratos->id)}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                     @csrf
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-tittle">Modificaciones Contratos</h4>
-                            <p class="card-category">Modificar datos</p>
+                            <h4 class="card-tittle">Boletas de Garantía</h4>
+                            <p class="card-category">Agregar datos</p>
                         </div>
                         <div class="card-body">
                         <div class="row">
                                 <div class="col-12 text-right">
-                                    <a href="{{ url()->previous() }}" class="btn btn-facebook"><i class="material-icons">arrow_back</i></a>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label for="res_aumento" class="col-sm-2 col-form-label">Resolución Aumento</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="res_aumento" placeholder="Resolución" value="{{old('res_aumento')}}" autofocus  required oninvalid="this.setCustomValidity('Ingrese ID de resolución')" oninput="this.setCustomValidity('')"/>
-                                    @if ($errors->has('res_aumento'))
-                                        <span class="error text-danger" for="input-res_aumento">{{$errors -> first('res_aumento')}}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label for="monto_aumento" class="col-sm-2 col-form-label">Monto Aumento</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="monto_aumento" placeholder="Monto Aumento" value="{{old('monto_aumento')}}">
-                                    @if ($errors->has('monto_aumento'))
-                                        <span class="error text-danger" for="input-monto_aumento">{{$errors -> first('monto_aumento')}}</span>
-                                    @endif
+                                    <a href="{{ route('contratos.show', $contratos->id) }}" class="btn btn-facebook"><i class="material-icons">arrow_back</i></a>
                                 </div>
                             </div>
                             <div class="row">
@@ -40,6 +22,7 @@
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="id_tipo_boleta" name="id_tipo_boleta">
+                                            <option hidden>Seleccione Tipo de Documento</option>
                                         @foreach ( $tipoboleta as $boletagarantia )
                                             <option value="{{ $boletagarantia->id }}">{{ $boletagarantia->documentos_garantia }}</option>
                                         @endforeach
@@ -67,6 +50,9 @@
                                         $('#otraboleta').prop("disabled", true);
                                     } else {
                                         $('#otraboleta').prop("disabled", false);
+                                    }
+                                    if ($(this).val() === "1") {
+                                        $
                                     }
                                 })
                             });
@@ -135,11 +121,54 @@
                             @endcan
                         <!--footers-->
                         <div class="card-footer ml-auto mr-auto">
-                            <button type="submit" class="btn btn-primary">{{ __('Actualizar') }}</button>
+                            <button type="submit" class="btn btn-primary">{{ __('Agregar') }}</button>
                         </div>
                         <!--End footer-->
                     </div>
                 </form>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th>Documento Garantía</th>
+                                <th>Institución</th>
+                                <th>N° Documento</th>
+                                <th>Monto</th>
+                                <th>Fecha Vencimiento</th>
+                                <th>Acciones</th>
+                            </thead>
+                            <tbody>
+                            @foreach ($montoboleta as $boleta)
+                                @if ($boleta->id_contrato_original == $contratos->id || $boleta->id_contrato_modificada == $contratos->id)
+                                <tr>
+                                    @if ($boleta->boletagarantia->documentos_garantia == 'Otro')
+                                        <td>{{ $boleta->otraboleta }}</td>
+                                    @else
+                                        <td>{{ $boleta->boletagarantia->documentos_garantia }}</td>
+                                    @endif
+                                    <td>{{ $boleta->institucion }}</td>
+                                    <td>{{ $boleta->id_boleta }}</td>
+                                    @if ($boleta->tipomoneda->Nombre_tipo == 'CLP')
+                                    <td>$ {{ number_format($boleta->monto_boleta) }} {{$boleta->tipomoneda->Nombre_tipo}}</td>
+                                    @endif
+                                    @if ($boleta->tipomoneda->Nombre_tipo == 'USD')
+                                    <td>$ {{ number_format($boleta->monto_boleta,2,',','.') }} {{$boleta->tipomoneda->Nombre_tipo}}</td>
+                                    @endif
+                                    @if ($boleta->tipomoneda->Nombre_tipo == 'UF')
+                                    <td>$ {{ number_format($boleta->monto_boleta) }} {{$boleta->tipomoneda->Nombre_tipo}}</td>
+                                    @endif
+                                    <td>{{ $boleta->fecha_vencimiento }}</td>
+                                    <td class="td-actions text-center">
+                                        <a href="{{ route('files.download', $boleta->file->uuid) }}" class="btn btn-info"><i class="material-icons">download</i></a>
+                                    </form>
+                                </td>
+                                </tr>
+                                @endif
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

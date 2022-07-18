@@ -18,6 +18,8 @@ use App\Models\EstadoContrato;
 use App\Models\Files;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
+
 
 class ContratoController extends Controller
 {
@@ -75,9 +77,32 @@ class ContratoController extends Controller
         //dd($request->id_tipo_moneda);
         $convenios = Convenio::create(array_merge($request->only('id_licitacion', 'convenio', 'rut_proveedor','rut','vigencia_inicio','vigencia_fin','admin')));
         $montoboleta = Monto::create($request->only('moneda', 'id_tipo_moneda'));
-        $boletagarantia = MontoBoleta::create($request->only('monto_boleta','fecha_inicio','fecha_fin','id_boleta','id_tipo_boleta','id_moneda')); //crear ID Boleta garantía en migración, controlador y vista.
+        $boletagarantia = MontoBoleta::create($request->only('monto_boleta','fecha_vencimiento','id_boleta','id_tipo_boleta','id_moneda','otraboleta','institucion')); //crear ID Boleta garantía en migración, controlador y vista.
         $contrato = Contrato::create(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','rut_proveedor','rut','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),
         ['id_monto'=>$montoboleta->id,'rut_proveedor'=>$convenios->rut_proveedor,'rut'=>$convenios->rut,'id_licitacion'=>$convenios->id,'id_boleta'=>$boletagarantia->id_tipo_boleta,'id_monto_boleta'=>$boletagarantia->id]));
+        $boletagarantia->update(array_merge($request->only('id_contrato_original'),['id_contrato_original'=>$contrato->id]));
+
+        $archivo = $request->all();
+        $archivo['uuid'] = (string) Str::uuid();
+        $archivo['id_contrato'] = $contrato->id;
+
+        //dd($request);
+        //en php.ini subir upload_max_filesize = 2M a los megas que quieras subir y post_max_size = 8M a los megas que quieras subir
+        $validator = Validator::make($request->all(), [
+            'nombre_archivo' => ['required','mimes:pdf,jpg,jpeg,png,xlsx,docx,doc,ppt,octet-stream','max:25000']
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors('No se puede subir este tipo de archivo o es muy pesado');
+        }
+
+        if($request->hasFile('nombre_archivo')){
+            $archivo['nombre_archivo'] = $request->file('nombre_archivo')->getClientOriginalName();
+            $request->file('nombre_archivo')->storeAs('folder_file',$archivo['nombre_archivo']);
+        }
+        //dd($request);
+        $archivoboleta = Files::create($archivo);
+        $boletagarantia->update(array_merge($request->only('archivo'),['archivo'=>$archivoboleta->id]));
         return redirect()->route('contratos.index', $contrato->id)->with('success', 'Usuario creado correctamente.');
     }
 
@@ -90,7 +115,7 @@ class ContratoController extends Controller
     public function show(Contrato $contrato)
     {
         return view('contratos.show', compact('contrato'), ['proveedores'=>Proveedor::all(),'convenios'=>Convenio::all(),'estadocontraot'=>EstadoContrato::all(),
-        'aumento'=>Aumento::all(),'boletagarantia'=>BoletaGarantia::all()]);
+        'aumento'=>Aumento::all(),'boletagarantia'=>BoletaGarantia::all()]) ;
     }
 
     /**
@@ -130,14 +155,32 @@ class ContratoController extends Controller
         $boletagarantia = $contrato->montoboleta;
         $user = $contrato->convenio->user;
         $convenios = $contrato->convenio;
+        $aumento = $contrato->aumento;
+        dd($aumento);
         $user->update($request->only('name'));
         $convenios->update(array_merge($request->only('rut_proveedor','rut','id_licitacion', 'convenio', 'vigencia_inicio','vigencia_fin','admin')));
         $montoboleta->update($request->only('moneda', 'id_tipo_moneda'));
         $boletagarantia->update($request->only('monto_boleta','fecha_inicio','fecha_fin','id_boleta','id_tipo_boleta','id_moneda'));
-        $contrato->update(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),['id_licitacion'=>$convenios->id]));
+        $contrato->update(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),['id_licitacion'=>$convenios->id,
+        'aumento_contrato'=>$aumento->monto_aumento,'res_aumento'=>$aumento->res_aumento]));
         return redirect()->route('contratos.index', $contrato->id)->with('success', 'Usuario creado correctamente.');
     }
 
+    public function update_aumento(Request $request, Contrato $contrato)
+    {
+        $aumento = $contrato->aumento;
+        $montoboleta = $contrato->monto;
+        $boletagarantia = $contrato->montoboleta;
+        $user = $contrato->convenio->user;
+        $convenios = $contrato->convenio;
+        $user->update($request->only('name'));
+        $convenios->update(array_merge($request->only('rut_proveedor','rut','id_licitacion', 'convenio', 'vigencia_inicio','vigencia_fin','admin')));
+        $montoboleta->update($request->only('moneda', 'id_tipo_moneda'));
+        $boletagarantia->update($request->only('monto_boleta','fecha_inicio','fecha_fin','id_boleta','id_tipo_boleta','id_moneda'));
+        $contrato->update(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),['id_licitacion'=>$convenios->id,
+        'aumento_contrato'=>$aumento->monto_aumento,'res_aumento'=>$aumento->res_aumento]));
+        return redirect()->route('contratos.index', $contrato->id)->with('success', 'Usuario creado correctamente.');
+    }
     /**
      * Remove the specified resource from storage.
      *

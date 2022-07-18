@@ -20,7 +20,7 @@
                             <div class="row">
                             <label for="id_licitacion" class="col-sm-2 col-form-label">ID Licitacion</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="id_licitacion" placeholder="id_licitacion" value="{{old('id_licitacion')}}" autofocus>
+                                    <input type="text" class="form-control" name="id_licitacion" placeholder="id_licitacion" value="{{old('id_licitacion')}}" autofocus required oninvalid="this.setCustomValidity('Ingrese ID de licitación')" oninput="this.setCustomValidity('')"/>
                                     @if ($errors->has('id_licitacion'))
                                         <span class="error text-danger" for="input-id_licitacion">{{$errors -> first('id_licitacion')}}</span>
                                     @endif
@@ -95,7 +95,7 @@
                             <div class="row">
                                 <label for="res_adjudicacion" class="col-sm-2 col-form-label">Resolucion de Adjudicacion</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="res_adjudicacion" placeholder="Ingrese la resolucion adjudicacion" value="{{old('res_adjudicacion')}}">
+                                    <input type="text" class="form-control" name="res_adjudicacion" placeholder="Ingrese la resolucion adjudicacion" value="{{old('res_adjudicacion')}}" required oninvalid="this.setCustomValidity('Ingrese resolución de adjudicación')" oninput="this.setCustomValidity('')"/>
                                     @if ($errors->has('res_adjudicacion'))
                                         <span class="error text-danger" for="input-res_adjudicacion">{{$errors -> first('res_adjudicacion')}}</span>
                                     @endif
@@ -104,7 +104,7 @@
                             <div class="row">
                                 <label for="res_apruebacontrato" class="col-sm-2 col-form-label">Resolucion Aprueba Contrato</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="res_apruebacontrato" placeholder="Ingrese la resolucion apruebo" value="{{old('res_apruebacontrato')}}">
+                                    <input type="text" class="form-control" name="res_apruebacontrato" placeholder="Ingrese la resolucion apruebo" value="{{old('res_apruebacontrato')}}" required oninvalid="this.setCustomValidity('Ingrese resolución de apruebo de contrato')" oninput="this.setCustomValidity('')"/>
                                     @if ($errors->has('res_apruebacontrato'))
                                         <span class="error text-danger" for="input-res_apruebacontrato">{{$errors -> first('res_apruebacontrato')}}</span>
                                     @endif
@@ -132,7 +132,52 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="id_boleta" class="col-sm-2 col-form-label">ID Boleta de Garantía</label>
+                                <label for="id_tipo_boleta" class="col-sm-2 col-form-label">Documento Garantía</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="id_tipo_boleta" name="id_tipo_boleta">
+                                        @foreach ( $tipoboleta as $boletagarantia )
+                                            <option value="{{ $boletagarantia->id }}">{{ $boletagarantia->documentos_garantia }}</option>
+                                        @endforeach
+                                        </select>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="otraboleta" class="col-sm-2 col-form-label">Otro Tipo Boleta</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="otraboleta" placeholder="Tipo Boleta" id="otraboleta" value="{{old('otraboleta')}}" required oninvalid="this.setCustomValidity('Ingrese tipo de boleta')" oninput="this.setCustomValidity('')"/>
+                                    @if ($errors->has('otraboleta'))
+                                        <span class="error text-danger" for="input-otraboleta">{{$errors -> first('otraboleta')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <script
+                                src="https://code.jquery.com/jquery-3.6.0.min.js"
+                                integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+                            </script>
+                            <script>
+                            $(document).ready(function() {
+                                $('#id_tipo_boleta').change(function(e) {
+                                    if ($(this).val() !== "5") {
+                                        $('#otraboleta').prop("disabled", true);
+                                    } else {
+                                        $('#otraboleta').prop("disabled", false);
+                                    }
+                                })
+                            });
+                            </script>
+                            <div class="row">
+                                <label for="institucion" class="col-sm-2 col-form-label">Institución Financiera</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="institucion" placeholder="Institución financiera" value="{{old('institucion')}}" autofocus>
+                                    @if ($errors->has('institucion'))
+                                        <span class="error text-danger" for="input-institucion">{{$errors -> first('institucion')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="id_boleta" class="col-sm-2 col-form-label">N° Documento</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="id_boleta" placeholder="Ingrese ID de la boleta de garantia" value="{{old('id_boleta')}}" autofocus>
                                     @if ($errors->has('id_boleta'))
@@ -162,29 +207,28 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="fecha_inicio" class="col-sm-2 col-form-label">Vigencia Inicio</label>
+                                <label for="fecha_vencimiento" class="col-sm-2 col-form-label">Fecha Vencimiento</label>
                                 <div class="col-sm-7">
-                                    <input type="date" class="form-control" name="fecha_inicio">
+                                    <input type="date" class="form-control" name="fecha_vencimiento">
                                 </div>
                             </div>
+                            @can('admin_create')
                             <div class="row">
-                                <label for="fecha_fin" class="col-sm-2 col-form-label">Vigencia Fin</label>
+                                <label for="res_aumento" class="col-sm-2 col-form-label">Subir Documento</label>
                                 <div class="col-sm-7">
-                                    <input type="date" class="form-control" name="fecha_fin">
+                                    @csrf
+                                    <input type="file" name="nombre_archivo" id="" accept="application/pdf, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/msword,image/*" required oninvalid="this.setCustomValidity('Seleccione antes un archivo para subir')" oninput="this.setCustomValidity('')"/>
+                                    @if(Session::has('errors'))
+                                        <div class="alert alert-danger" style="text-align:center" role="alert">
+                                            <h4>{{Session::get('errors')->first()}}</h4>
+                                        </div>
+                                    @endif
+                                    @error('nombre_archivo')
+                                        <big class="text-danger">{{session('errors')->first('message1');}}</big>
+                                    @enderror
                                 </div>
                             </div>
-                            <div class="row">
-                                <label for="id_tipo_boleta" class="col-sm-2 col-form-label">Tipo Boleta</label>
-                                <div class="col-sm-7">
-                                    <div class="form-group">
-                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_tipo_boleta">
-                                        @foreach ( $tipoboleta as $boletagarantia )
-                                            <option value="{{ $boletagarantia->id }}">{{ $boletagarantia->documentos_garantia }}</option>
-                                        @endforeach
-                                        </select>
-                                      </div>
-                                </div>
-                            </div>
+                            @endcan
                             <div class="row">
                                 <label for="id_modalidad" class="col-sm-2 col-form-label">Modalidad</label>
                                 <div class="col-sm-7">
