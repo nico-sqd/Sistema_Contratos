@@ -21,5 +21,9 @@ class Files extends Model
     {
         return $this->belongsTo(Contrato::class,'id_contrato');
     }
+    public function boletagarantia()
+    {
+        return $this->hasOne(MontoBoleta::class,'archivo');
+    }
 
 }

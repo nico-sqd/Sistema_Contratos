@@ -55,13 +55,12 @@
                                         @if ($contrato->montoboleta->tipomoneda->Nombre_tipo == 'UF')
                                         <div class="h5">Monto Boleta Garantía: ${{ number_format($contrato->montoboleta->monto_boleta)}} {{$contrato->montoboleta->tipomoneda->Nombre_tipo}}</div>
                                         @endif
-                                        <div class="h5">Fecha Inicio Boleta Garantía: {{$contrato->montoboleta->fecha_inicio}}</div>
-                                        <div class="h5">Fecha Fin Boleta Garantía: {{$contrato->montoboleta->fecha_fin}}</div>
+                                        <div class="h5">Fecha Vencimiento Boleta Garantía: {{$contrato->montoboleta->fecha_vencimiento}}</div>
                                     </div>
                                     <div class="row">
                                         <div class="col-12 text-center">
-                                            <a href="{{ route('contratos.boletagarantia.index', $contrato->id) }}" class="btn btn-facebook">Agregar Boleta de Garantía</a>
-                                            <a href="{{ route('contratos.aumento.index', $contrato->id) }}" class="btn btn-facebook">Agregar modificación  de contrato</a>
+                                            <a href="{{ route('contratos.boletagarantia.index', $contrato->id) }}" class="btn btn-facebook">Boletas de Garantía</a>
+                                            <a href="{{ route('contratos.aumento.index', $contrato->id) }}" class="btn btn-facebook">Agregar Modificación  de Contrato</a>
                                             <a href="{{ route('contratos.aumento.index', $contrato->id) }}" class="btn btn-danger">Multas del Contrato</a>
                                         </div>
                                     </div>

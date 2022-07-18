@@ -19,11 +19,15 @@ class MontoBoleta extends Model
      */
     protected $fillable = [
         'monto_boleta',
-        'fecha_inicio',
-        'fecha_fin',
+        'fecha_vencimiento',
         'id_boleta',
         'id_tipo_boleta',
         'id_moneda',
+        'otraboleta',
+        'institucion',
+        'id_contrato_original',
+        'id_contrato_modificada',
+        'archivo',
     ];
 
     public function boletagarantia()
@@ -41,5 +45,9 @@ class MontoBoleta extends Model
     public function tipomoneda()
     {
         return $this->belongsTo(TipoMoneda::class,'id_moneda');
+    }
+    public function file()
+    {
+        return $this->belongsTo(Files::class,'archivo');
     }
 }

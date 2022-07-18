@@ -36,7 +36,7 @@
                                         <label for="res_aumento" class="col-sm-2 col-form-label">Subir Documento</label>
                                         <div class="col-sm-7">
                                             @csrf
-                                            <input type="file" name="nombre_archivo" id="" accept="application/pdf, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/msword,image/*">
+                                            <input type="file" name="nombre_archivo" id="" accept="application/pdf, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/msword,image/*" required oninvalid="this.setCustomValidity('Seleccione antes un archivo para subir')" oninput="this.setCustomValidity('')"/>
                                             @if(Session::has('errors'))
                                                 <div class="alert alert-danger" style="text-align:center" role="alert">
                                                     <h4>{{Session::get('errors')->first()}}</h4>

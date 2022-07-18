@@ -64,6 +64,12 @@ class UserSeeder extends Seeder
         DB::table('tipo_moneda')->insert([
             'Nombre_tipo'=>'UF'
         ]);
+        DB::table('tipo_moneda')->insert([
+            'Nombre_tipo'=>'EUR'
+        ]);
+        DB::table('tipo_moneda')->insert([
+            'Nombre_tipo'=>'UTM'
+        ]);
         DB::table('modalidad')->insert([
             'nombre_modalidad'=>'Licitacion Publica',
             'abreviacion_modalidad'=>'LP'
@@ -87,6 +93,9 @@ class UserSeeder extends Seeder
         ]);
         DB::table('boletagarantia')->insert([
             'documentos_garantia'=>'Certificado de Fianza'
+        ]);
+        DB::table('boletagarantia')->insert([
+            'documentos_garantia'=>'Otro'
         ]);
         DB::table('subdirecciones')->insert([
             'nombre_subdireccion'=>'Subdirección Administrativa',

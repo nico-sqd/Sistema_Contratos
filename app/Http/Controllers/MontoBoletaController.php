@@ -8,6 +8,11 @@ use App\Models\Aumento;
 use App\Models\MontoBoleta;
 use App\Models\BoletaGarantia;
 use App\Models\TipoMoneda;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Files;
 
 class MontoBoletaController extends Controller
 {
@@ -16,9 +21,9 @@ class MontoBoletaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Contrato $contratos)
+    public function index(Request $request, Contrato $contratos)
     {
-        return view('boletagarantia.index',compact('contratos'),['tipoboleta'=>BoletaGarantia::all(),'contratos'=>Contrato::all(),'tipomoneda'=>TipoMoneda::all()]);
+        return view('boletagarantia.index',compact('contratos'),['tipoboleta'=>BoletaGarantia::all(),'contratos'=>Contrato::all(),'tipomoneda'=>TipoMoneda::all(),'montoboleta'=>Montoboleta::all()]);
     }
 
     /**
@@ -39,8 +44,38 @@ class MontoBoletaController extends Controller
      */
     public function store(Request $request, Contrato $contratos)
     {
-        MontoBoleta::create(array_merge($request->only('monto_boleta','fecha_inicio','fecha_fin','id_boleta','id_tipo_boleta','id_moneda')));
-        return redirect()->route('contratos.show', $contratos->id)->with('success', 'Aumento modificado');
+        $archivo = $request->all();
+        $archivo['uuid'] = (string) Str::uuid();
+        $archivo['id_contrato'] = $contratos->id;
+
+        //dd($request);
+        //en php.ini subir upload_max_filesize = 2M a los megas que quieras subir y post_max_size = 8M a los megas que quieras subir
+        $validator = Validator::make($request->all(), [
+            'nombre_archivo' => ['required','mimes:pdf,jpg,jpeg,png,xlsx,docx,doc,ppt,octet-stream','max:25000']
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors('No se puede subir este tipo de archivo o es muy pesado');
+        }
+
+        if($request->hasFile('nombre_archivo')){
+            $archivo['nombre_archivo'] = $request->file('nombre_archivo')->getClientOriginalName();
+            $request->file('nombre_archivo')->storeAs('folder_file',$archivo['nombre_archivo']);
+        }
+        //dd($request);
+        $archivoboleta = Files::create($archivo);
+
+        $contrato = $contratos;
+        $idboleta = MontoBoleta::create(array_merge($request->only('monto_boleta','fecha_vencimiento','id_boleta','id_tipo_boleta','id_moneda','otraboleta','institucion','id_contrato_modificada','archivo'),['id_contrato_modificada'=>$contrato->id, 'archivo'=>$archivoboleta->id]));
+        $contrato->update(array_merge($request->only('id_boleta','id_monto_boleta'),['id_boleta'=>$request->id_tipo_boleta,'id_monto_boleta'=>$idboleta->id]));
+        return redirect()->route('contratos.boletagarantia.index', $contrato->id)->with('success', 'Aumento modificado');
+    }
+
+    public function download($uuid)
+    {
+        $file = Files::where('uuid',$uuid)->firstOrFail();
+        $pathToFile = storage_path("app/folder_file/" . $file->nombre_archivo);
+        return response()->download($pathToFile);
     }
 
     /**

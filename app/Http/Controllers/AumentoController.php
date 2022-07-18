@@ -8,6 +8,11 @@ use App\Models\Aumento;
 use App\Models\MontoBoleta;
 use App\Models\BoletaGarantia;
 use App\Models\TipoMoneda;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Files;
 
 class AumentoController extends Controller
 {
@@ -40,17 +45,35 @@ class AumentoController extends Controller
      */
     public function store(Request $request, Contrato $contratos)
     {
-        //dd($request->monto_aumento);
-        //$monto_boleta = number_format($request->monto_boleta,2,',','.');
-        //$monto_aumento = number_format($request->monto_aumento);
-        //dd($request->monto_aumento);
+        $archivo = $request->all();
+        $archivo['uuid'] = (string) Str::uuid();
+        $archivo['id_contrato'] = $contratos->id;
+
+        //dd($request);
+        //en php.ini subir upload_max_filesize = 2M a los megas que quieras subir y post_max_size = 8M a los megas que quieras subir
+        $validator = Validator::make($request->all(), [
+            'nombre_archivo' => ['required','mimes:pdf,jpg,jpeg,png,xlsx,docx,doc,ppt,octet-stream','max:25000']
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors('No se puede subir este tipo de archivo o es muy pesado');
+        }
+
+        if($request->hasFile('nombre_archivo')){
+            $archivo['nombre_archivo'] = $request->file('nombre_archivo')->getClientOriginalName();
+            $request->file('nombre_archivo')->storeAs('folder_file',$archivo['nombre_archivo']);
+        }
+        //dd($request);
+        $archivoboleta = Files::create($archivo);
+
         $contrato = $contratos;
         $monto = $contratos->monto;
         $montoboleta = $contratos->montoboleta;
         $monto->update(array_merge($request->only('moneda'),['moneda'=>$monto->moneda+$request->monto_aumento]));
-        $id_boleta = MontoBoleta::create(array_merge($request->only('monto_boleta','fecha_inicio','fecha_fin','id_boleta','id_tipo_boleta','id_moneda'),['fecha_inicio'=>$request->vigencia_inicio, 'fecha_fin'=>$request->vigencia_fin]));
+        $id_boleta = MontoBoleta::create(array_merge($request->only('monto_boleta','fecha_vencimiento','id_boleta','id_tipo_boleta','id_moneda','otraboleta','institucion','id_contrato_modificada','archivo'),['id_contrato_modificada'=>$contrato->id, 'archivo'=>$archivoboleta->id]));
         $contrato->update(array_merge($request->only('aumento_contrato','res_aumento','id_monto_boleta'),['aumento_contrato'=>$request->monto_aumento,'id_monto_boleta'=>$id_boleta->id]));
         Aumento::create(array_merge($request->only('monto_aumento','res_aumento','id_contrato','id_monto_boleta','monto_total'),['id_contrato'=>$contratos->id,'id_monto_boleta'=>$montoboleta->id,'monto_total'=>$monto->moneda]));
+        //$id_boleta->update(array_merge($request->only()));
         return redirect()->route('contratos.show', $contratos->id)->with('success', 'Aumento modificado');
     }
 
@@ -95,7 +118,7 @@ class AumentoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Contrato $contrato, Aumento $aumentos, MontoBoleta $montoboleta)
-    {  
+    {
         //d($aumentos->montoboleta);
         $aumentos-> montoboleta -> delete();
         $aumentos -> delete();
