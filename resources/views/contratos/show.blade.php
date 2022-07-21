@@ -44,19 +44,23 @@
                                         <div class="h5">Aumento Contrato: {{$contrato->aumento_contrato}}</div>
                                         <div class="h5">Res. Aumento Contrato: {{$contrato->res_aumento}}</div>
                                     </div>
-                                    <div class="container p-3 my-3 border">
-                                        <div class="h5">ID Boleta Garantía: {{$contrato->montoboleta->id_boleta}}</div>
-                                        @if ($contrato->montoboleta->tipomoneda->Nombre_tipo == 'CLP')
-                                        <div class="h5">Monto Boleta Garantía: ${{ number_format($contrato->montoboleta->monto_boleta)}} {{$contrato->montoboleta->tipomoneda->Nombre_tipo}}</div>
+                                    @foreach ($montoboleta as $boletas)
+                                        @if ($boletas->id_contrato_original != NULL)
+                                        <div class="container p-3 my-3 border">
+                                            <div class="h5">N° Documento Boleta Garantía: {{$boletas->id_boleta}}</div>
+                                            @if ($boletas->tipomoneda->Nombre_tipo == 'CLP')
+                                            <div class="h5">Monto Boleta Garantía: ${{ number_format($boletas->monto_boleta)}} {{$boletas->tipomoneda->Nombre_tipo}}</div>
+                                            @endif
+                                            @if ($boletas->tipomoneda->Nombre_tipo == 'USD')
+                                            <div class="h5">Monto Boleta Garantía: ${{ number_format($boletas->monto_boleta,2,',','.') }} {{$boletas->tipomoneda->Nombre_tipo}}</div>
+                                            @endif
+                                            @if ($boletas->tipomoneda->Nombre_tipo == 'UF')
+                                            <div class="h5">Monto Boleta Garantía: ${{ number_format($boletas->monto_boleta)}} {{$boletas->tipomoneda->Nombre_tipo}}</div>
+                                            @endif
+                                            <div class="h5">Fecha Vencimiento Boleta Garantía: {{$boletas->fecha_vencimiento}}</div>
+                                        </div>
                                         @endif
-                                        @if ($contrato->montoboleta->tipomoneda->Nombre_tipo == 'USD')
-                                        <div class="h5">Monto Boleta Garantía: ${{ number_format($contrato->montoboleta->monto_boleta,2,',','.') }} {{$contrato->montoboleta->tipomoneda->Nombre_tipo}}</div>
-                                        @endif
-                                        @if ($contrato->montoboleta->tipomoneda->Nombre_tipo == 'UF')
-                                        <div class="h5">Monto Boleta Garantía: ${{ number_format($contrato->montoboleta->monto_boleta)}} {{$contrato->montoboleta->tipomoneda->Nombre_tipo}}</div>
-                                        @endif
-                                        <div class="h5">Fecha Vencimiento Boleta Garantía: {{$contrato->montoboleta->fecha_vencimiento}}</div>
-                                    </div>
+                                    @endforeach
                                     <div class="row">
                                         <div class="col-12 text-center">
                                             <a href="{{ route('contratos.boletagarantia.index', $contrato->id) }}" class="btn btn-facebook">Boletas de Garantía</a>

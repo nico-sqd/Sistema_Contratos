@@ -58,9 +58,11 @@ class BoletaGarantiaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Contrato $contratos)
     {
-        //
+        dd($contratos->id);
+        return view('boletagarantia.edit', compact('contratos'),['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
+        'montoboletagarantia'=>MontoBoleta::all(),'monto'=>Monto::all(),'contrato'=>Contrato::all()]);
     }
 
     /**

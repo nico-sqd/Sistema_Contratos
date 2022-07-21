@@ -95,9 +95,10 @@ class MontoBoletaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Contrato $contratos, Request $request, MontoBoleta $montoboleta)
     {
-        //
+        return view('boletagarantia.edit', compact('contratos'),['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
+        'montoboletagarantia'=>MontoBoleta::all(),'contrato'=>Contrato::all()]);
     }
 
     /**
@@ -107,9 +108,10 @@ class MontoBoletaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Contrato $contratos, MontoBoleta $boletagarantia)
     {
-        //
+        $boletagarantia->update($request->only('monto_boleta','fecha_vencimiento','id_boleta','id_tipo_boleta','id_moneda','otraboleta','institucion'));
+        return redirect()->route('contratos.index', $contratos->id)->with('success', 'Usuario creado correctamente.');
     }
 
     /**

@@ -115,7 +115,7 @@ class ContratoController extends Controller
     public function show(Contrato $contrato)
     {
         return view('contratos.show', compact('contrato'), ['proveedores'=>Proveedor::all(),'convenios'=>Convenio::all(),'estadocontraot'=>EstadoContrato::all(),
-        'aumento'=>Aumento::all(),'boletagarantia'=>BoletaGarantia::all()]) ;
+        'aumento'=>Aumento::all(),'boletagarantia'=>BoletaGarantia::all(),'montoboleta'=>MontoBoleta::all()]) ;
     }
 
     /**

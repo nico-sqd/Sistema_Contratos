@@ -55,6 +55,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::model('contrato', \App\Models\Contrato::class);
         Route::model('files', \App\Models\Files::class);
         Route::model('aumento', \App\Models\Aumento::class);
+        Route::model('boletagarantia', \App\Models\MontoBoleta::class);
 
     }
 

@@ -159,6 +159,7 @@
                                     @endif
                                     <td>{{ $boleta->fecha_vencimiento }}</td>
                                     <td class="td-actions text-center">
+                                        <a href="{{ route('contratos.boletagarantia.edit', [$contratos,$boleta]) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
                                         <a href="{{ route('files.download', $boleta->file->uuid) }}" class="btn btn-info"><i class="material-icons">download</i></a>
                                     </form>
                                 </td>

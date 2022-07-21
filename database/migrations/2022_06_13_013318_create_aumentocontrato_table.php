@@ -20,6 +20,8 @@ class CreateAumentocontratoTable extends Migration
             $table->float('monto_aumento');
             $table->string('res_aumento');
             $table->float('monto_total');
+            $table->string('res_aprueba_aumento');
+            $table->date('fecha_resolucion');
             $table->unsignedBigInteger('id_contrato');
             $table->foreign('id_contrato')->references('id')->on('contrato');
             $table->unsignedBigInteger('id_monto_boleta');

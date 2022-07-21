@@ -20,9 +20,18 @@
                             <div class="row">
                                 <label for="res_aumento" class="col-sm-2 col-form-label">Resolución Aumento</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="res_aumento" placeholder="Resolución" value="{{old('res_aumento')}}" autofocus  required oninvalid="this.setCustomValidity('Ingrese ID de resolución')" oninput="this.setCustomValidity('')"/>
+                                    <input type="text" class="form-control" name="res_aumento" placeholder="Resolución Aumento" value="{{old('res_aumento')}}" autofocus  required oninvalid="this.setCustomValidity('Ingrese ID de resolución')" oninput="this.setCustomValidity('')"/>
                                     @if ($errors->has('res_aumento'))
                                         <span class="error text-danger" for="input-res_aumento">{{$errors -> first('res_aumento')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="res_aprueba_aumento" class="col-sm-2 col-form-label">Resolución Aprueba Aumento</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="res_aprueba_aumento" placeholder="Resolución Aprueba Aumento" value="{{old('res_aprueba_aumento')}}" autofocus  required oninvalid="this.setCustomValidity('Ingrese ID de resolución')" oninput="this.setCustomValidity('')"/>
+                                    @if ($errors->has('res_aprueba_aumento'))
+                                        <span class="error text-danger" for="input-res_aprueba_aumento">{{$errors -> first('res_aprueba_aumento')}}</span>
                                     @endif
                                 </div>
                             </div>
@@ -33,6 +42,12 @@
                                     @if ($errors->has('monto_aumento'))
                                         <span class="error text-danger" for="input-monto_aumento">{{$errors -> first('monto_aumento')}}</span>
                                     @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="fecha_resolucion" class="col-sm-2 col-form-label">Fecha de Resolución</label>
+                                <div class="col-sm-7">
+                                    <input type="date" class="form-control" name="fecha_resolucion">
                                 </div>
                             </div>
                             <div class="row">

@@ -20,6 +20,8 @@ class Aumento extends Model
         'res_aumento',
         'id_contrato',
         'id_monto_boleta',
+        'res_aprueba_aumento',
+        'fecha_resolucion',
     ];
 
     public function contrato()

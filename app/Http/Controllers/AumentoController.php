@@ -72,7 +72,7 @@ class AumentoController extends Controller
         $monto->update(array_merge($request->only('moneda'),['moneda'=>$monto->moneda+$request->monto_aumento]));
         $id_boleta = MontoBoleta::create(array_merge($request->only('monto_boleta','fecha_vencimiento','id_boleta','id_tipo_boleta','id_moneda','otraboleta','institucion','id_contrato_modificada','archivo'),['id_contrato_modificada'=>$contrato->id, 'archivo'=>$archivoboleta->id]));
         $contrato->update(array_merge($request->only('aumento_contrato','res_aumento','id_monto_boleta'),['aumento_contrato'=>$request->monto_aumento,'id_monto_boleta'=>$id_boleta->id]));
-        Aumento::create(array_merge($request->only('monto_aumento','res_aumento','id_contrato','id_monto_boleta','monto_total'),['id_contrato'=>$contratos->id,'id_monto_boleta'=>$montoboleta->id,'monto_total'=>$monto->moneda]));
+        Aumento::create(array_merge($request->only('monto_aumento','res_aumento','id_contrato','id_monto_boleta','monto_total','res_aprueba_aumento','fecha_resolucion'),['id_contrato'=>$contratos->id,'id_monto_boleta'=>$montoboleta->id,'monto_total'=>$monto->moneda]));
         //$id_boleta->update(array_merge($request->only()));
         return redirect()->route('contratos.show', $contratos->id)->with('success', 'Aumento modificado');
     }
