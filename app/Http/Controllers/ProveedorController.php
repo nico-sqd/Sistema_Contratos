@@ -103,7 +103,12 @@ class ProveedorController extends Controller
      */
     public function destroy(Proveedor $proveedores)
     {
-        $proveedores->delete();
+        if(!$proveedores->contrato()->exists()){
+            $proveedores->delete();
         return redirect()->route('proveedor.index');
+          } else {
+            return back()->with('success', 'Proveedor activo en contrato');
+          } 
+        
     }
 }

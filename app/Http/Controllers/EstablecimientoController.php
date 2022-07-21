@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Establecimiento;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class EstablecimientoController extends Controller
@@ -91,8 +92,12 @@ class EstablecimientoController extends Controller
      */
     public function destroy(Establecimiento $establecimientos)
     {
-        $establecimientos->delete();
 
-        return redirect()->route('establecimiento.index');
+        if(!$establecimientos->usuarios()->exists()){
+            $establecimientos->delete();
+            return redirect()->route('proveedor.index');
+          } else {
+            return back()->with('success', 'Usuarios trabajando en el establecimiento');
+          } 
     }
 }
