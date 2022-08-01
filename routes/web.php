@@ -56,5 +56,6 @@ Route::group(['middleware'=>'auth'], function(){
     Route::resource('caratula', App\Http\Controllers\CaratulaController::class);
     Route::resource('contratos.aumento', App\Http\Controllers\AumentoController::class);
     Route::resource('contratos.boletagarantia', App\Http\Controllers\MontoBoletaController::class);
+    Route::resource('contratos.multas', App\Http\Controllers\MultasController::class);
 });
 

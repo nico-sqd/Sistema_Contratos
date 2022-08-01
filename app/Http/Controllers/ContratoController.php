@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Models\Aumento;
 use App\Models\EstadoContrato;
 use App\Models\Files;
+use App\Models\Multas;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -115,7 +116,7 @@ class ContratoController extends Controller
     public function show(Contrato $contrato)
     {
         return view('contratos.show', compact('contrato'), ['proveedores'=>Proveedor::all(),'convenios'=>Convenio::all(),'estadocontraot'=>EstadoContrato::all(),
-        'aumento'=>Aumento::all(),'boletagarantia'=>BoletaGarantia::all(),'montoboleta'=>MontoBoleta::all()]) ;
+        'aumento'=>Aumento::all(),'boletagarantia'=>BoletaGarantia::all(),'montoboleta'=>MontoBoleta::all(),'multas'=>Multas::all()]) ;
     }
 
     /**
