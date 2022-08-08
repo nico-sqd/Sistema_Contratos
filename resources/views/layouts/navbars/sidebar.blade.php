@@ -65,22 +65,22 @@
         </a>
       </li>
       @endcan
-      @can('Oculto') <!-- Seccion oculta  -->
+      
       <li class="nav-item{{ $activePage == 'permissions' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('permissions.index') }}">
           <i class="material-icons">bubble_chart</i>
           <p>{{ __('Permisos') }}</p>
         </a>
       </li>
-      @endcan
-      @can('Oculto') <!-- Seccion oculta  -->
+      
+      
       <li class="nav-item{{ $activePage == 'roles' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('roles.index') }}">
           <i class="material-icons">work_outline</i>
             <p>{{ __('Roles') }}</p>
         </a>
       </li>
-      @endcan
+      
       <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
         <a class="nav-link" href="#">
           <i class="material-icons">notifications</i>

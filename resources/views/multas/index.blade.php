@@ -33,8 +33,8 @@
                                     @endif
                                     <div class="row">
                                         <div class="col-12 text-right">
-                                            @can('admin_create')
                                             <a href="{{ url()->route('contratos.show', $contratos->id) }}" class="btn btn-facebook"><i class="material-icons">arrow_back</i></a>
+                                            @can('admin_create')
                                             <a href="{{ route('contratos.multas.create', $contratos->id) }}" class="btn btn-sm btn-danger">Añadir Multa</a>
                                             @endcan
                                         </div>
