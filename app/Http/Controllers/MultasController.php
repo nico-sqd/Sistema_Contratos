@@ -16,6 +16,8 @@ use App\Models\Aumento;
 use App\Models\EstadoContrato;
 use App\Models\Files;
 use App\Models\Multas;
+use App\Models\EstadoPagoMulta;
+use App\Models\EstadoTramiteMulta;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -39,7 +41,7 @@ class MultasController extends Controller
      */
     public function create(Contrato $contratos)
     {
-        return view('multas.create',compact('contratos'),['multas'=>Multas::all()]);
+        return view('multas.create',compact('contratos'),['multas'=>Multas::all(),'estadopagomulta'=>EstadoPagoMulta::all(),'estadotramitemulta'=>EstadoTramiteMulta::all()]);
     }
 
     /**

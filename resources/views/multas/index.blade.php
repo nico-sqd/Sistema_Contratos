@@ -50,7 +50,7 @@
                                             <tbody>
                                             @if (count($multas)<=0)
                                                 <div class="alert alert-danger" style="text-align:center" role="alert">
-                                                    <h4>No se han encontrado contratos</h4>
+                                                    <h4>No se han encontrado multas</h4>
                                                 </div>
                                             @endif
                                             @foreach ($multas as $multa)

@@ -18,12 +18,170 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <label for="nmr_memo_informe" class="col-sm-2 col-form-label">N° Memorándum Informe</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="nmr_memo_informe" placeholder="N° Memorándum Informe" value="{{old('nmr_memo_informe')}}">
+                                    @if ($errors->has('nmr_memo_informe'))
+                                        <span class="error text-danger" for="input-nmr_memo_informe">{{$errors -> first('nmr_memo_informe')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="nmr_oficio" class="col-sm-2 col-form-label">N° Oficio</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="nmr_oficio" placeholder="N° Oficio" value="{{old('nmr_oficio')}}">
+                                    @if ($errors->has('nmr_oficio'))
+                                        <span class="error text-danger" for="input-nmr_oficio">{{$errors -> first('nmr_oficio')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="fecha_oficio" class="col-sm-2 col-form-label">Fecha Notificación</label>
+                                <div class="col-sm-3">
+                                    <input type="date" class="form-control" name="fecha_oficio">
+                                </div>
+                                <label for="plazo_dias_notificacion" class="col-sm-1 col-form-label">Plazo (Días)</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="plazo_dias_notificacion" placeholder="Número Días" value="{{old('plazo_dias_notificacion')}}">
+                                    @if ($errors->has('plazo_dias_notificacion'))
+                                        <span class="error text-danger" for="input-plazo_dias_notificacion">{{$errors -> first('plazo_dias_notificacion')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="fecha_oficio" class="col-sm-2 col-form-label">Presenta Descargos</label>
+                                <div class="col-sm-3">
+                                    <div class="form-check form-check-radio form-check-inline">
+                                        <label class="form-check-label">
+                                          <input class="form-check-input" type="radio" name="presenta_descargos" id="inlineRadio1" value=1> SI
+                                          <span class="circle">
+                                              <span class="check"></span>
+                                          </span>
+                                        </label>
+                                      </div>
+                                      <div class="form-check form-check-radio form-check-inline">
+                                        <label class="form-check-label">
+                                          <input class="form-check-input" type="radio" name="presenta_descargos" id="inlineRadio2" value=0> NO
+                                          <span class="circle">
+                                              <span class="check"></span>
+                                          </span>
+                                        </label>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="nmr_memo_juridica" class="col-sm-2 col-form-label">N° Memorándum Jurídica</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="nmr_memo_juridica" placeholder="N° Memorándum Jurídica" value="{{old('nmr_memo_juridica')}}">
+                                    @if ($errors->has('nmr_memo_juridica'))
+                                        <span class="error text-danger" for="input-nmr_memo_juridica">{{$errors -> first('nmr_memo_juridica')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="fecha_memo" class="col-sm-2 col-form-label">Fecha Memorándum</label>
+                                <div class="col-sm-7">
+                                    <input type="date" class="form-control" name="fecha_memo">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="nmr_res_exenta" class="col-sm-2 col-form-label">N° Resolución Exenta</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="nmr_res_exenta" placeholder="N° Resolución Exenta" value="{{old('nmr_res_exenta')}}">
+                                    @if ($errors->has('nmr_res_exenta'))
+                                        <span class="error text-danger" for="input-nmr_res_exenta">{{$errors -> first('nmr_res_exenta')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="fecha_res_exenta" class="col-sm-2 col-form-label">Fecha Resolución Exenta</label>
+                                <div class="col-sm-3">
+                                    <input type="date" class="form-control" name="fecha_res_exenta">
+                                </div>
+                                <label for="plazo_dias_exenta" class="col-sm-1 col-form-label">Plazo (Días)</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="plazo_dias_exenta" placeholder="Número Días" value="{{old('plazo_dias_exenta')}}">
+                                    @if ($errors->has('plazo_dias_exenta'))
+                                        <span class="error text-danger" for="input-plazo_dias_exenta">{{$errors -> first('plazo_dias_exenta')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="fecha_oficio" class="col-sm-2 col-form-label">Presenta Recurso de Reposición</label>
+                                <div class="col-sm-3">
+                                    <div class="form-check form-check-radio form-check-inline">
+                                        <label class="form-check-label">
+                                          <input class="form-check-input" type="radio" name="presenta_rec_de_reposicion" id="inlineRadio1" value=1> SI
+                                          <span class="circle">
+                                              <span class="check"></span>
+                                          </span>
+                                        </label>
+                                      </div>
+                                      <div class="form-check form-check-radio form-check-inline">
+                                        <label class="form-check-label">
+                                          <input class="form-check-input" type="radio" name="presenta_rec_de_reposicion" id="inlineRadio2" value=0> NO
+                                          <span class="circle">
+                                              <span class="check"></span>
+                                          </span>
+                                        </label>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="nmr_memo_juridica_2" class="col-sm-2 col-form-label">N° Memorándum Jurídica</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="nmr_memo_juridica_2" placeholder="N° Memorándum Jurídica" value="{{old('nmr_memo_juridica_2')}}">
+                                    @if ($errors->has('nmr_memo_juridica_2'))
+                                        <span class="error text-danger" for="input-nmr_memo_juridica_2">{{$errors -> first('nmr_memo_juridica_2')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="nmr_res_exenta_2" class="col-sm-2 col-form-label">N° Resolución Exenta</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="nmr_res_exenta_2" placeholder="N° Resolución Exenta" value="{{old('nmr_res_exenta_2')}}">
+                                    @if ($errors->has('nmr_res_exenta_2'))
+                                        <span class="error text-danger" for="input-nmr_res_exenta_2">{{$errors -> first('nmr_res_exenta_2')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="fecha_res_exenta_2" class="col-sm-2 col-form-label">Fecha Resolución Exenta</label>
+                                <div class="col-sm-7">
+                                    <input type="date" class="form-control" name="fecha_res_exenta_2">
+                                </div>
+                            </div>
+                            <div class="row">
                                 <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="descripcion" placeholder="Institución financiera" value="{{old('descripcion')}}">
                                     @if ($errors->has('descripcion'))
                                         <span class="error text-danger" for="input-descripcion">{{$errors -> first('descripcion')}}</span>
                                     @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="id_estadomulta" class="col-sm-2 col-form-label">Estado de Pago</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_estadomulta">
+                                        @foreach ( $estadopagomulta as $pago )
+                                            <option value="{{ $pago->id }}">{{ $pago->estado_pago }}</option>
+                                        @endforeach
+                                        </select>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="id_estadomulta" class="col-sm-2 col-form-label">Estado de Trámite</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_estadomulta">
+                                        @foreach ( $estadotramitemulta as $pago )
+                                            <option value="{{ $pago->id }}">{{ $pago->estado_tramite }}</option>
+                                        @endforeach
+                                        </select>
+                                      </div>
                                 </div>
                             </div>
                         <!--footers-->
