@@ -16,6 +16,7 @@ class CreateMultasTable extends Migration
         Schema::create('multas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
             $table->string('nmr_memo_informe');
             $table->string('nmr_oficio')->nullable();
             $table->date('fecha_oficio')->nullable();
@@ -32,6 +33,9 @@ class CreateMultasTable extends Migration
             $table->string('nmr_res_exenta_2')->nullable();
             $table->date('fecha_res_exenta_2')->nullable();
             $table->text('descripcion')->nullable();
+            $table->string('nmr_factura')->nullable();
+            $table->string('nmr_ingreso')->nullable();
+            $table->date('fecha_comprobante')->nullable();
             $table->string('estado_comprobante_pago_proveedor')->nullable();
             $table->date('fecha_estado_comprobante_pago_proveedor')->nullable();
             $table->string('estado_comprobante_pago_garantia')->nullable();

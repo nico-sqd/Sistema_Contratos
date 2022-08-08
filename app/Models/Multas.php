@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Multas extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'multas';
 
@@ -29,6 +29,9 @@ class Multas extends Model
         'nmr_res_exenta_2',
         'fecha_res_exenta_2',
         'descripcion',
+        'nmr_factura',
+        'nmr_ingreso',
+        'fecha_comprobante',
         'id_contrato',
         'id_estadomulta',
         'id_estadotramite',

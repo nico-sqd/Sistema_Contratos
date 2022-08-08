@@ -23,7 +23,7 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <p class="card-category">Datos de Contratos</p>
+                                    <p class="card-category">Datos de Multas</p>
                                 </div>
                                 <div class="card-body">
                                     @if (session('success'))
@@ -42,9 +42,10 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead class="text-primary">
-                                                <th>ID Multa</th>
-                                                <th>Creacion</th>
                                                 <th>Descripción</th>
+                                                <th>Estado de tramite</th>
+                                                <th>Estado de pago multa</th>
+                                                <th>Fecha Oficio</th>
                                                 <th class="text-right">Acciones</th>
                                             </thead>
                                             <tbody>
@@ -54,29 +55,32 @@
                                                 </div>
                                             @endif
                                             @foreach ($multas as $multa)
-                                                <tr>
-                                                    <td>{{ $multa->id }}</td>
-                                                    <td>{{ $multa->created_at }}</td>
-                                                    <td>{{ $multa->descripcion }}</td>
-                                                    <td class="td-actions text-right">
-                                                        @can('show')
-                                                        <a href="{{ route('contratos.show', $multa->id) }}" class="btn btn-info"><i class="material-icons">library_books</i></a>
-                                                        @endcan
-                                                        @can('admin_edit')
-                                                        <a href="{{ route('contratos.edit', $multa->id) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
-                                                        @endcan
-                                                        @can('admin_destroy')
-                                                        <form action="{{route('contratos.multas.destroy', [$contratos,$multa])}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-danger" type="submit" rel="tooltip">
-                                                            <i class="material-icons">close</i>
-                                                        </button>
-                                                        </form>
-                                                        @endcan
-                                                    </td>
-                                                </tr>
-                                                @endforeach
+                                                @if ($multa->id_contrato == $contratos->id)
+                                                    <tr>
+                                                        <td>{{ $multa->descripcion }}</td>
+                                                        <td>{{ $multa->estadotramitemulta->estado_tramite }}</td>
+                                                        <td>{{ $multa->estadopagomulta->estado_pago }}</td>
+                                                        <td>{{ $multa->fecha_oficio }}</td>
+                                                        <td class="td-actions text-right">
+                                                            @can('show')
+                                                            <a href="{{ route('contratos.multas.show', [$contratos,$multa]) }}" class="btn btn-info"><i class="material-icons">library_books</i></a>
+                                                            @endcan
+                                                            @can('admin_edit')
+                                                            <a href="{{ route('contratos.multas.edit', [$contratos, $multa]) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                            @endcan
+                                                            @can('admin_destroy')
+                                                            <form action="{{route('contratos.multas.destroy', [$contratos,$multa])}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-danger" type="submit" rel="tooltip">
+                                                                <i class="material-icons">close</i>
+                                                            </button>
+                                                            </form>
+                                                            @endcan
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
                                             </tbody>
                                         </table>
                                     </div>
