@@ -273,6 +273,39 @@ class UserSeeder extends Seeder
         DB::table('estadocontrato')->insert([
             'estado_contrato'=>'Fin Presupuesto',
         ]);
+        DB::table('estadopagomulta')->insert([
+            'estado_pago'=>'Pendiente',
+        ]);
+        DB::table('estadopagomulta')->insert([
+            'estado_pago'=>'Cobrado',
+        ]);
+        DB::table('estadopagomulta')->insert([
+            'estado_pago'=>'Pago Proveedor',
+        ]);
+        DB::table('estadopagomulta')->insert([
+            'estado_pago'=>'Cobrado desde Garantía',
+        ]);
+        DB::table('estadotramitemulta')->insert([
+            'estado_tramite'=>'En Notificación',
+        ]);
+        DB::table('estadotramitemulta')->insert([
+            'estado_tramite'=>'En Revisión de Descargos',
+        ]);
+        DB::table('estadotramitemulta')->insert([
+            'estado_tramite'=>'Resolución Solicitada',
+        ]);
+        DB::table('estadotramitemulta')->insert([
+            'estado_tramite'=>'Resolución Emitida',
+        ]);
+        DB::table('estadotramitemulta')->insert([
+            'estado_tramite'=>'En Revisión Recurso de Reposición',
+        ]);
+        DB::table('estadotramitemulta')->insert([
+            'estado_tramite'=>'Resolución Recurso de Reposición',
+        ]);
+        DB::table('estadotramitemulta')->insert([
+            'estado_tramite'=>'Multa Pagada',
+        ]);
         $user = User::create([
             'name'=>'Admin',
             'email'=>'admin@admin.com',

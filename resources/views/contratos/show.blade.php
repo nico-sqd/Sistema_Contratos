@@ -45,7 +45,7 @@
                                         <div class="h5">Res. Aumento Contrato: {{$contrato->res_aumento}}</div>
                                     </div>
                                     @foreach ($montoboleta as $boletas)
-                                        @if ($boletas->id_contrato_original != NULL)
+                                        @if ($boletas->id_contrato_original != NULL && $boletas->id_contrato_original == $contrato->id)
                                         <div class="container p-3 my-3 border">
                                             <div class="h5">N° Documento Boleta Garantía: {{$boletas->id_boleta}}</div>
                                             @if ($boletas->tipomoneda->Nombre_tipo == 'CLP')
@@ -66,6 +66,7 @@
                                             <a href="{{ route('contratos.boletagarantia.index', $contrato->id) }}" class="btn btn-facebook">Boletas de Garantía</a>
                                             <a href="{{ route('contratos.aumento.index', $contrato->id) }}" class="btn btn-facebook">Agregar Modificación  de Contrato</a>
                                             <a href="{{ route('contratos.multas.index', $contrato->id) }}" class="btn btn-danger">Multas del Contrato</a>
+                                            <a href="#" class="btn btn-success">Movimientos Mensuales</a>
                                         </div>
                                     </div>
                                     <div class="card-body">

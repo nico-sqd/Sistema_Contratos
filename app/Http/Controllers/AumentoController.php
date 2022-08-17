@@ -119,7 +119,7 @@ class AumentoController extends Controller
      */
     public function destroy(Contrato $contrato, Aumento $aumentos, MontoBoleta $montoboleta)
     {
-        //d($aumentos->montoboleta);
+        dd($aumentos);
         $aumentos-> montoboleta -> delete();
         $aumentos -> delete();
         return redirect()->route('contratos.show', $contrato->id);

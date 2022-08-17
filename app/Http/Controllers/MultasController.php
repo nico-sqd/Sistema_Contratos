@@ -16,6 +16,8 @@ use App\Models\Aumento;
 use App\Models\EstadoContrato;
 use App\Models\Files;
 use App\Models\Multas;
+use App\Models\EstadoPagoMulta;
+use App\Models\EstadoTramiteMulta;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -27,7 +29,7 @@ class MultasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Contrato $contratos)
+    public function index(Contrato $contratos, Request $request)
     {
         return view('multas.index',compact('contratos'),['contratos'=>Contrato::all(),'multas'=>Multas::all()]);
     }
@@ -39,7 +41,7 @@ class MultasController extends Controller
      */
     public function create(Contrato $contratos)
     {
-        return view('multas.create',compact('contratos'),['multas'=>Multas::all()]);
+        return view('multas.create',compact('contratos'),['multas'=>Multas::all(),'estadopagomulta'=>EstadoPagoMulta::all(),'estadotramitemulta'=>EstadoTramiteMulta::all()]);
     }
 
     /**
@@ -51,7 +53,9 @@ class MultasController extends Controller
     public function store(Request $request, Contrato $contratos)
     {
         //dd($request->descripcion);
-        Multas::create(array_merge($request->only('descripcion','id_contrato'),['id_contrato'=>$contratos->id]));
+        $multas = Multas::create(array_merge($request->only('nmr_memo_informe','nmr_oficio','fecha_oficio','fecha_notificacion','plazo_dias_notificacion','presenta_descargos',
+        'nmr_memo_juridica','fecha_memo','nmr_res_exenta','fecha_res_exenta','plazo_dias_exenta',
+        'presenta_rec_de_reposicion','nmr_memo_juridica_2','nmr_res_exenta_2','fecha_res_exenta_2','descripcion','id_contrato','id_estadomulta','id_estadotramite','nmr_factura','nmr_ingreso','fecha_comprobante'),['id_contrato'=>$contratos->id]));
         return redirect()->route('contratos.multas.index', $contratos->id)->with('success', 'Multa creada correctamente.');
     }
 
@@ -61,9 +65,9 @@ class MultasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Contrato $contratos, Multas $multa)
     {
-        //
+        return view('multas.show',compact('contratos','multa'),['multas'=>Multas::all(),'estadopagomulta'=>EstadoPagoMulta::all(),'estadotramitemulta'=>EstadoTramiteMulta::all()]);
     }
 
     /**
@@ -72,9 +76,10 @@ class MultasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Contrato $contratos, Multas $multa)
     {
-        //
+        //dd($multa);
+        return view('multas.edit',compact('contratos','multa'),['estadopagomulta'=>EstadoPagoMulta::all(),'estadotramitemulta'=>EstadoTramiteMulta::all(),'multas'=>Multas::all()]);
     }
 
     /**
@@ -84,9 +89,12 @@ class MultasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Contrato $contratos, Multas $multa)
     {
-        //
+        $multa->update(array_merge($request->only('nmr_memo_informe','nmr_oficio','fecha_oficio','fecha_notificacion','plazo_dias_notificacion','presenta_descargos',
+        'nmr_memo_juridica','fecha_memo','nmr_res_exenta','fecha_res_exenta','plazo_dias_exenta',
+        'presenta_rec_de_reposicion','nmr_memo_juridica_2','nmr_res_exenta_2','fecha_res_exenta_2','descripcion','id_contrato','id_estadomulta','id_estadotramite','nmr_factura','nmr_ingreso','fecha_comprobante')));
+        return redirect()->route('contratos.multas.index', $contratos->id)->with('success', 'Multa editada correctamente.');
     }
 
     /**
@@ -95,9 +103,10 @@ class MultasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contrato $contratos, Multas $multas)
+    public function destroy(Contrato $contratos, Multas $multa)
     {
-        $multas -> delete();
+        //dd($multas);
+        $multa->delete();
         return redirect()->route('contratos.multas.index', $contratos->id);
     }
 }

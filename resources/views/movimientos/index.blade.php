@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'contratos', 'titlePage' => 'Multas'])
+@extends('layouts.main', ['activePage' => 'contratos', 'titlePage' => 'Movimientos'])
 @section('content')
     <div class="content">
         <div class="container-fuid">
@@ -42,10 +42,10 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead class="text-primary">
-                                                <th>Descripción</th>
-                                                <th>Estado de tramite</th>
-                                                <th>Estado de pago multa</th>
-                                                <th>Fecha Oficio</th>
+                                                <th>Fecha</th>
+                                                <th>Establecimiento</th>
+                                                <th>OC</th>
+                                                <th>Fecha OC</th>
                                                 <th class="text-right">Acciones</th>
                                             </thead>
                                             <tbody>
