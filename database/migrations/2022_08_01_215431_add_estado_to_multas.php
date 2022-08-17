@@ -14,9 +14,9 @@ class AddEstadoToMultas extends Migration
     public function up()
     {
         Schema::table('multas', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_estadomulta');
+            $table->unsignedBigInteger('id_estadomulta')->nullable();
             $table->foreign('id_estadomulta')->references('id')->on('estadopagomulta');
-            $table->unsignedBigInteger('id_estadotramite');
+            $table->unsignedBigInteger('id_estadotramite')->nullable();
             $table->foreign('id_estadotramite')->references('id')->on('estadotramitemulta');
         });
     }

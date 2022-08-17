@@ -10,15 +10,19 @@
               <div class="card-icon">
                 <i class="material-icons">content_copy</i>
               </div>
-              <p class="card-category">Used Space</p>
-              <h3 class="card-title">49/50
-                <small>GB</small>
+              <p class="card-category">Contratos Activos</p>
+              <h3 class="card-title">{{count($contratos)}}
+                @if (count($contratos) >= 2)
+                    <small>Contratos</small>
+                    @else
+                        <small>Contrato</small>
+                @endif
               </h3>
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons text-danger">warning</i>
-                <a href="#pablo">Get More Space...</a>
+                <i class="material-icons text-success">library_books</i>
+                <a href="{{route('contratos.index')}}">Ver Contratos</a>
               </div>
             </div>
           </div>
@@ -79,14 +83,17 @@
               <div class="ct-chart" id="dailySalesChart"></div>
             </div>
             <div class="card-body">
-              <h4 class="card-title">Daily Sales</h4>
+              <h4 class="card-title">Alerta Baja</h4>
               <p class="card-category">
                 <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
             </div>
             <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons">access_time</i> updated 4 minutes ago
-              </div>
+            @foreach ($multas as $multa)
+                <div class="stats">
+                    <i class="material-icons text-success">visibility</i>
+                    <a href="{{route('contratos.multas.show', [$multa->contrato->id,$multa])}}">Ver multa</a>
+                </div>
+            @endforeach
             </div>
           </div>
         </div>
@@ -96,7 +103,7 @@
               <div class="ct-chart" id="websiteViewsChart"></div>
             </div>
             <div class="card-body">
-              <h4 class="card-title">Email Subscriptions</h4>
+              <h4 class="card-title">Alerta Mediana</h4>
               <p class="card-category">Last Campaign Performance</p>
             </div>
             <div class="card-footer">
@@ -112,7 +119,7 @@
               <div class="ct-chart" id="completedTasksChart"></div>
             </div>
             <div class="card-body">
-              <h4 class="card-title">Completed Tasks</h4>
+              <h4 class="card-title">Alerta Máxima</h4>
               <p class="card-category">Last Campaign Performance</p>
             </div>
             <div class="card-footer">
@@ -371,43 +378,49 @@
         </div>
         <div class="col-lg-6 col-md-12">
           <div class="card">
-            <div class="card-header card-header-warning">
-              <h4 class="card-title">Employees Stats</h4>
-              <p class="card-category">New employees on 15th September, 2016</p>
+            <div class="card-header card-header-danger">
+              <h4 class="card-title">Multas Pendientes</h4>
+              <p class="card-category">Multas pendientes de los contratos hasta la fecha</p>
             </div>
             <div class="card-body table-responsive">
               <table class="table table-hover">
-                <thead class="text-warning">
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Salary</th>
-                  <th>Country</th>
+                <thead class="text-danger">
+                  <th>ID Contrato</th>
+                  <th>N° Memorándum Informe</th>
+                  <th>Fecha Notificación</th>
+                  <th>Plazo Días</th>
+                  <th>Plazo</th>
+                  <th>Acciones</th>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Dakota Rice</td>
-                    <td>$36,738</td>
-                    <td>Niger</td>
+                @if (count($multas)<=0)
+                <div class="alert alert-danger" style="text-align:center" role="alert">
+                    <h4>No se han encontrato multas</h4>
+                </div>
+                @endif
+                @foreach ( $multas as $multas )
+                    <tr>
+                      <td>{{$multas->contrato->id_contrato}}</td>
+                      <td>{{$multas->nmr_memo_informe}}</td>
+                      <td>{{$multas->fecha_notificacion}}</td>
+                      <td>{{$multas->plazo_dias_notificacion}}</td>
+                      <?php
+                        $fecha = new DateTime ($multas->fecha_notificacion);
+                        $fechahoy = new DateTime(date('Y-m-d'));
+                        $diferencia = $fecha->diff($fechahoy);
+                      ?>
+                      @if ($diferencia->y == 0 && $diferencia->m == 0 && $diferencia->d <= 15)
+                        <td>Quedan {{$diferencia->d}} días</td>
+                        @endif
+
+                        <td></td>
+                      <td class="td-actions text-right">
+                        <a href="{{ route('contratos.show', $multas->contrato->id) }}" class="btn btn-info"><i class="material-icons">library_books</i></a>
+                        <a href="{{ route('contratos.multas.show', [$multas->contrato->id,$multas]) }}" class="btn btn-danger"><i class="material-icons">visibility</i></a>
+                      </td>
                   </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Minerva Hooper</td>
-                    <td>$23,789</td>
-                    <td>Curaçao</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Sage Rodriguez</td>
-                    <td>$56,142</td>
-                    <td>Netherlands</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Philip Chaney</td>
-                    <td>$38,735</td>
-                    <td>Korea, South</td>
-                  </tr>
+                    </tr>
+                @endforeach
                 </tbody>
               </table>
             </div>
