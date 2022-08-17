@@ -23,7 +23,7 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <p class="card-category">Datos de Contratos</p>
+                                    <p class="card-category">Datos de Multas</p>
                                 </div>
                                 <div class="card-body">
                                     @if (session('success'))
@@ -50,7 +50,7 @@
                                             <tbody>
                                             @if (count($multas)<=0)
                                                 <div class="alert alert-danger" style="text-align:center" role="alert">
-                                                    <h4>No se han encontrado contratos</h4>
+                                                    <h4>No se han encontrado Multas</h4>
                                                 </div>
                                             @endif
                                             @foreach ($multas as $multa)

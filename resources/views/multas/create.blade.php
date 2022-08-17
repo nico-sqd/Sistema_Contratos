@@ -20,7 +20,7 @@
                             <div class="row">
                                 <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="descripcion" placeholder="Institución financiera" value="{{old('descripcion')}}">
+                                    <input type="text" class="form-control" name="descripcion" placeholder="Descripción de la Multa" value="{{old('descripcion')}}">
                                     @if ($errors->has('descripcion'))
                                         <span class="error text-danger" for="input-descripcion">{{$errors -> first('descripcion')}}</span>
                                     @endif

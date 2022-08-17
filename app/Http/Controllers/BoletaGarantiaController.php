@@ -7,6 +7,8 @@ use app\models\BoletaGarantia;
 use app\models\Contrato;
 use app\models\Monto;
 use app\models\TipoMoneda;
+use app\models\MontoBoleta;
+
 
 class BoletaGarantiaController extends Controller
 {
