@@ -306,6 +306,182 @@ class UserSeeder extends Seeder
         DB::table('estadotramitemulta')->insert([
             'estado_tramite'=>'Multa Pagada',
         ]);
+        $unidades = ['Arriendo Analizador Hormonas',
+        'Arriendo Analizador VHS',
+        'Arriendo Mensual',
+        'Cantidad Eco Abd',
+        'Cantidad Eco Mamaria',
+        'Cantidad Equipos',
+        'Cantidad Exámenes',
+        'Cantidad Funcionarios',
+        'Cantidad Impresiones B y N',
+        'Cantidad Impresiones Color'
+        ,'Cantidad Informes Rx'
+        ,'Cantidad Informes Rx Urgentes'
+        ,'Cantidad Licencias FULL'
+        ,'Cantidad Licencias MIXTA'
+        ,'Cantidad Licencias Software'
+        ,'Cantidad Licencias Software Comunitarias'
+        ,'Cantidad Licencias Software APS'
+        ,'Cantidad Matriculas'
+        ,'Cantidad Mensualidades'
+        ,'Cantidad Prueba Hidrostática'
+        ,'Cantidad Transmisiones ECG'
+        ,'Cantidad Transmisiones ECG Urgentes'
+        ,'Días Arriendo'
+        ,'Días Hábiles'
+        ,'Días Hogar Protegido'
+        ,'Días Rehabilitación'
+        ,'Días Residencia Protegida'
+        ,'Flete Cilindros'
+        ,'Horas D/Ciudad'
+        ,'Horas Extras'
+        ,'Horas F/Ciudad'
+        ,'Informe Fondo de Ojos'
+        ,'Inspección Extintores'
+        ,'Kg Residuos Especiales'
+        ,'Kg Residuos Peligrosos'
+        ,'Litros Combustible'
+        ,'Mantención'
+        ,'Mantención Extintores'
+        ,'Mantención Correctiva Aire Acondicionado'
+        ,'Mantención Correctiva Ascensor'
+        ,'Mantención Correctiva Caldera'
+        ,'Mantención Correctiva Calefacción Central'
+        ,'Mantención Correctiva Chiller'
+        ,'Mantención Correctiva Desfibriladores'
+        ,'Mantención Correctiva Emergencia o Extraordinaria'
+        ,'Mantención Correctiva Equipo Calefacción'
+        ,'Mantención Correctiva Equipos Críticos'
+        ,'Mantención Correctiva Equipos Imagenología'
+        ,'Mantención Correctiva Grupo Electrógeno'
+        ,'Mantención Correctiva Lavandería'
+        ,'Mantención Correctiva Monitores Signos Vitales'
+        ,'Mantención Correctiva Salas Térmicas'
+        ,'Mantención Correctiva Tableros Eléctricos'
+        ,'Mantención Correctiva Vehículo'
+        ,'Mantención Correctiva Ventiladores Mecánicos'
+        ,'Mantención Preventiva Aire Acondicionado'
+        ,'Mantención Preventiva Alcantarillado'
+        ,'Mantención Preventiva Ascensor'
+        ,'Mantención Preventiva Caldera'
+        ,'Mantención Preventiva Calefacción Central'
+        ,'Mantención Preventiva Chiller'
+        ,'Mantención Preventiva Desfibriladores'
+        ,'Mantención Preventiva Equipo Calefacción'
+        ,'Mantención Preventiva Equipos Críticos'
+        ,'Mantención Preventiva Equipos Imagenología'
+        ,'Mantención Preventiva Grupo Electrógeno'
+        ,'Mantención Preventiva Lavandería'
+        ,'Mantención Preventiva Monitores Signos Vitales'
+        ,'Mantención Preventiva Salas Térmicas'
+        ,'Mantención Preventiva Tableros Eléctricos'
+        ,'Mantención Preventiva Vehículo'
+        ,'Mantención Preventiva Ventiladores Mecánicos'
+        ,'Mantención Red UMAS '
+        ,'Mantención Reparativa Vehiculo'
+        ,'Metros Cúbicos Chips'
+        ,'Metros Cúbicos Leña'
+        ,'N° Almuerzo'
+        ,'N° Cenas'
+        ,'N° Colaciones'
+        ,'N° Cotización'
+        ,'N° Cuota Arriendo'
+        ,'N° Cuota Compra Equipo'
+        ,'N° Cuota Seguro'
+        ,'N° Desayunos'
+        ,'N° Etapa'
+        ,'N° Mantención'
+        ,'N° Mantención Correctiva Autoclave'
+        ,'N° Mantención Correctiva Cuna Procedimiento'
+        ,'N° Mantención Correctiva Ecógrafo'
+        ,'N° Mantención Correctiva Equipo Rx Dental'
+        ,'N° Mantención Correctiva Equipo Rx Osteopulmonar'
+        ,'N° Mantención Correctiva Incubadora'
+        ,'N° Mantención Correctiva Unidad Dental'
+        ,'N° Mantención Preventica Autoclave'
+        ,'N° Mantención Preventica Equipo Rx Dental'
+        ,'N° Mantención Preventica Equipo Rx Osteopulmonar'
+        ,'N° Mantención Preventica Unidad Dental'
+        ,'N° Mantención Preventiva Cuna Procedimiento'
+        ,'N° Mantención Preventiva Ecógrafo'
+        ,'N° Mantención Preventiva Incubadora'
+        ];
+
+        $unidades2 = ['N° OT'
+        ,'Días Paciente AVI C/TENS'
+        ,'Días Paciente AVI S/TENS'
+        ,'Días Paciente AVIA L-V'
+        ,'Días Paciente AVIA L-D'
+        ,'Días Paciente AVNI C/TENS'
+        ,'Días Paciente AVNI S/TENS'
+        ,'Días Paciente AVNIA L-V'
+        ,'Días Paciente AVNIA L-D'
+        ,'N° Pacientes GES'
+        ,'N° Pacientes NO GES'
+        ,'N° Pre-Factura'
+        ,'N° Tarjetas'
+        ,'Valor Mensual'
+        ,'Recarga Cilindros 0,4m3'
+        ,'Recarga Cilindros 0,7m3'
+        ,'Recarga Cilindros 10m3'
+        ,'Recarga Cilindros 6m3'
+        ,'Recarga Cilindros Particulares'
+        ,'Recarga Extintores'
+        ,'Retiro m3 Aguas Servidas'
+        ,'Retiro m3 Alcantarillado'
+        ,'Retiro m3 Grasas'
+        ,'Servicio Aseo Parcial'
+        ,'Servicio Aseo Completo'
+        ,'Servicio Bombeo Agua'
+        ,'Servicio Destape Ducto y Alcantarillado'
+        ,'Servicio Mantención Software RRHH'
+        ,'Servicio Monitoreo Agua'
+        ,'Servicio Soporte Software RRHH'
+        ,'Unidades Andador 2 Ruedas'
+        ,'Unidades Andador 4 Ruedas'
+        ,'Unidades Andador S/Ruedas'
+        ,'Unidades Bastón Codera Fija'
+        ,'Unidades Bastón Codera Móvil'
+        ,'Unidades Bastón Simple'
+        ,'Unidades Bata Desechable'
+        ,'Unidades Cinta Glicemia'
+        ,'Unidades Cojín Antiescaras'
+        ,'Unidades Colchón Antiescaras'
+        ,'Unidades Equipo de Glicemia'
+        ,'Unidades Equipos en Arriendo'
+        ,'Unidades Guantes Nitrilo L'
+        ,'Unidades Guantes Nitrilo M'
+        ,'Unidades Guantes Nitrilo S'
+        ,'Unidades Kit Colon Check N/Usuarios'
+        ,'Unidades Kit Colon Check Seguimiento'
+        ,'Unidades Kit Test VPH'
+        ,'Unidades Lancetas'
+        ,'Unidad'
+        ,'Unidades Silla Ruedas Bariátricas'
+        ,'Unidades Silla Ruedas Estándar'
+        ,'Unidades Silla Ruedas Traumatológicas'
+        ,'Valor Horas Hombre'
+        ,'Valor Kilometros'
+        ,'Valor Pasajero'];
+
+        //dd(count($unidades));
+        $contadorunidades = count($unidades);
+        $contadorunidades2 = count($unidades2);
+
+        for ($i = 0; $i <= $contadorunidades-1; $i++){
+            DB::table('unidadesmedidas')->insert([
+                'unidad'=>$unidades[$i],
+            ]);
+        }
+
+        for ($i = 0; $i <= $contadorunidades2-1; $i++){
+            DB::table('unidadesmedidas2')->insert([
+                'unidad'=>$unidades2[$i],
+            ]);
+        }
+
+
         $user = User::create([
             'name'=>'Admin',
             'email'=>'admin@admin.com',
