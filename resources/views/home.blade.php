@@ -89,10 +89,17 @@
             </div>
             <div class="card-footer">
             @foreach ($multas as $multa)
+              <?php
+                  $fecha = new DateTime ($multa->fecha_notificacion);
+                  $fechahoy = new DateTime(date('Y-m-d'));
+                  $diferencia = $fecha->diff($fechahoy);
+              ?>
+              @if ($diferencia->y == 0 && $diferencia->m == 0 && $diferencia->d <="15" || $diferencia->d >="11")
                 <div class="stats">
                     <i class="material-icons text-success">visibility</i>
-                    <a href="{{route('contratos.multas.show', [$multa->contrato->id,$multa])}}">Ver multa</a>
+                    <a href="{{route('contratos.multas.index', [$multa->contrato->id,'diferencia'=>$diferencia->d])}}">Ver multa</a>
                 </div>
+              @endif
             @endforeach
             </div>
           </div>
@@ -136,23 +143,23 @@
             <div class="card-header card-header-tabs card-header-primary">
               <div class="nav-tabs-navigation">
                 <div class="nav-tabs-wrapper">
-                  <span class="nav-tabs-title">Tasks:</span>
+                  <span class="nav-tabs-title">Contratos:</span>
                   <ul class="nav nav-tabs" data-tabs="tabs">
                     <li class="nav-item">
                       <a class="nav-link active" href="#profile" data-toggle="tab">
-                        <i class="material-icons">bug_report</i> Bugs
+                        <i class="material-icons">library_books</i> Vigentes 
                         <div class="ripple-container"></div>
                       </a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="#messages" data-toggle="tab">
-                        <i class="material-icons">code</i> Website
+                        <i class="material-icons">library_books</i> Termino Anticipado
                         <div class="ripple-container"></div>
                       </a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="#settings" data-toggle="tab">
-                        <i class="material-icons">cloud</i> Server
+                        <i class="material-icons">library_books</i> Cerrado
                         <div class="ripple-container"></div>
                       </a>
                     </li>
@@ -164,211 +171,81 @@
               <div class="tab-content">
                 <div class="tab-pane active" id="profile">
                   <table class="table">
+                  <thead class="text-danger">
+                  <th>ID Contrato</th>
+                  <th>Convenio</th>
+                  <th>Proveedor</th>
+                  <th>Referente</th>
+                  <th>Acciones</th>
+                </thead>
                     <tbody>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Sign contract for "What are conference organizers afraid of?"</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                        </td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
+                      @foreach ($contratos as $pendientes)
+                        @if ($pendientes->estado_contrato == 1)
+                          <td>{{$pendientes->id_contrato}}</td>
+                          <td>{{$pendientes->convenio->convenio}}</td>
+                          <td>{{$pendientes->convenio->proveedor->nombre_proveedor}}</td>
+                          <td>{{$pendientes->convenio->user->name}}</td>
+                          <td class="td-actions text-right">
+                            <a href="{{ route('contratos.show', $pendientes->id) }}" class="btn btn-info"><i class="material-icons">library_books</i></a>
+                          </td>
+                        @endif
+                      @endforeach
                     </tbody>
                   </table>
                 </div>
                 <div class="tab-pane" id="messages">
                   <table class="table">
                     <tbody>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                        </td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Sign contract for "What are conference organizers afraid of?"</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
+                    <table class="table">
+                  <thead class="text-danger">
+                  <th>ID Contrato</th>
+                  <th>Convenio</th>
+                  <th>Proveedor</th>
+                  <th>Referente</th>
+                  <th>Acciones</th>
+                </thead>
+                    <tbody>
+                      @foreach ($contratos as $pendientes)
+                        @if ($pendientes->estado_contrato == 3)
+                          <td>{{$pendientes->id_contrato}}</td>
+                          <td>{{$pendientes->convenio->convenio}}</td>
+                          <td>{{$pendientes->convenio->proveedor->nombre_proveedor}}</td>
+                          <td>{{$pendientes->convenio->user->name}}</td>
+                          <td class="td-actions text-right">
+                            <a href="{{ route('contratos.show', $pendientes->id) }}" class="btn btn-info"><i class="material-icons">library_books</i></a>
+                          </td>
+                        @endif
+                      @endforeach
+                    </tbody>
+                  </table>
                     </tbody>
                   </table>
                 </div>
                 <div class="tab-pane" id="settings">
                   <table class="table">
                     <tbody>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                        </td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Sign contract for "What are conference organizers afraid of?"</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
+                    <table class="table">
+                  <thead class="text-danger">
+                  <th>ID Contrato</th>
+                  <th>Convenio</th>
+                  <th>Proveedor</th>
+                  <th>Referente</th>
+                  <th>Acciones</th>
+                </thead>
+                    <tbody>
+                      @foreach ($contratos as $pendientes)
+                        @if ($pendientes->estado_contrato == 5)
+                          <td>{{$pendientes->id_contrato}}</td>
+                          <td>{{$pendientes->convenio->convenio}}</td>
+                          <td>{{$pendientes->convenio->proveedor->nombre_proveedor}}</td>
+                          <td>{{$pendientes->convenio->user->name}}</td>
+                          <td class="td-actions text-right">
+                            <a href="{{ route('contratos.show', $pendientes->id) }}" class="btn btn-info"><i class="material-icons">library_books</i></a>
+                          </td>
+                        @endif
+                      @endforeach
+                    </tbody>
+                  </table>
                     </tbody>
                   </table>
                 </div>

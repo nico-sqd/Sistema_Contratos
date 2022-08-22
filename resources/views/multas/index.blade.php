@@ -11,7 +11,8 @@
                                     <h4 class="card-tittle">Tablas de Multas</h4>
                                     <div class="row">
                                         <div class="col-7 text-right d-felx">
-                                            <form action="{{route('contratos.multas.index', $contratos->id)}}" method="get">
+                                            <form action="{{route('contratos.multas.index', [$contratos->id,$diferencia])}}" method="get">
+                                                {{dd($diferencia)}}
                                                 <div class="form-row">
                                                     <div class="col-sm-4 align-self-center" style="text-align: right">
                                                         <input type="text" class="form-control float-right" name="texto" value="{{$texto ?? ''}}" placeholder="Buscar...">
@@ -55,30 +56,59 @@
                                                 </div>
                                             @endif
                                             @foreach ($multas as $multa)
-                                                @if ($multa->id_contrato == $contratos->id)
-                                                    <tr>
-                                                        <td>{{ $multa->descripcion }}</td>
-                                                        <td>{{ $multa->estadotramitemulta->estado_tramite }}</td>
-                                                        <td>{{ $multa->estadopagomulta->estado_pago }}</td>
-                                                        <td>{{ $multa->fecha_oficio }}</td>
-                                                        <td class="td-actions text-right">
-                                                            @can('show')
-                                                            <a href="{{ route('contratos.multas.show', [$contratos,$multa]) }}" class="btn btn-info"><i class="material-icons">library_books</i></a>
-                                                            @endcan
-                                                            @can('admin_edit')
-                                                            <a href="{{ route('contratos.multas.edit', [$contratos, $multa]) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
-                                                            @endcan
-                                                            @can('admin_destroy')
-                                                            <form action="{{route('contratos.multas.destroy', [$contratos,$multa])}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="btn btn-danger" type="submit" rel="tooltip">
-                                                                <i class="material-icons">close</i>
-                                                            </button>
-                                                            </form>
-                                                            @endcan
-                                                        </td>
-                                                    </tr>
+                                                @if ($diferencia <="15" && $diferencia >="11")                    
+                                                    @if ($multa->id_contrato == $contratos->id)
+                                                        <tr>
+                                                            <td>{{ $multa->descripcion }}</td>
+                                                            <td>{{ $multa->estadotramitemulta->estado_tramite }}</td>
+                                                            <td>{{ $multa->estadopagomulta->estado_pago }}</td>
+                                                            <td>{{ $multa->fecha_oficio }}</td>
+                                                            <td class="td-actions text-right">
+                                                                @can('show')
+                                                                <a href="{{ route('contratos.multas.show', [$contratos,$multa]) }}" class="btn btn-info"><i class="material-icons">library_books</i></a>
+                                                                @endcan
+                                                                @can('admin_edit')
+                                                                <a href="{{ route('contratos.multas.edit', [$contratos, $multa]) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                                @endcan
+                                                                @can('admin_destroy')
+                                                                <form action="{{route('contratos.multas.destroy', [$contratos,$multa])}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="btn btn-danger" type="submit" rel="tooltip">
+                                                                    <i class="material-icons">close</i>
+                                                                </button>
+                                                                </form>
+                                                                @endcan
+                                                            </td>
+                                                        </tr>
+                                                    @endif
+                                                @endif
+                                                @if ($diferencia <=" ")
+                                                    @if ($multa->id_contrato == $contratos->id)
+                                                        <tr>
+                                                            <td>{{ $multa->descripcion }}</td>
+                                                            <td>{{ $multa->estadotramitemulta->estado_tramite }}</td>
+                                                            <td>{{ $multa->estadopagomulta->estado_pago }}</td>
+                                                            <td>{{ $multa->fecha_oficio }}</td>
+                                                            <td class="td-actions text-right">
+                                                                @can('show')
+                                                                <a href="{{ route('contratos.multas.show', [$contratos,$multa]) }}" class="btn btn-info"><i class="material-icons">library_books</i></a>
+                                                                @endcan
+                                                                @can('admin_edit')
+                                                                <a href="{{ route('contratos.multas.edit', [$contratos, $multa]) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                                @endcan
+                                                                @can('admin_destroy')
+                                                                <form action="{{route('contratos.multas.destroy', [$contratos,$multa])}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="btn btn-danger" type="submit" rel="tooltip">
+                                                                    <i class="material-icons">close</i>
+                                                                </button>
+                                                                </form>
+                                                                @endcan
+                                                            </td>
+                                                        </tr>
+                                                    @endif
                                                 @endif
                                             @endforeach
                                             </tbody>

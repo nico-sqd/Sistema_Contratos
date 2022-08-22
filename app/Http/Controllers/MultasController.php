@@ -31,7 +31,13 @@ class MultasController extends Controller
      */
     public function index(Contrato $contratos, Request $request)
     {
-        return view('multas.index',compact('contratos'),['contratos'=>Contrato::all(),'multas'=>Multas::all()]);
+        $diferencia = $request->diferencia;
+        return view('multas.index',compact('contratos','diferencia'),['contratos'=>Contrato::all(),'multas'=>Multas::all()]);
+    }
+    public function index_alertas(Contrato $contratos, Request $request)
+    {
+        $diferencia = $request->diferencia;
+        return view('multas.index_alertas',compact('contratos','diferencia'),['contratos'=>Contrato::all(),'multas'=>Multas::all()]);
     }
 
     /**
