@@ -35,7 +35,7 @@
                                         <div class="col-12 text-right">
                                             <a href="{{ url()->route('contratos.show', $contratos->id) }}" class="btn btn-facebook"><i class="material-icons">arrow_back</i></a>
                                             @can('admin_create')
-                                            <a href="{{ route('contratos.multas.create', $contratos->id) }}" class="btn btn-sm btn-danger">Añadir Multa</a>
+                                            <a href="{{ route('contratos.multas.create', $contratos->id) }}" class="btn btn-danger">Añadir Multa</a>
                                             @endcan
                                         </div>
                                     </div>
@@ -55,7 +55,7 @@
                                                 </div>
                                             @endif
                                             @foreach ($multas as $multa)
-                                                @if ($diferencia <="15" && $diferencia >="11")                    
+                                                @if ($diferencia <="15" && $diferencia >="11")
                                                     @if ($multa->id_contrato == $contratos->id)
                                                         <tr>
                                                             <td>{{ $multa->descripcion }}</td>

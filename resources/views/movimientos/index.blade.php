@@ -9,82 +9,108 @@
                             <div class="card">
                                 <div class="card-header card-header-primary">
                                     <h4 class="card-tittle">Tablas de Multas</h4>
-                                    <div class="row">
-                                        <div class="col-7 text-right d-felx">
-                                            <form action="{{route('contratos.multas.index', $contratos->id)}}" method="get">
-                                                <div class="form-row">
-                                                    <div class="col-sm-4 align-self-center" style="text-align: right">
-                                                        <input type="text" class="form-control float-right" name="texto" value="{{$texto ?? ''}}" placeholder="Buscar...">
-                                                    </div>
-                                                    <div class="col-auto align-self-center">
-                                                        <input type="submit" class="btn btn-primary float-right" value="Buscar">
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
                                     <p class="card-category">Datos de Multas</p>
                                 </div>
-                                <div class="card-body">
-                                    @if (session('success'))
-                                        <div class="alert alert-success" role="success">
-                                            {{ session('success') }}
-                                        </div>
-                                    @endif
-                                    <div class="row">
-                                        <div class="col-12 text-right">
-                                            <a href="{{ url()->route('contratos.show', $contratos->id) }}" class="btn btn-facebook"><i class="material-icons">arrow_back</i></a>
-                                            @can('admin_create')
-                                            <a href="{{ route('contratos.multas.create', $contratos->id) }}" class="btn btn-sm btn-danger">Añadir Multa</a>
-                                            @endcan
-                                        </div>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead class="text-primary">
-                                                <th>Fecha</th>
-                                                <th>Establecimiento</th>
-                                                <th>OC</th>
-                                                <th>Fecha OC</th>
-                                                <th class="text-right">Acciones</th>
-                                            </thead>
-                                            <tbody>
-                                            @if (count($multas)<=0)
-                                                <div class="alert alert-danger" style="text-align:center" role="alert">
-                                                    <h4>No se han encontrado multas</h4>
-                                                </div>
-                                            @endif
-                                            @foreach ($multas as $multa)
-                                                @if ($multa->id_contrato == $contratos->id)
-                                                    <tr>
-                                                        <td>{{ $multa->descripcion }}</td>
-                                                        <td>{{ $multa->estadotramitemulta->estado_tramite }}</td>
-                                                        <td>{{ $multa->estadopagomulta->estado_pago }}</td>
-                                                        <td>{{ $multa->fecha_oficio }}</td>
-                                                        <td class="td-actions text-right">
-                                                            @can('show')
-                                                            <a href="{{ route('contratos.multas.show', [$contratos,$multa]) }}" class="btn btn-info"><i class="material-icons">library_books</i></a>
-                                                            @endcan
-                                                            @can('admin_edit')
-                                                            <a href="{{ route('contratos.multas.edit', [$contratos, $multa]) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
-                                                            @endcan
-                                                            @can('admin_destroy')
-                                                            <form action="{{route('contratos.multas.destroy', [$contratos,$multa])}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="btn btn-danger" type="submit" rel="tooltip">
-                                                                <i class="material-icons">close</i>
-                                                            </button>
-                                                            </form>
-                                                            @endcan
-                                                        </td>
-                                                    </tr>
-                                                @endif
-                                            @endforeach
-                                            </tbody>
-                                        </table>
+                        <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12 text-center">
+                                        <a href="#" class="btn btn-facebook">Añadir Movimiento</a>
+                                        <a href="{{ url()->route('contratos.show', $contratos->id) }}" class="btn btn-facebook" style="float: right;"><i class="material-icons">arrow_back</i></a>
                                     </div>
                                 </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="card">
+                                      <div class="card-header card-header-primary">
+                                        <h4 class="card-title">Multas Pendientes</h4>
+                                        <p class="card-category">Multas pendientes de los contratos hasta la fecha</p>
+                                      </div>
+                                      <div class="card-body table-responsive">
+                                        <table class="table table-hover">
+                                          <thead class="text-primary">
+                                            <th>Monto Contrato</th>
+                                            <th>Monto Consumido</th>
+                                          </thead>
+                                          <tbody>
+                                          @if (count($movimientos)<=0)
+                                          <div class="alert alert-danger" style="text-align:center" role="alert">
+                                              <h4>No se han encontrato multas</h4>
+                                          </div>
+                                          @endif
+                                          @foreach ( $movimientos as $movimientos )
+                                              <tr>
+                                                <td>{{$movimientos->contrato->id_contrato}}</td>
+                                            </tr>
+                                          @endforeach
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 col-md-12">
+                                    <div class="card">
+                                      <div class="card-header card-header-primary">
+                                        <h4 class="card-title">Multas Pendientes</h4>
+                                        <p class="card-category">Multas pendientes de los contratos hasta la fecha</p>
+                                      </div>
+                                      <div class="card-body table-responsive">
+                                        <table class="table table-hover">
+                                          <thead class="text-primary">
+                                            <th>Monto Contrato</th>
+                                            <th>Monto Consumido</th>
+                                          </thead>
+                                          <tbody>
+                                          @if (count($movimientos)<=0)
+                                          <div class="alert alert-danger" style="text-align:center" role="alert">
+                                              <h4>No se han encontrato multas</h4>
+                                          </div>
+                                          @endif
+                                          @foreach ( $movimientos as $movimientos )
+                                              <tr>
+                                                <td>{{$movimientos->contrato->id_contrato}}</td>
+                                            </tr>
+                                          @endforeach
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                    <div class="card-header card-header-primary">
+                                        <h4 class="card-title">Multas Pendientes</h4>
+                                        <p class="card-category">Multas pendientes de los contratos hasta la fecha</p>
+                                    </div>
+                                    <div class="card-body table-responsive">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class="text-primary">
+                                                    <th>ID Orden de Compra</th>
+                                                    <th>Unidad de Medida</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Valor Unitario</th>
+                                                    <th>Valor OC</th>
+                                                    <th>N° Factura</th>
+                                                    <th>Fecha Factura</th>
+                                                    <th>Valor Factura</th>
+                                                    <th>Recepción</th>
+                                                    <th>Saldo Pendiente Recepcionar</th>
+                                                </thead>
+                                                <tbody>
+                                                @if (count($movimientos)<=0)
+                                                    <div class="alert alert-danger" style="text-align:center" role="alert">
+                                                        <h4>No se han encontrato multas</h4>
+                                                    </div>
+                                                @endif
+                                                @foreach ( $movimientos as $movimientos )
+                                                    <tr>
+                                                        <td>{{$movimientos->contrato->id_contrato}}</td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                            </div>
                         </div>
                     </div>
                 </div>
