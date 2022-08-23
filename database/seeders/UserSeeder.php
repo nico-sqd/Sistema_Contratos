@@ -406,9 +406,7 @@ class UserSeeder extends Seeder
         ,'N° Mantención Preventiva Cuna Procedimiento'
         ,'N° Mantención Preventiva Ecógrafo'
         ,'N° Mantención Preventiva Incubadora'
-        ];
-
-        $unidades2 = ['N° OT'
+        ,'N° OT'
         ,'Días Paciente AVI C/TENS'
         ,'Días Paciente AVI S/TENS'
         ,'Días Paciente AVIA L-V'
@@ -467,21 +465,13 @@ class UserSeeder extends Seeder
 
         //dd(count($unidades));
         $contadorunidades = count($unidades);
-        $contadorunidades2 = count($unidades2);
 
         for ($i = 0; $i <= $contadorunidades-1; $i++){
             DB::table('unidadesmedidas')->insert([
                 'unidad'=>$unidades[$i],
             ]);
         }
-
-        for ($i = 0; $i <= $contadorunidades2-1; $i++){
-            DB::table('unidadesmedidas2')->insert([
-                'unidad'=>$unidades2[$i],
-            ]);
-        }
-
-
+        
         $user = User::create([
             'name'=>'Admin',
             'email'=>'admin@admin.com',
