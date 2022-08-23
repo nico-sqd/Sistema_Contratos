@@ -12,7 +12,6 @@
                                     <div class="row">
                                         <div class="col-7 text-right d-felx">
                                             <form action="{{route('contratos.multas.index', [$contratos->id,$diferencia])}}" method="get">
-                                                {{dd($diferencia)}}
                                                 <div class="form-row">
                                                     <div class="col-sm-4 align-self-center" style="text-align: right">
                                                         <input type="text" class="form-control float-right" name="texto" value="{{$texto ?? ''}}" placeholder="Buscar...">
