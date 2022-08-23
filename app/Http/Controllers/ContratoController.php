@@ -17,6 +17,7 @@ use App\Models\Aumento;
 use App\Models\EstadoContrato;
 use App\Models\Files;
 use App\Models\Multas;
+use App\Models\Movimientos;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -31,27 +32,6 @@ class ContratoController extends Controller
      */
     public function index(Request $request)
     {
-        $unidades = ['Arriendo Analizador Hormonas',
-        'Arriendo Analizador VHS',
-        'Arriendo Mensual',
-        'Cantidad Eco Abd',
-        'Cantidad Eco Mamaria',
-        'Cantidad Equipos',
-        'Cantidad Exámenes',
-        'Cantidad Funcionarios',
-        'Cantidad Impresiones B y N',
-        'Cantidad Impresiones Color'];
-
-        //dd(count($unidades));
-        $contadorunidades = count($unidades);
-
-        $unidades2 = [];
-
-        for ($i = 0; $i <= $contadorunidades-1; $i++){
-            $unidades2[$i] = $unidades[$i];
-        }
-
-        dd($unidades2);
         $texto = trim($request->get('texto'));
         $contratos = Contrato::with('convenio')
         ->whereHas('convenio', function (Builder $query) use ($texto) {
@@ -137,7 +117,7 @@ class ContratoController extends Controller
     public function show(Contrato $contrato)
     {
         return view('contratos.show', compact('contrato'), ['proveedores'=>Proveedor::all(),'convenios'=>Convenio::all(),'estadocontraot'=>EstadoContrato::all(),
-        'aumento'=>Aumento::all(),'boletagarantia'=>BoletaGarantia::all(),'montoboleta'=>MontoBoleta::all(),'multas'=>Multas::all()]) ;
+        'aumento'=>Aumento::all(),'boletagarantia'=>BoletaGarantia::all(),'montoboleta'=>MontoBoleta::all(),'multas'=>Multas::all(),'movimientos'=>Movimientos::all()]) ;
     }
 
     /**
