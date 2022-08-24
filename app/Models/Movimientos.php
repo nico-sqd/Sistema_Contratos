@@ -19,4 +19,8 @@ class Movimientos extends Model
     {
         return $this->belongsTo(Contrato::class,'id_contrato');
     }
+    public function unidadmedida()
+    {
+        return $this->hasMany(UnidadMedida::class,'id_movimiento');
+    }
 }

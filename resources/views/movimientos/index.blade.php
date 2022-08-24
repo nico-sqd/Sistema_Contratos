@@ -14,7 +14,7 @@
                         <div class="card-body">
                                 <div class="row">
                                     <div class="col-12 text-center">
-                                        <a href="#" class="btn btn-facebook">Añadir Movimiento</a>
+                                        <a href="{{ route('contratos.movimientos.create', $contratos->id)}}" class="btn btn-facebook">Añadir Movimiento</a>
                                         <a href="{{ url()->route('contratos.show', $contratos->id) }}" class="btn btn-facebook" style="float: right;"><i class="material-icons">arrow_back</i></a>
                                     </div>
                                 </div>

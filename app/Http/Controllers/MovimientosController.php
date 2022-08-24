@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Contrato;
 use App\Models\Movimientos;
+use App\Models\UnidadMedida;
 
 class MovimientosController extends Controller
 {
@@ -23,9 +24,9 @@ class MovimientosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Contrato $contratos)
     {
-        //
+        return view('movimientos.create',compact('contratos'),['unidadesmedidas'=>UnidadMedida::all()]);
     }
 
     /**
@@ -36,7 +37,8 @@ class MovimientosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cantidad = $request->unidadmedida->unidad;
+        dd($cantidad);
     }
 
     /**
