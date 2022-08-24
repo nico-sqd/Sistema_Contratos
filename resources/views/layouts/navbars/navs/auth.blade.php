@@ -53,10 +53,20 @@
             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-            <a class="dropdown-item" href="#">{{ __('Perfil') }}</a>
-            <a class="dropdown-item" href="#">{{ __('Configuracion') }}</a>
+            @can('_super')
+            <a class="dropdown-item" href="{{ route('users.show', Auth::user()->id) }}">{{ __('Perfil') }}</a>
+            <a class="dropdown-item" href="{{ route('users.edit', Auth::user()->id) }}">{{ __('Editar Perfil') }}</a>
+            @endcan
+            @can('_admin')
+            <a class="dropdown-item" href="{{ route('administradores.show_administrador', Auth::user()->id) }}">{{ __('Perfil') }}</a>
+            <a class="dropdown-item" href="{{ route('administradores.edit_administrador', Auth::user()->id) }}">{{ __('Editar Perfil') }}</a>
+            @endcan
+            @can('referente')
+            <a class="dropdown-item" href="{{ route('referentes.show_referente', Auth::user()->id) }}">{{ __('Perfil') }}</a>
+            <a class="dropdown-item" href="{{ route('referentes.edit_referente', Auth::user()->id) }}">{{ __('Editar Perfil') }}</a>
+            @endcan
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Cerrar Secion') }}</a>
+            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Cerrar Sesión') }}</a>
           </div>
         </li>
       </ul>

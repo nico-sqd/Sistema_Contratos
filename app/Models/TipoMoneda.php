@@ -18,7 +18,6 @@ class TipoMoneda extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'id_tipo',
         'Nombre_tipo',
     ];
 
@@ -29,5 +28,9 @@ class TipoMoneda extends Model
     public function contrato()
     {
         return $this->hasMany(Contrato::class,'id_tipo_moneda');
+    }
+    public function montoboleta()
+    {
+        return $this->hasMany(Montoboleta::class,'id_moneda');
     }
 }

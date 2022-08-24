@@ -53,7 +53,7 @@
                                        </div>
                                        <div class="card-footer">
                                         <div class="button-container">
-                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning "><i class="material-icons">edit</i></a>
+                                            <a href="{{ route('referentes.edit_referente', $user->id) }}" class="btn btn-warning "><i class="material-icons">edit</i></a>
                                        </div>
                                    </div>
                                </div><!-- end card user -->

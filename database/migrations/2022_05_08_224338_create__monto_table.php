@@ -19,7 +19,7 @@ class CreateMontoTable extends Migration
             $table->softDeletes();
             $table->unsignedBigInteger('moneda');
             $table->unsignedBigInteger('id_tipo_moneda');
-            $table->foreign('id_tipo_moneda')->references('id_tipo')->on('tipo_moneda');
+            $table->foreign('id_tipo_moneda')->references('id')->on('tipo_moneda');
         });
     }
 

@@ -126,7 +126,7 @@
                                     <div class="form-group">
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_tipo_moneda">
                                         @foreach ( $tipomoneda as $tipo )
-                                            <option value="{{ $tipo->id_tipo}}" {{$contratos->id_tipo_moneda == $tipo->id_tipo ? 'selected' : ''}}>{{$tipo->Nombre_tipo}}</option>
+                                            <option value="{{ $tipo->id}}" {{$contratos->id_tipo_moneda == $tipo->id ? 'selected' : ''}}>{{$tipo->Nombre_tipo}}</option>
                                         @endforeach
                                         </select>
                                       </div>
@@ -139,6 +139,27 @@
                                     @if ($errors->has('id_boleta'))
                                         <span class="error text-danger" for="input-id_boleta">{{$errors -> first('id_boleta')}}</span>
                                     @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="monto_boleta" class="col-sm-2 col-form-label">Monto Boleta de Garantía</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="monto_boleta" value="{{ old('monto_boleta', $contratos->montoboleta->monto_boleta) }}" >
+                                    @if ($errors->has('monto_boleta'))
+                                        <span class="error text-danger" for="input-monto_boleta">{{$errors -> first('monto_boleta')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="fecha_inicio" class="col-sm-2 col-form-label">Vigencia Inicio </label>
+                                <div class="col-sm-7">
+                                    <input type="date" class="form-control" name="fecha_inicio" value="{{ old('fecha_inicio', $contratos->montoboleta->fecha_inicio) }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="fecha_fin" class="col-sm-2 col-form-label">Vigencia Fin</label>
+                                <div class="col-sm-7">
+                                    <input type="date" class="form-control" name="fecha_fin" value="{{ old('fecha_fin', $contratos->montoboleta->fecha_fin) }}">
                                 </div>
                             </div>
                             <div class="row">
@@ -163,24 +184,6 @@
                                           @endforeach
                                         </select>
                                       </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label for="aumento_contrato" class="col-sm-2 col-form-label">Aumento de Contrato</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="aumento_contrato" value="{{ old('aumento_contrato', $contratos->aumento_contrato) }}" >
-                                    @if ($errors->has('aumento_contrato'))
-                                        <span class="error text-danger" for="input-aumento_contrato">{{$errors -> first('aumento_contrato')}}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label for="res_aumento" class="col-sm-2 col-form-label">Resolucion de Aumento</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="res_aumento" value="{{ old('res_aumento', $contratos->res_aumento) }}" >
-                                    @if ($errors->has('res_aumento'))
-                                        <span class="error text-danger" for="input-res_aumento">{{$errors -> first('res_aumento')}}</span>
-                                    @endif
                                 </div>
                             </div>
                             <div class="row">

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use app\models\BoletaGarantia;
 use app\models\Contrato;
 use app\models\Monto;
+use app\models\TipoMoneda;
+use app\models\MontoBoleta;
+
 
 class BoletaGarantiaController extends Controller
 {
@@ -14,9 +17,9 @@ class BoletaGarantiaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Contrato $contratos)
     {
-        //
+        return view('boletagarantia.index',compact('contratos'),['contratos'=>Contrato::all(),'tipomoneda'=>TipoMoneda::all()]);
     }
 
     /**
@@ -57,9 +60,11 @@ class BoletaGarantiaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Contrato $contratos)
     {
-        //
+        dd($contratos->id);
+        return view('boletagarantia.edit', compact('contratos'),['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
+        'montoboletagarantia'=>MontoBoleta::all(),'monto'=>Monto::all(),'contrato'=>Contrato::all()]);
     }
 
     /**

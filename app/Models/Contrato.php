@@ -79,4 +79,16 @@ class Contrato extends Model
     {
         return $this->hasMany(Files::class,'id_contrato');
     }
+    public function aumento()
+    {
+        return $this->hasMany(Aumento::class,'id_contrato');
+    }
+    public function multas()
+    {
+        return $this->hasMany(Multas::class,'id_contrato');
+    }
+    public function movimientos()
+    {
+        return $this->hasMany(Movimientos::class,'id_contrato');
+    }
 }
