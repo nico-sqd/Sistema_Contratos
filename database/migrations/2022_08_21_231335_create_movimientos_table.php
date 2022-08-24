@@ -17,7 +17,7 @@ class CreateMovimientosTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('id_oc');
-            $table->float('valor_total_oc');
+            $table->float('valor_total_oc')->nullable();
             $table->string('nmr_factura');
             $table->date('fecha_factura');
             $table->float('valor_factura');

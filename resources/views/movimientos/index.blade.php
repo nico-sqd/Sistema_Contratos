@@ -30,6 +30,7 @@
                                           <thead class="text-primary">
                                             <th>Monto Contrato</th>
                                             <th>Monto Consumido</th>
+                                            <th>Saldo Disponible</th>
                                           </thead>
                                           <tbody>
                                           @if (count($movimientos)<=0)
@@ -37,11 +38,16 @@
                                               <h4>No se han encontrato multas</h4>
                                           </div>
                                           @endif
-                                          @foreach ( $movimientos as $movimientos )
+                                          @foreach ( $cantidades as  $canti)
                                               <tr>
-                                                <td>{{$movimientos->contrato->id_contrato}}</td>
+                                                   <td>${{$canti->movimiento->contrato->monto->moneda}}</td>
+                                                   <?php
+                                                   $total_consumido = $canti->valor_unitario * $canti->cantidad;
+                                                   ?>
+                                                   <td>${{$canti->valor_unitario * $canti->cantidad}}</td>
+                                                   <td>${{$canti->movimiento->contrato->monto->moneda - $total_consumido}}</td>
                                             </tr>
-                                          @endforeach
+                                            @endforeach
                                           </tbody>
                                         </table>
                                       </div>
@@ -56,20 +62,16 @@
                                       <div class="card-body table-responsive">
                                         <table class="table table-hover">
                                           <thead class="text-primary">
-                                            <th>Monto Contrato</th>
-                                            <th>Monto Consumido</th>
+                                            <th>Unidad de Medida</th>
+                                            <th>Costo Unitario</th>
                                           </thead>
                                           <tbody>
-                                          @if (count($movimientos)<=0)
-                                          <div class="alert alert-danger" style="text-align:center" role="alert">
-                                              <h4>No se han encontrato multas</h4>
-                                          </div>
-                                          @endif
-                                          @foreach ( $movimientos as $movimientos )
+                                            @foreach ( $cantidades as $cantidad )
                                               <tr>
-                                                <td>{{$movimientos->contrato->id_contrato}}</td>
+                                                <td>{{$cantidad->unidadmedida->unidad}}</td>
+                                                <td>${{$cantidad->valor_unitario}}</td>
                                             </tr>
-                                          @endforeach
+                                            @endforeach
                                           </tbody>
                                         </table>
                                       </div>
@@ -92,20 +94,20 @@
                                                     <th>N° Factura</th>
                                                     <th>Fecha Factura</th>
                                                     <th>Valor Factura</th>
-                                                    <th>Recepción</th>
-                                                    <th>Saldo Pendiente Recepcionar</th>
                                                 </thead>
                                                 <tbody>
-                                                @if (count($movimientos)<=0)
-                                                    <div class="alert alert-danger" style="text-align:center" role="alert">
-                                                        <h4>No se han encontrato multas</h4>
-                                                    </div>
-                                                @endif
-                                                @foreach ( $movimientos as $movimientos )
+                                                    @foreach ( $cantidades as $cantidad )
                                                     <tr>
-                                                        <td>{{$movimientos->contrato->id_contrato}}</td>
+                                                        <td>{{$cantidad->movimiento->id_oc}}</td>
+                                                        <td>{{$cantidad->unidadmedida->unidad}}</td>
+                                                        <td>{{$cantidad->cantidad}}</td>
+                                                        <td>${{$cantidad->valor_unitario}}</td>
+                                                        <td>Pronto</td>
+                                                        <td>{{$cantidad->movimiento->nmr_factura}}</td>
+                                                        <td>{{$cantidad->movimiento->fecha_factura}}</td>
+                                                        <td>{{$cantidad->movimiento->valor_factura}}</td>
                                                     </tr>
-                                                @endforeach
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>

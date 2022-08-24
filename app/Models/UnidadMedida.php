@@ -17,7 +17,7 @@ class UnidadMedida extends Model
 
     public function cantidad()
     {
-        return $this->hasOne(Cantidad::class,'id_movimiento');
+        return $this->hasOne(Cantidad::class,'id_unidad');
     }
     public function movimiento()
     {

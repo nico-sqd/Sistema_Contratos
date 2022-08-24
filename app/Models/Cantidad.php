@@ -24,6 +24,6 @@ class Cantidad extends Model
     }
     public function unidadmedida()
     {
-        return $this->belongsTo(UnidadMedida::class,'id_movimiento');
+        return $this->belongsTo(UnidadMedida::class,'id_unidad');
     }
 }

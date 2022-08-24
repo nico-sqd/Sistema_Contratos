@@ -13,14 +13,19 @@ class Movimientos extends Model
 
     protected $fillable = [
         'id_contrato',
+        'id_oc',
+        'valor_total_oc',
+        'nmr_factura',
+        'fecha_factura',
+        'valor_factura',
     ];
 
     public function contrato()
     {
         return $this->belongsTo(Contrato::class,'id_contrato');
     }
-    public function unidadmedida()
+    public function cantidad()
     {
-        return $this->hasMany(UnidadMedida::class,'id_movimiento');
+        return $this->hasMany(Cantidad::class,'id_movimiento');
     }
 }
