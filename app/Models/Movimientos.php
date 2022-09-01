@@ -18,6 +18,7 @@ class Movimientos extends Model
         'nmr_factura',
         'fecha_factura',
         'valor_factura',
+        'monto_contrato_actualizado',
     ];
 
     public function contrato()

@@ -38,15 +38,22 @@
                                               <h4>No se han encontrato multas</h4>
                                           </div>
                                           @endif
-                                          @foreach ( $cantidades as  $canti)
-                                              <tr>
-                                                   <td>${{$canti->movimiento->contrato->monto->moneda}}</td>
-                                                   <?php
-                                                   $total_consumido = $canti->valor_unitario * $canti->cantidad;
-                                                   ?>
-                                                   <td>${{$canti->valor_unitario * $canti->cantidad}}</td>
-                                                   <td>${{$canti->movimiento->contrato->monto->moneda - $total_consumido}}</td>
-                                            </tr>
+                                            @foreach ( $cantidades as  $canti)
+                                                @if ($canti->movimiento->contrato->id == $contratos->id)
+                                                    <tr>
+                                                        <td>${{$canti->movimiento->contrato->monto->moneda}}</td>
+                                                        <?php
+                                                        $total_consumido = $canti->valor_unitario * $canti->cantidad;
+                                                        ?>
+                                                        <td>${{$canti->valor_unitario * $canti->cantidad}}</td>
+                                                        @if ($canti->movimiento->monto_contrato_actualizado - $total_consumido < 0)
+                                                                <td style="color:#ff0000">${{$canti->movimiento->monto_contrato_actualizado - $total_consumido}}</td>
+                                                            @if ($canti->movimiento->monto_contrato_actualizado - $total_consumido > 0)
+                                                                <td style="color:#008000">${{$canti->movimiento->monto_contrato_actualizado - $total_consumido}}</td>
+                                                            @endif
+                                                            @endif
+                                                    </tr>
+                                                @endif
                                             @endforeach
                                           </tbody>
                                         </table>
@@ -67,10 +74,12 @@
                                           </thead>
                                           <tbody>
                                             @foreach ( $cantidades as $cantidad )
-                                              <tr>
-                                                <td>{{$cantidad->unidadmedida->unidad}}</td>
-                                                <td>${{$cantidad->valor_unitario}}</td>
-                                            </tr>
+                                                @if ($canti->movimiento->contrato->id == $contratos->id)
+                                                    <tr>
+                                                        <td>{{$cantidad->unidadmedida->unidad}}</td>
+                                                        <td>${{$cantidad->valor_unitario}}</td>
+                                                    </tr>
+                                                @endif
                                             @endforeach
                                           </tbody>
                                         </table>
@@ -97,16 +106,18 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ( $cantidades as $cantidad )
-                                                    <tr>
-                                                        <td>{{$cantidad->movimiento->id_oc}}</td>
-                                                        <td>{{$cantidad->unidadmedida->unidad}}</td>
-                                                        <td>{{$cantidad->cantidad}}</td>
-                                                        <td>${{$cantidad->valor_unitario}}</td>
-                                                        <td>Pronto</td>
-                                                        <td>{{$cantidad->movimiento->nmr_factura}}</td>
-                                                        <td>{{$cantidad->movimiento->fecha_factura}}</td>
-                                                        <td>{{$cantidad->movimiento->valor_factura}}</td>
-                                                    </tr>
+                                                        @if ($canti->movimiento->contrato->id == $contratos->id)
+                                                            <tr>
+                                                                <td>{{$cantidad->movimiento->id_oc}}</td>
+                                                                <td>{{$cantidad->unidadmedida->unidad}}</td>
+                                                                <td>{{$cantidad->cantidad}}</td>
+                                                                <td>${{$cantidad->valor_unitario}}</td>
+                                                                <td>Pronto</td>
+                                                                <td>{{$cantidad->movimiento->nmr_factura}}</td>
+                                                                <td>{{$cantidad->movimiento->fecha_factura}}</td>
+                                                                <td>{{$cantidad->movimiento->valor_factura}}</td>
+                                                            </tr>
+                                                        @endif
                                                     @endforeach
                                                 </tbody>
                                             </table>
