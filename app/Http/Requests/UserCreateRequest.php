@@ -27,13 +27,15 @@ class UserCreateRequest extends FormRequest
             'name' => 'required|max:25',
             'rut' => 'required|unique:users',
             'email' => 'required|email|unique:users',
+            'password2'=> 'required|same:password',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'El nombre es requerido'
+            'name.required' => 'El nombre es requerido',
+            'password2.same' => 'La contraseña no coincide'
         ];
     }
 }
