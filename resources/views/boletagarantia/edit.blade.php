@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form action="{{route('contratos.boletagarantia.update', [$contratos->id, $montoboletagarantia[1]->id])}}" method="post" class="form-horizontal">
+                <form action="{{route('contratos.boletagarantia.update', [$contratos, $boleta])}}" method="post" class="form-horizontal">
                     @csrf
                     @method('PUT')
                     <div class="card">
@@ -33,7 +33,7 @@
                             <div class="row">
                                 <label for="otraboleta" class="col-sm-2 col-form-label">Otro Tipo Boleta</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="otraboleta" value="{{ old('otraboleta', $contratos->montoboleta->otraboleta) }}" >
+                                    <input type="text" class="form-control" name="otraboleta" value="{{ old('otraboleta', $boleta->otraboleta) }}" >
                                     @if ($errors->has('otraboleta'))
                                         <span class="error text-danger" for="input-otraboleta">{{$errors -> first('otraboleta')}}</span>
                                     @endif
@@ -60,7 +60,7 @@
                             <div class="row">
                                 <label for="institucion" class="col-sm-2 col-form-label">Institución</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="institucion" value="{{ old('institucion', $contratos->montoboleta->institucion) }}" >
+                                    <input type="text" class="form-control" name="institucion" value="{{ old('institucion', $boleta->institucion) }}" >
                                     @if ($errors->has('institucion'))
                                         <span class="error text-danger" for="input-institucion">{{$errors -> first('institucion')}}</span>
                                     @endif
@@ -69,7 +69,7 @@
                             <div class="row">
                                 <label for="id_boleta" class="col-sm-2 col-form-label">N° Documento</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="id_boleta" value="{{ old('id_boleta', $contratos->montoboleta->id_boleta) }}" >
+                                    <input type="text" class="form-control" name="id_boleta" value="{{ old('id_boleta', $boleta->id_boleta) }}" >
                                     @if ($errors->has('id_boleta'))
                                         <span class="error text-danger" for="input-id_boleta">{{$errors -> first('id_boleta')}}</span>
                                     @endif
@@ -78,7 +78,7 @@
                             <div class="row">
                                 <label for="monto_boleta" class="col-sm-2 col-form-label">Monto Boleta Garantía</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="monto_boleta" value="{{ old('monto_boleta', $contratos->montoboleta->monto_boleta) }}" >
+                                    <input type="text" class="form-control" name="monto_boleta" value="{{ old('monto_boleta', $boleta->monto_boleta) }}" >
                                     @if ($errors->has('monto_boleta'))
                                         <span class="error text-danger" for="input-monto_boleta">{{$errors -> first('monto_boleta')}}</span>
                                     @endif
@@ -99,7 +99,7 @@
                             <div class="row">
                                 <label for="fecha_vencimiento" class="col-sm-2 col-form-label">Vigencia Vencimiento</label>
                                 <div class="col-sm-7">
-                                    <input type="date" class="form-control" name="fecha_vencimiento" value="{{ old('fecha_vencimiento', $contratos->montoboleta->fecha_vencimiento) }}">
+                                    <input type="date" class="form-control" name="fecha_vencimiento" value="{{ old('fecha_vencimiento', $boleta->fecha_vencimiento) }}">
                                 </div>
                             </div>
                         <!--footers-->

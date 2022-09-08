@@ -49,6 +49,7 @@
                                                 <th>Referente</th>
                                                 <th>Proveedor</th>
                                                 <th>Gestor</th>
+                                                <th>Estado</th>
                                                 <th class="text-right">Acciones</th>
                                             </thead>
                                             <tbody>
@@ -67,6 +68,13 @@
                                                     <td>{{ $contrato->convenio->user->name }}</td>
                                                     <td>{{ $contrato->convenio->proveedor->nombre_proveedor }}</td>
                                                     <td>{{ $contrato->convenio->admin }}</td>
+                                                    @if ($contrato->estadocontrato->estado_contrato == "Cerrado" || $contrato->estadocontrato->estado_contrato == "Fin Presupuesto")
+                                                        <td><font color="#FF0000">{{ $contrato->estadocontrato->estado_contrato }}</font></td>
+                                                    @elseif ($contrato->estadocontrato->estado_contrato == "Terminado" || $contrato->estadocontrato->estado_contrato == "Termino Anticipado")
+                                                        <td><font color="#FF9966">{{ $contrato->estadocontrato->estado_contrato }}</font></td>
+                                                    @elseif ($contrato->estadocontrato->estado_contrato == "Vigente" || $contrato->estadocontrato->estado_contrato == "Modificado")
+                                                        <td><font color="#008000">{{ $contrato->estadocontrato->estado_contrato }}</font></td>
+                                                    @endif
                                                     <td class="td-actions text-right">
                                                         <a href="{{ route('contratos.files.index', $contrato->id) }}" class="btn btn-download"><i class="material-icons">download</i></a>
                                                         @can('show')
