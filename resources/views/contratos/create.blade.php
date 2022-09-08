@@ -156,7 +156,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="otraboleta" class="col-sm-2 col-form-label">Otro Tipo Documento</label>
+                                <label for="otraboleta" class="col-sm-2 col-form-label">Otro Tipo Documento Garantia</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="otraboleta" placeholder="Tipo Boleta" id="otraboleta" value="{{old('otraboleta')}}" required oninvalid="this.setCustomValidity('Ingrese tipo de boleta')" oninput="this.setCustomValidity('')"/>
                                     @if ($errors->has('otraboleta'))

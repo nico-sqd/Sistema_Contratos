@@ -38,11 +38,12 @@
             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">{{ __('Mike John responded to your email') }}</a>
-            <a class="dropdown-item" href="#">{{ __('You have 5 new tasks') }}</a>
-            <a class="dropdown-item" href="#">{{ __('You\'re now friend with Andrew') }}</a>
-            <a class="dropdown-item" href="#">{{ __('Another Notification') }}</a>
-            <a class="dropdown-item" href="#">{{ __('Another One') }}</a>
+            <a class="dropdown-item" href="#">{{ __('Alerta presupuesto/s (incertar numero)') }}</a>
+            <a class="dropdown-item" href="#">{{ __('Alerta Contrato/s por vencer (incertar numero)') }}</a>
+            <a class="dropdown-item" href="#">{{ __('Alerta Boleta/s por vencer (incertar numero)') }}</a>
+            <a class="dropdown-item" href="#">{{ __('Alerta Multa/s por vencer (incertar numero) ') }}</a>
+            <a class="dropdown-item" href="#">{{ __('Alerta Contrato/s vencidos (incertar numero)') }}</a>
+            
           </div>
         </li>
         <li class="nav-item dropdown">
