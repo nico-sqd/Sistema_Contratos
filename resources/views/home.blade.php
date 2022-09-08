@@ -155,6 +155,7 @@
                       $diferencia = $fecha->diff($fechahoy);
                       if ($diferencia->y == 0 && $diferencia->m <= 6 && $diferencia->m >= 3){
                         $contador += 1;
+                        $id = $multa->id;
                       }
                   ?>
                 @endforeach
