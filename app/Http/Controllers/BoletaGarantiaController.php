@@ -63,8 +63,8 @@ class BoletaGarantiaController extends Controller
     public function edit(Contrato $contratos)
     {
         dd($contratos->id);
-        return view('boletagarantia.edit', compact('contratos'),['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
-        'montoboletagarantia'=>MontoBoleta::all(),'monto'=>Monto::all(),'contrato'=>Contrato::all()]);
+        return view('boletagarantia.edit', compact('contratos'),['tipomoneda'=>TipoMoneda::all(),'boletagarantia'=>BoletaGarantia::all(),
+        'montoboletagarantia'=>MontoBoleta::all(),'montoboleta'=>Monto::all(),'contrato'=>Contrato::all()]);
     }
 
     /**
@@ -76,6 +76,7 @@ class BoletaGarantiaController extends Controller
      */
     public function update(Request $request, BoletaGarantia $boletagarantia, Contrato $contratos, Monto $montoboleta)
     {
+        $montoboleta -> update($request->only("fecha_vencimiento"));
         $boletagarantia -> update($request->only('monto_boleta','id_tipo_boleta'));
         $contratos -> create(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento'),['id_monto'=>$montoboleta->id,'id_boleta'=>$boletagarantia->id_tipo_boleta,'id_monto_boleta'=>$boletagarantia->id]));
 

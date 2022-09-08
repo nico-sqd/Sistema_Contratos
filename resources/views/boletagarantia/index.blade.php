@@ -159,8 +159,19 @@
                                     @endif
                                     <td>{{ $boleta->fecha_vencimiento }}</td>
                                     <td class="td-actions text-center">
-                                        <a href="{{ route('contratos.boletagarantia.edit', [$contratos,$boleta]) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                        @can("admin_edit")
+                                            <a href="{{ route('contratos.boletagarantia.edit', [$contratos,$boleta]) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                        @endcan
                                         <a href="{{ route('files.download', $boleta->file->uuid) }}" class="btn btn-info"><i class="material-icons">download</i></a>
+                                        @can('admin_destroy')
+                                        <form action="{{route('contratos.boletagarantia.destroy', [$contratos,$boleta])}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger" type="submit" rel="tooltip">
+                                            <i class="material-icons">close</i>
+                                        </button>
+                                        </form>
+                                        @endcan
                                     </form>
                                 </td>
                                 </tr>
