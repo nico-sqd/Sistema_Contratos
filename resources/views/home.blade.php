@@ -169,7 +169,7 @@
             @if ($contador >= 1)
                 <div class="stats">
                     <i class="material-icons text-success">visibility</i>
-                    <a href="{{route('contratos.multas.index', [$multa->contrato->id,'diferencia'=>$diferencia->d])}}">Ver multa</a>
+                    <a href="{{route('contratos.multas.index', [$multa->contrato->id,'diferencia'=>$diferencia->m])}}">Ver multa</a>
                 </div>
             @endif
             </div>
@@ -207,7 +207,7 @@
                 @if ($contador >= 1)
                     <div class="stats">
                         <i class="material-icons text-success">visibility</i>
-                        <a href="{{route('contratos.multas.index', [$multa->contrato->id,'diferencia'=>$diferencia->d])}}">Ver multa</a>
+                        <a href="{{route('contratos.multas.index', [$multa->contrato->id,'diferencia'=>$diferencia->m])}}">Ver multa</a>
                     </div>
                 @endif
             </div>
@@ -245,7 +245,7 @@
                 @if ($contador >= 1)
                 <div class="stats">
                     <i class="material-icons text-success">visibility</i>
-                    <a href="{{route('contratos.multas.index', [$multa->contrato->id,'diferencia'=>$diferencia->d])}}">Ver multa</a>
+                    <a href="{{route('contratos.multas.index', [$multa->contrato->id,'diferencia'=>$diferencia->m])}}">Ver multa</a>
                 </div>
                 @endif
             </div>
