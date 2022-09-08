@@ -16,7 +16,12 @@ class CreateMovimientosTable extends Migration
         Schema::create('movimientos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('movimiento');
+            $table->string('id_oc');
+            $table->float('valor_total_oc')->nullable();
+            $table->string('nmr_factura');
+            $table->date('fecha_factura');
+            $table->float('valor_factura');
+            $table->float('monto_contrato_actualizado')->nullable();
             $table->unsignedBigInteger('id_contrato');
             $table->foreign('id_contrato')->references('id')->on('contrato');
         });

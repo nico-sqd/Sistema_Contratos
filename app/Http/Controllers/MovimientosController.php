@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Contrato;
 use App\Models\Movimientos;
+use App\Models\UnidadMedida;
+use App\Models\Cantidad;
+use App\Models\Monto;
 
 class MovimientosController extends Controller
 {
@@ -15,7 +18,7 @@ class MovimientosController extends Controller
      */
     public function index(Contrato $contratos, Request $request)
     {
-        return view('movimientos.index',compact('contratos'),['contratos'=>Contrato::all(),'movimientos'=>Movimientos::all()]);
+        return view('movimientos.index',compact('contratos'),['contratos'=>Contrato::all(),'movimientos'=>Movimientos::all(),'cantidades'=>Cantidad::all()]);
     }
 
     /**
@@ -23,9 +26,9 @@ class MovimientosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Contrato $contratos)
     {
-        //
+        return view('movimientos.create',compact('contratos'),['unidadesmedidas'=>UnidadMedida::all()]);
     }
 
     /**
@@ -34,9 +37,30 @@ class MovimientosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Contrato $contratos, Monto $monto)
     {
-        //
+        $movimientos = Movimientos::all();
+        $contadormovimientos = count(Movimientos::all());
+
+        for ($i = 0; $i<=$contadormovimientos-1;$i++){
+            $montoactualizado = $movimientos[$i]->monto_contrato_actualizado;
+        }
+        if ($contadormovimientos >=1){
+            $montoconsumido = $request->cantidad * $request->valor_unitario;
+            $montototal = $montoactualizado - $montoconsumido;
+            $movimiento = Movimientos::create(array_merge($request->only('id_oc','nmr_factura','fecha_factura','valor_factura','id_contrato','monto_contrato_actualizado'),['id_contrato'=>$contratos->id,'monto_contrato_actualizado'=>$montototal]));
+            $cantidad = Cantidad::create(array_merge($request->only('id_unidad','cantidad','valor_unitario','id_movimiento'),['id_movimiento'=>$movimiento->id]));
+        }
+        else{
+
+            $montocontrato = $contratos->monto->moneda;
+            $montoconsumido = $request->cantidad * $request->valor_unitario;
+            $montototal = $montocontrato - $montoconsumido;
+
+            $movimiento = Movimientos::create(array_merge($request->only('id_oc','nmr_factura','fecha_factura','valor_factura','id_contrato','monto_contrato_actualizado'),['id_contrato'=>$contratos->id,'monto_contrato_actualizado'=>$montototal]));
+            $cantidad = Cantidad::create(array_merge($request->only('id_unidad','cantidad','valor_unitario','id_movimiento'),['id_movimiento'=>$movimiento->id]));
+        }
+        return redirect()->route('contratos.movimientos.index', $contratos->id)->with('success', 'Movimiento agregado correctamente.');
     }
 
     /**

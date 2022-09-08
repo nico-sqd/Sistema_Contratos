@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Multas;
 use App\Models\Contrato;
+use App\Models\MontoBoleta;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home',['contratos'=>Contrato::all(),'multas'=>Multas::all()]);
+        return view('home',['contratos'=>Contrato::all(),'multas'=>Multas::all(),'boleta'=>MontoBoleta::all()]);
     }
 }

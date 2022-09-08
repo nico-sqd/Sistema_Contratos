@@ -33,12 +33,32 @@
               <div class="card-icon">
                 <i class="material-icons">store</i>
               </div>
-              <p class="card-category">Revenue</p>
-              <h3 class="card-title">$34,245</h3>
+              <p class="card-category">Garantías por vencer</p>
+              <h3 class="card-title">
+                @if (count($boleta)>=1)
+                <?php
+                    $contador = 0;
+                ?>
+                @foreach ($boleta as $garantia)
+                    <?php
+                        $fecha = new DateTime ($garantia->fecha_vencimiento);
+                        $fechahoy = new DateTime(date('Y-m-d'));
+                        $diferencia = $fecha->diff($fechahoy);
+                        if ($diferencia->y == 0 && $diferencia->m <= "3" || $diferencia->d <= "31" && $diferencia->m <= "3"){
+                            $contador += 1;
+                        }
+                    ?>
+                @endforeach
+                        {{$contador}} <small>Boletas por vencer</small>
+                        @else
+                        <small>Sin boletas por vencer</small>
+                @endif
+              </h3>
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons">date_range</i> Last 24 Hours
+                <i class="material-icons text-success">library_books</i>
+                <a href="{{route('contratos.index')}}">Ver Contratos</a>
               </div>
             </div>
           </div>
@@ -49,12 +69,34 @@
               <div class="card-icon">
                 <i class="material-icons">info_outline</i>
               </div>
-              <p class="card-category">Fixed Issues</p>
-              <h3 class="card-title">75</h3>
+              <p class="card-category">Documentos ya vencidos</p>
+              <h3 class="card-title">
+                @if (count($boleta)>=1)
+                <?php
+                      $contador = 0;
+                  ?>
+                @foreach ($boleta as  $boletas)
+                  <?php
+                      $fecha = new DateTime ($boletas->fecha_vencimiento);
+                      $fechahoy = new DateTime(date('Y-m-d'));
+                      $diferencia = $fecha->diff($fechahoy);
+                      if ($diferencia->y == 0 && $diferencia->m == 0 && $diferencia->d >= 0){
+                          $contador += 1;
+                      }
+                  ?>
+                @endforeach
+                @if ($contador>=1)
+                    {{$contador}} <small>Documentos vencidos</small>
+                @else
+                    <small>No hay documentos vencidos</small>
+                @endif
+            @endif
+              </h3>
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons">local_offer</i> Tracked from Github
+                <i class="material-icons text-success">library_books</i>
+                <a href="{{route('contratos.index')}}">Ver Contratos</a>
               </div>
             </div>
           </div>
@@ -85,22 +127,33 @@
             <div class="card-body">
               <h4 class="card-title">Alerta Baja</h4>
               <p class="card-category">
-                <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
+                <?php
+                    $contador = 0;
+                ?>
+                @foreach ($multas as $multa)
+                  <?php
+                      $fecha = new DateTime ($multa->fecha_notificacion);
+                      $fechahoy = new DateTime(date('Y-m-d'));
+                      $diferencia = $fecha->diff($fechahoy);
+                      if ($diferencia->y == 0 && $diferencia->m <= 6 || $diferencia->m > 3){
+                        $contador += 1;
+                      }
+                  ?>
+                @endforeach
+                @if ($contador >= 1)
+                    <h4 style="text-align:center">{{$contador}} Multas por vencer</h4>
+                @else
+                      <h4 style="text-align: center">Sin multas por vencer</h4>
+                @endif
+              </p>
             </div>
             <div class="card-footer">
-            @foreach ($multas as $multa)
-              <?php
-                  $fecha = new DateTime ($multa->fecha_notificacion);
-                  $fechahoy = new DateTime(date('Y-m-d'));
-                  $diferencia = $fecha->diff($fechahoy);
-              ?>
-              @if ($diferencia->y == 0 && $diferencia->m == 0 && $diferencia->d <="15" || $diferencia->d >="11")
+            @if ($contador >= 1)
                 <div class="stats">
                     <i class="material-icons text-success">visibility</i>
                     <a href="{{route('contratos.multas.index', [$multa->contrato->id,'diferencia'=>$diferencia->d])}}">Ver multa</a>
                 </div>
-              @endif
-            @endforeach
+            @endif
             </div>
           </div>
         </div>
@@ -111,12 +164,34 @@
             </div>
             <div class="card-body">
               <h4 class="card-title">Alerta Mediana</h4>
-              <p class="card-category">Last Campaign Performance</p>
+              <p class="card-category">
+            <?php
+                $contador = 0;
+            ?>
+            @foreach ($multas as $multass)
+              <?php
+                  $fecha = new DateTime ($multass->fecha_notificacion);
+                  $fechahoy = new DateTime(date('Y-m-d'));
+                  $diferencia = $fecha->diff($fechahoy);
+                  if ($diferencia->y == 0 && $diferencia->m <= 3 && $diferencia->m > 1){
+                    $contador += 1;
+                  }
+              ?>
+            @endforeach
+            @if ($contador >= 1)
+                <h4 style="text-align:center">{{$contador}} Multas por vencer</h4>
+            @else
+                  <h4 style="text-align: center">Sin multas por vencer</h4>
+            @endif
+            </p>
             </div>
             <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons">access_time</i> campaign sent 2 days ago
-              </div>
+                @if ($contador >= 1)
+                    <div class="stats">
+                        <i class="material-icons text-success">visibility</i>
+                        <a href="{{route('contratos.multas.index', [$multa->contrato->id,'diferencia'=>$diferencia->d])}}">Ver multa</a>
+                    </div>
+                @endif
             </div>
           </div>
         </div>
@@ -147,7 +222,7 @@
                   <ul class="nav nav-tabs" data-tabs="tabs">
                     <li class="nav-item">
                       <a class="nav-link active" href="#profile" data-toggle="tab">
-                        <i class="material-icons">library_books</i> Vigentes 
+                        <i class="material-icons">library_books</i> Vigentes
                         <div class="ripple-container"></div>
                       </a>
                     </li>
