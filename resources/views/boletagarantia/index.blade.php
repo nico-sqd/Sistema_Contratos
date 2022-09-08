@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'contratos', 'titlePage' => 'Boletas de Garantía'])
+@extends('layouts.main', ['activePage' => 'contratos', 'titlePage' => 'Documentos de Garantía'])
 @section('content')
 <div class="content">
     <div class="container-fluid">
@@ -8,7 +8,7 @@
                     @csrf
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-tittle">Boletas de Garantía</h4>
+                            <h4 class="card-tittle">Documentos de Garantía</h4>
                             <p class="card-category">Agregar datos</p>
                         </div>
                         <div class="card-body">
@@ -18,7 +18,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="id_tipo_boleta" class="col-sm-2 col-form-label">Tipo Boleta</label>
+                                <label for="id_tipo_boleta" class="col-sm-2 col-form-label">Tipo Documento</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="id_tipo_boleta" name="id_tipo_boleta">
@@ -31,7 +31,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="otraboleta" class="col-sm-2 col-form-label">Otro Tipo Boleta</label>
+                                <label for="otraboleta" class="col-sm-2 col-form-label">Otro Tipo Documento</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="otraboleta" placeholder="Tipo Boleta" id="otraboleta" value="{{old('otraboleta')}}" required oninvalid="this.setCustomValidity('Ingrese tipo de boleta')" oninput="this.setCustomValidity('')"/>
                                     @if ($errors->has('otraboleta'))
@@ -76,7 +76,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="monto_boleta" class="col-sm-2 col-form-label">Monto Boleta Garantía</label>
+                                <label for="monto_boleta" class="col-sm-2 col-form-label">Monto Documento Garantía</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="monto_boleta" placeholder="Monto boleta Garantía" value="{{old('monto_boleta')}}">
                                     @if ($errors->has('monto_boleta'))
@@ -85,7 +85,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="id_moneda" class="col-sm-2 col-form-label">Tipo Moneda Boleta Garantía</label>
+                                <label for="id_moneda" class="col-sm-2 col-form-label">Tipo Moneda Documento Garantía</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_moneda">

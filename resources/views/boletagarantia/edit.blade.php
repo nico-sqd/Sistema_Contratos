@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' => 'contratos', 'titlePage' => 'Editar Boletas de Garantía'])
+@extends('layouts.main', ['activePage' => 'contratos', 'titlePage' => 'Editar Documento de Garantía'])
 @section('content')
 <div class="content">
     <div class="container-fluid">
@@ -19,7 +19,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="id_tipo_boleta" class="col-sm-2 col-form-label">Tipo Boleta</label>
+                                <label for="id_tipo_boleta" class="col-sm-2 col-form-label">Tipo Documento</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_tipo_boleta">
@@ -31,7 +31,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="otraboleta" class="col-sm-2 col-form-label">Otro Tipo Boleta</label>
+                                <label for="otraboleta" class="col-sm-2 col-form-label">Otro Tipo Documento</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="otraboleta" value="{{ old('otraboleta', $contratos->montoboleta->otraboleta) }}" >
                                     @if ($errors->has('otraboleta'))
@@ -76,7 +76,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="monto_boleta" class="col-sm-2 col-form-label">Monto Boleta Garantía</label>
+                                <label for="monto_boleta" class="col-sm-2 col-form-label">Monto Documento Garantía</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="monto_boleta" value="{{ old('monto_boleta', $contratos->montoboleta->monto_boleta) }}" >
                                     @if ($errors->has('monto_boleta'))

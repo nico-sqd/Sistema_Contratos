@@ -27,7 +27,7 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead class="text-primary">
-                                                <th>ID Licitacion</th>
+                                                <th>ID Proceso Compra</th>
                                                 <th>Convenios</th>
                                                 <th>Vigencia inicio</th>
                                                 <th>Vigencia Fin</th>
