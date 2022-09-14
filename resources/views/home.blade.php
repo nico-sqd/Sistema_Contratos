@@ -6,9 +6,9 @@
       <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="card card-stats">
-            <div class="card-header card-header-warning card-header-icon">
+            <div class="card-header card-header-success card-header-icon">
               <div class="card-icon">
-                <i class="material-icons">content_copy</i>
+                <i class="material-icons">library_books</i>
               </div>
               <p class="card-category">Contratos Activos</p>
               <h3 class="card-title">
@@ -41,9 +41,9 @@
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="card card-stats">
-            <div class="card-header card-header-success card-header-icon">
+            <div class="card-header card-header-warning card-header-icon">
               <div class="card-icon">
-                <i class="material-icons">store</i>
+                <i class="material-icons">library_books</i>
               </div>
               <p class="card-category">Garantías por vencer</p>
               <h3 class="card-title">
@@ -51,6 +51,7 @@
                 <?php
                     $contador = 0;
                     $id = [];
+                    $id_contrato = [];
                     $i = 0;
                 ?>
                 @foreach ($boleta as $garantia)
@@ -59,6 +60,14 @@
                         $fechahoy = new DateTime(date('Y-m-d'));
                         $diferencia = $fecha->diff($fechahoy);
                         if ($diferencia->y == 0 && $diferencia->m <= "3" && $diferencia->m > "0"|| $diferencia->y == 0 && $diferencia->d <= "31" && $diferencia->m < "3" && $diferencia->m > "0"){
+                            if ($garantia->id_contrato_original != NULL)
+                            {
+                                $id_contrato[$i] = $garantia->id_contrato_original;
+                            }
+                            elseif ($garantia->id_contrato_modificada != NULL)
+                            {
+                                $id_contrato[$i] = $garantia->id_contrato_modificada;
+                            }
                             $contador += 1;
                             $id[$i] = $garantia->id;
                             $meses = $diferencia;
@@ -78,7 +87,7 @@
             @if ($contador>=1)
                 <div class="stats">
                   <i class="material-icons text-success">library_books</i>
-                  <a href="{{route('boletagarantia.index_alerta', ['id_boletas'=>$id,'diferencia'=>$meses->m])}}">Ver Garantías</a>
+                  <a href="{{route('boletagarantia.index_alerta', ['id_boletas'=>$id,'diferencia'=>$meses->m,'id_contrato'=>$id_contrato])}}">Ver Garantías</a>
                 </div>
             @endif
             </div>
@@ -88,7 +97,7 @@
           <div class="card card-stats">
             <div class="card-header card-header-danger card-header-icon">
               <div class="card-icon">
-                <i class="material-icons">info_outline</i>
+                <i class="material-icons">warning</i>
               </div>
               <p class="card-category">Documentos ya vencidos</p>
               <h3 class="card-title">
@@ -126,9 +135,9 @@
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="card card-stats">
-            <div class="card-header card-header-info card-header-icon">
+            <div class="card-header card-header-warning card-header-icon">
               <div class="card-icon">
-                <i class="fa fa-twitter"></i>
+                <i class="material-icons">warning</i>
               </div>
               <p class="card-category">Contratos con presupuesto bajo</p>
               <h3 class="card-title">

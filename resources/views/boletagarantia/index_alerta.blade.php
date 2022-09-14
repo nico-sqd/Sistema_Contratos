@@ -35,7 +35,8 @@
                             <tbody>
                             @foreach ($montoboleta as $boleta)
                                 @foreach ($id_boleta as $id)
-                                    @if ($boleta->id_contrato_original == $contratos->id && $id == $boleta->id || $boleta->id_contrato_modificada == $contratos->id && $id == $boleta->id)
+                                    @foreach ($id_contrato as $id_contratos)
+                                    @if ($boleta->id_contrato_original == $id_contratos && $id == $boleta->id || $boleta->id_contrato_modificada == $id_contratos && $id == $boleta->id)
                                     <tr>
                                         @if ($boleta->boletagarantia->documentos_garantia == 'Otro')
                                             <td>{{ $boleta->otraboleta }}</td>
@@ -55,11 +56,11 @@
                                         @endif
                                         <td>{{ $boleta->fecha_vencimiento }}</td>
                                         <td class="td-actions text-right">
-                                            {{$contrato_id = $boleta->id_contrato_modificada}}
-                                            <a href="{{ route('contratos.show', $boleta->id_contrato_modificada) }}" class="btn btn-danger"><i class="material-icons">visibility</i></a>
+                                            <a href="{{ route('contratos.show', $id_contratos) }}" class="btn btn-twitter"><i class="material-icons">visibility</i></a>
                                         </td>
                                     </tr>
                                     @endif
+                                    @endforeach
                                 @endforeach
                             @endforeach
                             </tbody>

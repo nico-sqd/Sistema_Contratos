@@ -31,7 +31,8 @@ class MontoBoletaController extends Controller
     {
         $id_boleta = $request->id_boletas;
         $diferencia = $request->diferencia;
-        return view('boletagarantia.index_alerta',compact('contratos','id_boleta','diferencia'),['tipoboleta'=>BoletaGarantia::all(),'contratos'=>Contrato::all(),'tipomoneda'=>TipoMoneda::all(),'montoboleta'=>Montoboleta::all()]);
+        $id_contrato = $request->id_contrato;
+        return view('boletagarantia.index_alerta',compact('contratos','id_boleta','diferencia','id_contrato'),['tipoboleta'=>BoletaGarantia::all(),'contratos'=>Contrato::all(),'tipomoneda'=>TipoMoneda::all(),'montoboleta'=>Montoboleta::all()]);
     }
 
     /**
