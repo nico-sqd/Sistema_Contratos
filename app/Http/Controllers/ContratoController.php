@@ -52,6 +52,32 @@ class ContratoController extends Controller
         ->paginate(5);
         return view('contratos.index', compact('contratos'));
     }
+    public function index_alerta(Request $request)
+    {
+        //dd($request->id_contratos);
+        $diferencia = $request->diferencia;
+        $id_contratos = $request->id_contratos;
+        //dd($diferencia);
+        $texto = trim($request->get('texto'));
+        $contratos = Contrato::with('convenio')
+        ->whereHas('convenio', function (Builder $query) use ($texto) {
+            $query->whereRaw('UPPER(id_licitacion) LIKE ?', ['%' . strtoupper($texto) . '%']);
+            $query->orWhere('vigencia_inicio','LIKE','%'.$texto.'%');
+            $query->orWhere('vigencia_fin','LIKE','%'.$texto.'%');
+            $query->orWhereRaw('UPPER(admin) LIKE ?', ['%' . strtoupper($texto) . '%']);
+            $query->orWhereRaw('UPPER(convenio) LIKE ?', ['%' . strtoupper($texto) . '%']);
+        })
+        ->orwhereHas('proveedor', function (Builder $query) use ($texto) {
+            $query->Where('rut_proveedor','LIKE','%'.$texto.'%');
+        })
+        ->orwhereHas('user', function (Builder $query) use ($texto) {
+            $query->whereRaw('UPPER(name) LIKE ?', ['%' . strtoupper($texto) . '%']);
+        })
+        //->whereRelation('Convenio', 'admin', Auth::id()) //--------(filrar contratos por id)------------
+        ->orderBy('id','asc')
+        ->paginate(5);
+        return view('contratos.index_alerta', compact('contratos','diferencia','id_contratos'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -164,7 +190,7 @@ class ContratoController extends Controller
         $montoboleta->update($request->only('moneda', 'id_tipo_moneda'));
         $boletagarantia->update($request->only('monto_boleta','fecha_inicio','fecha_fin','id_boleta','id_tipo_boleta','id_moneda'));
         $contrato->update(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),['id_licitacion'=>$convenios->id]));
-        return redirect()->route('contratos.index', $contrato->id)->with('success', 'Usuario creado correctamente.');
+        return redirect()->route('contratos.index', $contrato->id)->with('success', 'Contrato actualizado correctamente.');
     }
 
     public function update_aumento(Request $request, Contrato $contrato)

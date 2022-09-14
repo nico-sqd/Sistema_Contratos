@@ -55,7 +55,61 @@
                                                 </div>
                                             @endif
                                             @foreach ($multas as $multa)
-                                                @if ($diferencia <="15" && $diferencia >="11")
+                                                @if ($diferencia <="1" && $diferencia >="0")
+                                                    @if ($multa->id_contrato == $contratos->id)
+                                                        <tr>
+                                                            <td>{{ $multa->descripcion }}</td>
+                                                            <td>{{ $multa->estadotramitemulta->estado_tramite }}</td>
+                                                            <td>{{ $multa->estadopagomulta->estado_pago }}</td>
+                                                            <td>{{ $multa->fecha_oficio }}</td>
+                                                            <td class="td-actions text-right">
+                                                                @can('show')
+                                                                <a href="{{ route('contratos.multas.show', [$contratos,$multa]) }}" class="btn btn-info"><i class="material-icons">library_books</i></a>
+                                                                @endcan
+                                                                @can('admin_edit')
+                                                                <a href="{{ route('contratos.multas.edit', [$contratos, $multa]) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                                @endcan
+                                                                @can('admin_destroy')
+                                                                <form action="{{route('contratos.multas.destroy', [$contratos,$multa])}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="btn btn-danger" type="submit" rel="tooltip">
+                                                                    <i class="material-icons">close</i>
+                                                                </button>
+                                                                </form>
+                                                                @endcan
+                                                            </td>
+                                                        </tr>
+                                                    @endif
+                                                @endif
+                                                @if ($diferencia <="3" && $diferencia >"1")
+                                                    @if ($multa->id_contrato == $contratos->id)
+                                                        <tr>
+                                                            <td>{{ $multa->descripcion }}</td>
+                                                            <td>{{ $multa->estadotramitemulta->estado_tramite }}</td>
+                                                            <td>{{ $multa->estadopagomulta->estado_pago }}</td>
+                                                            <td>{{ $multa->fecha_oficio }}</td>
+                                                            <td class="td-actions text-right">
+                                                                @can('show')
+                                                                <a href="{{ route('contratos.multas.show', [$contratos,$multa]) }}" class="btn btn-info"><i class="material-icons">library_books</i></a>
+                                                                @endcan
+                                                                @can('admin_edit')
+                                                                <a href="{{ route('contratos.multas.edit', [$contratos, $multa]) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                                @endcan
+                                                                @can('admin_destroy')
+                                                                <form action="{{route('contratos.multas.destroy', [$contratos,$multa])}}" method="post" style="display: inline-block" onsubmit="return confirm('¿Estás seguro?')">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="btn btn-danger" type="submit" rel="tooltip">
+                                                                    <i class="material-icons">close</i>
+                                                                </button>
+                                                                </form>
+                                                                @endcan
+                                                            </td>
+                                                        </tr>
+                                                    @endif
+                                                @endif
+                                                @if ($diferencia <="6" && $diferencia >"3")
                                                     @if ($multa->id_contrato == $contratos->id)
                                                         <tr>
                                                             <td>{{ $multa->descripcion }}</td>

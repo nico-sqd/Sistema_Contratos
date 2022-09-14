@@ -18,7 +18,19 @@
                                 </div>
                             </div>
                             <div class="row">
-                            <label for="id_licitacion" class="col-sm-2 col-form-label">ID Licitacion</label>
+                                <label for="id_modalidad" class="col-sm-2 col-form-label">Modalidad</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_modalidad">
+                                        @foreach ( $modalidad as $modalidades )
+                                            <option value="{{ $modalidades->id }}">{{ $modalidades->nombre_modalidad }} - {{ $modalidades->abreviacion_modalidad }}</option>
+                                        @endforeach
+                                        </select>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                            <label for="id_licitacion" class="col-sm-2 col-form-label">ID Proceso Compra</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="id_licitacion" placeholder="id_licitacion" value="{{old('id_licitacion')}}" autofocus required oninvalid="this.setCustomValidity('Ingrese ID de licitación')" oninput="this.setCustomValidity('')"/>
                                     @if ($errors->has('id_licitacion'))
@@ -144,7 +156,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="otraboleta" class="col-sm-2 col-form-label">Otro Tipo Boleta</label>
+                                <label for="otraboleta" class="col-sm-2 col-form-label">Otro Tipo Documento Garantia</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="otraboleta" placeholder="Tipo Boleta" id="otraboleta" value="{{old('otraboleta')}}" required oninvalid="this.setCustomValidity('Ingrese tipo de boleta')" oninput="this.setCustomValidity('')"/>
                                     @if ($errors->has('otraboleta'))
@@ -186,7 +198,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="monto_boleta" class="col-sm-2 col-form-label">Monto Boleta Garantía</label>
+                                <label for="monto_boleta" class="col-sm-2 col-form-label">Monto Documento Garantía</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="monto_boleta" placeholder="Ingrese monto de la boleta de garantia" value="{{old('monto_boleta')}}" autofocus>
                                     @if ($errors->has('monto_boleta'))
@@ -195,7 +207,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="id_moneda" class="col-sm-2 col-form-label">Tipo Moneda Boleta Garantía</label>
+                                <label for="id_moneda" class="col-sm-2 col-form-label">Tipo Moneda Documento Garantía</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_moneda">
@@ -229,18 +241,6 @@
                                 </div>
                             </div>
                             @endcan
-                            <div class="row">
-                                <label for="id_modalidad" class="col-sm-2 col-form-label">Modalidad</label>
-                                <div class="col-sm-7">
-                                    <div class="form-group">
-                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_modalidad">
-                                        @foreach ( $modalidad as $modalidades )
-                                            <option value="{{ $modalidades->id }}">{{ $modalidades->nombre_modalidad }} - {{ $modalidades->abreviacion_modalidad }}</option>
-                                        @endforeach
-                                        </select>
-                                      </div>
-                                </div>
-                            </div>
                             <div class="row">
                                 <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
                                 <div class="col-sm-7" >

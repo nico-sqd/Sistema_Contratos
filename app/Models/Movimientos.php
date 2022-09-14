@@ -18,6 +18,7 @@ class Movimientos extends Model
         'nmr_factura',
         'fecha_factura',
         'valor_factura',
+        'monto_contrato_actualizado',
     ];
 
     public function contrato()
@@ -26,6 +27,6 @@ class Movimientos extends Model
     }
     public function cantidad()
     {
-        return $this->hasMany(Cantidad::class,'id_movimiento');
+        return $this->hasOne(Cantidad::class,'id_movimiento');
     }
 }

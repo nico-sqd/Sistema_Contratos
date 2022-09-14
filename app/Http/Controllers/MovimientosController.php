@@ -39,11 +39,27 @@ class MovimientosController extends Controller
      */
     public function store(Request $request, Contrato $contratos, Monto $monto)
     {
-        $montocontrato = $contratos->monto;
-        $movimiento = Movimientos::create(array_merge($request->only('id_oc','nmr_factura','fecha_factura','valor_factura','id_contrato'),['id_contrato'=>$contratos->id]));
-        $cantidad = Cantidad::create(array_merge($request->only('id_unidad','cantidad','valor_unitario','id_movimiento'),['id_movimiento'=>$movimiento->id]));
-        //$monto_total =  $contratos->monto->moneda - ($cantidad->valor_unitario * $cantidad->cantidad);
-        //$montocontrato->update(array_merge($request->only('moneda'),['moneda'=>$monto_total]));
+        $movimientos = Movimientos::all();
+        $contadormovimientos = count(Movimientos::all());
+
+        for ($i = 0; $i<=$contadormovimientos-1;$i++){
+            $montoactualizado = $movimientos[$i]->monto_contrato_actualizado;
+        }
+        if ($contadormovimientos >=1){
+            $montoconsumido = $request->cantidad * $request->valor_unitario;
+            $montototal = $montoactualizado - $montoconsumido;
+            $movimiento = Movimientos::create(array_merge($request->only('id_oc','nmr_factura','fecha_factura','valor_factura','id_contrato','monto_contrato_actualizado'),['id_contrato'=>$contratos->id,'monto_contrato_actualizado'=>$montototal]));
+            $cantidad = Cantidad::create(array_merge($request->only('id_unidad','cantidad','valor_unitario','id_movimiento'),['id_movimiento'=>$movimiento->id]));
+        }
+        else{
+
+            $montocontrato = $contratos->monto->moneda;
+            $montoconsumido = $request->cantidad * $request->valor_unitario;
+            $montototal = $montocontrato - $montoconsumido;
+
+            $movimiento = Movimientos::create(array_merge($request->only('id_oc','nmr_factura','fecha_factura','valor_factura','id_contrato','monto_contrato_actualizado'),['id_contrato'=>$contratos->id,'monto_contrato_actualizado'=>$montototal]));
+            $cantidad = Cantidad::create(array_merge($request->only('id_unidad','cantidad','valor_unitario','id_movimiento'),['id_movimiento'=>$movimiento->id]));
+        }
         return redirect()->route('contratos.movimientos.index', $contratos->id)->with('success', 'Movimiento agregado correctamente.');
     }
 
@@ -64,9 +80,9 @@ class MovimientosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Contrato $contratos, Movimientos $movimiento)
     {
-        //
+        return view('movimientos.edit',compact('contratos','movimiento'),['movimiento'=>Movimientos::all(),'cantidad'=>Cantidad::all(),'contratos'=>Contrato::all(),'unidadesmedidas'=>UnidadMedida::all()]);
     }
 
     /**
@@ -76,9 +92,22 @@ class MovimientosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Contrato $contratos, Movimientos $movimiento, Cantidad $cantidad)
     {
-        //
+        $cantidad = $movimiento->cantidad;
+        $movimientos = Movimientos::all();
+        $contadormovimientos = count(Movimientos::all());
+
+        if ($contadormovimientos >= 2){
+            for ($i = 0; $i<=$contadormovimientos-2;$i++){
+                $montoactualizado = $movimientos[$i]->monto_contrato_actualizado;
+            }
+            $montoconsumido = $request->cantidad * $request->valor_unitario;
+            $montototal = $montoactualizado - $montoconsumido;
+        }
+        $movimiento->update(array_merge($request->only('id_oc','nmr_factura','fecha_factura','valor_factura','id_contrato','monto_contrato_actualizado'),['id_contrato'=>$contratos->id,'monto_contrato_actualizado'=>$montototal]));
+        $cantidad->update(array_merge($request->only('id_unidad','cantidad','valor_unitario','id_movimiento'),['id_movimiento'=>$movimiento->id]));
+        return redirect()->route('contratos.movimientos.index', $contratos->id)->with('success', 'Movimiento actualizado correctamente.');
     }
 
     /**
@@ -87,8 +116,11 @@ class MovimientosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Contrato $contratos, Cantidad $cantidad, Request $request, Movimientos $movimiento)
     {
-        //
+        //dd($movimiento->cantidad);
+        $movimiento->cantidad -> delete();
+        $movimiento -> delete();
+        return redirect()->route('contratos.movimientos.index', $contratos->id);
     }
 }

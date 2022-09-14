@@ -19,7 +19,19 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="id_licitacion" class="col-sm-2 col-form-label">ID Licitacion</label>
+                                <label for="id_modalidad" class="col-sm-2 col-form-label">Modalidad</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_modalidad">
+                                          @foreach ( $modalidad as $modalidad )
+                                            <option value="{{ $modalidad->id }}" {{$contratos->id_modalidad == $modalidad->id ? 'selected' : ''}}>{{$modalidad->nombre_modalidad}}</option>
+                                          @endforeach
+                                        </select>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="id_licitacion" class="col-sm-2 col-form-label">ID Proceso Compra</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="id_licitacion" value="{{ old('id_licitacion', $contratos->convenio->id_licitacion) }}" autofocus>
                                     @if ($errors->has('id_licitacion'))
@@ -133,7 +145,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="id_boleta" class="col-sm-2 col-form-label">ID Boleta de Garantía</label>
+                                <label for="id_boleta" class="col-sm-2 col-form-label">ID Documento de Garantía</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="id_boleta" value="{{ old('id_boleta', $contratos->montoboleta->id_boleta) }}" >
                                     @if ($errors->has('id_boleta'))
@@ -142,7 +154,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="monto_boleta" class="col-sm-2 col-form-label">Monto Boleta de Garantía</label>
+                                <label for="monto_boleta" class="col-sm-2 col-form-label">Monto Documento de Garantía</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="monto_boleta" value="{{ old('monto_boleta', $contratos->montoboleta->monto_boleta) }}" >
                                     @if ($errors->has('monto_boleta'))
@@ -163,24 +175,12 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="id_tipo_boleta" class="col-sm-2 col-form-label">Tipo Boleta</label>
+                                <label for="id_tipo_boleta" class="col-sm-2 col-form-label">Tipo Documento</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_tipo_boleta">
                                           @foreach ( $tipoboleta as $boletas )
                                             <option value="{{ $boletas->id }}" {{$contratos->montoboleta->id_tipo_boleta == $boletas->id ? 'selected' : ''}}>{{$boletas->documentos_garantia}}</option>
-                                          @endforeach
-                                        </select>
-                                      </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label for="id_modalidad" class="col-sm-2 col-form-label">Modalidad</label>
-                                <div class="col-sm-7">
-                                    <div class="form-group">
-                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_modalidad">
-                                          @foreach ( $modalidad as $modalidad )
-                                            <option value="{{ $modalidad->id }}" {{$contratos->id_modalidad == $modalidad->id ? 'selected' : ''}}>{{$modalidad->nombre_modalidad}}</option>
                                           @endforeach
                                         </select>
                                       </div>

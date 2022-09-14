@@ -63,6 +63,15 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <label for="password2" class="col-sm-2 col-form-label">Confirma Contraseña</label>
+                                <div class="col-sm-7">
+                                    <input type="password" class="form-control" name="password2" placeholder="Contraseña">
+                                    @if ($errors->has('password2'))
+                                        <span class="error text-danger" for="input-password2">{{$errors -> first('password2')}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
                                 <label for="rol" class="col-sm-2 col-form-label">Establecimiento</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">

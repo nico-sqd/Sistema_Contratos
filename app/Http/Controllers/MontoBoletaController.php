@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Files;
 
+
 class MontoBoletaController extends Controller
 {
     /**
@@ -24,6 +25,14 @@ class MontoBoletaController extends Controller
     public function index(Request $request, Contrato $contratos)
     {
         return view('boletagarantia.index',compact('contratos'),['tipoboleta'=>BoletaGarantia::all(),'contratos'=>Contrato::all(),'tipomoneda'=>TipoMoneda::all(),'montoboleta'=>Montoboleta::all()]);
+    }
+
+    public function index_alerta(Request $request)
+    {
+        $id_boleta = $request->id_boletas;
+        $diferencia = $request->diferencia;
+        $id_contrato = $request->id_contrato;
+        return view('boletagarantia.index_alerta',compact('id_boleta','diferencia','id_contrato'),['tipoboleta'=>BoletaGarantia::all(),'contratos'=>Contrato::all(),'tipomoneda'=>TipoMoneda::all(),'montoboleta'=>Montoboleta::all()]);
     }
 
     /**
@@ -95,10 +104,11 @@ class MontoBoletaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Contrato $contratos, Request $request, MontoBoleta $montoboleta)
+    public function edit(Contrato $contratos, MontoBoleta $boleta, $id)
     {
-        return view('boletagarantia.edit', compact('contratos'),['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
-        'montoboletagarantia'=>MontoBoleta::all(),'contrato'=>Contrato::all()]);
+        $boleta = MontoBoleta::find($id);
+        return view('boletagarantia.edit', compact('contratos','boleta'),['tipomoneda'=>TipoMoneda::all(),'tipoboleta'=>BoletaGarantia::all(),
+        'montoboleta'=>MontoBoleta::all(),'contrato'=>Contrato::all()]);
     }
 
     /**
@@ -108,10 +118,11 @@ class MontoBoletaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contrato $contratos, MontoBoleta $boletagarantia)
+    public function update(Request $request, Contrato $contratos, MontoBoleta $boleta, $id)
     {
-        $boletagarantia->update($request->only('monto_boleta','fecha_vencimiento','id_boleta','id_tipo_boleta','id_moneda','otraboleta','institucion'));
-        return redirect()->route('contratos.index', $contratos->id)->with('success', 'Usuario creado correctamente.');
+        $boleta = MontoBoleta::find($id);
+        $boleta->update($request->only('monto_boleta','fecha_vencimiento','id_boleta','id_tipo_boleta','id_moneda','otraboleta','institucion'));
+        return redirect()->route('contratos.boletagarantia.index', $contratos->id)->with('success', 'Usuario creado correctamente.');
     }
 
     /**
@@ -120,8 +131,10 @@ class MontoBoletaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Contrato $contratos, MontoBoleta $boleta, $id)
     {
-        //
+        $boleta = MontoBoleta::find($id);
+        $boleta->delete();
+        return redirect()->route('contratos.boletagarantia.index', $contratos->id);
     }
 }
