@@ -38,11 +38,11 @@
             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">{{ __('Alerta presupuesto/s (incertar numero)') }}</a>
-            <a class="dropdown-item" href="#">{{ __('Alerta Contrato/s por vencer (incertar numero)') }}</a>
-            <a class="dropdown-item" href="#">{{ __('Alerta Boleta/s por vencer (incertar numero)') }}</a>
-            <a class="dropdown-item" href="#">{{ __('Alerta Multa/s por vencer (incertar numero) ') }}</a>
-            <a class="dropdown-item" href="#">{{ __('Alerta Contrato/s vencidos (incertar numero)') }}</a>
+            <a class="dropdown-item" href="#">Alerta presupuesto/s (insertar numero)</a>
+            <a class="dropdown-item" href="#">Alerta Contrato/s por vencer ({{$contratosPorVencer}})</a>
+            <a class="dropdown-item" href="#">Alerta Boleta/s por vencer ({{$boletasPorVencer}})</a>
+            <a class="dropdown-item" href="#">Alerta Multa/s por vencer ({{$multasPorVencer}}) </a>
+            <a class="dropdown-item" href="#">Alerta Contrato/s vencidos ({{$contratosVencidos}})</a>
             
           </div>
         </li>
