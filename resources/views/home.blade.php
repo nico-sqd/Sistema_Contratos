@@ -50,6 +50,8 @@
                 @if (count($boleta)>=1)
                 <?php
                     $contador = 0;
+                    $id = [];
+                    $i = 0;
                 ?>
                 @foreach ($boleta as $garantia)
                     <?php
@@ -58,6 +60,9 @@
                         $diferencia = $fecha->diff($fechahoy);
                         if ($diferencia->y == 0 && $diferencia->m <= "3" && $diferencia->m > "0"|| $diferencia->y == 0 && $diferencia->d <= "31" && $diferencia->m < "3" && $diferencia->m > "0"){
                             $contador += 1;
+                            $id[$i] = $garantia->id;
+                            $meses = $diferencia;
+                            $i++;
                         }
                     ?>
                 @endforeach
@@ -73,7 +78,7 @@
             @if ($contador>=1)
                 <div class="stats">
                   <i class="material-icons text-success">library_books</i>
-                  <a href="{{route('contratos.index')}}">Ver Contratos</a>
+                  <a href="{{route('boletagarantia.index_alerta', ['id_boletas'=>$id,'diferencia'=>$meses->m])}}">Ver Garantías</a>
                 </div>
             @endif
             </div>
@@ -125,13 +130,35 @@
               <div class="card-icon">
                 <i class="fa fa-twitter"></i>
               </div>
-              <p class="card-category">Followers</p>
-              <h3 class="card-title">+245</h3>
+              <p class="card-category">Contratos con presupuesto bajo</p>
+              <h3 class="card-title">
+              @foreach ($contratos as $contrato)
+                    <?php
+                        $contador = 0;
+                        $nmrmovimientos = count($contrato->movimientos);
+                        for ($i=0;$i <= count($contrato->movimientos)-1;$i++){
+                            if ($contrato->movimientos[$i]->monto_contrato_actualizado <= ($contrato->monto->moneda * 0.3)  ){
+                                $contador += 1;
+                            }
+                        }
+                    ?>
+                @endforeach
+                @if ($contador >= 2)
+                    {{$contador}} <small>Contratos</small>
+                @elseif ($contador == 1)
+                    1 <small>Contrato</small>
+                @else
+                    <small>No hay contratos</small>
+                @endif
+            </h3>
             </div>
             <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons">update</i> Just Updated
-              </div>
+                @if ($contador>=1)
+                <div class="stats">
+                  <i class="material-icons text-success">library_books</i>
+                  <a href="{{route('contratos.index')}}">Ver Contratos</a>
+                </div>
+              @endif
             </div>
           </div>
         </div>

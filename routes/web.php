@@ -59,6 +59,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::resource('contratos.multas', App\Http\Controllers\MultasController::class);
     Route::get('multas', [App\Http\Controllers\MultasController::class, 'index_alertas'])->name('multas.index_alertas');
     Route::get('/contrato', [App\Http\Controllers\ContratoController::class, 'index_alerta'])->name('contrato.index_alerta');
+    Route::get('/garantías', [App\Http\Controllers\MontoBoletaController::class, 'index_alerta'])->name('boletagarantia.index_alerta');
     Route::resource('contratos.movimientos', App\Http\Controllers\MovimientosController::class);
 });
 

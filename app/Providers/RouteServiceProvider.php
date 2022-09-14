@@ -58,6 +58,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::model('boletagarantia', \App\Models\MontoBoleta::class);
         Route::model('multas', \App\Models\Multas::class);
         Route::model('movimientos', \App\Models\Movimientos::class);
+        Route::model('cantidad', \App\Models\Cantidad::class);
 
     }
 
