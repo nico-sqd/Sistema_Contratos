@@ -30,39 +30,35 @@
                                 <th>N° Documento</th>
                                 <th>Monto</th>
                                 <th>Fecha Vencimiento</th>
-                                <th>Acciones</th>
                             </thead>
                             <tbody>
-                            @foreach ($montoboleta as $boleta)
-                                @foreach ($id_boleta as $id)
-                                    @foreach ($id_contrato as $id_contratos)
-                                    @if ($boleta->id_contrato_original == $id_contratos && $id == $boleta->id || $boleta->id_contrato_modificada == $id_contratos && $id == $boleta->id)
-                                    <tr>
-                                        @if ($boleta->boletagarantia->documentos_garantia == 'Otro')
-                                            <td>{{ $boleta->otraboleta }}</td>
-                                        @else
-                                            <td>{{ $boleta->boletagarantia->documentos_garantia }}</td>
+                                @foreach($montoboleta as $boleta)
+                                    @foreach ($id_boleta as $id)
+                                        @if ($id == $boleta->id)
+                                        <tr>
+                                            @if ($boleta->boletagarantia->documentos_garantia == 'Otro')
+                                                <td>{{ $boleta->otraboleta }}</td>
+                                            @else
+                                                <td>{{ $boleta->boletagarantia->documentos_garantia }}</td>
+                                            @endif
+                                            <td>{{ $boleta->institucion }}</td>
+                                            <td>{{ $boleta->id_boleta }}</td>
+                                            @if ($boleta->tipomoneda->Nombre_tipo == 'CLP')
+                                            <td>$ {{ number_format($boleta->monto_boleta) }} {{$boleta->tipomoneda->Nombre_tipo}}</td>
+                                            @endif
+                                            @if ($boleta->tipomoneda->Nombre_tipo == 'USD')
+                                            <td>$ {{ number_format($boleta->monto_boleta,2,',','.') }} {{$boleta->tipomoneda->Nombre_tipo}}</td>
+                                            @endif
+                                            @if ($boleta->tipomoneda->Nombre_tipo == 'UF')
+                                            <td>$ {{ number_format($boleta->monto_boleta) }} {{$boleta->tipomoneda->Nombre_tipo}}</td>
+                                            @endif
+                                            <td>{{ $boleta->fecha_vencimiento }}</td>
+                                            <td class="td-actions text-right">
+                                            </td>
+                                        </tr>
                                         @endif
-                                        <td>{{ $boleta->institucion }}</td>
-                                        <td>{{ $boleta->id_boleta }}</td>
-                                        @if ($boleta->tipomoneda->Nombre_tipo == 'CLP')
-                                        <td>$ {{ number_format($boleta->monto_boleta) }} {{$boleta->tipomoneda->Nombre_tipo}}</td>
-                                        @endif
-                                        @if ($boleta->tipomoneda->Nombre_tipo == 'USD')
-                                        <td>$ {{ number_format($boleta->monto_boleta,2,',','.') }} {{$boleta->tipomoneda->Nombre_tipo}}</td>
-                                        @endif
-                                        @if ($boleta->tipomoneda->Nombre_tipo == 'UF')
-                                        <td>$ {{ number_format($boleta->monto_boleta) }} {{$boleta->tipomoneda->Nombre_tipo}}</td>
-                                        @endif
-                                        <td>{{ $boleta->fecha_vencimiento }}</td>
-                                        <td class="td-actions text-right">
-                                            <a href="{{ route('contratos.show', $id_contratos) }}" class="btn btn-twitter"><i class="material-icons">visibility</i></a>
-                                        </td>
-                                    </tr>
-                                    @endif
                                     @endforeach
                                 @endforeach
-                            @endforeach
                             </tbody>
                         </table>
                     </div>
