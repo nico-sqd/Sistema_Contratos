@@ -48,10 +48,9 @@
                                                         <td>${{$canti->valor_unitario * $canti->cantidad}}</td>
                                                         @if ($canti->movimiento->monto_contrato_actualizado - $total_consumido < 0)
                                                                 <td style="color:#ff0000">${{$canti->movimiento->monto_contrato_actualizado - $total_consumido}}</td>
-                                                            @if ($canti->movimiento->monto_contrato_actualizado - $total_consumido > 0)
+                                                            @elseif ($canti->movimiento->monto_contrato_actualizado - $total_consumido > 0)
                                                                 <td style="color:#008000">${{$canti->movimiento->monto_contrato_actualizado - $total_consumido}}</td>
-                                                            @endif
-                                                            @endif
+                                                        @endif
                                                     </tr>
                                                 @endif
                                             @endforeach
