@@ -147,22 +147,26 @@
               <p class="card-category">
                 <?php
                     $contador = 0;
+                    $i = 0;
+                    $id = [];
                 ?>
-                @foreach ($multas as $multa)
+                @foreach ($contratos as $contrato)
                   <?php
-                      $fecha = new DateTime ($multa->fecha_notificacion);
+                      $fecha = new DateTime ($contrato->convenio->vigencia_fin);
                       $fechahoy = new DateTime(date('Y-m-d'));
                       $diferencia = $fecha->diff($fechahoy);
-                      if ($diferencia->y == 0 && $diferencia->m <= 6 && $diferencia->m >= 3){
+                      if ($diferencia->y == 0 && $diferencia->m <= 6 && $diferencia->m > 3){
                         $contador += 1;
-                        $id = $multa->id;
+                        $id[$i] = $contrato->id;
+                        $i++;
+                        $meses = $diferencia;
                       }
                   ?>
                 @endforeach
                 @if ($contador >= 1)
-                    <h4 style="text-align:center">{{$contador}} Multas por vencer</h4>
+                    <h4 style="text-align:center">{{$contador}} Contratos por vencer</h4>
                 @else
-                      <h4 style="text-align: center">Sin multas por vencer</h4>
+                      <h4 style="text-align: center">Sin Contratos por vencer</h4>
                 @endif
               </p>
             </div>
@@ -170,7 +174,7 @@
             @if ($contador >= 1)
                 <div class="stats">
                     <i class="material-icons text-success">visibility</i>
-                    <a href="{{route('contratos.multas.index', [$multa->contrato->id,'diferencia'=>$diferencia->m])}}">Ver multa</a>
+                    <a href="{{route('contrato.index_alerta', ['id_contratos'=>$id,'diferencia'=>$meses->m])}}">Ver contratos</a>
                 </div>
             @endif
             </div>
@@ -186,21 +190,26 @@
               <p class="card-category">
             <?php
                 $contador = 0;
+                $i = 0;
+                $id = [];
             ?>
-            @foreach ($multas as $multass)
+            @foreach ($contratos as $contrato)
               <?php
-                  $fecha = new DateTime ($multass->fecha_notificacion);
+                  $fecha = new DateTime ($contrato->convenio->vigencia_fin);
                   $fechahoy = new DateTime(date('Y-m-d'));
                   $diferencia = $fecha->diff($fechahoy);
-                  if ($diferencia->y == 0 && $diferencia->m < 3 && $diferencia->m > 1){
+                  if ($diferencia->y == 0 && $diferencia->m <= 3 && $diferencia->m > 1){
                     $contador += 1;
+                    $id[$i] = $contrato->id;
+                    $meses = $diferencia;
+                    $i++;
                   }
               ?>
             @endforeach
             @if ($contador >= 1)
-                <h4 style="text-align:center">{{$contador}} Multas por vencer</h4>
+                <h4 style="text-align:center">{{$contador}} Contratos por vencer</h4>
             @else
-                  <h4 style="text-align: center">Sin multas por vencer</h4>
+                  <h4 style="text-align: center">Sin contratos por vencer</h4>
             @endif
             </p>
             </div>
@@ -208,7 +217,7 @@
                 @if ($contador >= 1)
                     <div class="stats">
                         <i class="material-icons text-success">visibility</i>
-                        <a href="{{route('contratos.multas.index', [$multa->contrato->id,'diferencia'=>$diferencia->m])}}">Ver multa</a>
+                        <a href="{{route('contrato.index_alerta', ['id_contratos'=>$id,'diferencia'=>$meses->m])}}">Ver contratos</a>
                     </div>
                 @endif
             </div>
@@ -224,21 +233,27 @@
               <p class="card-category">
             <?php
                 $contador = 0;
+                $i = 0;
+                $id = [];
             ?>
-            @foreach ($multas as $multass)
+            @foreach ($contratos as $contrato)
               <?php
-                  $fecha = new DateTime ($multass->fecha_notificacion);
+                  $fecha = new DateTime ($contrato->convenio->vigencia_fin);
                   $fechahoy = new DateTime(date('Y-m-d'));
                   $diferencia = $fecha->diff($fechahoy);
-                  if ($diferencia->y == 0 && $diferencia->m <= 1 && $diferencia->m >= 0){
+                  //dd($diferencia);
+                  if ($diferencia->y == 0 && $diferencia->m == 1 || $diferencia->m == 0){
                     $contador += 1;
+                    $id[$i] = $contrato->id;
+                    $meses = $diferencia;
+                    $i++;
                   }
               ?>
             @endforeach
             @if ($contador >= 1)
-                <h4 style="text-align:center">{{$contador}} Multas por vencer</h4>
+                <h4 style="text-align:center">{{$contador}} Contratos por vencer</h4>
             @else
-                  <h4 style="text-align: center">Sin multas por vencer</h4>
+                  <h4 style="text-align: center">Sin contratos por vencer</h4>
             @endif
             </p>
             </div>
@@ -246,7 +261,7 @@
                 @if ($contador >= 1)
                 <div class="stats">
                     <i class="material-icons text-success">visibility</i>
-                    <a href="{{route('contratos.multas.index', [$multa->contrato->id,'diferencia'=>$diferencia->m])}}">Ver multa</a>
+                    <a href="{{route('contrato.index_alerta', ['id_contratos'=>$id,'diferencia'=>$meses->m])}}">Ver contratos</a>
                 </div>
                 @endif
             </div>
