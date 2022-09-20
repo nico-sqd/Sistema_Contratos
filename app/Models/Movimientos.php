@@ -27,6 +27,6 @@ class Movimientos extends Model
     }
     public function cantidad()
     {
-        return $this->hasMany(Cantidad::class,'id_movimiento');
+        return $this->hasOne(Cantidad::class,'id_movimiento');
     }
 }

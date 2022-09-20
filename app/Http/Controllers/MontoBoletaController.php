@@ -27,6 +27,14 @@ class MontoBoletaController extends Controller
         return view('boletagarantia.index',compact('contratos'),['tipoboleta'=>BoletaGarantia::all(),'contratos'=>Contrato::all(),'tipomoneda'=>TipoMoneda::all(),'montoboleta'=>Montoboleta::all()]);
     }
 
+    public function index_alerta(Request $request)
+    {
+        $id_boleta = $request->id_boletas;
+        $diferencia = $request->diferencia;
+        $id_contrato = $request->id_contrato;
+        return view('boletagarantia.index_alerta',compact('id_boleta','diferencia','id_contrato'),['tipoboleta'=>BoletaGarantia::all(),'contratos'=>Contrato::all(),'tipomoneda'=>TipoMoneda::all(),'montoboleta'=>Montoboleta::all()]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

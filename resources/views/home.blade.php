@@ -6,9 +6,9 @@
       <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="card card-stats">
-            <div class="card-header card-header-warning card-header-icon">
+            <div class="card-header card-header-success card-header-icon">
               <div class="card-icon">
-                <i class="material-icons">content_copy</i>
+                <i class="material-icons">library_books</i>
               </div>
               <p class="card-category">Contratos Activos</p>
               <h3 class="card-title">
@@ -41,15 +41,18 @@
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="card card-stats">
-            <div class="card-header card-header-success card-header-icon">
+            <div class="card-header card-header-warning card-header-icon">
               <div class="card-icon">
-                <i class="material-icons">store</i>
+                <i class="material-icons">library_books</i>
               </div>
               <p class="card-category">Garantías por vencer</p>
               <h3 class="card-title">
                 @if (count($boleta)>=1)
                 <?php
                     $contador = 0;
+                    $id = [];
+                    $id_contrato = [];
+                    $i = 0;
                 ?>
                 @foreach ($boleta as $garantia)
                     <?php
@@ -57,7 +60,18 @@
                         $fechahoy = new DateTime(date('Y-m-d'));
                         $diferencia = $fecha->diff($fechahoy);
                         if ($diferencia->y == 0 && $diferencia->m <= "3" && $diferencia->m > "0"|| $diferencia->y == 0 && $diferencia->d <= "31" && $diferencia->m < "3" && $diferencia->m > "0"){
+                            if ($garantia->id_contrato_original != NULL)
+                            {
+                                $id_contrato[$i] = $garantia->id_contrato_original;
+                            }
+                            elseif ($garantia->id_contrato_modificada != NULL)
+                            {
+                                $id_contrato[$i] = $garantia->id_contrato_modificada;
+                            }
                             $contador += 1;
+                            $id[$i] = $garantia->id;
+                            $meses = $diferencia;
+                            $i++;
                         }
                     ?>
                 @endforeach
@@ -73,7 +87,7 @@
             @if ($contador>=1)
                 <div class="stats">
                   <i class="material-icons text-success">library_books</i>
-                  <a href="{{route('contratos.index')}}">Ver Contratos</a>
+                  <a href="{{route('boletagarantia.index_alerta', ['id_boletas'=>$id,'diferencia'=>$meses->m,'id_contrato'=>$id_contrato])}}">Ver Garantías</a>
                 </div>
             @endif
             </div>
@@ -83,7 +97,7 @@
           <div class="card card-stats">
             <div class="card-header card-header-danger card-header-icon">
               <div class="card-icon">
-                <i class="material-icons">info_outline</i>
+                <i class="material-icons">warning</i>
               </div>
               <p class="card-category">Documentos ya vencidos</p>
               <h3 class="card-title">
@@ -121,17 +135,39 @@
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="card card-stats">
-            <div class="card-header card-header-info card-header-icon">
+            <div class="card-header card-header-warning card-header-icon">
               <div class="card-icon">
-                <i class="fa fa-twitter"></i>
+                <i class="material-icons">warning</i>
               </div>
-              <p class="card-category">Followers</p>
-              <h3 class="card-title">+245</h3>
+              <p class="card-category">Contratos con presupuesto bajo</p>
+              <h3 class="card-title">
+              @foreach ($contratos as $contrato)
+                    <?php
+                        $contador = 0;
+                        $nmrmovimientos = count($contrato->movimientos);
+                        for ($i=0;$i <= count($contrato->movimientos)-1;$i++){
+                            if ($contrato->movimientos[$i]->monto_contrato_actualizado <= ($contrato->monto->moneda * 0.3)  ){
+                                $contador += 1;
+                            }
+                        }
+                    ?>
+                @endforeach
+                @if ($contador >= 2)
+                    {{$contador}} <small>Contratos</small>
+                @elseif ($contador == 1)
+                    1 <small>Contrato</small>
+                @else
+                    <small>No hay contratos</small>
+                @endif
+            </h3>
             </div>
             <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons">update</i> Just Updated
-              </div>
+                @if ($contador>=1)
+                <div class="stats">
+                  <i class="material-icons text-success">library_books</i>
+                  <a href="{{route('contratos.index')}}">Ver Contratos</a>
+                </div>
+              @endif
             </div>
           </div>
         </div>
