@@ -33,6 +33,7 @@
                                     @endif
                                     <div class="row">
                                         <div class="col-12 text-right">
+                                            <a href="{{ route('contratos.excel')}}" class="btn btn-sm btn-success">Exportar a Excel</a>
                                             @can('admin_create')
                                             <a href="{{ route('contratos.create') }}" class="btn btn-sm btn-facebook">Añadir Contrato</a>
                                             @endcan

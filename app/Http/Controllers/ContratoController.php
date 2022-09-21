@@ -21,6 +21,8 @@ use App\Models\Movimientos;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ContratosExport;
 
 
 class ContratoController extends Controller
@@ -210,6 +212,11 @@ class ContratoController extends Controller
         $contrato->update(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),['id_licitacion'=>$convenios->id,
         'aumento_contrato'=>$aumento->monto_aumento,'res_aumento'=>$aumento->res_aumento]));
         return redirect()->route('contratos.index', $contrato->id)->with('success', 'Usuario creado correctamente.');
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new ContratosExport, 'contratos.xlsx');
     }
     /**
      * Remove the specified resource from storage.

@@ -17,6 +17,7 @@
                                         @can('admin_create')
                                         <a href="{{ route('contratos.movimientos.create', $contratos->id)}}" class="btn btn-facebook">Añadir Movimiento</a>
                                         @endcan
+                                        <a href="{{ route('movimientos.excel', $contratos->id)}}" class="btn btn-success">Exportar a Excel</a>
                                         <a href="{{ url()->route('contratos.show', $contratos->id) }}" class="btn btn-facebook" style="float: right;"><i class="material-icons">arrow_back</i></a>
                                     </div>
                                 </div>

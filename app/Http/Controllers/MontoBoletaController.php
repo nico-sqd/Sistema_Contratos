@@ -13,6 +13,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Files;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\BoletaGarantiaExport;
 
 
 class MontoBoletaController extends Controller
@@ -123,6 +125,12 @@ class MontoBoletaController extends Controller
         $boleta = MontoBoleta::find($id);
         $boleta->update($request->only('monto_boleta','fecha_vencimiento','id_boleta','id_tipo_boleta','id_moneda','otraboleta','institucion'));
         return redirect()->route('contratos.boletagarantia.index', $contratos->id)->with('success', 'Usuario creado correctamente.');
+    }
+
+    public function exportExcel(Contrato $contrato)
+    {
+        //dd($contrato);
+        return Excel::download(new BoletaGarantiaExport($contrato), 'boletas de garantía de'.$contrato->id_contrato.'.xlsx');
     }
 
     /**
