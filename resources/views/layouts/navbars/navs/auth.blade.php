@@ -38,7 +38,7 @@
             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Alerta presupuesto/s (insertar numero)</a>
+            <a class="dropdown-item" href="{{route('contrato.index_alerta', ['diferencia'=>3, 'id_contratos'=>$nroContratos->pluck('id')->toArray()])}}">Alerta presupuesto/s ({{$nroContratos->count()}})</a>
             @if($contratosPorVencer != 0)
             <a class="dropdown-item" href="#">Alerta Contrato/s por vencer ({{$contratosPorVencer}})</a>
             @endif

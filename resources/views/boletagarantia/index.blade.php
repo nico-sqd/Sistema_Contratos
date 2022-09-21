@@ -17,6 +17,7 @@
                                     <a href="{{ route('contratos.show', $contratos->id) }}" class="btn btn-facebook"><i class="material-icons">arrow_back</i></a>
                                 </div>
                             </div>
+                            <!-- PREGUNTAR A MANCHAS SOBRE DESABILITAR ESTA SECCION -->
                             <div class="row">
                                 <label for="id_tipo_boleta" class="col-sm-2 col-form-label">Tipo Documento</label>
                                 <div class="col-sm-7">
@@ -159,7 +160,7 @@
                                     @endif
                                     <td>{{ $boleta->fecha_vencimiento }}</td>
                                     <td class="td-actions text-center">
-                                        @can("admin_edit")
+                                        @can('admin_edit')
                                             <a href="{{ route('contratos.boletagarantia.edit', [$contratos,$boleta]) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
                                         @endcan
                                         <a href="{{ route('files.download', $boleta->file->uuid) }}" class="btn btn-info"><i class="material-icons">download</i></a>

@@ -57,8 +57,7 @@
                                                 </div>
                                             @endif
                                             @foreach ($contratos as $contrato)
-                                            @foreach ($id_contratos as $id)
-                                            @if ($diferencia <= "6" && $diferencia >"3" && $id == "$contrato->id" )
+                                            @if ($diferencia <= "6" && $diferencia >"3" )
                                                     <tr>
                                                         <td>{{ $contrato->convenio->id_licitacion }}</td>
                                                         <td>{{ $contrato->convenio->convenio }}</td>
@@ -95,7 +94,7 @@
                                                         </td>
                                                     </tr>
                                                 @endif
-                                                @if ($diferencia <= "3" && $diferencia >"1" && $id == "$contrato->id")
+                                                @if ($diferencia <= "3" && $diferencia >"1")
                                                     <tr>
                                                         <td>{{ $contrato->convenio->id_licitacion }}</td>
                                                         <td>{{ $contrato->convenio->convenio }}</td>
@@ -132,7 +131,7 @@
                                                         </td>
                                                     </tr>
                                                 @endif
-                                                @if (($diferencia == "1" || $diferencia =="0") && $id == "$contrato->id")
+                                                @if (($diferencia == "1" || $diferencia =="0"))
                                                     <tr>
                                                         <td>{{ $contrato->convenio->id_licitacion }}</td>
                                                         <td>{{ $contrato->convenio->convenio }}</td>
@@ -169,7 +168,6 @@
                                                         </td>
                                                     </tr>
                                                 @endif
-                                                @endforeach
                                             @endforeach
                                             </tbody>
                                         </table>

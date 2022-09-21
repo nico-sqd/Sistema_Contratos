@@ -60,18 +60,21 @@ class ContratoController extends Controller
         //dd($diferencia);
         $texto = trim($request->get('texto'));
         $contratos = Contrato::with('convenio')
-        ->whereHas('convenio', function (Builder $query) use ($texto) {
-            $query->whereRaw('UPPER(id_licitacion) LIKE ?', ['%' . strtoupper($texto) . '%']);
-            $query->orWhere('vigencia_inicio','LIKE','%'.$texto.'%');
-            $query->orWhere('vigencia_fin','LIKE','%'.$texto.'%');
-            $query->orWhereRaw('UPPER(admin) LIKE ?', ['%' . strtoupper($texto) . '%']);
-            $query->orWhereRaw('UPPER(convenio) LIKE ?', ['%' . strtoupper($texto) . '%']);
-        })
-        ->orwhereHas('proveedor', function (Builder $query) use ($texto) {
-            $query->Where('rut_proveedor','LIKE','%'.$texto.'%');
-        })
-        ->orwhereHas('user', function (Builder $query) use ($texto) {
-            $query->whereRaw('UPPER(name) LIKE ?', ['%' . strtoupper($texto) . '%']);
+        ->whereIn('id', $id_contratos)
+        ->where(function($query) use ($texto) {
+            $query->whereHas('convenio', function (Builder $query) use ($texto) {
+                $query->whereRaw('UPPER(id_licitacion) LIKE ?', ['%' . strtoupper($texto) . '%']);
+                $query->orWhere('vigencia_inicio','LIKE','%'.$texto.'%');
+                $query->orWhere('vigencia_fin','LIKE','%'.$texto.'%');
+                $query->orWhereRaw('UPPER(admin) LIKE ?', ['%' . strtoupper($texto) . '%']);
+                $query->orWhereRaw('UPPER(convenio) LIKE ?', ['%' . strtoupper($texto) . '%']);
+            })
+            ->orwhereHas('proveedor', function (Builder $query) use ($texto) {
+                $query->Where('rut_proveedor','LIKE','%'.$texto.'%');
+            })
+            ->orwhereHas('user', function (Builder $query) use ($texto) {
+                $query->whereRaw('UPPER(name) LIKE ?', ['%' . strtoupper($texto) . '%']);
+            });
         })
         //->whereRelation('Convenio', 'admin', Auth::id()) //--------(filrar contratos por id)------------
         ->orderBy('id','asc')
