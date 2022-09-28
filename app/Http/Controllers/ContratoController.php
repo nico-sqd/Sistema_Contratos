@@ -112,8 +112,8 @@ class ContratoController extends Controller
         $montoboleta = Monto::create($request->only('moneda', 'id_tipo_moneda'));
         $boletagarantia = MontoBoleta::create($request->only('monto_boleta','fecha_vencimiento','id_boleta','id_tipo_boleta','id_moneda','otraboleta','institucion')); //crear ID Boleta garantía en migración, controlador y vista.
         $contrato = Contrato::create(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','rut_proveedor','rut','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),
-        ['id_monto'=>$montoboleta->id,'rut_proveedor'=>$convenios->rut_proveedor,'rut'=>$convenios->rut,'id_licitacion'=>$convenios->id,'id_boleta'=>$boletagarantia->id_tipo_boleta,'id_monto_boleta'=>$boletagarantia->id]));
-        $boletagarantia->update(array_merge($request->only('id_contrato_original'),['id_contrato_original'=>$contrato->id]));
+        ['id_monto'=>$montoboleta->id,'rut_proveedor'=>$convenios->rut_proveedor,'rut'=>$convenios->rut,'id_licitacion'=>$convenios->id,'id_boleta'=>$boletagarantia->id_tipo_boleta]));
+        $boletagarantia->update(array_merge($request->only('id_contrato_original','id_contrato'),['id_contrato_original'=>$contrato->id,'id_contrato'=>$contrato->id]));
 
         $archivo = $request->all();
         $archivo['uuid'] = (string) Str::uuid();

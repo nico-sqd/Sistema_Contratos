@@ -31,4 +31,8 @@ class Establecimiento extends Model
     {
         return $this->hasMany(SubDireccion::class,'id_establecimiento');
     }
+    public function movimiento()
+    {
+        return $this->hasMany(Movimientos::class,'id_establecimiento');
+    }
 }

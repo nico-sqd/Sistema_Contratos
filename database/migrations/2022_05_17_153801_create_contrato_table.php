@@ -28,8 +28,6 @@ class CreateContratoTable extends Migration
             $table->foreign('id_tipo_moneda')->references('id')->on('tipo_moneda');
             $table->unsignedBigInteger('id_boleta');
             $table->foreign('id_boleta')->references('id')->on('boletagarantia');
-            $table->unsignedBigInteger('id_monto_boleta');
-            $table->foreign('id_monto_boleta')->references('id')->on('montoboleta');
             $table->unsignedBigInteger('id_modalidad');
             $table->foreign('id_modalidad')->references('id')->on('modalidad');
             $table->unsignedBigInteger('rut_proveedor');
@@ -55,7 +53,6 @@ class CreateContratoTable extends Migration
             $table->dropColumn('id_tipo_moneda');
             $table->dropColumn('id_boleta');
             $table->dropColumn('id_modalidad');
-            $table->dropColumn('id_monto_boleta');
             $table->dropColumn('rut_proveedor');
             $table->dropColumn('rut');
         });

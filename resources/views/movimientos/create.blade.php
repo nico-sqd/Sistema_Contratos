@@ -18,6 +18,32 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <label for="id_establecimiento" class="col-sm-2 col-form-label">Establecimientos</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_establecimiento">
+                                            <option value="" hidden>Seleccione Establecimiento</option>
+                                        @foreach ( $establecimientos as $establecimiento )
+                                            <option value="{{ $establecimiento->id }}">{{ $establecimiento->establecimiento }}</option>
+                                        @endforeach
+                                        </select>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="id_dispositivo" class="col-sm-2 col-form-label">Dispositivos</label>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_dispositivo">
+                                            <option value = "" hidden>Seleccione Dispositivo</option>
+                                        @foreach ( $dispositivos as $dispositivo )
+                                            <option value="{{ $dispositivo->id }}">{{ $dispositivo->nombre_dispositivo }}</option>
+                                        @endforeach
+                                        </select>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row">
                             <label for="id_oc" class="col-sm-2 col-form-label">ID Orden de Compra</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="id_oc" placeholder="id_oc" value="{{old('id_oc')}}" autofocus required oninvalid="this.setCustomValidity('Ingrese ID de Orden de Compra')" oninput="this.setCustomValidity('')"/>

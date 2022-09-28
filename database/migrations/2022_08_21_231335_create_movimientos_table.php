@@ -21,6 +21,10 @@ class CreateMovimientosTable extends Migration
             $table->string('nmr_factura');
             $table->date('fecha_factura');
             $table->float('valor_factura');
+            $table->unsignedBigInteger('id_establecimiento')->nullable();
+            $table->foreign('id_establecimiento')->references('id')->on('establecimiento');
+            $table->unsignedBigInteger('id_dispositivo')->nullable();
+            $table->foreign('id_dispositivo')->references('id')->on('dispositivos');
             $table->float('monto_contrato_actualizado')->nullable();
             $table->unsignedBigInteger('id_contrato');
             $table->foreign('id_contrato')->references('id')->on('contrato');
@@ -36,6 +40,8 @@ class CreateMovimientosTable extends Migration
     {
         Schema::table('movimientos', function (Blueprint $table) {
             $table->dropColumn('id_contrato');
+            $table->dropColumn('id_establecimiento');
+            $table->dropColumn('id_dispositivo');
         });
         Schema::dropIfExists('movimientos');
     }

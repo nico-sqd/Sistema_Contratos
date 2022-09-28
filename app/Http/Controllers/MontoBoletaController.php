@@ -77,8 +77,8 @@ class MontoBoletaController extends Controller
         $archivoboleta = Files::create($archivo);
 
         $contrato = $contratos;
-        $idboleta = MontoBoleta::create(array_merge($request->only('monto_boleta','fecha_vencimiento','id_boleta','id_tipo_boleta','id_moneda','otraboleta','institucion','id_contrato_modificada','archivo'),['id_contrato_modificada'=>$contrato->id, 'archivo'=>$archivoboleta->id]));
-        $contrato->update(array_merge($request->only('id_boleta','id_monto_boleta'),['id_boleta'=>$request->id_tipo_boleta,'id_monto_boleta'=>$idboleta->id]));
+        $idboleta = MontoBoleta::create(array_merge($request->only('monto_boleta','fecha_vencimiento','id_boleta','id_tipo_boleta','id_moneda','otraboleta','institucion','id_contrato_modificada','archivo','id_contrato'),['id_contrato_modificada'=>$contrato->id, 'archivo'=>$archivoboleta->id,'id_contrato'=>$contrato->id]));
+        $contrato->update(array_merge($request->only('id_boleta'),['id_boleta'=>$request->id_tipo_boleta]));
         return redirect()->route('contratos.boletagarantia.index', $contrato->id)->with('success', 'Aumento modificado');
     }
 

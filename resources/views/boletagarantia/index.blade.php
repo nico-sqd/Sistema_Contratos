@@ -14,11 +14,11 @@
                         <div class="card-body">
                         <div class="row">
                                 <div class="col-12 text-right">
-                                    <a href="{{ route('boletagarantia.excel', $contratos->id) }}" class="btn btn-success">Exportar a Excel</a>
                                     <a href="{{ route('contratos.show', $contratos->id) }}" class="btn btn-facebook"><i class="material-icons">arrow_back</i></a>
                                 </div>
                             </div>
                             <!-- PREGUNTAR A MANCHAS SOBRE DESABILITAR ESTA SECCION -->
+                            @can('admin_create')
                             <div class="row">
                                 <label for="id_tipo_boleta" class="col-sm-2 col-form-label">Tipo Documento</label>
                                 <div class="col-sm-7">
@@ -128,6 +128,7 @@
                         <!--End footer-->
                     </div>
                 </form>
+                @endcan
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">

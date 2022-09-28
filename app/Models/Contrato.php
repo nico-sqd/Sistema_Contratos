@@ -25,7 +25,6 @@ class Contrato extends Model
         'id_monto',
         'id_tipo_moneda',
         'id_boleta',
-        'id_monto_boleta',
         'id_modalidad',
         'aumento_contrato',
         'res_aumento',
@@ -49,15 +48,11 @@ class Contrato extends Model
     }
     public function montoboleta()
     {
-        return $this->belongsTo(MontoBoleta::class,'id_monto_boleta');
+        return $this->hasMany(MontoBoleta::class,'id_contrato');
     }
     public function convenio()
     {
         return $this->belongsTo(Convenio::class,'id_licitacion');
-    }
-    public function caratula()
-    {
-        return $this->hasMany(Caratula::class,'id_contrato');
     }
     public function tipomoneda()
     {
