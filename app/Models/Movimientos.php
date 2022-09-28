@@ -19,6 +19,8 @@ class Movimientos extends Model
         'fecha_factura',
         'valor_factura',
         'monto_contrato_actualizado',
+        'id_establecimiento',
+        'id_dispositivo',
     ];
 
     public function contrato()
@@ -28,5 +30,13 @@ class Movimientos extends Model
     public function cantidad()
     {
         return $this->hasOne(Cantidad::class,'id_movimiento');
+    }
+    public function establecimiento()
+    {
+        return $this->belongsTo(Establecimiento::class,'id_establecimiento');
+    }
+    public function dispositivo()
+    {
+        return $this->belongsTo(Dispositivo::class,'id_dispositivo');
     }
 }

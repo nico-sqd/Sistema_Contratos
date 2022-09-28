@@ -29,11 +29,11 @@
                                         <div class="h5">Vigencia: Inicio: {{$contrato->convenio->vigencia_inicio}} Fin: {{$contrato->convenio->vigencia_fin}}</div>
                                         <div class="h5">Res. Adjudicación: {{$contrato->res_adjudicacion}}</div>
                                         <div class="h5">Res. Aprueba Contrato: {{$contrato->res_apruebacontrato}}</div>
-                                        @if ($contrato->montoboleta->tipomoneda->Nombre_tipo == 'CLP' || $contrato->montoboleta->tipomoneda->Nombre_tipo == 'UF')
+                                        @if ($contrato->montoboleta[0]->tipomoneda->Nombre_tipo == 'CLP' || $contrato->montoboleta[0]->tipomoneda->Nombre_tipo == 'UF')
                                         <div class="h5">Monto: ${{ number_format($contrato->monto->moneda)}} {{$contrato->montoboleta->tipomoneda->Nombre_tipo}}</div>
                                         @endif
-                                        @if ($contrato->montoboleta->tipomoneda->Nombre_tipo == 'USD')
-                                        <div class="h5">Monto: ${{ number_format($contrato->monto->moneda,2,',','.')}} {{$contrato->montoboleta->tipomoneda->Nombre_tipo}}</div>
+                                        @if ($contrato->montoboleta[0]->tipomoneda->Nombre_tipo == 'USD')
+                                        <div class="h5">Monto: ${{ number_format($contrato->monto->moneda,2,',','.')}} {{$contrato->montoboleta[0]->tipomoneda->Nombre_tipo}}</div>
                                         @endif
                                         <div class="h5">ID Contrato: {{$contrato->id_contrato}}</div>
                                         <div class="h5">Proveedor: {{$contrato->convenio->proveedor->nombre_proveedor}}</div>
@@ -64,7 +64,9 @@
                                     <div class="row">
                                         <div class="col-12 text-center">
                                             <a href="{{ route('contratos.boletagarantia.index', $contrato->id) }}" class="btn btn-facebook">Boletas de Garantía</a>
+                                            @can('admin_index')
                                             <a href="{{ route('contratos.aumento.index', $contrato->id) }}" class="btn btn-facebook">Agregar Modificación  de Contrato</a>
+                                            @endcan
                                             <a href="{{ route('contratos.multas.index', $contrato->id) }}" class="btn btn-danger">Multas del Contrato</a>
                                             <a href="{{ route('contratos.movimientos.index', $contrato->id) }}" class="btn btn-success">Movimientos Mensuales</a>
                                         </div>

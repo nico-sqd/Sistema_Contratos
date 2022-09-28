@@ -8,6 +8,13 @@ use App\Models\Movimientos;
 use App\Models\UnidadMedida;
 use App\Models\Cantidad;
 use App\Models\Monto;
+use App\Models\Establecimiento;
+use App\Models\Dispositivo;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\MovimientosExport;
+use App\Exports\SaldoContratosExport;
+
+
 
 class MovimientosController extends Controller
 {
@@ -28,7 +35,7 @@ class MovimientosController extends Controller
      */
     public function create(Contrato $contratos)
     {
-        return view('movimientos.create',compact('contratos'),['unidadesmedidas'=>UnidadMedida::all()]);
+        return view('movimientos.create',compact('contratos'),['unidadesmedidas'=>UnidadMedida::all(),'establecimientos'=>Establecimiento::all(),'dispositivos'=>Dispositivo::all()]);
     }
 
     /**
@@ -48,7 +55,7 @@ class MovimientosController extends Controller
         if ($contadormovimientos >=1){
             $montoconsumido = $request->cantidad * $request->valor_unitario;
             $montototal = $montoactualizado - $montoconsumido;
-            $movimiento = Movimientos::create(array_merge($request->only('id_oc','nmr_factura','fecha_factura','valor_factura','id_contrato','monto_contrato_actualizado'),['id_contrato'=>$contratos->id,'monto_contrato_actualizado'=>$montototal]));
+            $movimiento = Movimientos::create(array_merge($request->only('id_oc','nmr_factura','fecha_factura','valor_factura','id_contrato','monto_contrato_actualizado','id_establecimiento','id_dispositivo'),['id_contrato'=>$contratos->id,'monto_contrato_actualizado'=>$montototal]));
             $cantidad = Cantidad::create(array_merge($request->only('id_unidad','cantidad','valor_unitario','id_movimiento'),['id_movimiento'=>$movimiento->id]));
         }
         else{
@@ -57,7 +64,7 @@ class MovimientosController extends Controller
             $montoconsumido = $request->cantidad * $request->valor_unitario;
             $montototal = $montocontrato - $montoconsumido;
 
-            $movimiento = Movimientos::create(array_merge($request->only('id_oc','nmr_factura','fecha_factura','valor_factura','id_contrato','monto_contrato_actualizado'),['id_contrato'=>$contratos->id,'monto_contrato_actualizado'=>$montototal]));
+            $movimiento = Movimientos::create(array_merge($request->only('id_oc','nmr_factura','fecha_factura','valor_factura','id_contrato','monto_contrato_actualizado','id_establecimiento','id_dispositivo'),['id_contrato'=>$contratos->id,'monto_contrato_actualizado'=>$montototal]));
             $cantidad = Cantidad::create(array_merge($request->only('id_unidad','cantidad','valor_unitario','id_movimiento'),['id_movimiento'=>$movimiento->id]));
         }
         return redirect()->route('contratos.movimientos.index', $contratos->id)->with('success', 'Movimiento agregado correctamente.');
@@ -108,6 +115,17 @@ class MovimientosController extends Controller
         $movimiento->update(array_merge($request->only('id_oc','nmr_factura','fecha_factura','valor_factura','id_contrato','monto_contrato_actualizado'),['id_contrato'=>$contratos->id,'monto_contrato_actualizado'=>$montototal]));
         $cantidad->update(array_merge($request->only('id_unidad','cantidad','valor_unitario','id_movimiento'),['id_movimiento'=>$movimiento->id]));
         return redirect()->route('contratos.movimientos.index', $contratos->id)->with('success', 'Movimiento actualizado correctamente.');
+    }
+
+    public function exportExcel(Contrato $contrato)
+    {
+        //dd($contrato);
+        return Excel::download(new MovimientosExport($contrato), 'movimientos de '.$contrato->id_contrato.'.xlsx');
+    }
+    public function exportSaldoExcel(Contrato $contrato)
+    {
+        //dd($contrato);
+        return Excel::download(new SaldoContratosExport($contrato), 'movimientos de '.$contrato->id_contrato.'.xlsx');
     }
 
     /**

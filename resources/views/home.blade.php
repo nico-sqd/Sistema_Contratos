@@ -1,6 +1,7 @@
 @extends('layouts.main', ['activePage' => 'dashboard', 'titlePage' => __('Dashboard')])
 
 @section('content')
+@can('admin_create')
   <div class="content">
     <div class="container-fluid">
       <div class="row">
@@ -47,9 +48,11 @@
               </div>
               <p class="card-category">Garantías por vencer</p>
               <h3 class="card-title">
-                @if (count($boleta)>=1)
                 <?php
                     $contador = 0;
+                ?>
+                @if (count($boleta)>=1)
+                <?php
                     $id = [];
                     $id_contrato = [];
                     $i = 0;
@@ -470,6 +473,7 @@
       </div>
     </div>
   </div>
+  @endcan
 @endsection
 
 

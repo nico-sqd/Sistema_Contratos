@@ -14,7 +14,10 @@
                         <div class="card-body">
                                 <div class="row">
                                     <div class="col-12 text-center">
+                                        @can('admin_create')
                                         <a href="{{ route('contratos.movimientos.create', $contratos->id)}}" class="btn btn-facebook">Añadir Movimiento</a>
+                                        @endcan
+                                        <a href="{{ route('movimientos.excel', $contratos->id)}}" class="btn btn-success">Exportar a Excel</a>
                                         <a href="{{ url()->route('contratos.show', $contratos->id) }}" class="btn btn-facebook" style="float: right;"><i class="material-icons">arrow_back</i></a>
                                     </div>
                                 </div>
@@ -35,7 +38,7 @@
                                           <tbody>
                                           @if (count($movimientos)<=0)
                                           <div class="alert alert-danger" style="text-align:center" role="alert">
-                                              <h4>No se han encontrato multas</h4>
+                                              <h4>No se han encontrado movimientos</h4>
                                           </div>
                                           @endif
                                             @foreach ( $cantidades as  $canti)
@@ -73,7 +76,7 @@
                                           </thead>
                                           <tbody>
                                             @foreach ( $cantidades as $cantidad )
-                                                @if ($canti->movimiento->contrato->id == $contratos->id)
+                                                @if ($cantidad->movimiento->contrato->id == $contratos->id)
                                                     <tr>
                                                         <td>{{$cantidad->unidadmedida->unidad}}</td>
                                                         <td>${{$cantidad->valor_unitario}}</td>
@@ -106,7 +109,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ( $cantidades as $cantidad )
-                                                        @if ($canti->movimiento->contrato->id == $contratos->id)
+                                                        @if ($cantidad->movimiento->contrato->id == $contratos->id)
                                                             <tr>
                                                                 <td>{{$cantidad->movimiento->id_oc}}</td>
                                                                 <td>{{$cantidad->unidadmedida->unidad}}</td>
