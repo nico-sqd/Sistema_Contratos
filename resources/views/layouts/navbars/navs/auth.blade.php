@@ -13,7 +13,7 @@
     <div class="collapse navbar-collapse justify-content-end">
       <form class="navbar-form">
         <div class="input-group no-border">
-        <input type="text" value="" class="form-control" placeholder="Search...">
+        <input type="text" value="" class="form-control" placeholder="Buscar...">
         <button type="submit" class="btn btn-white btn-round btn-just-icon">
           <i class="material-icons">search</i>
           <div class="ripple-container"></div>
@@ -38,12 +38,19 @@
             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Alerta presupuesto/s (insertar numero)</a>
+            <a class="dropdown-item" href="{{route('contrato.index_alerta', ['diferencia'=>3, 'id_contratos'=>$nroContratos->pluck('id')->toArray()])}}">Alerta presupuesto/s ({{$nroContratos->count()}})</a>
+            @if($contratosPorVencer != 0)
             <a class="dropdown-item" href="#">Alerta Contrato/s por vencer ({{$contratosPorVencer}})</a>
+            @endif
+            @if($boletasPorVencer != 0)
             <a class="dropdown-item" href="#">Alerta Boleta/s por vencer ({{$boletasPorVencer}})</a>
+            @endif
+            @if($multasPorVencer != 0)
             <a class="dropdown-item" href="#">Alerta Multa/s por vencer ({{$multasPorVencer}}) </a>
+            @endif
+            @if($contratosVencidos != 0)
             <a class="dropdown-item" href="#">Alerta Contrato/s vencidos ({{$contratosVencidos}})</a>
-            
+            @endif
           </div>
         </li>
         <li class="nav-item dropdown">

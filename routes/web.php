@@ -60,6 +60,12 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('multas', [App\Http\Controllers\MultasController::class, 'index_alertas'])->name('multas.index_alertas');
     Route::get('/contrato', [App\Http\Controllers\ContratoController::class, 'index_alerta'])->name('contrato.index_alerta');
     Route::get('/garantías', [App\Http\Controllers\MontoBoletaController::class, 'index_alerta'])->name('boletagarantia.index_alerta');
+    Route::get('/contrato-excel', [App\Http\Controllers\ContratoController::class, 'exportExcel'])->name('contratos.excel');
     Route::resource('contratos.movimientos', App\Http\Controllers\MovimientosController::class);
+    Route::get('movimientos/{contrato}/movimientos-excel', [App\Http\Controllers\MovimientosController::class, 'exportExcel'])->name('movimientos.excel');
+    Route::get('/proveedores-excel', [App\Http\Controllers\ProveedorController::class, 'exportExcel'])->name('proveedores.excel');
+    Route::get('/boletagarantia-excel', [App\Http\Controllers\MontoBoletaController::class, 'exportExcel'])->name('boletagarantia.excel');
+    Route::get('/multas-excel', [App\Http\Controllers\MultasController::class, 'exportExcel'])->name('multas.excel');
+    Route::get('/saldocontratos-excel', [App\Http\Controllers\MovimientosController::class, 'exportSaldoExcel'])->name('saldocontratos.excel');
 });
 

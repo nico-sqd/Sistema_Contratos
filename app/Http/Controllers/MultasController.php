@@ -21,6 +21,8 @@ use App\Models\EstadoTramiteMulta;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\MultasExport;
 
 class MultasController extends Controller
 {
@@ -101,6 +103,11 @@ class MultasController extends Controller
         'nmr_memo_juridica','fecha_memo','nmr_res_exenta','fecha_res_exenta','plazo_dias_exenta',
         'presenta_rec_de_reposicion','nmr_memo_juridica_2','nmr_res_exenta_2','fecha_res_exenta_2','descripcion','id_contrato','id_estadomulta','id_estadotramite','nmr_factura','nmr_ingreso','fecha_comprobante')));
         return redirect()->route('contratos.multas.index', $contratos->id)->with('success', 'Multa editada correctamente.');
+    }
+    public function exportExcel(Contrato $contrato)
+    {
+        //dd($contrato);
+        return Excel::download(new MultasExport($contrato), 'multas.xlsx');
     }
 
     /**

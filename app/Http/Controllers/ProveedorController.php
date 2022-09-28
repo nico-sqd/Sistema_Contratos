@@ -8,6 +8,8 @@ use App\Models\Direccion;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProveedoresExport;
 
 class ProveedorController extends Controller
 {
@@ -95,6 +97,11 @@ class ProveedorController extends Controller
         return redirect()->route('proveedor.index', $proveedores->id)->with('success', 'Usuario actualizado correctamente.');
     }
 
+    public function exportExcel()
+    {
+        return Excel::download(new ProveedoresExport, 'proveedores.xlsx');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -108,7 +115,7 @@ class ProveedorController extends Controller
         return redirect()->route('proveedor.index');
           } else {
             return back()->with('success', 'Proveedor activo en contrato');
-          } 
-        
+          }
+
     }
 }

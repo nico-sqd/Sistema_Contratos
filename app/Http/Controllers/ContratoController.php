@@ -21,6 +21,8 @@ use App\Models\Movimientos;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ContratosExport;
 
 
 class ContratoController extends Controller
@@ -60,18 +62,21 @@ class ContratoController extends Controller
         //dd($diferencia);
         $texto = trim($request->get('texto'));
         $contratos = Contrato::with('convenio')
-        ->whereHas('convenio', function (Builder $query) use ($texto) {
-            $query->whereRaw('UPPER(id_licitacion) LIKE ?', ['%' . strtoupper($texto) . '%']);
-            $query->orWhere('vigencia_inicio','LIKE','%'.$texto.'%');
-            $query->orWhere('vigencia_fin','LIKE','%'.$texto.'%');
-            $query->orWhereRaw('UPPER(admin) LIKE ?', ['%' . strtoupper($texto) . '%']);
-            $query->orWhereRaw('UPPER(convenio) LIKE ?', ['%' . strtoupper($texto) . '%']);
-        })
-        ->orwhereHas('proveedor', function (Builder $query) use ($texto) {
-            $query->Where('rut_proveedor','LIKE','%'.$texto.'%');
-        })
-        ->orwhereHas('user', function (Builder $query) use ($texto) {
-            $query->whereRaw('UPPER(name) LIKE ?', ['%' . strtoupper($texto) . '%']);
+        ->whereIn('id', $id_contratos)
+        ->where(function($query) use ($texto) {
+            $query->whereHas('convenio', function (Builder $query) use ($texto) {
+                $query->whereRaw('UPPER(id_licitacion) LIKE ?', ['%' . strtoupper($texto) . '%']);
+                $query->orWhere('vigencia_inicio','LIKE','%'.$texto.'%');
+                $query->orWhere('vigencia_fin','LIKE','%'.$texto.'%');
+                $query->orWhereRaw('UPPER(admin) LIKE ?', ['%' . strtoupper($texto) . '%']);
+                $query->orWhereRaw('UPPER(convenio) LIKE ?', ['%' . strtoupper($texto) . '%']);
+            })
+            ->orwhereHas('proveedor', function (Builder $query) use ($texto) {
+                $query->Where('rut_proveedor','LIKE','%'.$texto.'%');
+            })
+            ->orwhereHas('user', function (Builder $query) use ($texto) {
+                $query->whereRaw('UPPER(name) LIKE ?', ['%' . strtoupper($texto) . '%']);
+            });
         })
         //->whereRelation('Convenio', 'admin', Auth::id()) //--------(filrar contratos por id)------------
         ->orderBy('id','asc')
@@ -107,8 +112,8 @@ class ContratoController extends Controller
         $montoboleta = Monto::create($request->only('moneda', 'id_tipo_moneda'));
         $boletagarantia = MontoBoleta::create($request->only('monto_boleta','fecha_vencimiento','id_boleta','id_tipo_boleta','id_moneda','otraboleta','institucion')); //crear ID Boleta garantía en migración, controlador y vista.
         $contrato = Contrato::create(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','rut_proveedor','rut','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),
-        ['id_monto'=>$montoboleta->id,'rut_proveedor'=>$convenios->rut_proveedor,'rut'=>$convenios->rut,'id_licitacion'=>$convenios->id,'id_boleta'=>$boletagarantia->id_tipo_boleta,'id_monto_boleta'=>$boletagarantia->id]));
-        $boletagarantia->update(array_merge($request->only('id_contrato_original'),['id_contrato_original'=>$contrato->id]));
+        ['id_monto'=>$montoboleta->id,'rut_proveedor'=>$convenios->rut_proveedor,'rut'=>$convenios->rut,'id_licitacion'=>$convenios->id,'id_boleta'=>$boletagarantia->id_tipo_boleta]));
+        $boletagarantia->update(array_merge($request->only('id_contrato_original','id_contrato'),['id_contrato_original'=>$contrato->id,'id_contrato'=>$contrato->id]));
 
         $archivo = $request->all();
         $archivo['uuid'] = (string) Str::uuid();
@@ -207,6 +212,11 @@ class ContratoController extends Controller
         $contrato->update(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),['id_licitacion'=>$convenios->id,
         'aumento_contrato'=>$aumento->monto_aumento,'res_aumento'=>$aumento->res_aumento]));
         return redirect()->route('contratos.index', $contrato->id)->with('success', 'Usuario creado correctamente.');
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new ContratosExport, 'contratos.xlsx');
     }
     /**
      * Remove the specified resource from storage.

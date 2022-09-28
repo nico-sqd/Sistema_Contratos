@@ -12,6 +12,7 @@ class MontoBoleta extends Model
 
     protected $table = 'montoboleta';
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -28,6 +29,7 @@ class MontoBoleta extends Model
         'id_contrato_original',
         'id_contrato_modificada',
         'archivo',
+        'id_contrato',
     ];
 
     public function boletagarantia()
@@ -36,7 +38,7 @@ class MontoBoleta extends Model
     }
     public function contrato()
     {
-        return $this->hasOne(Contrato::class,'id_monto_boleta');
+        return $this->belongsTo(Contrato::class,'id_contrato');
     }
     public function aumento()
     {

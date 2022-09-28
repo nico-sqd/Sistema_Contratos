@@ -34,6 +34,10 @@
                                     <div class="row">
                                         <div class="col-12 text-right">
                                             @can('admin_create')
+                                            <a href="{{ route('saldocontratos.excel')}}" class="btn btn-sm btn-success">Exportar Saldo Contratos</a>
+                                            <a href="{{ route('multas.excel')}}" class="btn btn-sm btn-success">Exportar Multas</a>
+                                            <a href="{{ route('boletagarantia.excel')}}" class="btn btn-sm btn-success">Exportar boletas de garantía</a>
+                                            <a href="{{ route('contratos.excel')}}" class="btn btn-sm btn-success">Exportar Contratos</a>
                                             <a href="{{ route('contratos.create') }}" class="btn btn-sm btn-facebook">Añadir Contrato</a>
                                             @endcan
                                         </div>

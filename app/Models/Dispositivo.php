@@ -32,6 +32,10 @@ class Dispositivo extends Model
     {
         return $this->belongsTo(SubDireccion::class, 'id_subdireccion');
     }
+    public function movimiento()
+    {
+        return $this->hasMany(Movimientos::class, 'id_dispositivo');
+    }
 
 
 }
