@@ -121,6 +121,7 @@
 
 @endsection
 
+<!-- script detecta si el id_oc ya exite -->
 @push('js')
 <script>
 
