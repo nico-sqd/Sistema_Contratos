@@ -10,11 +10,11 @@
       {{ __('Gestión de Contratos SSO') }}
     </a>
     @endcan
-    @can('admin_index')
+    @cannot('referente')
     <a href="home" class="simple-text logo-normal">
         {{ __('Gestión de Contratos SSO') }}
       </a>
-    @endcan
+    @endcannot
   </div>
   <div class="sidebar-wrapper">
     <ul class="nav">
