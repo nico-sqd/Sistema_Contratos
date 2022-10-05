@@ -63,6 +63,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('/contrato-excel', [App\Http\Controllers\ContratoController::class, 'exportExcel'])->name('contratos.excel');
     Route::resource('contratos.movimientos', App\Http\Controllers\MovimientosController::class);
     Route::get('movimientos/{contrato}/movimientos-excel', [App\Http\Controllers\MovimientosController::class, 'exportExcel'])->name('movimientos.excel');
+    Route::get('movimientos/movimientos-buscar/', [App\Http\Controllers\MovimientosController::class, 'buscarOC'])->name('movimiento.buscar');
     Route::get('/proveedores-excel', [App\Http\Controllers\ProveedorController::class, 'exportExcel'])->name('proveedores.excel');
     Route::get('/boletagarantia-excel', [App\Http\Controllers\MontoBoletaController::class, 'exportExcel'])->name('boletagarantia.excel');
     Route::get('/multas-excel', [App\Http\Controllers\MultasController::class, 'exportExcel'])->name('multas.excel');

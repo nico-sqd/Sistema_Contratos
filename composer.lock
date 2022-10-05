@@ -649,10 +649,6 @@
             "keywords": [
                 "html"
             ],
-            "support": {
-                "issues": "https://github.com/ezyang/htmlpurifier/issues",
-                "source": "https://github.com/ezyang/htmlpurifier/tree/v4.16.0"
-            },
             "time": "2022-09-18T07:06:19+00:00"
         },
         {
@@ -1945,6 +1941,7 @@
         },
         {
             "name": "maatwebsite/excel",
+<<<<<<< HEAD
             "version": "3.1.42",
             "source": {
                 "type": "git",
@@ -1955,6 +1952,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/SpartnerNL/Laravel-Excel/zipball/b3938c9a4cf70d01173612fe35e64f31ca830132",
                 "reference": "b3938c9a4cf70d01173612fe35e64f31ca830132",
+=======
+            "version": "3.1.43",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SpartnerNL/Laravel-Excel.git",
+                "reference": "3c5b95478fb6f76b9a6ab527d54afbb3afbda611"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SpartnerNL/Laravel-Excel/zipball/3c5b95478fb6f76b9a6ab527d54afbb3afbda611",
+                "reference": "3c5b95478fb6f76b9a6ab527d54afbb3afbda611",
+>>>>>>> 2518d2fd02c212a4e644c654eb57239f8b3df768
                 "shasum": ""
             },
             "require": {
@@ -2006,10 +2015,13 @@
                 "php",
                 "phpspreadsheet"
             ],
+<<<<<<< HEAD
             "support": {
                 "issues": "https://github.com/SpartnerNL/Laravel-Excel/issues",
                 "source": "https://github.com/SpartnerNL/Laravel-Excel/tree/3.1.42"
             },
+=======
+>>>>>>> 2518d2fd02c212a4e644c654eb57239f8b3df768
             "funding": [
                 {
                     "url": "https://laravel-excel.com/commercial-support",
@@ -2020,7 +2032,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-09-28T11:25:11+00:00"
+=======
+            "time": "2022-10-03T11:50:29+00:00"
+>>>>>>> 2518d2fd02c212a4e644c654eb57239f8b3df768
         },
         {
             "name": "maennchen/zipstream-php",
@@ -2083,10 +2099,6 @@
                 "stream",
                 "zip"
             ],
-            "support": {
-                "issues": "https://github.com/maennchen/ZipStream-PHP/issues",
-                "source": "https://github.com/maennchen/ZipStream-PHP/tree/2.2.1"
-            },
             "funding": [
                 {
                     "url": "https://opencollective.com/zipstream",
@@ -2140,10 +2152,6 @@
                 "complex",
                 "mathematics"
             ],
-            "support": {
-                "issues": "https://github.com/MarkBaker/PHPComplex/issues",
-                "source": "https://github.com/MarkBaker/PHPComplex/tree/3.0.1"
-            },
             "time": "2021-06-29T15:32:53+00:00"
         },
         {
@@ -2196,10 +2204,6 @@
                 "matrix",
                 "vector"
             ],
-            "support": {
-                "issues": "https://github.com/MarkBaker/PHPMatrix/issues",
-                "source": "https://github.com/MarkBaker/PHPMatrix/tree/3.0.0"
-            },
             "time": "2021-07-01T19:01:15+00:00"
         },
         {
@@ -2348,10 +2352,6 @@
             "keywords": [
                 "enum"
             ],
-            "support": {
-                "issues": "https://github.com/myclabs/php-enum/issues",
-                "source": "https://github.com/myclabs/php-enum/tree/1.8.4"
-            },
             "funding": [
                 {
                     "url": "https://github.com/mnapoli",
@@ -2893,10 +2893,6 @@
                 "xls",
                 "xlsx"
             ],
-            "support": {
-                "issues": "https://github.com/PHPOffice/PhpSpreadsheet/issues",
-                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/1.24.1"
-            },
             "time": "2022-07-18T19:50:48+00:00"
         },
         {
@@ -3750,10 +3746,6 @@
                 "security",
                 "spatie"
             ],
-            "support": {
-                "issues": "https://github.com/spatie/laravel-permission/issues",
-                "source": "https://github.com/spatie/laravel-permission/tree/5.5.3"
-            },
             "funding": [
                 {
                     "url": "https://github.com/spatie",
@@ -8819,5 +8811,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "1.1.0"
 }

@@ -123,6 +123,7 @@ class MontoBoletaController extends Controller
     public function update(Request $request, Contrato $contratos, MontoBoleta $boleta, $id)
     {
         $boleta = MontoBoleta::find($id);
+        //dd($request->id_tipo_boleta);
         $boleta->update($request->only('monto_boleta','fecha_vencimiento','id_boleta','id_tipo_boleta','id_moneda','otraboleta','institucion'));
         return redirect()->route('contratos.boletagarantia.index', $contratos->id)->with('success', 'Usuario creado correctamente.');
     }
