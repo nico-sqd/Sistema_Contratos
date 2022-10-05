@@ -4,6 +4,14 @@
 
       Tip 2: you can also add an image using data-image tag
   -->
+  @can('admin_index')
+  <div class="logo">
+    <a href="home" class="simple-text logo-normal">
+      {{ __('Gestión de Contratos SSO') }}
+    </a>
+  </div>
+  @endcan
+  @can('referente')
   <div class="logo">
     @can('referente')
     <a href="contratos" class="simple-text logo-normal">
@@ -16,6 +24,7 @@
       </a>
     @endcannot
   </div>
+  @endcan
   <div class="sidebar-wrapper">
     <ul class="nav">
       @can('admin_index')
@@ -82,7 +91,7 @@
         </a>
       </li>
       @endcan
-      @can('Oculto') <!-- Seccion oculta  -->
+      @can('admin_index') <!-- Seccion oculta  -->
       <li class="nav-item{{ $activePage == 'roles' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('roles.index') }}">
           <i class="material-icons">work_outline</i>

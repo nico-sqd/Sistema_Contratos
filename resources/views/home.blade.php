@@ -49,7 +49,7 @@
               <p class="card-category">Garantías por vencer</p>
               <h3 class="card-title">
                 <?php
-                    $contador = 0;
+                  $contador = 0;
                 ?>
                 @if (count($boleta)>=1)
                 <?php
