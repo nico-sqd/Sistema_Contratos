@@ -48,19 +48,11 @@
               </div>
               <p class="card-category">Garantías por vencer</p>
               <h3 class="card-title">
-<<<<<<< HEAD
-                <?php
-                  $contador = 0;
-                ?>
-                @if (count($boleta)>=1)
-                <?php
-=======
                 <?php
                     $contador = 0;
                 ?>
                 @if (count($boleta)>=1)
                 <?php
->>>>>>> ad1836f0a9801e27646929ce4bc6ea603034734c
                     $id = [];
                     $id_contrato = [];
                     $i = 0;
