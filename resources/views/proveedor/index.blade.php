@@ -33,7 +33,9 @@
                                     @endif
                                     <div class="row">
                                         <div class="col-12 text-right">
-                                            <a href="{{ route('proveedores.excel') }}" class="btn btn-sm btn-success">Exportar a Excel</a>
+                                            @if(count($proveedores)>=1)
+                                                <a href="{{ route('proveedores.excel') }}" class="btn btn-sm btn-success">Exportar a Excel</a>
+                                            @endif
                                             @can('admin_create')
                                             <a href="{{ route('proveedor.create') }}" class="btn btn-sm btn-facebook">Añadir Proveedor</a>
                                             @endcan

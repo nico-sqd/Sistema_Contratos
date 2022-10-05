@@ -13,9 +13,16 @@
   @endcan
   @can('referente')
   <div class="logo">
+    @can('referente')
     <a href="contratos" class="simple-text logo-normal">
       {{ __('Gestión de Contratos SSO') }}
     </a>
+    @endcan
+    @cannot('referente')
+    <a href="home" class="simple-text logo-normal">
+        {{ __('Gestión de Contratos SSO') }}
+      </a>
+    @endcannot
   </div>
   @endcan
   <div class="sidebar-wrapper">
@@ -92,7 +99,7 @@
         </a>
       </li>
       @endcan
-      <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
+      <!--<li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
         <a class="nav-link" href="#">
           <i class="material-icons">notifications</i>
           <p>{{ __('Notificaciones') }}</p>
@@ -103,7 +110,7 @@
           <i class="material-icons">language</i>
           <p>{{ __('RTL Support') }}</p>
         </a>
-      </li>
+      </li>-->
     </ul>
   </div>
 </div>

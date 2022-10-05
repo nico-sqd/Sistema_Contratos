@@ -46,7 +46,7 @@
                             <div class="row">
                             <label for="id_oc" class="col-sm-2 col-form-label">ID Orden de Compra</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="id_oc" id="id_oc" data-toggle="tooltip" title="prueba :)" data-trigger="" placeholder="id_oc" value="{{old('id_oc')}}" autofocus required oninvalid="this.setCustomValidity('Ingrese ID de Orden de Compra')" oninput="this.setCustomValidity('')"/>
+                                    <input type="text" class="form-control" name="id_oc" id="id_oc" data-toggle="tooltip" title="" data-trigger="" placeholder="id_oc" value="{{old('id_oc')}}" autofocus required oninvalid="this.setCustomValidity('Ingrese ID de Orden de Compra')" oninput="this.setCustomValidity('')"/>
                                     @if ($errors->has('id_oc'))
                                         <span class="error text-danger" for="input-id_oc">{{$errors -> first('id_oc')}}</span>
                                     @endif
@@ -126,7 +126,7 @@
 <script>
 
     $(function(){
-      $("#id_oc").tooltip(); 
+      $("#id_oc").tooltip();
     });
     $("#id_oc").on("change", function(){
          texto = $(this).val();
@@ -138,12 +138,12 @@
            },
            success: function(data) {
              $("#id_oc").tooltip('hide')
-            .attr('data-original-title', data.existe.startsWith("t") ? "El ID ingresado ya existe" : "El ID ingresado no ha sido registrado")
+            .attr('data-original-title', data.existe.startsWith("t") ? "El ID OC ingresado ya existe" : "El ID OC ingresado no ha sido registrado")
             .tooltip('update')
             .tooltip('show');
            },
            error: function(data) {
-             console.log('nos caimos :(');
+             console.log('error');
            }
          });
     });

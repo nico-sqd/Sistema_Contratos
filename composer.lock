@@ -1941,6 +1941,18 @@
         },
         {
             "name": "maatwebsite/excel",
+<<<<<<< HEAD
+            "version": "3.1.42",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SpartnerNL/Laravel-Excel.git",
+                "reference": "b3938c9a4cf70d01173612fe35e64f31ca830132"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SpartnerNL/Laravel-Excel/zipball/b3938c9a4cf70d01173612fe35e64f31ca830132",
+                "reference": "b3938c9a4cf70d01173612fe35e64f31ca830132",
+=======
             "version": "3.1.43",
             "source": {
                 "type": "git",
@@ -1951,6 +1963,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/SpartnerNL/Laravel-Excel/zipball/3c5b95478fb6f76b9a6ab527d54afbb3afbda611",
                 "reference": "3c5b95478fb6f76b9a6ab527d54afbb3afbda611",
+>>>>>>> 2518d2fd02c212a4e644c654eb57239f8b3df768
                 "shasum": ""
             },
             "require": {
@@ -2002,6 +2015,13 @@
                 "php",
                 "phpspreadsheet"
             ],
+<<<<<<< HEAD
+            "support": {
+                "issues": "https://github.com/SpartnerNL/Laravel-Excel/issues",
+                "source": "https://github.com/SpartnerNL/Laravel-Excel/tree/3.1.42"
+            },
+=======
+>>>>>>> 2518d2fd02c212a4e644c654eb57239f8b3df768
             "funding": [
                 {
                     "url": "https://laravel-excel.com/commercial-support",
@@ -2012,7 +2032,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD
+            "time": "2022-09-28T11:25:11+00:00"
+=======
             "time": "2022-10-03T11:50:29+00:00"
+>>>>>>> 2518d2fd02c212a4e644c654eb57239f8b3df768
         },
         {
             "name": "maennchen/zipstream-php",
