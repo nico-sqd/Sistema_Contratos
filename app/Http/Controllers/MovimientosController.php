@@ -128,12 +128,23 @@ class MovimientosController extends Controller
         return Excel::download(new SaldoContratosExport($contrato), 'movimientos de '.$contrato->id_contrato.'.xlsx');
     }
 
+    public function buscarOC(Request $request)
+    {
+        $contrato = $request->get('contrato');
+        $oc = $request->get('oc');
+        $contrato = Contrato::find($contrato);
+        if($contrato->movimientos->where('id_oc', '=', $oc)->count() > 0){
+            return response()->json(['existe' => 'true']);
+          }
+          return response()->json(['existe' => 'false']);
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy(Contrato $contratos, Cantidad $cantidad, Request $request, Movimientos $movimiento)
     {
         //dd($movimiento->cantidad);

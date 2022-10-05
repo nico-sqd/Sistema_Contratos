@@ -5,18 +5,20 @@
       Tip 2: you can also add an image using data-image tag
   -->
   <div class="logo">
-    <a href="home" class="simple-text logo-normal">
+    <a href="contratos" class="simple-text logo-normal">
       {{ __('Gestión de Contratos SSO') }}
     </a>
   </div>
   <div class="sidebar-wrapper">
     <ul class="nav">
+      @can('admin_index')
       <li class="nav-item{{ $activePage == 'dashboard' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('home') }}">
           <i class="material-icons">dashboard</i>
             <p>{{ __('Dashboard') }}</p>
         </a>
       </li>
+      @endcan
       @can('super_index')
       <li class="nav-item{{ $activePage == 'usuarios' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('users.index') }}">
