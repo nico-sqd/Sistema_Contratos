@@ -157,13 +157,19 @@
                                     @if ($boleta->tipomoneda->Nombre_tipo == 'USD')
                                     <td>$ {{ number_format($boleta->monto_boleta,2,',','.') }} {{$boleta->tipomoneda->Nombre_tipo}}</td>
                                     @endif
+                                    @if ($boleta->tipomoneda->Nombre_tipo == 'EUR')
+                                    <td>$ {{ number_format($boleta->monto_boleta,2,',','.') }} {{$boleta->tipomoneda->Nombre_tipo}}</td>
+                                    @endif
                                     @if ($boleta->tipomoneda->Nombre_tipo == 'UF')
+                                    <td>$ {{ number_format($boleta->monto_boleta) }} {{$boleta->tipomoneda->Nombre_tipo}}</td>
+                                    @endif
+                                    @if ($boleta->tipomoneda->Nombre_tipo == 'UTM')
                                     <td>$ {{ number_format($boleta->monto_boleta) }} {{$boleta->tipomoneda->Nombre_tipo}}</td>
                                     @endif
                                     <td>{{ $boleta->fecha_vencimiento }}</td>
                                     <td class="td-actions text-center">
                                         @can('admin_edit')
-                                            <a href="{{ route('contratos.boletagarantia.edit', [$contratos,$boleta]) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                            <a href="{{ route('contratos.boletagarantia.edit', [$contratos,$boleta->id]) }}" class="btn btn-warning"><i class="material-icons">edit</i></a>
                                         @endcan
                                         <a href="{{ route('files.download', $boleta->file->uuid) }}" class="btn btn-info"><i class="material-icons">download</i></a>
                                         @can('admin_destroy')

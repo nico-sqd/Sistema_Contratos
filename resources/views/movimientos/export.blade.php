@@ -11,6 +11,8 @@
             <th>N° Factura</th>
             <th>Fecha Factura</th>
             <th>Valor Factura</th>
+            <th>Monto Consumido</th>
+            <th>Saldo Disponible</th>
         </tr>
     </thead>
     <tbody>
@@ -30,10 +32,12 @@
                 <td>{{$cantidad->unidadmedida->unidad}}</td>
                 <td>{{$cantidad->cantidad}}</td>
                 <td>${{$cantidad->valor_unitario}}</td>
-                <td>{{$cantidad->cantidad * $cantidad->valor_unitario}}</td>
+                <td>${{$cantidad->cantidad * $cantidad->valor_unitario}}</td>
                 <td>{{$cantidad->movimiento->nmr_factura}}</td>
                 <td>{{$cantidad->movimiento->fecha_factura}}</td>
-                <td>{{$cantidad->movimiento->valor_factura}}</td>
+                <td>${{$cantidad->movimiento->valor_factura}}</td>
+                <td>${{$cantidad->valor_unitario * $cantidad->cantidad}}</td>
+                <td>${{$cantidad->movimiento->monto_contrato_actualizado}}</td>
             </tr>
         @endforeach
     </tbody>

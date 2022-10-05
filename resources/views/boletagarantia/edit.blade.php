@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form action="{{route('contratos.boletagarantia.update', [$contratos, $boleta])}}" method="post" class="form-horizontal">
+                <form action="{{route('contratos.boletagarantia.update', [$contratos, $boleta->id])}}" method="post" class="form-horizontal">
                     @csrf
                     @method('PUT')
                     <div class="card">
@@ -24,7 +24,7 @@
                                     <div class="form-group">
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_tipo_boleta">
                                           @foreach ( $tipoboleta as $boletas )
-                                            <option value="{{ $boletas->id }}" {{$contratos->montoboleta->id_tipo_boleta == $boletas->id ? 'selected' : ''}}>{{$boletas->documentos_garantia}}</option>
+                                            <option value="{{ $boletas->id }}" {{$boleta->id_tipo_boleta == $boletas->id ? 'selected' : ''}}>{{$boletas->documentos_garantia}}</option>
                                           @endforeach
                                         </select>
                                       </div>
@@ -85,12 +85,12 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="id_tipo_moneda" class="col-sm-2 col-form-label">Tipo Moneda</label>
+                                <label for="id_moneda" class="col-sm-2 col-form-label">Tipo Moneda</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
-                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_tipo_moneda">
+                                        <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_moneda">
                                         @foreach ( $tipomoneda as $tipo )
-                                            <option value="{{ $tipo->id}}" {{$contratos->id_tipo_moneda == $tipo->id ? 'selected' : ''}}>{{$tipo->Nombre_tipo}}</option>
+                                            <option value="{{ $tipo->id}}" {{$boleta->id_moneda == $tipo->id ? 'selected' : ''}}>{{$tipo->Nombre_tipo}}</option>
                                         @endforeach
                                         </select>
                                       </div>

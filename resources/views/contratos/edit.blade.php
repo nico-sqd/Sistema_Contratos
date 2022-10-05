@@ -145,33 +145,18 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="id_boleta" class="col-sm-2 col-form-label">ID Documento de Garantía</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="id_boleta" value="{{ old('id_boleta', $contratos->montoboleta->id_boleta) }}" >
-                                    @if ($errors->has('id_boleta'))
-                                        <span class="error text-danger" for="input-id_boleta">{{$errors -> first('id_boleta')}}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="row">
                                 <label for="monto_boleta" class="col-sm-2 col-form-label">Monto Documento de Garantía</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="monto_boleta" value="{{ old('monto_boleta', $contratos->montoboleta->monto_boleta) }}" >
+                                    <input type="text" class="form-control" name="monto_boleta" value="{{ old('monto_boleta', $contratos->montoboleta[0]->monto_boleta) }}" >
                                     @if ($errors->has('monto_boleta'))
                                         <span class="error text-danger" for="input-monto_boleta">{{$errors -> first('monto_boleta')}}</span>
                                     @endif
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="fecha_inicio" class="col-sm-2 col-form-label">Vigencia Inicio </label>
+                                <label for="fecha_vencimiento" class="col-sm-2 col-form-label">Fecha de Vencimiento</label>
                                 <div class="col-sm-7">
-                                    <input type="date" class="form-control" name="fecha_inicio" value="{{ old('fecha_inicio', $contratos->montoboleta->fecha_inicio) }}">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label for="fecha_fin" class="col-sm-2 col-form-label">Vigencia Fin</label>
-                                <div class="col-sm-7">
-                                    <input type="date" class="form-control" name="fecha_fin" value="{{ old('fecha_fin', $contratos->montoboleta->fecha_fin) }}">
+                                    <input type="date" class="form-control" name="fecha_vencimiento" value="{{ old('fecha_vencimiento', $contratos->montoboleta[0]->fecha_vencimiento) }}">
                                 </div>
                             </div>
                             <div class="row">
@@ -180,7 +165,7 @@
                                     <div class="form-group">
                                         <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1" name="id_tipo_boleta">
                                           @foreach ( $tipoboleta as $boletas )
-                                            <option value="{{ $boletas->id }}" {{$contratos->montoboleta->id_tipo_boleta == $boletas->id ? 'selected' : ''}}>{{$boletas->documentos_garantia}}</option>
+                                            <option value="{{ $boletas->id }}" {{$contratos->montoboleta[0]->id_tipo_boleta == $boletas->id ? 'selected' : ''}}>{{$boletas->documentos_garantia}}</option>
                                           @endforeach
                                         </select>
                                       </div>
