@@ -9,8 +9,6 @@
             <th>Fecha Resolución Exenta (D)</th>
             <th>Estado de Trámite</th>
             <th>Estado Pago Multa</th>
-            <th>Forma Pago</th>
-            <th>Institución Financiera</th>
             <th>N° Documento</th>
             <th>Fecha</th>
         </tr>
@@ -27,8 +25,6 @@
                 <td>{{$multa->fecha_res_exenta }}</td>
                 <td>{{ $multa->estadotramitemulta->estado_tramite }}</td>
                 <td>{{ $multa->estadopagomulta->estado_pago }}</td>
-                <td>Por definir</td>
-                <td>Por definir</td>
                 <td>{{ $multa->nmr_factura }}</td>
                 <td>{{ $multa->fecha_comprobante }}</td>
             </tr>

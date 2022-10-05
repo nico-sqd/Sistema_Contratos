@@ -185,7 +185,7 @@ class ContratoController extends Controller
     {
         $aumento = $contrato->aumento;
         $montoboleta = $contrato->monto;
-        $boletagarantia = $contrato->montoboleta;
+        $boletagarantia = $contrato->montoboleta[0];
         $user = $contrato->convenio->user;
         $convenios = $contrato->convenio;
         $aumento = $contrato->aumento;
@@ -193,7 +193,7 @@ class ContratoController extends Controller
         $user->update($request->only('name'));
         $convenios->update(array_merge($request->only('rut_proveedor','rut','id_licitacion', 'convenio', 'vigencia_inicio','vigencia_fin','admin')));
         $montoboleta->update($request->only('moneda', 'id_tipo_moneda'));
-        $boletagarantia->update($request->only('monto_boleta','fecha_inicio','fecha_fin','id_boleta','id_tipo_boleta','id_moneda'));
+        $boletagarantia->update($request->only('monto_boleta','fecha_vencimiento','id_tipo_boleta','id_moneda'));
         $contrato->update(array_merge($request->only('id_licitacion','id_contrato','res_adjudicacion','res_apruebacontrato','id_modalidad','aumento_contrato','res_aumento','id_tipo_moneda','estado_contrato','descripcion'),['id_licitacion'=>$convenios->id]));
         return redirect()->route('contratos.index', $contrato->id)->with('success', 'Contrato actualizado correctamente.');
     }
