@@ -21,6 +21,7 @@
         </div>
       </form>-->
       <ul class="navbar-nav">
+        @cannot('referente')
         <li class="nav-item">
           <a class="nav-link" href="{{ route('home') }}">
             <i class="material-icons">dashboard</i>
@@ -53,6 +54,7 @@
             @endif
           </div>
         </li>
+        @endcannot
         <li class="nav-item dropdown">
           <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="material-icons">person</i>
